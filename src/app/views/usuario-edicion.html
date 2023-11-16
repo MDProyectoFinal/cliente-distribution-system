@@ -1,0 +1,86 @@
+<hr>
+<div class="col-lg-6" style="margin: 15px" >
+    <h1>{{ titulo }}</h1>
+
+    <div *ngIf="alertaActualizacion">
+      <div class="alert alert-info" role="alert">
+        {{alertaActualizacion}}
+      </div>
+    </div>
+
+    <!-- Formualario -->
+    <form #usuarioActualizacionForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">
+      <p>
+        <label>Nombre/s:</label>
+        <input type="text" #nombre="ngModel" name="nombre" [(ngModel)]="usuario_persona_actualizacion.persona.nombre" class="form-control" required>
+        <!-- Validacion -->
+        <span *ngIf="!nombre.valid && nombre.touched">
+          El nombre es obligatorio.
+        </span>      
+      </p>
+      <p>
+        <label>Apellido:</label>
+        <input type="text" #apellido="ngModel" name="apellido" [(ngModel)]="usuario_persona_actualizacion.persona.apellido" class="form-control" required>
+        <!-- Validacion -->
+        <span *ngIf="!apellido.valid && apellido.touched">
+          El apellido es obligatorio.
+        </span>  
+      </p>
+      <p>
+        <label>Dirección:</label>
+        <input type="text" #direccion="ngModel" name="direccion" [(ngModel)]="usuario_persona_actualizacion.persona.direccion" class="form-control" required>
+        <!-- Validacion -->
+        <span *ngIf="!direccion.valid && direccion.touched">
+          La dirección es obligatoria.
+        </span>
+      </p>      
+      <p>
+        <label>Teléfono:</label>
+        <input type="text" #telefono="ngModel" name="telefono" [(ngModel)]="usuario_persona_actualizacion.persona.telefono" class="form-control" required>
+        <!-- Validacion -->
+        <span *ngIf="!telefono.valid && telefono.touched">
+          El teléfono es obligatorio.
+        </span>
+      </p>     
+
+      <br/>
+
+      <p>
+        <label>Nombre Usuario:</label>
+        <input type="text" #nombreUsuario="ngModel" name="nombreUsuario" [(ngModel)]="usuario_persona_actualizacion.nombre_usuario" class="form-control" required>
+        <!-- Validacion -->
+        <span *ngIf="!nombreUsuario.valid && nombreUsuario.touched">
+          El nombre de usuario es obligatorio.
+        </span>
+      </p>
+      <p>
+        <label>Email:</label>
+        <input type="text" #correoElectronico="ngModel" name="correoElectronico" [(ngModel)]="usuario_persona_actualizacion.correo_electronico" class="form-control" required>
+        <!-- Validacion -->
+        <span *ngIf="!correoElectronico.valid && correoElectronico.touched">
+          El correo electrónico es obligatorio.
+        </span>
+      </p>
+      <p>
+        <label>Rol:</label>
+        <input type="text" #rol="ngModel" name="rol" [(ngModel)]="usuario_persona_actualizacion.rol" class="form-control" required>
+        <!-- Validacion -->
+        <span *ngIf="!rol.valid && rol.touched">
+          El rol es obligatorio.
+        </span>
+      </p>
+
+      <div class="imagen_para_edicion" *ngIf="usuario_persona_actualizacion.imagen && usuario_persona_actualizacion.imagen != 'null'">
+        <img id="imagen-logueado" src="{{ url + 'obtener-archivo-imagen/' + usuario_persona_actualizacion.imagen }}" style="width: 50px"/>  
+      </div>
+
+      <p> 
+        <label>Sube tu foto: </label><br>
+        <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)" />
+      </p>
+
+      <hr>
+
+      <input type="submit" value="Actualizar mis datos" class="btn btn-primary" required>
+    </form>
+  </div>

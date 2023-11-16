@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var GLOBAL = {\n  url: 'http://localhost:3977/api/',\n  ip: '0.0.0.0'\n};","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
