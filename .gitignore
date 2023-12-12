@@ -4,6 +4,7 @@
 # Compiled files
 /dist
 /tmp
+/out-tsc
 
 # Logs
 /logs
@@ -44,3 +45,15 @@
 # OS generated files
 .DS_Store
 Thumbs.db
+.vercel
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+.angular
