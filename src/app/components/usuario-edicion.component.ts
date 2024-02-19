@@ -73,8 +73,6 @@ export class UsuarioEdicionComponent implements OnInit{
 
             if( response != null ){
                 
-                debugger;
-                
                 // Hacer el mapeo del "usuario" (response.user) y la "persona" (response.persona)
                 const { user, persona } = response;
                 this.usuario_persona_actualizacion = <any>new UsuarioPersona('', new Persona('','','','','',''),'','','','ROLE_USER', '');  
@@ -86,8 +84,6 @@ export class UsuarioEdicionComponent implements OnInit{
                 this.usuario_persona_actualizacion.rol = user.rol;
                 this.usuario_persona_actualizacion.imagen = user.imagen;
                 
-                debugger;
-
                 // Actualizamos el "identity" del "LocalStorage"
                 localStorage.setItem('identity', JSON.stringify(this.usuario_persona_actualizacion));
 
@@ -102,19 +98,27 @@ export class UsuarioEdicionComponent implements OnInit{
                 // Subida de arhivos de imagen (si es que existen)
                 if(!this.filesToUpload){
                     // Redireccion
-                }else{
-                    debugger;
-                    this.makeFileRequest(this.url + 'actualizar-imagen-usuario/' + this.usuario_persona_actualizacion._id, [], this.filesToUpload).then(
-                        ( result: any ) => {
-                            debugger;
-                            this.usuario_persona_actualizacion.imagen = result.imagen
-
-                            debugger;
-                            // Actualizar imagen de usuario en app, porque no reflejaba al actualizar sino.
-                            let imagen_path = this.url + 'obtener-archivo-imagen/' + this.usuario_persona_actualizacion.imagen;
-                            document.getElementById("imagen-logueado")?.setAttribute('src', imagen_path);                             
-                        }
-                    );
+                }else{                    
+                    try {
+                        var respuesta = this.makeFileRequest(this.url + 'actualizar-imagen-usuario/' + this.usuario_persona_actualizacion._id, [], this.filesToUpload)
+                            .then(
+                                ( result: any ) => {
+                                                                        
+                                    this.usuario_persona_actualizacion.imagen = result.imagen
+                                            
+                                    // Actualizar imagen de usuario en app, porque no reflejaba al actualizar sino.
+                                    let imagen_path = this.url + 'obtener-archivo-imagen/' + this.usuario_persona_actualizacion.imagen;
+                                    document.getElementById("imagen-logueado")?.setAttribute('src', imagen_path);                             
+                                }
+                            )
+                            .catch(
+                                ( result: any ) => {
+                                    console.log("error capturado: " + result);
+                                }                               
+                            );
+                    } catch (error) {
+                        console.log("Falla al intentar actualizar la imagen:" + error);
+                    }                    
                 }   
 
                 // Actualizamos la variable que llena el modelo en html, para reflejar los cambios                
@@ -141,39 +145,44 @@ export class UsuarioEdicionComponent implements OnInit{
 
     }
     
-    async fileChangeEvent(fileInput: any){
-        debugger;
+    async fileChangeEvent(fileInput: any){        
         this.filesToUpload = <Array<File>>fileInput.target.files; // Recoger archivos seleccionados en el input        
     }
 
     // Peticion AJAX para ficheros convencionales. (LLEVARLO A UN SERVICIO). -> Sube el fichero con esto!
     async makeFileRequest(url: string, params: Array<string>, files: Array<File>){
-        var token = this.token;
+        
+        try {
+            // VEEEER porque no funciona subido en render y versel!!
+            var token = this.token;
 
-        return new Promise(function( resolve, reject){
-            var formData: any = new FormData(); // Simular comportamiento de un Form convencional
-            var xhr = new XMLHttpRequest();
+            return new Promise(function( resolve, reject ){
+                var formData: any = new FormData(); // Simular comportamiento de un Form convencional
+                var xhr = new XMLHttpRequest();
 
-            // Recorremos los ficheros
-            for(var i = 0; i < files.length; i++){
-                formData.append('imagen', files[i], files[i].name)
-            }
-
-            // Vemos si está lista la petición para realizarse
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4){
-                    if( xhr.status == 200 ){
-                        resolve(JSON.parse(xhr.response));
-                    }else{
-                        reject(xhr.response);
-                    }           
+                // Recorremos los ficheros
+                for(var i = 0; i < files.length; i++){
+                    formData.append('imagen', files[i], files[i].name)
                 }
-            }
 
-            xhr.open('POST', url, true);
-            xhr.setRequestHeader('Authorization', token); // VER ESE NOMBRE DE "AUTHORIZATION". Creo q es "authorization"
-            xhr.send(formData);
-        });
+                // Vemos si está lista la petición para realizarse
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState == 4){
+                        if( xhr.status == 200 ){
+                            resolve(JSON.parse(xhr.response));
+                        }else{
+                            reject(xhr.response);
+                        }           
+                    }
+                }
+
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Authorization', token); // VER ESE NOMBRE DE "AUTHORIZATION". Creo q es "authorization"
+                xhr.send(formData);
+            });
+        } catch (error) {
+            console.log("Error en el makeFileRequest" + error);
+            return "Error";
+        }
     }
-
 }

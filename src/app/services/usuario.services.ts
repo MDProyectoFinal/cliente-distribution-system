@@ -85,14 +85,12 @@ export class UsuarioServices{
     //         // Devolvemos la petición AJAX
     //         const resp = await this._http.post( this.url + 'guardar-persona', params, {headers: headers} )
     //         .pipe(                
-    //             map(response => {
-    //                 debugger;
+    //             map(response => {    //                 
     //                 console.log( {resp: response, message: "Respuesta dentro del pipe.map..."} );
     //                 //return response;
     //             }),
     //             // Error arrojado desde el usuario.js. Clave incorrecta, usuario incorrecto, etc..
-    //             catchError(error => { 
-    //                 debugger;
+    //             catchError(error => {     //                 
     //                 console.log({error:error.error.message, message: "No se encontró el usuario logueado"});
                     
     //                 // Puedo definir si solo mando eso, o el status y mas info o solo el "error"
@@ -101,14 +99,12 @@ export class UsuarioServices{
             
     //         // var resp = await this._http.get( this.url + 'probando-controlador', { headers: headers })  
     //         //     .pipe(
-    //         //         map(response => {
-    //         //             debugger;
+    //         //         map(response => {    //         //             
     //         //             console.log( {resp: response, message: "Respuesta dentro del pipe.map..."} );
     //         //             return response;
     //         //         }),
     //         //         // Error arrojado desde el usuario.js. Clave incorrecta, usuario incorrecto, etc..
-    //         //         catchError(error => { 
-    //         //             debugger;
+    //         //         catchError(error => {     //         //             
     //         //             console.log({error:error.error.message, message: "No se encontró el usuario logueado"});
                         
     //         //             // Puedo definir si solo mando eso, o el status y mas info o solo el "error"
@@ -129,8 +125,7 @@ export class UsuarioServices{
     // }
 
 
-    async actualizarUsuario( usuario_a_actualizar:any ){
-        
+    async actualizarUsuario( usuario_a_actualizar:any ){        
         let jsonUser = JSON.stringify(usuario_a_actualizar);            
     
         // Como usamos Js en el servidor tambien, definimos asi el Content-Type
