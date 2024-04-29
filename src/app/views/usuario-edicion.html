@@ -16,7 +16,7 @@
         <!-- Validacion -->
         <span *ngIf="!nombre.valid && nombre.touched">
           El nombre es obligatorio.
-        </span>      
+        </span>
       </p>
       <p>
         <label>Apellido:</label>
@@ -24,7 +24,7 @@
         <!-- Validacion -->
         <span *ngIf="!apellido.valid && apellido.touched">
           El apellido es obligatorio.
-        </span>  
+        </span>
       </p>
       <p>
         <label>Dirección:</label>
@@ -33,7 +33,7 @@
         <span *ngIf="!direccion.valid && direccion.touched">
           La dirección es obligatoria.
         </span>
-      </p>      
+      </p>
       <p>
         <label>Teléfono:</label>
         <input type="text" #telefono="ngModel" name="telefono" [(ngModel)]="usuario_persona_actualizacion.persona.telefono" class="form-control" required>
@@ -41,7 +41,7 @@
         <span *ngIf="!telefono.valid && telefono.touched">
           El teléfono es obligatorio.
         </span>
-      </p>     
+      </p>
 
       <br/>
 
@@ -71,10 +71,10 @@
       </p>
 
       <div class="imagen_para_edicion" *ngIf="usuario_persona_actualizacion.imagen && usuario_persona_actualizacion.imagen != 'null'">
-        <img id="imagen-logueado" src="{{ url + 'obtener-archivo-imagen/' + usuario_persona_actualizacion.imagen }}" style="width: 50px"/>  
+        <img id="imagen-logueado" src="{{ url + 'obtener-archivo-imagen/' + usuario_persona_actualizacion.imagen }}" style="width: 50px"/>
       </div>
 
-      <p> 
+      <p>
         <label>Sube tu foto: </label><br>
         <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)" />
       </p>

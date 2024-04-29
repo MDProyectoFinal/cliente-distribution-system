@@ -1,0 +1,27 @@
+<div class="col-lg-11" style="margin: 20px" *ngIf="!identity">
+  <div class="col-lg-6">
+    <h1>Identificate</h1>
+
+    <div *ngIf="errorMensaje">
+      <div class="alert alert-info" role="alert"><strong>¡Error! </strong>{{ errorMensaje }}</div>
+    </div>
+
+    <!-- Formulario -->
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">
+      <p>
+        <label>Correo electrónico:</label>
+        <input type="email" #email="ngModel" name="email" [(ngModel)]="usuario.email" class="form-control" required />
+
+        <!-- Validacion -->
+        <span *ngIf="!email.valid && email.touched"> El email es obligatorio. </span>
+      </p>
+      <p>
+        <label>Contraseña:</label>
+        <input type="password" #clave name="clave" [(ngModel)]="usuario.clave" class="form-control" required />
+      </p>
+
+      <input type="submit" value="Entrar" class="btn btn-primary" required />
+    </form>
+    <a [routerLink]="[ '/registro']">Registrarme</a>
+  </div>
+</div>

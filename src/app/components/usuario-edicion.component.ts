@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
-import { UsuarioServices } from "../services/usuario.services";
-import { PersonaServices } from "../services/persona.services";
+import { UsuarioServices } from "../services/usuario.service";
+import { PersonaServices } from "../services/persona.service";
 
 import { GLOBAL } from "../services/global";
 
@@ -24,7 +24,7 @@ export class UsuarioEdicionComponent implements OnInit{
 
     public identity: any;
     public token: any;
-    
+
     public url: string;
 
     public usuario_persona_actualizacion: any; //UsuarioPersona;
@@ -58,6 +58,7 @@ export class UsuarioEdicionComponent implements OnInit{
     }
 
     ngOnInit(): void {
+        console.log(this.url)
         console.log('usuario-edicion.component.ts cargado');
         console.log(this.usuario_persona_actualizacion);
     }
@@ -72,10 +73,10 @@ export class UsuarioEdicionComponent implements OnInit{
             console.log({ resp: response, message: "Respuesta del metodo actualizarUsuario desde onSubmit"});
 
             if( response != null ){
-                
+
                 // Hacer el mapeo del "usuario" (response.user) y la "persona" (response.persona)
                 const { user, persona } = response;
-                this.usuario_persona_actualizacion = <any>new UsuarioPersona('', new Persona('','','','','',''),'','','','ROLE_USER', '');  
+                this.usuario_persona_actualizacion = <any>new UsuarioPersona('', new Persona('','','','','',''),'','','','ROLE_USER', '');
                 this.usuario_persona_actualizacion.persona = persona;
                 this.usuario_persona_actualizacion._id = user._id;
                 this.usuario_persona_actualizacion.correo_electronico = user.correo_electronico;
@@ -83,13 +84,13 @@ export class UsuarioEdicionComponent implements OnInit{
                 this.usuario_persona_actualizacion.password = user.password;
                 this.usuario_persona_actualizacion.rol = user.rol;
                 this.usuario_persona_actualizacion.imagen = user.imagen;
-                
+
                 // Actualizamos el "identity" del "LocalStorage"
                 localStorage.setItem('identity', JSON.stringify(this.usuario_persona_actualizacion));
 
                 // ***** Actualizamos mediante DOM, la variable del nombre de usuario y la imagen. *****
                 // Ya que el "nombre_usuario" mostrado por pantalla no se actualiza sino al guardar. Muestra el viejo sino.
-                const element = document.getElementById("identity_nombre_usuario");                
+                const element = document.getElementById("identity_nombre_usuario");
                 if (element !== null) {
                     // Si el elemento existe, asignar el valor a innerHTML
                     element.innerHTML = this.usuario_persona_actualizacion.nombre_usuario;
@@ -98,33 +99,33 @@ export class UsuarioEdicionComponent implements OnInit{
                 // Subida de arhivos de imagen (si es que existen)
                 if(!this.filesToUpload){
                     // Redireccion
-                }else{                    
+                }else{
                     try {
                         var respuesta = this.makeFileRequest(this.url + 'actualizar-imagen-usuario/' + this.usuario_persona_actualizacion._id, [], this.filesToUpload)
                             .then(
                                 ( result: any ) => {
-                                                                        
+
                                     this.usuario_persona_actualizacion.imagen = result.imagen
-                                            
+
                                     // Actualizar imagen de usuario en app, porque no reflejaba al actualizar sino.
                                     let imagen_path = this.url + 'obtener-archivo-imagen/' + this.usuario_persona_actualizacion.imagen;
-                                    document.getElementById("imagen-logueado")?.setAttribute('src', imagen_path);                             
+                                    document.getElementById("imagen-logueado")?.setAttribute('src', imagen_path);
                                 }
                             )
                             .catch(
                                 ( result: any ) => {
                                     console.log("error capturado: " + result);
-                                }                               
+                                }
                             );
                     } catch (error) {
                         console.log("Falla al intentar actualizar la imagen:" + error);
-                    }                    
-                }   
+                    }
+                }
 
-                // Actualizamos la variable que llena el modelo en html, para reflejar los cambios                
-                this.identity = JSON.parse(<any>this._usuarioServicio.getIdentity());// Convertir la cadena JSON en un objeto JavaScript  
+                // Actualizamos la variable que llena el modelo en html, para reflejar los cambios
+                this.identity = JSON.parse(<any>this._usuarioServicio.getIdentity());// Convertir la cadena JSON en un objeto JavaScript
                 //this.identity = this._usuarioServicio.getIdentity();
-                
+
                 // Actualizamos la variable que usamos para el html de actualizacion (asi refleja en los input)
                 this.usuario_persona_actualizacion = this.identity; // JSON.parse(this.identity);
 
@@ -141,17 +142,17 @@ export class UsuarioEdicionComponent implements OnInit{
         } catch (error) {
             this.alertaActualizacion = <any>error;
             console.error('Ocurrió un error el OnSubmit:', error);
-        }        
+        }
 
     }
-    
-    async fileChangeEvent(fileInput: any){        
-        this.filesToUpload = <Array<File>>fileInput.target.files; // Recoger archivos seleccionados en el input        
+
+    async fileChangeEvent(fileInput: any){
+        this.filesToUpload = <Array<File>>fileInput.target.files; // Recoger archivos seleccionados en el input
     }
 
     // Peticion AJAX para ficheros convencionales. (LLEVARLO A UN SERVICIO). -> Sube el fichero con esto!
     async makeFileRequest(url: string, params: Array<string>, files: Array<File>){
-        
+
         try {
             // VEEEER porque no funciona subido en render y versel!!
             var token = this.token;
@@ -172,7 +173,7 @@ export class UsuarioEdicionComponent implements OnInit{
                             resolve(JSON.parse(xhr.response));
                         }else{
                             reject(xhr.response);
-                        }           
+                        }
                     }
                 }
 

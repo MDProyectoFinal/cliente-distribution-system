@@ -2,13 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, Params } from "@angular/router"
 
 import { GLOBAL } from "../services/global";
-import { UsuarioServices } from "../services/usuario.services";
+import { UsuarioServices } from "../services/usuario.service";
 import { Pedido } from "../models/pedido";
 import { Producto } from "../models/producto";
 
 @Component({
     selector: 'lista-pedidos',
-    templateUrl: '../views/lista-pedidos.html', 
+    templateUrl: '../views/lista-pedidos.html',
     providers: [UsuarioServices]
 })
 
@@ -18,9 +18,9 @@ export class ListaPedidosComponent implements OnInit{
     public producto: Producto[];
 
     public identity: any;
-    public token: any;    
+    public token: any;
     public url: string;
-    
+
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
