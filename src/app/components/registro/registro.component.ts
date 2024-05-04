@@ -2,46 +2,58 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/models/persona';
 import { UsuarioPersona } from 'src/app/models/usuarioPersona';
-import { PersonaServices } from 'src/app/services/persona.service';
+import { RegistroUsuario } from 'src/app/models/IInfoRegistro';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss'],
 })
-export class RegistroComponent{
-  public alertaRegistro = '';
-  public usuario_persona_registro: UsuarioPersona;
-  public usuario_persona_guardada: any;
+export class RegistroComponent {
+  public registro: RegistroUsuario;
 
-  constructor(private _personaServices: PersonaServices, private router : Router) {
-    this.usuario_persona_registro = <any>new UsuarioPersona('', new Persona('', '', '', '', '', ''), '', '', '', 'USER', '');
+  constructor(private authService: AuthService, private router: Router) {
+    this.registro = new RegistroUsuario();
   }
 
-  public async onSubmitRegistro(): Promise<void> {
-    console.log(this.usuario_persona_registro);
+  public async onSubmitRegistro() {
+    let persona = new Persona('', this.registro.nombre, this.registro.apellido, this.registro.fechaNacimiento.toString(), this.registro.direccion, this.registro.telefono);
+    let usuario = new UsuarioPersona('', persona, this.registro.nombreUsuario, this.registro.password, this.registro.email, this.registro.rol, '');
 
-    try {
-      const response = await this._personaServices.guardarPersona(this.usuario_persona_registro);
+    this.authService.registrarUsuario(usuario).subscribe({
+      next: (v) => {
+        console.log(v);
+      },
+      error: (e) => {
+        alert('Error de identificación');
+      },
+      complete: () => {
+        setTimeout(() => this.router.navigateByUrl('/login'), 2000);
+      },
+    });
 
-      // response.persona._id
-      if (!response.persona._id) {
-        this.alertaRegistro = 'Error al guardar la persona/usuario.';
-        return;
-      }
+    // try {
+    //   const response = await this._personaServices.guardarPersona(this.usuario_persona_registro);
 
-      let usuarioGuar = response.usuario;
-      let personaGuar = response.persona;
+    //   // response.persona._id
+    //   if (!response.persona._id) {
+    //     this.alertaRegistro = 'Error al guardar la persona/usuario.';
+    //     return;
+    //   }
 
-      // Seteamos la carga completa de la persona en la variable correspondiente
-      this.usuario_persona_guardada = <any>new UsuarioPersona(usuarioGuar._id, new Persona(personaGuar._id, personaGuar.nombre, personaGuar.apellido, personaGuar.fecha_nacimiento, personaGuar.direccion, personaGuar.telefono), usuarioGuar.nombre_usuario, usuarioGuar.clave, usuarioGuar.email, usuarioGuar.rol, usuarioGuar.imagen);
+    //   let usuarioGuar = response.usuario;
+    //   let personaGuar = response.persona;
 
-      this.alertaRegistro = 'El registro se ha realizado correctamente. Por favor ' + this.usuario_persona_guardada.persona.nombre + ', identifícate en la pantalla de logueo con tu email: ' + this.usuario_persona_guardada.correo_electronico + '.';
+    //   // Seteamos la carga completa de la persona en la variable correspondiente
+    //   this.usuario_persona_guardada = <any>new UsuarioPersona(usuarioGuar._id, new Persona(personaGuar._id, personaGuar.nombre, personaGuar.apellido, personaGuar.fecha_nacimiento, personaGuar.direccion, personaGuar.telefono), usuarioGuar.nombre_usuario, usuarioGuar.clave, usuarioGuar.email, usuarioGuar.rol, usuarioGuar.imagen);
 
-      setTimeout(() => this.router.navigateByUrl('/login') , 2000)
+    //   this.alertaRegistro = 'El registro se ha realizado correctamente. Por favor ' + this.usuario_persona_guardada.persona.nombre + ', identifícate en la pantalla de logueo con tu email: ' + this.usuario_persona_guardada.correo_electronico + '.';
 
-    } catch (error) {
-      this.alertaRegistro = <any>error;
-    }
+    //   setTimeout(() => this.router.navigateByUrl('/login') , 2000)
+
+    // } catch (error) {
+    //   this.alertaRegistro = <any>error;
+    // }
   }
 }
