@@ -3,11 +3,11 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Import User
-import { UsuarioEdicionComponent } from './components/usuario-edicion.component';
 import { ListaPedidosComponent } from './components/lista-pedidos.component';
-import { InicioComponent } from './components/inicio.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { InicioComponent } from './components/inicio/inicio.component';
+import { UsuarioEdicionComponent } from './components/usuario/usuario-edicion/usuario-edicion.component';
 
 const appRoutes: Routes = [
   {

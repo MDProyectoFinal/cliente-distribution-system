@@ -10,13 +10,13 @@ import { routing, appRoutingProviders } from './app.routing';
 
 
 import { AppComponent } from './app.component';
-import { UsuarioEdicionComponent } from './components/usuario-edicion.component';
-import { ListaPedidosComponent } from './components/lista-pedidos.component';
 
-import { RespuestaUsuarioPersona } from './interfaz/respuestaUsuarioPersona';
-import { InicioComponent } from './components/inicio.component';
+import { ListaPedidosComponent } from './components/lista-pedidos.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { UsuarioEdicionComponent } from './components/usuario/usuario-edicion/usuario-edicion.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { RegistroComponent } from './components/registro/registro.component';
     ListaPedidosComponent,
     InicioComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,
