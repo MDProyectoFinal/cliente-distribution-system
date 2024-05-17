@@ -15,7 +15,7 @@ export class AuthService {
   private tokenKey = 'Bearer Token';
 
   constructor(private http: HttpClient) {
-    this.autenticado = !!localStorage.getItem(this.tokenKey);
+    this.autenticado = !!localStorage.getItem("token");
   }
 
   login(model: any) {

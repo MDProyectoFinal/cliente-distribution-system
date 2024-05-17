@@ -1,5 +1,6 @@
 import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,9 @@ export class LoginComponent {
   clave: string = '';
   formEnviado: boolean = false;
 
-  constructor(private authService: AuthService) {
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   public onSubmit() {
-
     this.authService.login({ email: this.email, clave: this.clave }).subscribe({
       next: (v) => {
         console.log('Acá va alerta');
@@ -24,7 +23,8 @@ export class LoginComponent {
         alert('Error de identificación');
       },
       complete: () => {
-        console.log('Acá debe redireccionar a home');
+        console.log('Redireccionando');
+        setTimeout(() => this.router.navigateByUrl('/'), 2000);
       },
     });
   }
