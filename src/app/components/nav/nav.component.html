@@ -1,0 +1,36 @@
+<nav id="navigation" class="navbar navbar-dark bg-dark justify-content-between" *ngIf="login">
+  <a [routerLink]="['/inicio']" [routerLinkActive]="['actived']" class="col-lg-1">
+    <span aria-hidden="true"><i class="fa fa-home"></i> Inicio</span>
+  </a>
+  <a href="#" class="col-lg-1">
+    <span aria-hidden="true"><i class="fa fa-search"></i> Buscar</span>
+  </a>
+  <a [routerLink]="['/pedidos']" [routerLinkActive]="['actived']" class="col-lg-1">
+    <span aria-hidden="true"><i class="fa fa-gear"></i> Pedidos</span>
+  </a>
+  <a href="#" class="col-lg-1">
+    <span aria-hidden="true"><i class="fa fa-cogs"></i> Cuenta</span>
+  </a>
+  <a href="#" class="col-lg-1">
+    <span aria-hidden="true"><i class="fa fa-info"></i> Información</span>
+  </a>
+  <a href="#" class="col-lg-1">
+    <span aria-hidden="true"><i class="fa fa-share"></i> Enviar Sugerencia</span>
+  </a>
+  <a href="#" class="col-lg-1">
+    <span aria-hidden="true"><i class="fa fa-sign-out"></i> Cerrar Sesión</span>
+  </a>
+  <nav id="user_logged" class="justify-content-between" style="color: grey; float: right">
+    <div class="usuario-imagen" style="float: right">
+      <!-- <img src="{{ url + 'obtener-archivo-imagen/' + identity.imagen }}" /> -->
+    </div>
+    <span id="identity_nombre_usuario" style="color: grey; float: right">
+      <!-- {{ identity.nombre_usuario }} -->
+    </span>
+    <br />
+    <br />
+    <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']" style="float: right">
+      <span aria-hidden="true"><i class="fa fa-gear"></i>Mis Datos</span>
+    </a>
+  </nav>
+</nav>

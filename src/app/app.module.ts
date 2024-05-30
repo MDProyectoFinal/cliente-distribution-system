@@ -17,6 +17,9 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { UsuarioEdicionComponent } from './components/usuario/usuario-edicion/usuario-edicion.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { NavComponent } from './components/nav/nav.component';
+import { AnonimoLayoutComponent } from './components/anonimo-layout/anonimo-layout.component';
+import { LogueadoLayoutComponent } from './components/logueado-layout/logueado-layout.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { InicioComponent } from './components/inicio/inicio.component';
     InicioComponent,
     LoginComponent,
     RegistroComponent,
-    PedidosComponent
+    PedidosComponent,
+    NavComponent,
+    AnonimoLayoutComponent,
+    LogueadoLayoutComponent
   ],
   imports: [
     BrowserModule,

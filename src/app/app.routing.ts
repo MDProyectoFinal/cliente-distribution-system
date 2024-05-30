@@ -1,3 +1,5 @@
+import { LogueadoLayoutComponent } from './components/logueado-layout/logueado-layout.component';
+import { AnonimoLayoutComponent } from './components/anonimo-layout/anonimo-layout.component';
 import { authGuard } from './guards/auth.guard';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -13,18 +15,26 @@ const appRoutes: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    component: InicioComponent,
-    pathMatch: 'full',
+    component: LogueadoLayoutComponent,
+    children: [
+      { path: '', redirectTo:'/inicio', pathMatch:'full'},
+      { path: 'mis-datos', component: UsuarioEdicionComponent },
+      { path: 'inicio', component: InicioComponent },
+      { path: 'pedidos', component: ListaPedidosComponent },
+      { path: 'cuenta', component: InicioComponent },
+      { path: 'informacion', component: InicioComponent },
+      { path: 'enviar-sugerencia', component: InicioComponent },
+      { path: 'cerrar-sesion', component: InicioComponent },
+    ],
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'registro', component: RegistroComponent },
-  { path: 'mis-datos', component: UsuarioEdicionComponent, canActivate: [authGuard] },
-  { path: 'inicio', component: InicioComponent, canActivate: [authGuard] },
-  { path: 'pedidos', component: ListaPedidosComponent, canActivate: [authGuard] },
-  { path: 'cuenta', component: InicioComponent, canActivate: [authGuard] },
-  { path: 'informacion', component: InicioComponent, canActivate: [authGuard] },
-  { path: 'enviar-sugerencia', component: InicioComponent, canActivate: [authGuard] },
-  { path: 'cerrar-sesion', component: InicioComponent, canActivate: [authGuard] },
+  {
+    path: '',
+    component: AnonimoLayoutComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'registro', component: RegistroComponent },
+    ],
+  },
 ];
 
 export const appRoutingProviders: any[] = [];
