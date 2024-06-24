@@ -20,7 +20,7 @@ export class AuthService {
 
   login(model: any) {
     model.gethash = true;
-    return this.http.post(GLOBAL.url + 'loguear-usuario', model).pipe(
+    return this.http.post(GLOBAL.url + 'usuarios/loguear-usuario', model).pipe(
       map((response: any) => {
         const user = response;
         localStorage.setItem('token', user.token);
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   registrarUsuario(usuario: UsuarioPersona) {
-    return this.http.post(GLOBAL.url + 'guardar-persona', usuario).pipe(
+    return this.http.post(GLOBAL.url + 'personas/guardar-persona', usuario).pipe(
       map((response: any) => {
         const user = response;
         console.log(response)
