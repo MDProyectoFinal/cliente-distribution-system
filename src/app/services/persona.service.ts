@@ -1,3 +1,4 @@
+import { LocalStorageService } from './local-storage.service';
 import { Injectable } from '@angular/core';
 
 import { catchError, map } from 'rxjs/operators';
@@ -11,52 +12,29 @@ import { UsuarioPersona } from '../models/usuarioPersona';
 
 // Decorador
 @Injectable({
-    providedIn: 'root'
-  })
-export class PersonaServices{
+  providedIn: 'root',
+})
+export class PersonaServices {
+  public url: string;
+  public identity: any;
+  public token: any;
 
-    public url: string;
-    public identity:any;
-    public token:any;
+  // constructor( private _httpClient: HttpClient ){
+  constructor(private _http: HttpClient) {
+    this.url = GLOBAL.url;
+  }
 
-    // constructor( private _httpClient: HttpClient ){
-    constructor( private _http: HttpClient ){
-        this.url = GLOBAL.url;
-    }
+  obtenerPersona(idPersona: string){
+    const opciones = {
+      headers: new HttpHeaders({
+        authorization: localStorage.getItem('token') as string,
+      }),
+    };
 
-    async obtenerPersona(_idPersona: any, _token:any): Promise<any>{
+      return this._http.get(this.url + 'personas/obtener-persona/' + idPersona, opciones).pipe(
+        (map((response : any) =>{
+            return response
+        })));
 
-        this.token = _token;
-
-        console.log(_idPersona);
-        console.log(this.token);
-
-        const headers = new HttpHeaders({
-            //'Content-Type':'application/json; charset=utf-8',
-            //'Content-Type': 'application/x-www-form-urlencoded'
-            //'autorizacion':'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NDk2MGVkNWE4ZDA3OGY0NWY3YjAyNDAiLCJub21icmVfdXN1YXJpbyI6Ik1hbnVVc2VyIiwiZW1haWwiOiJtYW51cGVyZXpAZ21haWwuY29tIiwicm9sIjoiQ2xpZW50ZSIsImltYWdlbiI6Im51bGwiLCJpYXQiOjE2OTE1MzE2MDEsImV4cCI6MTY5NDEyMzYwMX0.i0fL37ACEC2I_oWrwPDGfXrHGK2eDCfnarXK17hAgmA',
-            'authorization': this.token,
-            //'authorization': 'Bearer clave_secreta_trabajo_final',
-        });
-
-        const opciones = { headers: headers }
-
-        try {
-
-            // Devolvemos la petición AJAX
-            const resp = await firstValueFrom(this._http.get(this.url + 'obtener-persona/' + _idPersona, opciones));
-
-            if(resp){
-                return resp;
-            }else{
-                return new Error("Error al obtener la persona");
-            }
-
-        } catch (error:any) {
-            // Puedo definir si solo mando eso, o el status y mas info o solo el "error"
-            throw error.error.mensaje;
-        }
-
-    }
-
+  }
 }
