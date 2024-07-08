@@ -45,13 +45,26 @@ export class UsuarioEdicionComponent implements OnInit {
         console.log(this.personaEdicion);
       },
       error: (e) => {
-        alert('Error de identificación');
+        alert('No pudieron recuperarse datos personales');
       },
     });
   }
 
   async onSubmit() {
-    //   console.log(this.usuario_persona_actualizacion);
+
+        this._personaServices.actualizarDatosPersonalesUsuario(this.personaEdicion).subscribe({
+          next:(data)=>{
+            console.log(data);
+
+
+          },
+          error: (e) =>{
+            console.log(e);
+
+            alert('Error al actualizar datos');
+          }
+        })
+
     //   try {
     //       // A la respuesta la declaramos del tipo interfaz para poder trabajar con el user y persona dentro
     //       var response: RespuestaUsuarioPersona = <any>await this._usuarioServicio.actualizarUsuario(this.usuario_persona_actualizacion);

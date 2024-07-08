@@ -9,12 +9,14 @@ import { GLOBAL } from './global';
 import { Persona } from '../models/persona';
 import { HttpHeaders } from '@angular/common/http';
 import { UsuarioPersona } from '../models/usuarioPersona';
+import { IPersonaEdicion } from '../models/IPersonaEdicion';
 
 // Decorador
 @Injectable({
   providedIn: 'root',
 })
 export class PersonaServices {
+
   public url: string;
   public identity: any;
   public token: any;
@@ -36,5 +38,19 @@ export class PersonaServices {
             return response
         })));
 
+  }
+
+
+  actualizarDatosPersonalesUsuario(personaEdicion: IPersonaEdicion) {
+    const opciones = {
+      headers: new HttpHeaders({
+        authorization: localStorage.getItem('token') as string,
+      }),
+    };
+
+      return this._http.patch(this.url + 'personas/' + personaEdicion.id, personaEdicion, opciones).pipe(
+        (map((response : any) =>{
+            return response
+        })));
   }
 }
