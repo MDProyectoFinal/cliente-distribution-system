@@ -1,11 +1,48 @@
+
+// Variables de colores
+
+$color-primary: #002B53;
+$color-secondary: #483DA7;
+
+//Estilos generales
+
+.titulos-paginas{
+    color: $color-primary;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.btn-primary{
+    background-color: $color-secondary;
+    border: 1px solid $color-secondary;
+}
+
+label{
+    color:$color-primary;
+    font-weight: 600;
+}
+
+.form-control{
+    border: 1px solid $color-primary !important;
+    box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.25);
+}
+
+.form-control::placeholder {
+    color: rgb(168, 168, 168);
+  }
+
+
 .page-container {
     height: 100%;
-    background: #fafafa;
+    background-color: #ffffff;
     color: #000;
-    display: flex;
-    flex-direction: column;
 
     main {
+        height: 100%;
         padding: 18px 24px;
     }
+
 }
+
+
+
