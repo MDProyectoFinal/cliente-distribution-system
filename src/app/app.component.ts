@@ -22,6 +22,8 @@ export class AppComponent implements OnInit{
 
   constructor(private authService: AuthService ){}
 
+  logoPath: string = "./assets/img/logo-rosario-snack.png";
+
   ngOnInit(): void {
     const token = localStorage.getItem("token");
     if (token) {

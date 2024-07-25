@@ -4,18 +4,24 @@ import { Persona } from 'src/app/models/persona';
 import { UsuarioPersona } from 'src/app/models/usuarioPersona';
 import { RegistroUsuario } from 'src/app/models/IInfoRegistro';
 import { AuthService } from 'src/app/services/auth.service';
+import { Globals } from 'src/app/app.globals';
+
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss'],
+  providers: [ Globals ],
 })
 export class RegistroComponent {
   public registro: RegistroUsuario;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private globals:Globals) {
     this.registro = new RegistroUsuario();
   }
+
+  logoImage = this.globals.logoImage;
+  logoImageAlt = this.globals.logoImageAlt;
 
   public async onSubmitRegistro() {
     let persona = new Persona('', this.registro.nombre, this.registro.apellido, this.registro.fechaNacimiento.toString(), this.registro.direccion, this.registro.telefono);
