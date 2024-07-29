@@ -1,19 +1,22 @@
 
-export interface IInfoRegistro{
-    nombre :string;
-    apellido:string;
-    fechaNacimiento:Date;
-    direccion: string;
-    telefono:string;
+// Nueva ruta de acceso a la interfaz
+import { IInfoRegistro } from '../usuarios/interfaces/info-registros.interface';
 
-    nombreUsuario:string;
-    password:string;
-    email:string;
-    rol:string;
+// export interface IInfoRegistro{
+//     nombre :string;
+//     apellido:string;
+//     fechaNacimiento:Date;
+//     direccion: string;
+//     telefono:string;
 
-}
+//     nombreUsuario:string;
+//     password:string;
+//     email:string;
+//     rol:string;
 
-export class RegistroUsuario implements IInfoRegistro{
+// }
+
+export class RegistroUsuario implements IInfoRegistro {
     nombre: string = '';
     apellido: string = '';
     fechaNacimiento: Date = new Date();
@@ -23,6 +26,4 @@ export class RegistroUsuario implements IInfoRegistro{
     password: string = '';
     email: string = '';
     rol: string = 'USER';
-
-
 }

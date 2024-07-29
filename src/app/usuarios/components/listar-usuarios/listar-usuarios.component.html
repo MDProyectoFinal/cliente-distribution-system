@@ -1,0 +1,19 @@
+<h3>{{ titulo }}</h3>
+<ul class="list-group">
+  <li *ngFor="
+    let usuario of listaUsuarios;
+    let i = index;
+    "
+
+    class="list-group-item d-flex justify-content-between align-items-center">
+
+    <div>
+      <span class="text-primary"> {{ i + 1 }}. </span>
+      <strong> Email: </strong>
+      <span> {{ usuario.email }} - </span>
+      <strong> Nombre usuario: </strong>
+      <span> {{ usuario.nombre_usuario }} </span>
+    </div>
+
+  </li>
+</ul>
