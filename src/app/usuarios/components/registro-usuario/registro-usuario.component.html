@@ -1,0 +1,50 @@
+<div class="col-lg-6">
+  <h1>{{ titulo }}</h1>
+
+  <!-- Formualario -->
+  <form #registroForm="ngForm" ngNativeValidate (ngSubmit)="onSubmitRegistro()" class="col-md-7">
+    <p>
+      <label>Nombre/s:</label>
+      <input type="text" name="nombre" [(ngModel)]="registro.nombre" class="form-control" required>
+
+    </p>
+    <p>
+      <label>Apellido:</label>
+      <input type="text" name="apellido" [(ngModel)]="registro.apellido" class="form-control" required>
+
+    </p>
+    <p>
+      <label>Fecha Nacimiento:</label>
+      <input type="date"  name="fechaNacimiento" [(ngModel)]="registro.fechaNacimiento" class="form-control" required>
+
+    </p>
+    <p>
+      <label>Dirección:</label>
+      <input type="text" name="direccion" [(ngModel)]="registro.direccion" class="form-control" required>
+
+    </p>
+    <p>
+      <label>Teléfono:</label>
+      <input type="text"  name="telefono" [(ngModel)]="registro.telefono" class="form-control" required>
+    </p>
+
+    <br/>
+
+    <p>
+      <label>Nombre Usuario:</label>
+      <input type="text"  name="nombreUsuario" [(ngModel)]="registro.nombreUsuario" class="form-control" required>
+
+    </p>
+    <p>
+      <label>Contraseña:</label>
+      <input type="password"  name="password" [(ngModel)]="registro.password" class="form-control" required>
+    </p>
+    <p>
+      <label>Email:</label>
+      <input type="text"  name="email" [(ngModel)]="registro.email" class="form-control" required>
+
+    </p>
+
+    <input type="submit" value="Registrarse" class="btn btn-primary" required>
+  </form>
+</div>

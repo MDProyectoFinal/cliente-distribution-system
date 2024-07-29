@@ -1,0 +1,18 @@
+<div class="col-lg-6">
+  <h1>{{ titulo }}</h1>
+  <form #loginForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit()" class="col-md-7">
+    <p>
+      <label>Correo electrónico:</label>
+      <input type="email" name="email" [(ngModel)]="email" class="form-control" required />
+    </p>
+    <p>
+      <label>Contraseña:</label>
+      <input type="password" name="clave" [(ngModel)]="clave" class="form-control" required />
+    </p>
+
+    <input type="submit" value="Entrar" class="btn btn-primary" required />
+
+  </form>
+  <a [routerLink]="['/registro']">Registrarme</a>
+
+</div>
