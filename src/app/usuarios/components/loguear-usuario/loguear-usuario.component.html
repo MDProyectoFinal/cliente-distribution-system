@@ -1,18 +1,30 @@
-<div class="col-lg-6">
-  <h1>{{ titulo }}</h1>
-  <form #loginForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit()" class="col-md-7">
-    <p>
-      <label>Correo electrónico:</label>
-      <input type="email" name="email" [(ngModel)]="email" class="form-control" required />
-    </p>
-    <p>
-      <label>Contraseña:</label>
-      <input type="password" name="clave" [(ngModel)]="clave" class="form-control" required />
-    </p>
+<div class="container-fluid h-100">
+  <div class="row justify-content-center align-items-center h-100">
 
-    <input type="submit" value="Entrar" class="btn btn-primary" required />
+    <div class="col-lg-6 d-flex flex-column align-items-center">
 
-  </form>
-  <a [routerLink]="['/registro']">Registrarme</a>
+      <img src={{logoImage}} alt={{logoImageAlt}} />
+      <!-- <img src="./assets/img/logo-rosario-snack.png" alt="rosario-snack"> -->
 
+      <form #loginForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit()" class="col-md-7">
+        <p>
+          <label>Usuario:</label>
+          <input type="email" name="email" [(ngModel)]="email" placeholder="usuario@ejemplo.com" class="form-control" required />
+        </p>
+        <p>
+          <label>Contraseña:</label>
+          <input type="password" name="clave" [(ngModel)]="clave" placeholder="contraseña" class="form-control" required />
+        </p>
+        <input type="submit" value="Ingresar" class="btn btn-primary w-100 mt-4" required />
+      </form>
+
+      <a [routerLink]="['']" class="link-olvido-contraseña mt-4">Olvidó su contraseña?</a>
+
+      <a [routerLink]="['/registro']" class="link-nuevo-cliente mt-4">Nuevo cliente</a>
+
+    </div>
+
+  </div>
 </div>
+
+
