@@ -20,6 +20,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { NavComponent } from './components/nav/nav.component';
 import { AnonimoLayoutComponent } from './components/anonimo-layout/anonimo-layout.component';
 import { LogueadoLayoutComponent } from './components/logueado-layout/logueado-layout.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { LogueadoLayoutComponent } from './components/logueado-layout/logueado-l
     AppRoutingModule,
     HttpClientModule,
     routing,
+    FontAwesomeModule,
   ],
   providers: [
     appRoutingProviders

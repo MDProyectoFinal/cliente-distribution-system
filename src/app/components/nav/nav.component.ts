@@ -1,6 +1,7 @@
 import { identity } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component } from '@angular/core';
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-nav',
@@ -14,5 +15,7 @@ export class NavComponent {
     this.login = this.auhtService.estaAutenticado()
     console.log(this.login)
   }
+
+  menuHamburguesaIcon = faBars;
 
 }
