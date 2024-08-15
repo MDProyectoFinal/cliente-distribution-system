@@ -7,6 +7,8 @@ import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usu
 import { LoguearUsuarioComponent } from './components/loguear-usuario/loguear-usuario.component';
 import { RegistroUsuarioComponent } from './components/registro-usuario/registro-usuario.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
+import { InformacionModule } from "../informacion/informacion.module";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    InformacionModule,
+    SharedModule
   ],
   exports: [
     ListarUsuariosComponent,

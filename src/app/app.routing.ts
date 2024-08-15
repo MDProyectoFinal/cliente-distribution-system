@@ -28,7 +28,10 @@ const appRoutes: Routes = [
       { path: 'pedidos', component: ListaPedidosComponent },
       { path: 'cuenta', component: PaginaInicioComponent },
       { path: 'listar-usuarios', component: ListarUsuariosComponent },
-      { path: 'informacion', component: PaginaInicioComponent },
+      {
+        path: 'informacion',
+        loadChildren: () => import('./informacion/informacion.module').then( m => m.InformacionModule )
+      },
       { path: 'enviar-sugerencia', component: PaginaInicioComponent },
       { path: 'cerrar-sesion', component: PaginaInicioComponent },
     ],
@@ -41,6 +44,10 @@ const appRoutes: Routes = [
       { path: 'registro', component: RegistroUsuarioComponent },
     ],
   },
+  {
+    path: '**',
+    redirectTo: '/inicio'
+  }
 ];
 
 export const appRoutingProviders: any[] = [];
