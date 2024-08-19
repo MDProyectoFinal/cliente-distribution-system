@@ -1,0 +1,12 @@
+<div class="container-fluid">
+
+  <a [routerLink]="['/detalle-producto']" routerLinkActive="router-link-active">Nuevo</a>
+
+  <ul>
+    <li class="producto-lista flex justify-content-between" *ngFor="let prod of productos">
+      <span class="nombre-producto">{{ prod.nombre }}</span>
+      <a [routerLink]="['/detalle-producto', prod._id]" routerLinkActive="router-link-active">editar</a>
+      <a [routerLink]="['/detalle-producto', prod._id]" routerLinkActive="router-link-active">eliminar</a>
+    </li>
+  </ul>
+</div>

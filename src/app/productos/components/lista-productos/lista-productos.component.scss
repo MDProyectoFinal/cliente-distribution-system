@@ -1,0 +1,17 @@
+@import "/src/app/app.component.scss";
+
+.producto-lista {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  font-weight: 600;
+  border: 1px solid grey;
+
+  .nombre-producto {
+    flex: 1 1 auto;
+  }
+  a{
+    margin-right: 2rem;
+  }
+}

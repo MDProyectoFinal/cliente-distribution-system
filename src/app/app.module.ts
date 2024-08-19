@@ -29,11 +29,13 @@ import { InicioModule } from './inicio/inicio.module';
 // import { LogueadoLayoutComponent } from './components/logueado-layout/logueado-layout.component';
 import { PersonaModule } from './personas/persona.module';
 import { PedidosModule } from './pedidos/pedidos.module';
+import { ProductosModule } from './productos/productos.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
     // UsuarioEdicionComponent, // Con esto tengo acceso a este componente desde cualquier otro componente
     // ListaPedidosComponent,
     // InicioComponent,
@@ -57,7 +59,8 @@ import { PedidosModule } from './pedidos/pedidos.module';
     MaquetadoModule,
     InicioModule,
     PersonaModule,
-    PedidosModule
+    PedidosModule,
+    ProductosModule
   ],
   providers: [
     appRoutingProviders
