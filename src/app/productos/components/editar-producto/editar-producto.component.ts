@@ -14,6 +14,8 @@ export class EditarProductoComponent implements OnInit {
   @Input()
   producto: any = {};
   tiposProductos: any;
+  urlImagen: string | ArrayBuffer | null;
+  imagenSubir: any;
 
 
   constructor(private route: ActivatedRoute, private servicio: ProductoService) {}
@@ -33,10 +35,46 @@ export class EditarProductoComponent implements OnInit {
       this.servicio.recuperarProducto(this.id).subscribe({
         next: (data) => {
           this.producto = data;
+          this.urlImagen = data.imagen
         },
 
         error: (e) => {},
       });
+
+    }
+  }
+
+  onImageChanged(eventoCambio :any){
+     const archivos = eventoCambio.target.files
+     if(archivos.length === 0){
+      return
+     }
+
+     const tipoImagen = archivos[0].type
+     if(tipoImagen.match(/image\/*/) == null) {
+      alert("Solamente se aceptan imágenes")
+     }
+
+     this.imagenSubir = archivos[0]
+     const reader = new FileReader();
+     reader.readAsDataURL(archivos[0])
+     reader.onload = (_event) =>{
+      this.urlImagen = reader.result
+     }
+
+  }
+
+  enviar(){
+    if(this.isAgregar){
+      this.servicio.insertarImagen(this.producto, this.imagenSubir).subscribe({
+      next: (data) => {
+        console.log("exito");
+
+      },
+
+      error: (e) => {console.log(e)},
+    });
+    } else{
 
     }
   }

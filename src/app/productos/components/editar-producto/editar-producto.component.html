@@ -1,4 +1,4 @@
-<form>
+<form (ngSubmit)="enviar()">
   <div>
     <label>Nombre:</label>
     <input [(ngModel)]="producto.nombre" type="text" name="nombre" />
@@ -25,10 +25,10 @@
   <div>
     <div>
 
-      <img class="img-producto" [src]="producto.imagen" [alt]="producto.nombre" *ngIf="producto.imagen"/>
-      <input type="file" id="btn-subir-imagen" hidden/>
+      <img class="img-producto" [src]="urlImagen" [alt]="producto.nombre" *ngIf="urlImagen"/>
+      <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)"/>
       <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
     </div>
 </div>
-  <button type="submit" >Editar</button>
+  <button type="submit">Editar</button>
 </form>

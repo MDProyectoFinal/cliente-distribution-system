@@ -8,6 +8,7 @@ import { GLOBAL } from 'src/app/config/global';
 })
 export class ProductoService {
 
+
   url: string;
 
   constructor(private httpClient : HttpClient) {
@@ -17,7 +18,6 @@ export class ProductoService {
 // Me parece que no es necesario que pida tokens para recuperar productos y tipos productos. Consultar
 
   recuperarProductos(){
-
 
       return this.httpClient.get(this.url).pipe(
         (map((response : any) =>{
@@ -40,5 +40,28 @@ export class ProductoService {
         (map((response : any) =>{
             return response
         })));
+  }
+
+  insertarImagen(producto: any, imagenSubir: any) {
+    console.log(producto);
+
+    const formData = new FormData();
+    for(var key in producto) {
+      formData.append(key, producto[key])
+    }
+
+    formData.append('image', imagenSubir, imagenSubir.name)
+    console.log(formData);
+
+
+    return this.httpClient.post(this.url, formData).pipe(
+      (map((response : any) =>{
+          return response
+      })));
+  }
+
+
+  editarImagen(producto: any) {
+    throw new Error('Method not implemented.');
   }
 }
