@@ -1,14 +1,19 @@
+@import "/src/app/app.component.scss";
+
 .img-producto{
+    display: block;
     max-height: 200px;
     max-width: 200px;
 }
 
 .lbl-subir-imagen {
-    background-color: indigo;
-    color: white;
     padding: 0.5rem;
-    font-family: sans-serif;
     border-radius: 0.3rem;
+    border: #AAA 1px dashed;
     cursor: pointer;
     margin-top: 1rem;
+  }
+
+  .select-tipo{
+    padding-right: 1rem;
   }
