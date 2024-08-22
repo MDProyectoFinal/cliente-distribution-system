@@ -5,13 +5,36 @@
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  font-weight: 600;
-  border: 1px solid grey;
+  font-weight: 400;
+  border: 1px solid #CCC;
 
   .nombre-producto {
     flex: 1 1 auto;
   }
-  a{
-    margin-right: 2rem;
+  a {
+    margin-right: 1rem;
+    color: $color-secondary;
+
+    :hover {
+      color: lighten($color-secondary, 20);
+    }
   }
+
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+ul {
+  margin-top: 1.5rem;
+  padding: 0;
+}
+
+.btn-nuevo-producto {
+
+  background-color: $color-secondary;
+  color: white;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 0.3rem;
 }
