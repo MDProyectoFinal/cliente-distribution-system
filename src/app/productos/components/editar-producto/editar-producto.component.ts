@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-editar-producto',
@@ -17,7 +18,7 @@ export class EditarProductoComponent implements OnInit {
   urlImagen: string | ArrayBuffer | null;
   imagenSubir: any;
 
-  constructor(private route: ActivatedRoute, private servicio: ProductoService) {}
+  constructor(private route: ActivatedRoute, private servicio: ProductoService, private location : Location) {}
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.isAgregar = !this.id;
@@ -82,5 +83,9 @@ export class EditarProductoComponent implements OnInit {
         },
       });
     }
+  }
+
+  back(){
+    this.location.back();
   }
 }
