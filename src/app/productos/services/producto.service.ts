@@ -4,64 +4,78 @@ import { map } from 'rxjs';
 import { GLOBAL } from 'src/app/config/global';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductoService {
-
-
   url: string;
 
-  constructor(private httpClient : HttpClient) {
-    this.url = GLOBAL.url + 'productos/'
+  constructor(private httpClient: HttpClient) {
+    this.url = GLOBAL.url + 'productos/';
   }
 
-// Me parece que no es necesario que pida tokens para recuperar productos y tipos productos. Consultar
+  // Me parece que no es necesario que pida tokens para recuperar productos y tipos productos. Consultar
 
-  recuperarProductos(){
-
-      return this.httpClient.get(this.url).pipe(
-        (map((response : any) =>{
-            return response
-        })));
+  recuperarProductos() {
+    return this.httpClient.get(this.url).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
   }
 
   recuperarTiposProductos() {
     return this.httpClient.get(GLOBAL.url + 'tiposProductos').pipe(
-        (map((response : any) =>{
-            return response
-        })));
+      map((response: any) => {
+        return response;
+      })
+    );
   }
-
 
   recuperarProducto(idProducto: string) {
-
-
     return this.httpClient.get(this.url + idProducto).pipe(
-        (map((response : any) =>{
-            return response
-        })));
+      map((response: any) => {
+        return response;
+      })
+    );
   }
 
-  insertarImagen(producto: any, imagenSubir: any) {
-    console.log(producto);
-
+  insertarProducto(producto: any, imagenSubir: any) {
     const formData = new FormData();
-    for(var key in producto) {
-      formData.append(key, producto[key])
+    for (var key in producto) {
+      formData.append(key, producto[key]);
     }
 
-    formData.append('image', imagenSubir, imagenSubir.name)
-    console.log(formData);
-
+    formData.append('image', imagenSubir, imagenSubir.name);
 
     return this.httpClient.post(this.url, formData).pipe(
-      (map((response : any) =>{
-          return response
-      })));
+      map((response: any) => {
+        return response;
+      })
+    );
   }
 
+  editarProducto(producto: any, imagenSubir: any) {
+    const formData = new FormData();
+    for (var key in producto) {
+      formData.append(key, producto[key]);
+    }
 
-  editarImagen(producto: any) {
-    throw new Error('Method not implemented.');
+    if (imagenSubir) {
+      formData.append('image', imagenSubir, imagenSubir.name);
+    }
+
+    return this.httpClient.put(this.url + producto._id, formData).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
+
+  eliminarProducto(idProducto: string) {
+    return this.httpClient.delete(this.url + idProducto).pipe(
+      map((res) => {
+        return res;
+      })
+    );
   }
 }
