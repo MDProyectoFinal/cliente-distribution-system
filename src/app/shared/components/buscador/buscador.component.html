@@ -1,0 +1,19 @@
+
+<hr>
+<div class="input-group">
+  <input
+    type="text"
+    [placeholder]="placeholder"
+    class="form-control"
+    (keyup.enter)="emitValue( txtInput.value )"
+    #txtInput
+  >
+  <div class="input-group-append">
+    <button
+      class="btn btn-outline-secondary"
+      type="button" (click)="emitValue( txtInput.value )">
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+</div>
+<hr>

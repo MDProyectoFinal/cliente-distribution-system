@@ -9,7 +9,7 @@
     </div> -->
 
     <!-- Formualario -->
-    <form #usuarioActualizacionForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">
+    <form *ngIf="personaEdicion" #usuarioActualizacionForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">
       <p>
         <label>Nombre/s:</label>
         <input type="text" name="nombre" [(ngModel)]="personaEdicion.nombre" class="form-control" required>
