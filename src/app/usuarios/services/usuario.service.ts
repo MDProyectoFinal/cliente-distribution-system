@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { catchError, map } from 'rxjs/operators';
-import { firstValueFrom, identity } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
@@ -80,6 +80,25 @@ export class UsuarioService {
       //     // return response
       //   })));
 
+    }
+
+    obtenerUsuariosPorNombreUsuario( nombre_usuario: string ): Observable<UsuarioInterface[]>{
+
+      debugger;
+      // Como usamos Js en el servidor tambien, definimos asi el Content-Type
+      let headers = new HttpHeaders({
+        'Content-Type':'application/json',
+        //'autorizacion': this.getToken(),
+        'authorization': this.getToken(), //this.token,
+        // 'Authorization': 'Bearer clave_secreta_trabajo_final'
+      });
+
+      debugger;
+      return this._http.get<{ users: UsuarioInterface[] }>(this.url + 'usuarios/obtener-usuarios/nombre/' + nombre_usuario, { headers: headers })
+      .pipe(
+        map(response => response.users),
+        catchError( () => of([]))
+      );
     }
 
     getIdentity(){

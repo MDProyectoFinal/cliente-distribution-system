@@ -1,22 +1,45 @@
 <h3>{{ titulo }}</h3>
-<ul class="list-group">
-  <li *ngFor="
-    let usuario of listaUsuarios;
-    let i = index;
-    "
 
-    class="list-group-item d-flex justify-content-between align-items-center">
+<!-- BUSCADOR -->
+<shared-buscador
+    placeholder="Ingrese el nombre de usuario.."
+    (onValue)="buscarPorNombreUsuario($event)"
+    ></shared-buscador>
 
-    <div>
-      <span class="text-primary"> {{ i + 1 }}. </span>
-      <strong> Email: </strong>
-      <span> {{ usuario.email }} - </span>
-      <strong> Nombre usuario: </strong>
-      <span> {{ usuario.nombre_usuario }} </span>
-    </div>
+<div *ngIf="listaUsuarios.length === 0" class="alert alert-warning text-centes">
+  No hay usuarios para mostrar
+</div>
 
-  </li>
-</ul>
+<div *ngIf="listaUsuarios.length > 0">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Email</th>
+        <th>Nombre de Usuario</th>
+        <th>Fecha Registro</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of listaUsuarios; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          {{ usuario.email }}
+        </td>
+        <!-- <td>
+          <img [src]="country.flags.svg" [alt]="country.name.common">
+        </td> -->
+        <td>{{ usuario.nombre_usuario }}</td>
+        <td>{{ usuario.fecha_registro | date:'dd/MM/yyyy' }}</td>
+        <!-- <td>
+          <a [routerLink]="['/countries/by/', country.cca3 ]" routerLinkActive="router-link-active">Info</a>
+        </td> -->
+
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <!-- Pie de Página -->
 <shared-footer></shared-footer>
