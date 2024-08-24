@@ -1,0 +1,35 @@
+@import "/src/app/app.component.scss";
+
+.img-producto{
+    display: block;
+    max-height: 200px;
+    max-width: 200px;
+}
+
+
+.btn-cancelar{
+    margin-right: 1rem;
+    cursor: pointer;
+    padding: 0.3rem;
+    border: none;
+
+    &:hover{
+        background-color: #ccc;
+    }
+
+    &:focus{
+        outline: none;
+    }
+}
+
+.lbl-subir-imagen {
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    border: #AAA 1px dashed;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+
+  .select-tipo{
+    padding-right: 1rem;
+  }

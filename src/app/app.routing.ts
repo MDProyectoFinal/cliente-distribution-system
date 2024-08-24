@@ -15,6 +15,8 @@ import { LogueadoMaquetadoComponent } from './maquetado/components/logueado-maqu
 import { AnonimoMaquetadoComponent } from './maquetado/components/anonimo-maquetado/anonimo-maquetado.component';
 import { LoguearUsuarioComponent } from './usuarios/components/loguear-usuario/loguear-usuario.component';
 import { RegistroUsuarioComponent } from './usuarios/components/registro-usuario/registro-usuario.component';
+import { ListaProductosComponent } from './productos/components/lista-productos/lista-productos.component';
+import { EditarProductoComponent } from './productos/components/editar-producto/editar-producto.component';
 
 const appRoutes: Routes = [
   {
@@ -22,10 +24,13 @@ const appRoutes: Routes = [
     canActivate: [authGuard],
     component: LogueadoMaquetadoComponent,
     children: [
-      { path: '', redirectTo:'/inicio', pathMatch:'full'},
+      { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'mis-datos', component: EditarUsuarioComponent },
       { path: 'inicio', component: PaginaInicioComponent },
       { path: 'pedidos', component: ListaPedidosComponent },
+      { path: 'productos', component: ListaProductosComponent },
+      { path: 'productos/detalle/:id', component: EditarProductoComponent },
+      { path: 'productos/nuevo', component: EditarProductoComponent },
       { path: 'cuenta', component: PaginaInicioComponent },
       { path: 'listar-usuarios', component: ListarUsuariosComponent },
       {

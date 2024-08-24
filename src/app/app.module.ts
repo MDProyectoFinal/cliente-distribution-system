@@ -11,13 +11,14 @@ import { MaquetadoModule } from './maquetado/maquetado.module';
 import { NavModule } from './nav/nav.module';
 import { NgModule } from '@angular/core';
 import { PedidosModule } from './pedidos/pedidos.module';
+import { ProductosModule } from './productos/productos.module';
 import { PersonaModule } from './personas/persona.module';
 import { SharedModule } from './shared/shared.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     AppRoutingModule,
@@ -30,9 +31,10 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     NavModule,
     PedidosModule,
     PersonaModule,
+    ProductosModule
     routing,
     SharedModule,
-    UsuariosModule,
+    UsuariosModule
   ],
   providers: [
     appRoutingProviders

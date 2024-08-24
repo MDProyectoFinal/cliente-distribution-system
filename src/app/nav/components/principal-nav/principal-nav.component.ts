@@ -10,13 +10,11 @@ export class PrincipalNavComponent {
   login : boolean = false;
   constructor(private authService: AuthenticationService){
 
-    debugger;
     this.login = this.authService.estaAutenticado()
     console.log(this.login)
   }
 
   public cerrarSesion(): void {
-    debugger;
     this.authService.cerrarSesion();
   }
 }

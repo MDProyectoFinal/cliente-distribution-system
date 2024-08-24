@@ -1,0 +1,45 @@
+@import "/src/app/app.component.scss";
+
+.producto-lista {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  font-weight: 400;
+  border: 1px solid #CCC;
+
+  .nombre-producto {
+    flex: 1 1 auto;
+  }
+  a {
+    margin-right: 1rem;
+    color: $color-secondary;
+
+    &:hover {
+      color: lighten($color-secondary, 10);
+      cursor: pointer;
+    }
+  }
+
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+ul {
+  margin-top: 1.5rem;
+  padding: 0;
+}
+
+.btn-nuevo-producto {
+
+  background-color: $color-secondary;
+  color: white;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 0.3rem;
+
+  &:hover{
+    background-color: lighten($color-secondary, 10);
+  }
+}

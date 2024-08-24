@@ -1,0 +1,40 @@
+<hr />
+
+<div class="col-lg-6">
+  <form (ngSubmit)="enviar()" class="col-md-7">
+    <p>
+      <label>Nombre:</label>
+      <input [(ngModel)]="producto.nombre" type="text" class="form-control" name="nombre" />
+    </p>
+    <p>
+      <label>Stock:</label>
+      <input [(ngModel)]="producto.stock" type="text" class="form-control" name="stock" />
+    </p>
+
+    <p>
+      <label>Precio Unitario:</label>
+      <input [(ngModel)]="producto.precio_unitario" type="text" class="form-control" name="precio_unitario" />
+    </p>
+    <p>
+      <label>Descripcion:</label>
+      <input [(ngModel)]="producto.descripcion" type="text" class="form-control" name="descripcion" />
+    </p>
+    <div>
+      <label>Tipo:</label>
+      <select class="form-control" [(ngModel)]="producto.tipoProducto" style="width: 200px" name="tipo">
+        <option *ngFor="let tipo of tiposProductos" [value]="tipo._id">{{ tipo.descripcion }}</option>
+      </select>
+    </div>
+    <br />
+
+    <div>
+      <img class="img-producto" [src]="urlImagen" [alt]="producto.nombre" *ngIf="urlImagen" />
+      <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
+      <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
+    </div>
+    <br />
+    <Button (click)="back()" class="btn-cancelar">Cancelar</Button>
+    <button class="btn-primary" type="submit">Editar</button>
+
+  </form>
+</div>
