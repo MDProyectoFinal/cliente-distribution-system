@@ -64,22 +64,22 @@ export class EditarProductoComponent implements OnInit {
   enviar() {
     if (this.isAgregar) {
       this.servicio.insertarProducto(this.producto, this.imagenSubir).subscribe({
-        next: (data) => {
-          console.log('exito');
-        },
-
+        complete: () => alert("Producto agregado exitosamente."),
         error: (e) => {
-          console.log(e);
-        },
+
+          if(e.status == 400){
+            alert(e.error)
+          }
+        }
       });
     } else {
       this.servicio.editarProducto(this.producto, this.imagenSubir).subscribe({
-        next: (data) => {
-          console.log('exito');
-        },
-
+        complete: () => alert("Producto modificado exitosamente."),
         error: (e) => {
-          console.log(e);
+
+          if(e.status == 400){
+            alert(e.error)
+          }
         },
       });
     }

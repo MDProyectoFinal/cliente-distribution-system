@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 import { GLOBAL } from 'src/app/config/global';
 
 @Injectable({
@@ -45,13 +45,14 @@ export class ProductoService {
       formData.append(key, producto[key]);
     }
 
-    formData.append('image', imagenSubir, imagenSubir.name);
+    if (imagenSubir) {
+      formData.append('image', imagenSubir, imagenSubir.name);
+    }
 
-    return this.httpClient.post(this.url, formData).pipe(
-      map((response: any) => {
-        return response;
-      })
-    );
+    return this.httpClient.post(this.url, formData)
+    .pipe(catchError(err => {
+      throw err;
+    }));
   }
 
   editarProducto(producto: any, imagenSubir: any) {
@@ -64,11 +65,10 @@ export class ProductoService {
       formData.append('image', imagenSubir, imagenSubir.name);
     }
 
-    return this.httpClient.put(this.url + producto._id, formData).pipe(
-      map((response: any) => {
-        return response;
-      })
-    );
+    return this.httpClient.put(this.url + producto._id, formData)
+    .pipe(catchError(err => {
+      throw err;
+    }));
   }
 
   eliminarProducto(idProducto: string) {
@@ -78,4 +78,10 @@ export class ProductoService {
       })
     );
   }
+
+  manejarError(error: HttpErrorResponse){
+
+  }
 }
+
+
