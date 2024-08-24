@@ -31,7 +31,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     NavModule,
     PedidosModule,
     PersonaModule,
-    ProductosModule
+    ProductosModule,
     routing,
     SharedModule,
     UsuariosModule
