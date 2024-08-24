@@ -1,5 +1,8 @@
 <h3>{{ titulo }}</h3>
 
+<!-- LOADING -->
+<shared-loading-spinner *ngIf="isLoading" textoCarga="Buscando usuarios.."></shared-loading-spinner>
+
 <!-- BUSCADOR -->
 <shared-buscador
     placeholder="Ingrese el nombre de usuario.."
@@ -40,6 +43,7 @@
     </tbody>
   </table>
 </div>
+
 
 <!-- Pie de Página -->
 <shared-footer></shared-footer>
