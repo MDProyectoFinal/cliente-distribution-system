@@ -4,14 +4,14 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
-
-
+import { PaginadorComponent } from './components/paginador/paginador.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
     BuscadorComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    PaginadorComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +20,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
   exports: [
     FooterComponent,
     BuscadorComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    PaginadorComponent
   ]
 })
 export class SharedModule { }

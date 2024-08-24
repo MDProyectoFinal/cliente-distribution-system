@@ -1,0 +1,67 @@
+@import "/src/app/app.component.scss";
+
+.paginacion {
+  display: inline-block;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+
+  .item-pagina {
+    display: inline;
+
+    &:first-child,
+    .link-pagina {
+      margin-left: 0;
+      font-size: large;
+      border-bottom-left-radius: 0.25rem;
+      border-top-left-radius: 0.25rem;
+    }
+
+    &:last-child,
+    .link-pagina {
+      margin-left: 0;
+      border-bottom-left-radius: 0.25rem;
+      border-top-left-radius: 0.25rem;
+    }
+
+    &.active .link-pagina,
+    &.active .link-pagina:hover,
+    &.active .link-pagina:focus
+    {
+        z-index: 2;
+        color: #fff;
+        cursor: default;
+        background-color: $color-primary;
+        border-color: $color-primary;
+
+
+
+    }
+
+
+  }
+
+  .link-pagina{
+    position: relative;
+  float: left;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  color: $color-primary;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+
+  &.fa{
+    background-color: red;
+    font-size: large;
+      }
+
+  &:focus,
+  &:hover{
+    color: $color-primary;
+  background-color: #eceeef;
+  border-color: #ddd;
+  }
+  }
+}

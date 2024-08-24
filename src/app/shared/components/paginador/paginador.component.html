@@ -1,0 +1,11 @@
+<ul class="paginacion">
+    <li class="item-pagina" (click)="navegarAnterior.emit()" *ngIf="linkAnterior"><span class="link-pagina"><</span></li>
+    <li *ngFor="let pagina of paginas" [ngClass]="{'item-pagina': true, 'active': paginaActual === pagina}"
+    (click)="navegar.emit(pagina)">
+        <span class="link-pagina">{{pagina}}</span>
+    </li>
+    <li class="item-pagina nav-paginacion" (click)="navegarSiguiente.emit()" *ngIf="linkSiguiente"><span class="link-pagina" >></span></li>
+</ul>
+
+
+
