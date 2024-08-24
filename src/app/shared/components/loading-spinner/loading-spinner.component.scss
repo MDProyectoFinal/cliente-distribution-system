@@ -1,0 +1,25 @@
+
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente visible */
+  border-radius: 30px;
+  padding: 20px;
+  color: white;
+  position: fixed; /* Fija el spinner en la pantalla */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta la posición para centrar */
+  z-index: 1000; /* Asegura que el spinner esté sobre otros elementos */
+  visibility: visible; /* Asegura que sea visible */
+}
+
+span {
+  margin-left: 10px; /* Ajusta el margen alrededor del texto */
+}
+
+svg {
+  width: 40px; /* Tamaño del SVG */
+  height: 40px;
+}
