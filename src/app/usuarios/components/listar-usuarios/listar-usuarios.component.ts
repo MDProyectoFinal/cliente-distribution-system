@@ -4,11 +4,13 @@ import { Usuario as UsuarioInterface } from 'src/app/usuarios/interfaces/usuario
 
 @Component({
   selector: 'personas-listar-usuarios',
-  templateUrl: './listar-usuarios.component.html'
+  templateUrl: './listar-usuarios.component.html',
+  styleUrls: ['./listar-usuarios.component.scss']
 })
 export class ListarUsuariosComponent implements OnInit {
 
-  public titulo: string = 'Listado de usuarios'
+  public titulo: string = 'Listado de usuarios';
+  public isLoading: boolean = false;
 
   @Input()
   public listaUsuarios: UsuarioInterface[] = [];
@@ -16,11 +18,21 @@ export class ListarUsuariosComponent implements OnInit {
   constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
-    debugger;
-    this.usuarioService.obtenerUsuarios().subscribe((data: UsuarioInterface[]) => {
-      debugger;
-      this.listaUsuarios = data;
-    });
+    this.usuarioService.obtenerUsuarios()
+      .subscribe((data: UsuarioInterface[]) => {
+        this.listaUsuarios = data;
+      })
+  }
+
+  buscarPorNombreUsuario( nombreUsuarioIngresado: string ): void {
+
+    this.isLoading = true;
+
+    this.usuarioService.obtenerUsuariosPorNombreUsuario( nombreUsuarioIngresado )
+      .subscribe( (usuarios: UsuarioInterface[]) => {
+        this.listaUsuarios = usuarios;
+        this.isLoading = false;
+      })
   }
 
 }

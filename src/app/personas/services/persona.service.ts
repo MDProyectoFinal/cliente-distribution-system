@@ -26,10 +26,10 @@ export class PersonaService {
       }),
     };
 
-      return this._http.get(this.url + 'personas/obtener-persona/' + idPersona, opciones).pipe(
-        (map((response : any) =>{
-            return response
-        })));
+    return this._http.get(this.url + 'personas/obtener-persona/' + idPersona, opciones).pipe(
+      (map((response : any) =>{
+          return response
+      })));
 
   }
 
