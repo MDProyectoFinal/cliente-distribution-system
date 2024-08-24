@@ -1,19 +1,34 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'paginador',
   templateUrl: './paginador.component.html',
   styleUrls: ['./paginador.component.scss'],
 })
-export class PaginadorComponent implements OnInit {
+export class PaginadorComponent implements OnInit  {
+
+private _totalPaginas : number = 1
+
   @Input()
   paginaActual: number = 1;
   @Input()
   totalElementos: number = 0;
   @Input()
   tamañoPagina: number = 20;
+
   @Input()
-  totalPaginas: number = 1;
+  set totalPaginas(valor:number){
+    if(valor>1){
+      this._totalPaginas = valor
+      this.paginas = this.range(1, this._totalPaginas)
+    }
+
+  }
+
+  get totalPaginas() : number{
+    return this._totalPaginas
+  }
+
 
   @Input()
   linkAnterior: string = ''
@@ -32,10 +47,11 @@ export class PaginadorComponent implements OnInit {
   paginas: number[] = [];
 
   ngOnInit(): void {
-    this.paginas = this.range(1, this.totalPaginas);
+   // this.paginas = this.range(1, this._totalPaginas);
   }
 
   range(inicio: number, fin: number) {
     return [...Array(fin).keys()].map((el) => el + inicio);
   }
+
 }

@@ -6,7 +6,7 @@
   justify-content: space-between;
   padding: 1rem;
   font-weight: 400;
-  border: 1px solid #CCC;
+  border: 1px solid #ccc;
 
   .nombre-producto {
     flex: 1 1 auto;
@@ -32,14 +32,22 @@ ul {
 }
 
 .btn-nuevo-producto {
-
   background-color: $color-secondary;
   color: white;
   font-weight: 600;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.3rem;
+  display: inline-block;
+  margin-top: 0.5rem;
 
-  &:hover{
+  &:hover {
     background-color: lighten($color-secondary, 10);
+    text-decoration: none;
   }
+}
+
+.paginador-productos {
+  text-align: center;
+  display: block;
+  background-color: transparent;
 }
