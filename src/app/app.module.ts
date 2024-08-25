@@ -1,5 +1,5 @@
 import { AppComponent } from './app.component';
-import { routing, appRoutingProviders } from './app.routing';
+//import { routing, appRoutingProviders } from './app.routing';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -32,12 +32,12 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     PedidosModule,
     PersonaModule,
     ProductosModule,
-    routing,
+    //routing,
     SharedModule,
     UsuariosModule
   ],
   providers: [
-    appRoutingProviders
+    //appRoutingProviders
   ],
   bootstrap: [AppComponent]
 })
