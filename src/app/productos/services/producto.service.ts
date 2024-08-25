@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { GLOBAL } from 'src/app/config/global';
 import { Producto } from 'src/app/models/producto';
 import { Pagina } from 'src/app/shared/interfaces/Pagina';
@@ -9,61 +9,55 @@ import { Pagina } from 'src/app/shared/interfaces/Pagina';
   providedIn: 'root',
 })
 export class ProductoService {
+
   url: string;
 
   constructor(private httpClient: HttpClient) {
     this.url = GLOBAL.url + 'productos/';
   }
 
-  // Me parece que no es necesario que pida tokens para recuperar productos y tipos productos. Consultar
-
-  recuperarProductos() {
+  recuperarProductos(): Observable<Pagina<Producto>> {
     return this.httpClient
       .get(this.url, {
         observe: 'response',
       })
       .pipe(
-        map((response: any) => {
+        map((response: HttpResponse<any>) => {
           const respuesta: Pagina<Producto> = this.crearPagina(response);
-          console.log(respuesta);
-
           return respuesta;
         })
       );
   }
 
-  recuperarProductosPorNombre(nombre: string) {
+  recuperarProductosPorNombre(nombre: string): Observable<Pagina<Producto>> {
     nombre.trim();
-
     return this.httpClient
       .get(this.url, {
         observe: 'response',
         params: new HttpParams().set('buscar', nombre),
       })
       .pipe(
-        map((response: any) => {
+        map((response: HttpResponse<any>) => {
           const respuesta: Pagina<Producto> = this.crearPagina(response);
-
           return respuesta;
         })
       );
   }
 
-  recuperarProductosEnDireccion(url: string) {
+  recuperarProductosEnDireccion(url: string): Observable<Pagina<Producto>> {
     return this.httpClient
       .get(url, {
         observe: 'response',
       })
       .pipe(
-        map((response: any) => {
+        map((response: HttpResponse<any>) => {
           const respuesta: Pagina<Producto> = this.crearPagina(response);
-
           return respuesta;
         })
       );
   }
 
-  recuperarTiposProductos() {
+  recuperarTiposProductos(): Observable<any> {
     return this.httpClient.get(GLOBAL.url + 'tiposProductos').pipe(
       map((response: any) => {
         return response;
@@ -71,7 +65,7 @@ export class ProductoService {
     );
   }
 
-  recuperarProducto(idProducto: string) {
+  recuperarProducto(idProducto: string): Observable<any> {
     return this.httpClient.get(this.url + idProducto).pipe(
       map((response: any) => {
         return response;
@@ -79,50 +73,46 @@ export class ProductoService {
     );
   }
 
-  insertarProducto(producto: any, imagenSubir: any) {
+  insertarProducto(producto: any, imagenSubir: any): Observable<any> {
     const formData = new FormData();
     for (var key in producto) {
       formData.append(key, producto[key]);
     }
-
     if (imagenSubir) {
       formData.append('image', imagenSubir, imagenSubir.name);
     }
-
     return this.httpClient.post(this.url, formData).pipe(
-      catchError((err) => {
+      catchError((err: HttpErrorResponse) => {
         throw err;
       })
     );
   }
 
-  editarProducto(producto: any, imagenSubir: any) {
+  editarProducto(producto: any, imagenSubir: any): Observable<any> {
     const formData = new FormData();
     for (var key in producto) {
       formData.append(key, producto[key]);
     }
-
     if (imagenSubir) {
       formData.append('image', imagenSubir, imagenSubir.name);
     }
-
     return this.httpClient.put(this.url + producto._id, formData).pipe(
-      catchError((err) => {
+      catchError((err: HttpErrorResponse) => {
         throw err;
       })
     );
   }
 
-  eliminarProducto(idProducto: string) {
+  eliminarProducto(idProducto: string): Observable<any> {
     return this.httpClient.delete(this.url + idProducto).pipe(
-      map((res) => {
+      map((res: any) => {
         return res;
       })
     );
   }
 
-  private crearPagina(response: any) {
-    const infoPaginacion = JSON.parse(response.headers.get('X-Paginacion'));
+  private crearPagina(response: HttpResponse<any>): Pagina<Producto> {
+    const infoPaginacion = JSON.parse(response.headers.get('X-Paginacion') ?? '');
     const respuesta: Pagina<Producto> = {
       elementos: response.body,
       totalElementos: infoPaginacion.total,
