@@ -4,7 +4,7 @@ import { ListaProductosComponent } from './components/lista-productos/lista-prod
 import { EditarProductoComponent } from './components/editar-producto/editar-producto.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CloudinaryModule } from '@cloudinary/ng';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -17,7 +17,7 @@ import { CloudinaryModule } from '@cloudinary/ng';
     CommonModule,
     RouterModule,
     FormsModule,
-    CloudinaryModule
+    SharedModule
   ]
 })
 export class ProductosModule { }

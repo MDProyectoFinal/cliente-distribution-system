@@ -1,17 +1,24 @@
-<hr>
+<div style="margin-top: 2rem">
+  <shared-buscador placeholder="Ingresar nombre producto" (onValue)="buscarProductoPorNombre($event)"></shared-buscador>
 
-<div style="margin-top: 2rem;">
+  <a class="btn-nuevo-producto" [routerLink]="['nuevo']" routerLinkActive="router-link-active">Nuevo</a>
 
-    <a class="btn-nuevo-producto" [routerLink]="['nuevo']" routerLinkActive="router-link-active">Nuevo</a>
+  <ul>
+    <li class="producto-lista flex justify-content-between" *ngFor="let prod of productosFiltrados">
+      <span class="nombre-producto">{{ prod.nombre }}</span>
+      <a [routerLink]="['detalle', prod._id]" routerLinkActive="router-link-active"><i class="fa fa-edit"></i></a>
+      <a (click)="confirmarEliminacion(prod._id)">
+        <i class="fa fa-trash"></i>
+      </a>
+    </li>
+  </ul>
 
-    <ul>
-      <li class="producto-lista flex justify-content-between" *ngFor="let prod of productos">
-        <span class="nombre-producto">{{ prod.nombre }}</span>
-        <a [routerLink]="['detalle', prod._id]" routerLinkActive="router-link-active"><i class="fa fa-edit"></i></a>
-        <a (click)="confirmarEliminacion(prod._id)">
-          <i class="fa fa-trash"></i>
-        </a>
-      </li>
-    </ul>
-
+  <paginador class="paginador-productos" *ngIf="infoPagina"  [paginaActual]="infoPagina.paginaActual"
+  [linkSiguiente]="infoPagina.linkSiguiente"
+  [linkAnterior]="infoPagina.linkAnterior"
+  [totalPaginas]="infoPagina.totalPaginas"
+  [totalElementos]="infoPagina.totalElementos"
+  (navegar)="irPagina($event)"
+  (navegarAnterior) = "navegarAnterior()"
+  (navegarSiguiente) = "navegarSiguiente()"></paginador>
 </div>
