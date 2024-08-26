@@ -1,5 +1,5 @@
 import { authGuard } from './guards/auth.guard';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Modifica al mismo tiempo en la vista y el modelo.
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -21,6 +21,9 @@ import { NavComponent } from './components/nav/nav.component';
 import { AnonimoLayoutComponent } from './components/anonimo-layout/anonimo-layout.component';
 import { LogueadoLayoutComponent } from './components/logueado-layout/logueado-layout.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SliderOfertasComponent } from './components/slider-ofertas/slider-ofertas.component';
+import { SliderDestacadosComponent } from './components/slider-destacados/slider-destacados.component';
+import { SliderExclusivosComponent } from './components/slider-exclusivos/slider-exclusivos.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     PedidosComponent,
     NavComponent,
     AnonimoLayoutComponent,
-    LogueadoLayoutComponent
+    LogueadoLayoutComponent,
+    SliderOfertasComponent,
+    SliderDestacadosComponent,
+    SliderExclusivosComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +52,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   providers: [
     appRoutingProviders
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

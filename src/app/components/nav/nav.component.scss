@@ -10,11 +10,19 @@
     color: $color-primary;
     font-weight: 600;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin-right: 0;
 }
 
-.navbar-light .navbar-toggler{
+.navbar-light .navbar-toggler,
+button{
     border: none;
     color: $color-primary;
+    background-color: transparent;
+
+    .bellIcon,
+    .cartIcon{
+        font-size: 20px;
+    }
 }
 
 .navbar-toggler:focus,

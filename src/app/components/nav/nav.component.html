@@ -1,9 +1,9 @@
 <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="row align-items-center">
-      <div class="col-12">
+  <div class="container-fluid d-flex justify-content-center w-100 px-0">
+    <div class="row align-items-center justify-content-between w-100">
+      <div class="col-8">
 
-        <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler mr-lg-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
            <fa-icon [icon]="menuHamburguesaIcon"></fa-icon>
         </button>
     
@@ -20,7 +20,20 @@
             </li>
           </ul> 
     
-        </div>    
+        </div> 
+      </div>
+       
+      <div class="col-4 text-right">
+
+        <button class="text-right">
+          <fa-icon [icon]="cartIcon" class="cartIcon mr-lg-3"></fa-icon>
+        </button>
+       
+
+        <button>
+          <fa-icon [icon]="bellIcon" class="bellIcon"></fa-icon>
+        </button>
+        
 
       </div>
     </div>

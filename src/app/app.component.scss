@@ -12,6 +12,12 @@ $color-secondary: #483DA7;
     font-weight: 500;
 }
 
+.titulos-inicio{
+    color: $color-primary;
+    font-size: 25px;
+    font-weight: 600;
+}
+
 .btn-primary{
     background-color: $color-secondary;
     border: 1px solid $color-secondary;
@@ -41,6 +47,79 @@ label{
         height: 100%;
         padding: 18px 24px;
     }
+
+}
+
+/*Estilos Generales sliders*/
+
+swiper-slide{
+    border: 3px solid $color-primary;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.25);
+}
+
+swiper-slide .imagen{
+   width: 60px;
+}
+
+.nombreProducto{
+    color: $color-primary;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.precioProducto{
+    color: gray;
+    font-weight: 100;
+    font-size: 17px;
+}
+
+@media(min-width: 768px){
+
+    swiper-slide .imagen{
+        width: 70px;
+     }
+     
+     .nombreProducto{
+         font-size: 17px;
+     }
+     
+     .precioProducto{
+         font-size: 19px;
+     }
+
+}
+
+@media(min-width: 920px){
+
+    swiper-slide .imagen{
+        width: 100px;
+     }
+     
+     .nombreProducto{
+         font-size: 19px;
+     }
+     
+     .precioProducto{
+         font-size: 21px;
+     }
+
+}
+
+@media(min-width: 1200px){
+
+    swiper-slide .imagen{
+        width: 120px;
+     }
+     
+     .nombreProducto{
+         font-size: 21px;
+     }
+     
+     .precioProducto{
+         font-size: 23px;
+     }
 
 }
 

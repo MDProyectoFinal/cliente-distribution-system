@@ -1,7 +1,7 @@
 import { identity } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Component } from '@angular/core';
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBell, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-nav',
@@ -17,5 +17,9 @@ export class NavComponent {
   }
 
   menuHamburguesaIcon = faBars;
+
+  cartIcon = faCartShopping;
+
+  bellIcon = faBell;
 
 }
