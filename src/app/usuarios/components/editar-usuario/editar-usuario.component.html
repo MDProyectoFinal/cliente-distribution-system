@@ -38,6 +38,12 @@
         <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)" />
       </p>
 
+      <div>
+        <img class="img-avatar-usuario" [src]="urlImagen" *ngIf="urlImagen" />
+        <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
+        <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
+      </div>
+
       <hr>
 
       <input type="submit" value="Actualizar mis datos" class="btn btn-primary" required>

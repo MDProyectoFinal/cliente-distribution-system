@@ -14,7 +14,10 @@ export class EditarUsuarioComponent {
   direccion: string = '';
   email: string = '';
   telefono: string = '';
-  urlImagen: string = '';
+  //urlImagen: string = '';
+
+  urlImagen: string | ArrayBuffer | null;
+  imagenSubir: any;
 
   public titulo: string | undefined;
   public personaEdicion: IPersonaEdicion;
@@ -126,6 +129,27 @@ export class EditarUsuarioComponent {
 
   async fileChangeEvent(fileInput: any) {
     this.filesToUpload = <Array<File>>fileInput.target.files; // Recoger archivos seleccionados en el input
+  }
+
+  onImageChanged(eventoCambio: any) {
+    debugger;
+
+    const archivos = eventoCambio.target.files;
+    if (archivos.length === 0) {
+      return;
+    }
+
+    const tipoImagen = archivos[0].type;
+    if (tipoImagen.match(/image\/*/) == null) {
+      alert('Solamente se aceptan imágenes');
+    }
+
+    this.imagenSubir = archivos[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(archivos[0]);
+    reader.onload = (_event) => {
+      this.urlImagen = reader.result;
+    };
   }
 
   //   // Peticion AJAX para ficheros convencionales. (LLEVARLO A UN SERVICIO). -> Sube el fichero con esto!
