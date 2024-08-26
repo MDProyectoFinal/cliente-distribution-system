@@ -6,6 +6,8 @@ import { LogueadoMaquetadoComponent } from './maquetado/components/logueado-maqu
 import { LoguearUsuarioComponent } from './usuarios/components/loguear-usuario/loguear-usuario.component';
 import { PaginaInicioComponent } from './inicio/components/pagina-inicio/pagina-inicio.component';
 import { RegistroUsuarioComponent } from './usuarios/components/registro-usuario/registro-usuario.component';
+import { ListaProductosComponent } from './productos/components/lista-productos/lista-productos.component';
+import { EditarProductoComponent } from './productos/components/editar-producto/editar-producto.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
