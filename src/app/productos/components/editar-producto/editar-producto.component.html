@@ -1,34 +1,54 @@
 <hr />
 
 <div class="col-lg-6">
-  <form (ngSubmit)="enviar()" class="col-md-7">
-    <p>
-      <label>Nombre:</label>
-      <input [(ngModel)]="producto.nombre" type="text" class="form-control" name="nombre" />
-    </p>
-    <p>
-      <label>Stock:</label>
-      <input [(ngModel)]="producto.stock" type="text" class="form-control" name="stock" />
-    </p>
+  <form [formGroup]="productoForm" (ngSubmit)="enviar()" class="col-md-7">
 
-    <p>
-      <label>Precio Unitario:</label>
-      <input [(ngModel)]="producto.precio_unitario" type="text" class="form-control" name="precio_unitario" />
-    </p>
-    <p>
+    <div class="campo">
+      <label>Nombre:</label>
+      <input formControlName="nombre" type="text" class="form-control" />
+      <div *ngIf="productoForm.get('nombre')?.invalid && (productoForm.get('nombre')?.dirty || productoForm.get('nombre')?.touched)" class="alert alert-danger">
+        Nombre es requerido
+      </div>
+    </div>
+
+    <div class="campo">
       <label>Descripcion:</label>
-      <input [(ngModel)]="producto.descripcion" type="text" class="form-control" name="descripcion" />
-    </p>
-    <div>
+      <input formControlName="descripcion" type="text" class="form-control" />
+      <div *ngIf="productoForm.get('descripcion')?.invalid && (productoForm.get('descripcion')?.dirty || productoForm.get('descripcion')?.touched)" class="alert alert-danger">
+        Descripcion es requerida
+      </div>
+    </div>
+
+    <div class="campo">
+      <label>Precio Unitario:</label>
+      <input formControlName="precio_unitario" type="text" class="form-control" />
+      <div *ngIf="productoForm.get('precio_unitario')?.invalid && (productoForm.get('precio_unitario')?.dirty || productoForm.get('precio_unitario')?.touched)" class="alert alert-danger">
+        Precio Unitario es requerido y debe ser un número
+      </div>
+    </div>
+
+    <div class="campo">
+      <label>Stock:</label>
+      <input formControlName="stock" type="text" class="form-control" />
+      <div *ngIf="productoForm.get('stock')?.invalid && (productoForm.get('stock')?.dirty || productoForm.get('stock')?.touched)" class="alert alert-danger">
+        Stock es requerido y debe ser un número entero
+      </div>
+    </div>
+
+    <div class="campo">
       <label>Tipo:</label>
-      <select class="form-control" [(ngModel)]="producto.tipoProducto" style="width: 200px" name="tipo">
+      <select formControlName="tipoProducto" class="form-control" style="width: 200px">
         <option *ngFor="let tipo of tiposProductos" [value]="tipo._id">{{ tipo.descripcion }}</option>
       </select>
+      <div *ngIf="productoForm.get('tipoProducto')?.invalid && (productoForm.get('tipoProducto')?.dirty || productoForm.get('tipoProducto')?.touched)" class="alert alert-danger">
+        Tipo de producto es requerido
+      </div>
     </div>
+
     <br />
 
     <div>
-      <img class="img-producto" [src]="urlImagen" [alt]="producto.nombre" *ngIf="urlImagen" />
+      <img class="img-producto" [src]="urlImagen" [alt]="productoForm.get('nombre')?.value" *ngIf="urlImagen" />
       <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
       <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
     </div>
@@ -37,4 +57,5 @@
     <button class="btn-primary" type="submit">Editar</button>
 
   </form>
+
 </div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ListaProductosComponent } from './components/lista-productos/lista-productos.component';
 import { EditarProductoComponent } from './components/editar-producto/editar-producto.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
 
@@ -17,7 +17,8 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RouterModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class ProductosModule { }

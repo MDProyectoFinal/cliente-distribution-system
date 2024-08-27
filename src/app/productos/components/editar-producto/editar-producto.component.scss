@@ -1,35 +1,38 @@
 @import "/src/app/app.component.scss";
 
-.img-producto{
-    display: block;
-    max-height: 200px;
-    max-width: 200px;
+.img-producto {
+  display: block;
+  max-height: 200px;
+  max-width: 200px;
 }
 
+.btn-cancelar {
+  margin-right: 1rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border: none;
 
-.btn-cancelar{
-    margin-right: 1rem;
-    cursor: pointer;
-    padding: 0.3rem;
-    border: none;
+  &:hover {
+    background-color: #ccc;
+  }
 
-    &:hover{
-        background-color: #ccc;
-    }
-
-    &:focus{
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
 
 .lbl-subir-imagen {
-    padding: 0.5rem;
-    border-radius: 0.3rem;
-    border: #AAA 1px dashed;
-    cursor: pointer;
-    margin-top: 1rem;
-  }
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: #aaa 1px dashed;
+  cursor: pointer;
+  margin-top: 1rem;
+}
 
-  .select-tipo{
-    padding-right: 1rem;
-  }
+.select-tipo {
+  padding-right: 1rem;
+}
+
+.campo {
+    margin-top: 1rem
+}
