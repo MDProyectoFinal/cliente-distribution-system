@@ -1,4 +1,50 @@
-<nav id="navigation" class="navbar navbar-dark bg-dark justify-content-between" *ngIf="login">
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid d-flex justify-content-center w-100 px-0">
+    <div class="row align-items-center justify-content-between w-100">
+      <div class="col-8">
+
+        <button class="navbar-toggler mr-lg-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <fa-icon [icon]="menuHamburguesaIcon"></fa-icon>
+        </button>
+    
+        <a class="navbar-brand" href="#">Rosario Snack</a>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          </ul> 
+    
+        </div> 
+      </div>
+       
+      <div class="col-4 text-right">
+
+        <button class="text-right">
+          <fa-icon [icon]="cartIcon" class="cartIcon mr-lg-3"></fa-icon>
+        </button>
+       
+
+        <button>
+          <fa-icon [icon]="bellIcon" class="bellIcon"></fa-icon>
+        </button>
+        
+
+      </div>
+    </div>
+    
+  </div>
+</nav>
+
+
+
+
+<nav id="navigation" class="navbar navbar-dark bg-dark justify-content-betwee d-none" *ngIf="login">
   <a [routerLink]="['/inicio']" [routerLinkActive]="['actived']" class="col-lg-1">
     <span aria-hidden="true"><i class="fa fa-home"></i> Inicio</span>
   </a>
@@ -11,16 +57,13 @@
   <a href="#" class="col-lg-1">
     <span aria-hidden="true"><i class="fa fa-cogs"></i> Cuenta</span>
   </a>
-  <a [routerLink]="['/listar-usuarios']" [routerLinkActive]="['actived']" class="col-lg-1">
-    <span aria-hidden="true"><i class="fa fa-user"></i> Usuarios</span>
-  </a>
-  <a [routerLink]="['/informacion/informacion-general']" [routerLinkActive]="['actived']" class="col-lg-1">
+  <a href="#" class="col-lg-1">
     <span aria-hidden="true"><i class="fa fa-info"></i> Información</span>
   </a>
   <a href="#" class="col-lg-1">
     <span aria-hidden="true"><i class="fa fa-share"></i> Enviar Sugerencia</span>
   </a>
-  <a href="#" (click)="cerrarSesion()" class="col-lg-1">
+  <a href="#" class="col-lg-1">
     <span aria-hidden="true"><i class="fa fa-sign-out"></i> Cerrar Sesión</span>
   </a>
   <nav id="user_logged" class="justify-content-between" style="color: grey; float: right">
