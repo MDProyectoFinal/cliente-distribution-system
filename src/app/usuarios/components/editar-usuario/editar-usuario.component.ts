@@ -14,7 +14,14 @@ export class EditarUsuarioComponent {
   direccion: string = '';
   email: string = '';
   telefono: string = '';
-  urlImagen: string = '';
+  //urlImagen: string = '';
+
+  public isLoading: boolean = false;
+  mensajeExito: string | null = null;
+  mensajeError: string | null = null;
+
+  urlImagen: string | ArrayBuffer | null;
+  imagenSubir: any;
 
   public titulo: string | undefined;
   public personaEdicion: IPersonaEdicion;
@@ -46,14 +53,27 @@ export class EditarUsuarioComponent {
 
   async onSubmit() {
 
-        this._personaService.actualizarDatosPersonalesUsuario(this.personaEdicion).subscribe({
+        this.isLoading = true;
+
+        this._personaService.actualizarDatosPersonalesUsuario(this.personaEdicion, this.imagenSubir).subscribe({
           next:(data)=>{
-            console.log(data);
+
+            this.isLoading = false;
+
+            // Mostrar mensaje de éxito
+            this.mensajeExito = 'Datos actualizados correctamente';
+            this.mensajeError = null;
+            setTimeout(() => this.mensajeExito = null, 3000); // Desaparece después de 3 segundos
+
+            console.log( { PersonaFinal: data});
 
 
           },
           error: (e) =>{
             console.log(e);
+            this.mensajeError = 'Error al actualizar los datos personales';
+            this.mensajeExito = null;
+            setTimeout(() => this.mensajeError = null, 3000); // Desaparece después de 3 segundos
 
             alert('Error al actualizar datos');
           }
@@ -126,6 +146,27 @@ export class EditarUsuarioComponent {
 
   async fileChangeEvent(fileInput: any) {
     this.filesToUpload = <Array<File>>fileInput.target.files; // Recoger archivos seleccionados en el input
+  }
+
+  onImageChanged(eventoCambio: any) {
+    debugger;
+
+    const archivos = eventoCambio.target.files;
+    if (archivos.length === 0) {
+      return;
+    }
+
+    const tipoImagen = archivos[0].type;
+    if (tipoImagen.match(/image\/*/) == null) {
+      alert('Solamente se aceptan imágenes');
+    }
+
+    this.imagenSubir = archivos[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(archivos[0]);
+    reader.onload = (_event) => {
+      this.urlImagen = reader.result;
+    };
   }
 
   //   // Peticion AJAX para ficheros convencionales. (LLEVARLO A UN SERVICIO). -> Sube el fichero con esto!

@@ -32,34 +32,35 @@ export class UsuarioService {
     }
 
     async actualizarUsuario( usuario_a_actualizar:any ){
-        let jsonUser = JSON.stringify(usuario_a_actualizar);
 
-        // Como usamos Js en el servidor tambien, definimos asi el Content-Type
-        let headers = new HttpHeaders({
-            'Content-Type':'application/json',
-            //'autorizacion': this.getToken(),
-            'authorization': this.token,
-            // 'Authorization': 'Bearer clave_secreta_trabajo_final'
-        });
+      let jsonUser = JSON.stringify(usuario_a_actualizar);
 
-        try {
-            // Devolvemos la petición AJAX
-            var resp = await firstValueFrom(this._http.put( this.url + 'actualizar-usuario/' + usuario_a_actualizar._id, jsonUser, { headers: headers }));
+      // Como usamos Js en el servidor tambien, definimos asi el Content-Type
+      let headers = new HttpHeaders({
+          'Content-Type':'application/json',
+          //'autorizacion': this.getToken(),
+          'authorization': this.token,
+          // 'Authorization': 'Bearer clave_secreta_trabajo_final'
+      });
 
-            if(resp){
+      try {
+          // Devolvemos la petición AJAX
+          var resp = await firstValueFrom(this._http.put( this.url + 'actualizar-usuario/' + usuario_a_actualizar._id, jsonUser, { headers: headers }));
+
+          if(resp){
                 console.log(resp);
 
-                // Deberiamos formar un objeto con el UsuarioPersona para luego cambiar la variable
-                return resp;
+              // Deberiamos formar un objeto con el UsuarioPersona para luego cambiar la variable
+              return resp;
 
-            }else{
-                console.log('Ocurrio un error al actualizar el usuario');
-                return null;
-            }
+          }else{
+              console.log('Ocurrio un error al actualizar el usuario');
+              return null;
+          }
 
-        } catch (error: any) {
-            throw error.error.message;
-        }
+      } catch (error: any) {
+          throw error.error.message;
+      }
 
 
     }
