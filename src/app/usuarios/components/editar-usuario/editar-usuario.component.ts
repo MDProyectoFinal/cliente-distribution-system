@@ -16,6 +16,10 @@ export class EditarUsuarioComponent {
   telefono: string = '';
   //urlImagen: string = '';
 
+  public isLoading: boolean = false;
+  mensajeExito: string | null = null;
+  mensajeError: string | null = null;
+
   urlImagen: string | ArrayBuffer | null;
   imagenSubir: any;
 
@@ -49,14 +53,27 @@ export class EditarUsuarioComponent {
 
   async onSubmit() {
 
-        this._personaService.actualizarDatosPersonalesUsuario(this.personaEdicion).subscribe({
+        this.isLoading = true;
+
+        this._personaService.actualizarDatosPersonalesUsuario(this.personaEdicion, this.imagenSubir).subscribe({
           next:(data)=>{
-            console.log(data);
+
+            this.isLoading = false;
+
+            // Mostrar mensaje de éxito
+            this.mensajeExito = 'Datos actualizados correctamente';
+            this.mensajeError = null;
+            setTimeout(() => this.mensajeExito = null, 3000); // Desaparece después de 3 segundos
+
+            console.log( { PersonaFinal: data});
 
 
           },
           error: (e) =>{
             console.log(e);
+            this.mensajeError = 'Error al actualizar los datos personales';
+            this.mensajeExito = null;
+            setTimeout(() => this.mensajeError = null, 3000); // Desaparece después de 3 segundos
 
             alert('Error al actualizar datos');
           }

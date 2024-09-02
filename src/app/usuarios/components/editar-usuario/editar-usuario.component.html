@@ -1,6 +1,12 @@
+<!-- LOADING -->
+<shared-loading-spinner *ngIf="isLoading" textoCarga="Editando datos personales.."></shared-loading-spinner>
+
 <hr>
 <div class="col-lg-6" style="margin: 15px" >
     <h1>{{ titulo }}</h1>
+
+    <div *ngIf="mensajeExito" class="alert alert-success">{{ mensajeExito }}</div>
+    <div *ngIf="mensajeError" class="alert alert-danger">{{ mensajeError }}</div>
 
     <!-- <div *ngIf="alertaActualizacion">
       <div class="alert alert-info" role="alert">
@@ -33,16 +39,19 @@
         <img id="imagen-logueado" src="{{ url + 'obtener-archivo-imagen/' + usuario_persona_actualizacion.imagen }}" style="width: 50px"/>
       </div> -->
 
-      <p>
+      <!-- VIEJO! -->
+      <!-- <p>
         <label>Sube tu foto: </label><br>
         <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)" />
-      </p>
+      </p> -->
 
-      <div>
-        <img class="img-avatar-usuario" [src]="urlImagen" *ngIf="urlImagen" />
+      <p>
+        <label>Sube tu foto: </label><br>
+
+        <img class="img-avatar-usuario" width="100px" height="100px" [src]="urlImagen" *ngIf="urlImagen" />
         <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
         <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
-      </div>
+      </p>
 
       <hr>
 
