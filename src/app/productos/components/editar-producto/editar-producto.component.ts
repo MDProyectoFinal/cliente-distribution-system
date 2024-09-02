@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { Location } from '@angular/common';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-producto',
@@ -17,11 +18,29 @@ export class EditarProductoComponent implements OnInit {
   tiposProductos: any;
   urlImagen: string | ArrayBuffer | null;
   imagenSubir: any;
+  productoForm!: FormGroup;
 
   constructor(private route: ActivatedRoute, private servicio: ProductoService, private location : Location) {}
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.isAgregar = !this.id;
+
+    this.productoForm = new FormGroup({
+      nombre: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.required]),
+      imagen: new FormControl(''),
+      precio_unitario: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]+(\.[0-9]+)?$'),
+      ]),
+      stock: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]+$'),
+      ]),
+      tipoProducto: new FormControl('', [Validators.required]),
+    });
+
+
     this.servicio.recuperarTiposProductos().subscribe({
       next: (data) => {
         this.tiposProductos = data;
@@ -35,6 +54,7 @@ export class EditarProductoComponent implements OnInit {
         next: (data) => {
           this.producto = data;
           this.urlImagen = data.imagen;
+          this.productoForm.patchValue(data)
         },
 
         error: (e) => {},
@@ -63,7 +83,7 @@ export class EditarProductoComponent implements OnInit {
 
   enviar() {
     if (this.isAgregar) {
-      this.servicio.insertarProducto(this.producto, this.imagenSubir).subscribe({
+      this.servicio.insertarProducto(this.productoForm.value, this.imagenSubir).subscribe({
         complete: () => alert("Producto agregado exitosamente."),
         error: (e) => {
 
@@ -73,7 +93,7 @@ export class EditarProductoComponent implements OnInit {
         }
       });
     } else {
-      this.servicio.editarProducto(this.producto, this.imagenSubir).subscribe({
+      this.servicio.editarProducto(this.productoForm.value, this.imagenSubir).subscribe({
         complete: () => alert("Producto modificado exitosamente."),
         error: (e) => {
 
