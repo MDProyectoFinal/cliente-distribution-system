@@ -50,7 +50,7 @@ export class EditarUsuarioComponent {
           nombre: data.user[0].nombre,
           telefono: data.user[0].telefono,
         };
-
+        
         // Obtenemos la imagen del usuario
         this._usuarioService.obtenerAvatarUsuario(this.authenticationService.decodedToken.sub).subscribe({
           next: (imagen: any) => {
