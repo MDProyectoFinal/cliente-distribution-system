@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IPersonaEdicion } from 'src/app/models/IPersonaEdicion';
 import { PersonaService } from 'src/app/personas/services/persona.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'usuarios-editar-usuario',
@@ -24,17 +25,24 @@ export class EditarUsuarioComponent {
   imagenSubir: any;
 
   public titulo: string | undefined;
-  public personaEdicion: IPersonaEdicion;
+  public personaEdicion: any = {};
 
   public filesToUpload: Array<File> = [];
 
-  constructor(private _personaService: PersonaService, private authenticationService: AuthenticationService) {
-    this.titulo = 'Actualizar mis datos';
+  constructor(
+    private _personaService: PersonaService,
+    private authenticationService: AuthenticationService,
+    private _usuarioService: UsuarioService
+  )
+  {
+      this.titulo = 'Actualizar mis datos';
   }
 
   ngOnInit(): void {
     this._personaService.obtenerPersona(this.authenticationService.decodedToken.persona).subscribe({
       next: (data) => {
+
+        // Obtenemos la Persona
         this.personaEdicion = {
           id: data.user[0]._id,
           apellido: data.user[0].apellido,
@@ -42,6 +50,14 @@ export class EditarUsuarioComponent {
           nombre: data.user[0].nombre,
           telefono: data.user[0].telefono,
         };
+
+        // Obtenemos la imagen del usuario
+        this._usuarioService.obtenerAvatarUsuario(this.authenticationService.decodedToken.sub).subscribe({
+          next: (imagen: any) => {
+            debugger;
+            this.urlImagen = imagen;
+          }
+        })
 
         console.log(this.personaEdicion);
       },
