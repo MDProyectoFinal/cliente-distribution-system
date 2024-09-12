@@ -1,7 +1,8 @@
 import { identity } from 'rxjs';
 import { AuthenticationService } from '../../../usuarios/services/authentication.service';
 import { Component } from '@angular/core';
-import { faBars, faBell, faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBell, faCartShopping, faGear } from '@fortawesome/free-solid-svg-icons'
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'nav-principal',
@@ -10,19 +11,32 @@ import { faBars, faBell, faCartShopping } from '@fortawesome/free-solid-svg-icon
 })
 export class PrincipalNavComponent {
   login : boolean = false;
-  constructor(private AuthenticationService: AuthenticationService){
+  jwtHelper = new JwtHelperService();
+  public decodedToken: any;
+  public imagen: string = '';
+  public nombreUsuario: string = '';
 
-    this.login = this.AuthenticationService.estaAutenticado()
+  constructor(private authService: AuthenticationService){
+
+    this.login = this.authService.estaAutenticado()
+
+    var token = localStorage.getItem('token') as string;
+    this.decodedToken = this.jwtHelper.decodeToken(token);
+
+    this.imagen = this.authService.decodedToken.imagen; // this.decodedToken.imagen;
+    this.nombreUsuario = this.authService.decodedToken.nombre_usuario;
+
+    var identity = localStorage.getItem('identity');
+
     console.log(this.login)
   }
 
   public cerrarSesion(): void {
-    this.AuthenticationService.cerrarSesion();
+    this.authService.cerrarSesion();
   }
 
   menuHamburguesaIcon = faBars;
-
   cartIcon = faCartShopping;
-
   bellIcon = faBell;
+  gearIcon = faGear;
 }

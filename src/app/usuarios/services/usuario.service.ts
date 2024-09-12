@@ -65,6 +65,12 @@ export class UsuarioService {
 
     }
 
+    obtenerAvatarUsuario( idUsuario: string): Observable<string | null>{
+      return this._http.get<{ imagen: string }>(this.url + 'usuarios/obtener-avatar-usuario/' + idUsuario).pipe(
+        map(response => response.imagen)
+      );
+    }
+
     obtenerUsuarios(): Observable<UsuarioInterface[]>{
 
       debugger;

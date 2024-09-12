@@ -39,36 +39,34 @@ export class PersonaService {
   }
 
 
-  actualizarDatosPersonalesUsuario(personaEdicion: IPersonaEdicion, imagenSubir: any) {
-    debugger;
-
-    let imagenName: string = '';
+  actualizarDatosPersonalesUsuario(personaEdicion: any, imagenSubir:any): Observable<any> {
 
     let headers = new HttpHeaders({
-      'Content-Type':'application/json',
+      //'Content-Type':'application/json',
       //'autorizacion': this.getToken(),
       'authorization': localStorage.getItem('token') as string, //this.getToken(), //this.token,
       // 'Authorization': 'Bearer clave_secreta_trabajo_final'
     });
 
-    if (imagenSubir) {
-      imagenName = imagenSubir.name;
-      //formData.append('image', imagenSubir, imagenSubir.name);
-    }
 
     this.decodedToken = this.jwtHelper.decodeToken(localStorage.getItem('token') as string);
 
-    const data = {
-      ...personaEdicion,
-      imagen: imagenName,
-      idUsuario: this.decodedToken.sub
-    }
+    // Crear un objeto FormData para enviar tanto la imagen como los datos
+    const formData = new FormData();
+    formData.append('image', imagenSubir, imagenSubir.name); // Añadir la imagen al FormData
+    formData.append('idUsuario', this.decodedToken.sub);
+    formData.append('id', personaEdicion.id);
+    formData.append('nombre', personaEdicion.nombre);
+    formData.append('apellido', personaEdicion.apellido);
+    formData.append('direccion', personaEdicion.direccion);
+    formData.append('telefono', personaEdicion.telefono);
 
+    // OPCION 2 - VER!
+    // for (var key in personaEdicion) {
+    //   formData.append(key, personaEdicion[key]);
+    // }
 
-    // personaEdicion.imagen = imagen;
-    // personaEdicion.idUsuario = this.decodedToken.idUser;
-
-    return this._http.put(this.url + 'personas/actualizar-persona/' + personaEdicion.id, data, { headers: headers })
+    return this._http.post<any>(this.url + 'personas/actualizar-persona/' + personaEdicion.id, formData, { headers: headers })
     .pipe(
       (
         map( (response : any) =>{
