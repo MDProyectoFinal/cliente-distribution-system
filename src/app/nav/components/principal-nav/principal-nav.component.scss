@@ -1,0 +1,45 @@
+@import "/src/app/app.component.scss";
+
+.navbar{
+    box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.1);
+}
+
+.navbar .nav-link.actived{
+    border-bottom: none ;
+    font-weight: 700;
+}
+
+.navbar .nav-link:hover{
+    color: $color-primary;
+    font-weight: 700;
+    transition: all .3s ease-in-out;
+}
+
+
+.navbar-brand{
+    color: $color-primary;
+    font-weight: 600;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    margin-right: 0;
+}
+
+.navbar-light .navbar-toggler,
+button{
+    border: none;
+    color: $color-primary;
+    background-color: transparent;
+
+    .bellIcon,
+    .cartIcon{
+        font-size: 20px;
+    }
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}

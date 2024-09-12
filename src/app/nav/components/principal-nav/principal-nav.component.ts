@@ -1,20 +1,28 @@
+import { identity } from 'rxjs';
+import { AuthenticationService } from '../../../usuarios/services/authentication.service';
 import { Component } from '@angular/core';
-import { AuthenticationService } from 'src/app/usuarios/services/authentication.service';
-
+import { faBars, faBell, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'nav-principal',
-  templateUrl: './principal-nav.component.html'
+  templateUrl: './principal-nav.component.html',
+  styleUrls: ['./principal-nav.component.scss']
 })
 export class PrincipalNavComponent {
   login : boolean = false;
-  constructor(private authService: AuthenticationService){
+  constructor(private AuthenticationService: AuthenticationService){
 
-    this.login = this.authService.estaAutenticado()
+    this.login = this.AuthenticationService.estaAutenticado()
     console.log(this.login)
   }
 
   public cerrarSesion(): void {
-    this.authService.cerrarSesion();
+    this.AuthenticationService.cerrarSesion();
   }
+
+  menuHamburguesaIcon = faBars;
+
+  cartIcon = faCartShopping;
+
+  bellIcon = faBell;
 }
