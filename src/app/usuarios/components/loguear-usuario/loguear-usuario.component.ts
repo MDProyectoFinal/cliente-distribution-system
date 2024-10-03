@@ -24,12 +24,17 @@ export class LoguearUsuarioComponent {
   logoImageAlt = this.globals.logoImageAlt;
 
   public onSubmit() {
-    this.authService.login({ email: this.email, clave: this.clave }).subscribe({
+    this.authService.login({ email: this.email, clave: this.clave })
+    .subscribe({
       next: (v) => {
-        console.log('Acá va alerta');
+
+        if (this.authService.usuarioActual) console.log("USUARIO LOGUEADO CON EXITO");
+
       },
       error: (e) => {
         alert('Error de identificación');
+        console.log({ estadoUsuario: this.authService.usuarioActual});
+        console.log("ERROR AL ACTUALIZAR EL USUARIO");
       },
       complete: () => {
         console.log('Redireccionando');
