@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common'
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from '@angular/router';
 
 import { ListarUsuariosComponent } from './components/listar-usuarios/listar-usuarios.component';
@@ -22,7 +22,8 @@ import { SharedModule } from "../shared/shared.module";
     FormsModule,
     RouterModule,
     InformacionModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   exports: [
     ListarUsuariosComponent,
