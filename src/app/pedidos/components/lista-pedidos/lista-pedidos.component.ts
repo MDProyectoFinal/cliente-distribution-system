@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GLOBAL } from 'src/app/config/global';
 import { Pedido } from 'src/app/models/pedido';
-import { Producto } from 'src/app/models/producto';
 import { UsuarioService } from 'src/app/usuarios/services/usuario.service';
 
 @Component({
@@ -13,7 +12,7 @@ export class ListaPedidosComponent implements OnInit{
 
   public titulo: string;
   public pedido: Pedido[];
-  public producto: Producto[];
+  //public producto: Producto[];
 
   public identity: any;
   public token: any;
@@ -34,7 +33,7 @@ export class ListaPedidosComponent implements OnInit{
     this.url = GLOBAL.url;
 
     this.pedido = [];
-    this.producto = [];
+    //this.producto = [];
   }
 
   ngOnInit(): void {

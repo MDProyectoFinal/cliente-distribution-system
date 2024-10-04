@@ -1,61 +1,81 @@
 <hr />
 
-<div class="col-lg-6">
-  <form [formGroup]="productoForm" (ngSubmit)="enviar()" class="col-md-7">
-
-    <div class="campo">
-      <label>Nombre:</label>
-      <input formControlName="nombre" type="text" class="form-control" />
-      <div *ngIf="productoForm.get('nombre')?.invalid && (productoForm.get('nombre')?.dirty || productoForm.get('nombre')?.touched)" class="alert alert-danger">
-        Nombre es requerido
+<div class="row">
+  <div class="col-lg-6">
+    <form [formGroup]="productoForm" (ngSubmit)="enviar()" class="col-md-7">
+      <div class="campo">
+        <label>Nombre:</label>
+        <input formControlName="nombre" type="text" class="form-control" />
+        <div *ngIf="productoForm.get('nombre')?.invalid && (productoForm.get('nombre')?.dirty || productoForm.get('nombre')?.touched)" class="alert alert-danger">Nombre es requerido</div>
       </div>
-    </div>
 
-    <div class="campo">
-      <label>Descripcion:</label>
-      <input formControlName="descripcion" type="text" class="form-control" />
-      <div *ngIf="productoForm.get('descripcion')?.invalid && (productoForm.get('descripcion')?.dirty || productoForm.get('descripcion')?.touched)" class="alert alert-danger">
-        Descripcion es requerida
+      <div class="campo">
+        <label>Descripcion:</label>
+        <input formControlName="descripcion" type="text" class="form-control" />
+        <div *ngIf="productoForm.get('descripcion')?.invalid && (productoForm.get('descripcion')?.dirty || productoForm.get('descripcion')?.touched)" class="alert alert-danger">Descripcion es requerida</div>
       </div>
-    </div>
 
-    <div class="campo">
-      <label>Precio Unitario:</label>
-      <input formControlName="precio_unitario" type="text" class="form-control" />
-      <div *ngIf="productoForm.get('precio_unitario')?.invalid && (productoForm.get('precio_unitario')?.dirty || productoForm.get('precio_unitario')?.touched)" class="alert alert-danger">
-        Precio Unitario es requerido y debe ser un número
+      <div class="campo">
+        <label>Precio Unitario:</label>
+        <input formControlName="precio_unitario" type="text" class="form-control" />
+        <div *ngIf="productoForm.get('precio_unitario')?.invalid && (productoForm.get('precio_unitario')?.dirty || productoForm.get('precio_unitario')?.touched)" class="alert alert-danger">Precio Unitario es requerido y debe ser un número</div>
       </div>
-    </div>
 
-    <div class="campo">
-      <label>Stock:</label>
-      <input formControlName="stock" type="text" class="form-control" />
-      <div *ngIf="productoForm.get('stock')?.invalid && (productoForm.get('stock')?.dirty || productoForm.get('stock')?.touched)" class="alert alert-danger">
-        Stock es requerido y debe ser un número entero
+      <div class="campo">
+        <label>Stock:</label>
+        <input formControlName="stock" type="text" class="form-control" />
+        <div *ngIf="productoForm.get('stock')?.invalid && (productoForm.get('stock')?.dirty || productoForm.get('stock')?.touched)" class="alert alert-danger">Stock es requerido y debe ser un número entero</div>
       </div>
-    </div>
 
-    <div class="campo">
-      <label>Tipo:</label>
-      <select formControlName="tipoProducto" class="form-control" style="width: 200px">
-        <option *ngFor="let tipo of tiposProductos" [value]="tipo._id">{{ tipo.descripcion }}</option>
-      </select>
-      <div *ngIf="productoForm.get('tipoProducto')?.invalid && (productoForm.get('tipoProducto')?.dirty || productoForm.get('tipoProducto')?.touched)" class="alert alert-danger">
-        Tipo de producto es requerido
+      <div class="campo">
+        <label>Tipo:</label>
+        <select formControlName="tipoProducto" class="form-control" style="width: 200px">
+          <option *ngFor="let tipo of tiposProductos" [value]="tipo._id">{{ tipo.descripcion }}</option>
+        </select>
+        <div *ngIf="productoForm.get('tipoProducto')?.invalid && (productoForm.get('tipoProducto')?.dirty || productoForm.get('tipoProducto')?.touched)" class="alert alert-danger">Tipo de producto es requerido</div>
       </div>
-    </div>
 
-    <br />
+      <br />
 
-    <div>
-      <img class="img-producto" [src]="urlImagen" [alt]="productoForm.get('nombre')?.value" *ngIf="urlImagen" />
-      <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
-      <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
-    </div>
-    <br />
-    <Button (click)="back()" class="btn-cancelar">Cancelar</Button>
-    <button class="btn-primary" type="submit">Editar</button>
+      <div>
+        <img class="img-producto" [src]="urlImagen" [alt]="productoForm.get('nombre')?.value" *ngIf="urlImagen" />
+        <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
+        <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
+      </div>
+      <br />
 
-  </form>
+      <div class="precio-promocional" *ngIf="producto.promocionActiva; else btnNuevaPromocion">
+        <p>
+          Precio promocional: <span class="precio"> {{ producto.promocionActiva.precio | currency:'ARS' }}</span>
+        </p>
+        <div class="d-flex">
+
+          <!-- <a [routerLink]="['/promociones', producto.promocionActiva._id]" routerLinkActive="router-link-active" title="Promociones"><i class="fa fa-edit"></i></a> -->
+          <a (click)="abrirModal()" routerLinkActive="router-link-active" title="Promociones"><i class="fa fa-edit"></i></a>
+        </div>
+      </div>
+
+      <ng-template #btnNuevaPromocion>
+        <div>
+          <a class="btn-primary px-2 py-1" [routerLink]="['/productos', producto._id, 'promociones', 'nueva']" routerLinkActive="router-link-active">Nueva Promoción</a>
+        </div>
+      </ng-template>
+
+      <button (click)="back()" class="btn-cancelar mt-3">Cancelar</button>
+      <button class="btn-primary" type="submit">Editar</button>
+    </form>
+  </div>
+
+  <app-modal-cancelar-confirmar #modal [title]="'EDIT'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
+
+  <app-editar-promocion #editarPromocion [promocion]="producto?.promocionActiva" [precioProducto]="producto?.precio_unitario" />
+
+  </app-modal-cancelar-confirmar>
+
+
 
 </div>
+
+<!-- <app-editar-promocion [promocion]="producto?.promocionActiva" [precioProducto]="producto?.precio_unitario" /> -->
+
+

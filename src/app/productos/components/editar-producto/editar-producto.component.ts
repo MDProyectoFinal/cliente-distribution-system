@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EditarPromocionComponent	 } from 'src/app/promociones/components/editar-promocion/editar-promocion.component';
+import { ModalCancelarConfirmarComponent } from 'src/app/shared/components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
 
 @Component({
   selector: 'app-editar-producto',
@@ -10,6 +12,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./editar-producto.component.scss'],
 })
 export class EditarProductoComponent implements OnInit {
+
+  @ViewChild('modal') modal: ModalCancelarConfirmarComponent;
+  @ViewChild('editarPromocion') editarPromocion: EditarPromocionComponent;
+
   id: string;
   isAgregar: boolean;
 
@@ -107,5 +113,27 @@ export class EditarProductoComponent implements OnInit {
 
   back(){
     this.location.back();
+  }
+
+  confirmarInactivar(){
+    console.log("Inactivar");
+
+  }
+
+  abrirModal(){
+    this.modal.isOpen = true
+  }
+
+  onModalClose(){
+    this.modal.isOpen = false
+  }
+
+  onModalConfirm(){
+
+    console.log(JSON.stringify(this.producto.promocionActiva));
+
+
+    this.modal.isOpen = false
+
   }
 }

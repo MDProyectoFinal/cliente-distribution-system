@@ -29,10 +29,48 @@
   margin-top: 1rem;
 }
 
+.precio-promocional {
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: $color-secondary 2px dashed;
+  display: flex;
+  justify-content: space-between;
+
+  .precio {
+    font-weight: 700;
+    color: #07743a;
+  }
+
+  a {
+    margin-right: 1rem;
+    color: $color-secondary;
+
+    &:hover {
+      color: lighten($color-secondary, 10);
+      cursor: pointer;
+    }
+
+
+  }
+
+  i {
+    font-size: 1.5rem;
+  }
+}
+
+.eliminacion{
+  color: rgb(219, 81, 81);
+
+  &:hover {
+    color: lighten(rgb(219, 81, 81), 10);
+    cursor: pointer;
+  }
+}
+
 .select-tipo {
   padding-right: 1rem;
 }
 
 .campo {
-    margin-top: 1rem
+  margin-top: 1rem;
 }
