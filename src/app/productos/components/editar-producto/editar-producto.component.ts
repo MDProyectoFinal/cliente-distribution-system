@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditarPromocionComponent	 } from 'src/app/promociones/components/editar-promocion/editar-promocion.component';
 import { ModalCancelarConfirmarComponent } from 'src/app/shared/components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
+import { PromocionService } from 'src/app/promociones/services/promocion.service';
 
 @Component({
   selector: 'app-editar-producto',
@@ -26,7 +27,7 @@ export class EditarProductoComponent implements OnInit {
   imagenSubir: any;
   productoForm!: FormGroup;
 
-  constructor(private route: ActivatedRoute, private servicio: ProductoService, private location : Location) {}
+  constructor(private route: ActivatedRoute, private servicioProducto: ProductoService, private servicioPromocion : PromocionService, private location : Location) {}
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.isAgregar = !this.id;
@@ -47,7 +48,7 @@ export class EditarProductoComponent implements OnInit {
     });
 
 
-    this.servicio.recuperarTiposProductos().subscribe({
+    this.servicioProducto.recuperarTiposProductos().subscribe({
       next: (data) => {
         this.tiposProductos = data;
       },
@@ -56,7 +57,7 @@ export class EditarProductoComponent implements OnInit {
     });
 
     if (this.id) {
-      this.servicio.recuperarProducto(this.id).subscribe({
+      this.servicioProducto.recuperarProducto(this.id).subscribe({
         next: (data) => {
           this.producto = data;
           this.urlImagen = data.imagen;
@@ -89,7 +90,7 @@ export class EditarProductoComponent implements OnInit {
 
   enviar() {
     if (this.isAgregar) {
-      this.servicio.insertarProducto(this.productoForm.value, this.imagenSubir).subscribe({
+      this.servicioProducto.insertarProducto(this.productoForm.value, this.imagenSubir).subscribe({
         complete: () => alert("Producto agregado exitosamente."),
         error: (e) => {
 
@@ -99,7 +100,7 @@ export class EditarProductoComponent implements OnInit {
         }
       });
     } else {
-      this.servicio.editarProducto(this.productoForm.value, this.imagenSubir).subscribe({
+      this.servicioProducto.editarProducto(this.productoForm.value, this.imagenSubir).subscribe({
         complete: () => alert("Producto modificado exitosamente."),
         error: (e) => {
 
@@ -130,10 +131,18 @@ export class EditarProductoComponent implements OnInit {
 
   onModalConfirm(){
 
-    console.log(JSON.stringify(this.producto.promocionActiva));
+    this.servicioPromocion.actualizarPromocionProducto(this.producto._id, this.producto.promocionActiva).subscribe({
+
+      complete: () => this.modal.isOpen = false,
+      error: (e) => {
+
+        if(e.status == 400){
+          alert(e.error)
+        }
+      },
+    });
 
 
-    this.modal.isOpen = false
 
   }
 }
