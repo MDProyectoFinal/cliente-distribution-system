@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } 
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { GLOBAL } from 'src/app/config/global';
-import { Producto } from 'src/app/models/producto';
+import { Producto } from '../interfaces/producto'
 import { Pagina } from 'src/app/shared/interfaces/Pagina';
 
 @Injectable({

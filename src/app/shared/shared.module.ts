@@ -5,13 +5,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { PaginadorComponent } from './components/paginador/paginador.component';
+import { ModalCancelarConfirmarComponent } from './components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
     BuscadorComponent,
     LoadingSpinnerComponent,
-    PaginadorComponent
+    PaginadorComponent,
+    ModalCancelarConfirmarComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { PaginadorComponent } from './components/paginador/paginador.component';
     FooterComponent,
     BuscadorComponent,
     LoadingSpinnerComponent,
-    PaginadorComponent
+    PaginadorComponent,
+    ModalCancelarConfirmarComponent
   ]
 })
 export class SharedModule { }

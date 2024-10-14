@@ -1,3 +1,5 @@
+import { Promocion } from "src/app/promociones/interfaces/promocion";
+
 export class Producto{
     constructor(
         public _id: string,
@@ -7,5 +9,6 @@ export class Producto{
         public precio_unitario: number,
         public stock: number,
         public tipoProducto: string,
+        public promocionActiva : Promocion
     ){}
 }
