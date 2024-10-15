@@ -1,1 +1,16 @@
-<p>promociones works!</p>
+<table *ngIf="producto" class="table mt-5">
+    <thead>
+        <th scope="col">Desde</th>
+        <th scope="col">Hasta</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Activa</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let promo of producto.promociones" [ngClass]="!promo.activa ? 'table-danger' : 'table-primary'" >
+            <td>{{promo.fecha_inicio | date}}</td>
+            <td>{{promo.fecha_fin | date}}</td>
+            <td>{{promo.precio | currency:'ARS'}}</td>
+            <td>{{promo.activa }}</td>
+        </tr>
+    </tbody>
+</table>

@@ -9,8 +9,9 @@ import { catchError, Observable } from 'rxjs';
 })
 export class PromocionService {
 
-  url: string;
-  readonly placeholder : string = "idProducto"
+
+  private url: string;
+  private readonly placeholder : string = "idProducto"
 
   constructor(private httpClient: HttpClient) {
     this.url = GLOBAL.url + 'productos/'+this.placeholder+'/promociones';
@@ -21,6 +22,16 @@ export class PromocionService {
     const urlConsulta = this.url.replace(this.placeholder, idProducto.toString()) + '/' + promocion._id;
 
     return this.httpClient.put(urlConsulta, promocion).pipe(
+      catchError((err: HttpErrorResponse) => {
+        throw err;
+      })
+    );
+  }
+
+  recuperarTodasPorProducto(idProducto: string) : Observable<any> {
+    const urlConsulta = this.url.replace(this.placeholder, idProducto.toString());
+
+    return this.httpClient.get(urlConsulta).pipe(
       catchError((err: HttpErrorResponse) => {
         throw err;
       })
