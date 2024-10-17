@@ -18,9 +18,9 @@
     <label>Valor:</label>
     <input formControlName="valorPromocion" type="number" class="form-control col-lg-4"/>
   </div>
-  <div class="campo">
+  <div class="campo" *ngIf="promocion">
     <label for="precio">Precio promocional:</label>
-    <span class="precio col-lg-4" id="precio">{{ promocion?.precio }}</span>
+    <span class="precio col-lg-4" id="precio">{{ promocion.precio }}</span>
   </div>
   <label for="activa">Activa</label>
   <input name="activa" id="activa" type="checkbox" formControlName="activa" />

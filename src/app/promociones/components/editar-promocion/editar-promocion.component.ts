@@ -31,9 +31,11 @@ export class EditarPromocionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (!changes['promocion']) {
+      return;
+    }
     let promo = changes['promocion'].currentValue as Promocion;
     if (promo) {
-
       this.promocionForm = new FormGroup({
         tipoPromocion: new FormControl('', [Validators.required]),
         valorPromocion: new FormControl('', [Validators.required]),

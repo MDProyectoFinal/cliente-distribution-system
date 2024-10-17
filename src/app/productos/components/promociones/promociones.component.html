@@ -1,9 +1,12 @@
+<div class="mt-5"><button class="btn-primary" (click)="abrirModal(null)">Nueva promoción</button></div>
+
 <table *ngIf="producto" class="table mt-5">
     <thead>
         <th scope="col">Desde</th>
         <th scope="col">Hasta</th>
         <th scope="col">Precio</th>
         <th scope="col">Activa</th>
+        <th scope="col"></th>
     </thead>
     <tbody>
         <tr *ngFor="let promo of producto.promociones" [ngClass]="!promo.activa ? 'table-danger' : 'table-primary'" >
@@ -11,6 +14,13 @@
             <td>{{promo.fecha_fin | date}}</td>
             <td>{{promo.precio | currency:'ARS'}}</td>
             <td>{{promo.activa }}</td>
+            <td><a (click)="abrirModal(promo)" title="Editar"><i class="fa fa-edit"></i></a></td>
         </tr>
     </tbody>
 </table>
+
+<app-modal-cancelar-confirmar #modal [title]="tituloModal" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
+
+    <app-editar-promocion #editarPromocion [promocion]="promocion" [precioProducto]="producto?.precio_unitario" />
+
+    </app-modal-cancelar-confirmar>

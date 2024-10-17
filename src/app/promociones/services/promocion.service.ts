@@ -10,6 +10,7 @@ import { catchError, Observable } from 'rxjs';
 export class PromocionService {
 
 
+
   private url: string;
   private readonly placeholder : string = "idProducto"
 
@@ -18,8 +19,19 @@ export class PromocionService {
   }
 
 
+  insertarPromocionProducto(idProducto: string, promocion: Promocion) : Observable<any> {
+    const urlConsulta = this.url.replace(this.placeholder, idProducto.toString());
+    return this.httpClient.post(urlConsulta, promocion).pipe(
+      catchError((err: HttpErrorResponse) => {
+        throw err;
+      })
+    );
+  }
+
   actualizarPromocionProducto(idProducto: string, promocion: Promocion) : Observable<any> {
     const urlConsulta = this.url.replace(this.placeholder, idProducto.toString()) + '/' + promocion._id;
+
+
 
     return this.httpClient.put(urlConsulta, promocion).pipe(
       catchError((err: HttpErrorResponse) => {
