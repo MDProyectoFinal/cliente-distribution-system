@@ -1,12 +1,89 @@
-<div class="head-page">
-  <h1>{{ titulo }}</h1>
-  <span>Los mejores productos al mejor precio:</span>
-  <ul class="mt-2 list-group">
-    <li class="list-group-item">
-      Pepsico
-    </li>
-    <li class="list-group-item">
-      Krachitos
-    </li>
-  </ul>
+<hr />
+
+<shared-loading-spinner *ngIf="isLoading" textoCarga="Obteniendo pedidos.."></shared-loading-spinner>
+
+<hr>
+<div class="col-lg-12" style="margin: 15px" >
+    <h1>{{ titulo }}</h1>
+    <hr>
+
+    <!-- FORMULARIO PRINCIPAL CON FILTROS -->
+    <form [formGroup]="myForm" (ngSubmit)="aplicarFiltroBusqueda()" class="col-md-7">
+
+      <div class="row">
+        <!-- Filtro por ID de pedido -->
+        <div class="col-3">
+          <label for="idPedido">ID Pedido:</label>
+          <input type="text" id="idPedido" formControlName="idPedido" class="form-control" placeholder="Buscar por ID" />
+        </div>
+
+        <div class="col-2">
+          <label for="idPedido">Fecha Desde:</label>
+          <input type="date" id="fechaDesde" formControlName="fechaDesde" class="form-control" placeholder="Buscar por fecha desde" />
+        </div>
+
+        <div class="col-2">
+          <label for="idPedido">Fecha Hasta:</label>
+          <input type="date" id="fechaHasta" formControlName="fechaHasta" class="form-control" placeholder="Buscar por fecha hasta" />
+        </div>
+
+        <!-- Filtro por categoría -->
+        <div class="col-3">
+          <label for="categoria">Estado:</label>
+          <select id="estado" formControlName="estado" class="form-control">
+            <option value="">Seleccionar Estado</option>
+            <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+          </select>
+        </div>
+
+        <!-- Botón para aplicar filtros -->
+        <div class="col-2">
+          <button type="submit" class="btn btn-primary mt-4">Buscar</button>
+        </div>
+      </div>
+
+    </form>
+
+
+    <!-- <div *ngIf="mensajeExito" class="alert alert-success mt-3">{{ mensajeExito }}</div> -->
+    <div *ngIf="mensajeError" class="alert alert-danger mt-3">{{ mensajeError }}</div>
+
+    <hr>
+
+    <div *ngIf="pedidos?.length === 0" class="alert alert-warning text-centes">
+      No hay pedidos para mostrar
+    </div>
+
+    <!-- Grilla de resultados -->
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>ID Pedido</th>
+          <th>Cliente</th>
+          <!-- <th>Categoría</th> -->
+          <th>Estado</th>
+          <th>Fecha Alta</th>
+          <th>Total</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pedido of pedidos">
+          <td>{{ pedido.idPedido }}</td>
+          <td>{{ pedido.cliente.nombre_usuario }}</td>
+          <!-- <td>{{ pedido.categoria }}</td> -->
+          <td [ngClass]="getEstadoClase( pedido.estado )">{{ pedido.estado }}</td>
+          <td>{{ pedido.fechaAlta | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>{{ pedido.subtotal | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td>
+            <button (click)="verDetallePedido( pedido.idPedido )" class="btn btn-info mx-2">Ver Detalles</button>
+            <button (click)="cambiarEstado( pedido.idPedido )" class="btn btn-info mx-2">Cambiar Estado</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 </div>
+
+
+<!-- Pie de Página -->
+<shared-footer></shared-footer>
