@@ -1,0 +1,27 @@
+<form [formGroup]="promocionForm">
+  <div class="campo">
+    <label>Desde</label>
+    <input formControlName="fechaInicio" type="date" class="form-control col-lg-4" />
+  </div>
+  <div class="campo">
+    <label>Hasta</label>
+    <input formControlName="fechaFin" type="date" class="form-control col-lg-4" />
+  </div>
+  <div class="campo">
+    <label>Tipo promoción:</label>
+    <select formControlName="tipoPromocion" class="form-control col-lg-4">
+      <option *ngFor="let tipo of tiposPromociones" [value]="tipo.nombre">{{ tipo.nombre }}</option>
+    </select>
+    <div *ngIf="promocionForm.get('tipoPromocion')?.invalid && (promocionForm.get('tipoPromocion')?.dirty || promocionForm.get('tipoPromocion')?.touched)" class="alert alert-danger">Tipo de promoción es requerido</div>
+  </div>
+  <div class="campo">
+    <label>Valor:</label>
+    <input formControlName="valorPromocion" type="number" class="form-control col-lg-4"/>
+  </div>
+  <div class="campo">
+    <label for="precio">Precio promocional:</label>
+    <span class="precio col-lg-4" id="precio">{{ promocion?.precio }}</span>
+  </div>
+  <label for="activa">Activa</label>
+  <input name="activa" id="activa" type="checkbox" formControlName="activa" />
+</form>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GLOBAL } from 'src/app/config/global';
 import { Pedido } from 'src/app/models/pedido';
-import { Producto } from 'src/app/models/producto';
 import { UsuarioService } from 'src/app/usuarios/services/usuario.service';
 import { PedidoService } from '../../services/pedido.service';
 import { IPedidoBusqueda } from '../../interfaces/pedido-busqueda.interface';
@@ -25,6 +24,7 @@ const formVacio = {
 export class ListaPedidosComponent implements OnInit {
 
   public titulo: string;
+
   public pedidos: Pedido[] | null;
   public productos: Producto[];
   public estados = ['Pendiente', 'En Despacho', 'En Distribucion']; //TODO: obtenerlo de la BD en el ngOnInit
