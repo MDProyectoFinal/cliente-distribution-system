@@ -5,6 +5,7 @@ import { Pedido } from 'src/app/models/pedido';
 import { UsuarioService } from 'src/app/usuarios/services/usuario.service';
 import { PedidoService } from '../../services/pedido.service';
 import { IPedidoBusqueda } from '../../interfaces/pedido-busqueda.interface';
+import { Producto } from 'src/app/models/producto';
 
 const formVacio = {
   idPedido: '',
