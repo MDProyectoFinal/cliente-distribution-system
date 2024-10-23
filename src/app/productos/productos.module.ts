@@ -5,13 +5,15 @@ import { EditarProductoComponent } from './components/editar-producto/editar-pro
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { PageProductoComponent } from './components/page-producto/page-producto.component';
 
 
 
 @NgModule({
   declarations: [
     ListaProductosComponent,
-    EditarProductoComponent
+    EditarProductoComponent,
+    PageProductoComponent
   ],
   imports: [
     CommonModule,
