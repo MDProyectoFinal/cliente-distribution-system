@@ -15,6 +15,7 @@ import { authGuard } from './guards/auth.guard';
 import { PromocionesProductoComponent } from './productos/components/promociones/promociones.component';
 import { NuevaPromocionProductoComponent } from './productos/components/promociones/nueva-promocion-producto/nueva-promocion-producto.component';
 import { EditarPromocionComponent } from './promociones/components/editar-promocion/editar-promocion.component';
+import { ListadoComponent } from './productos/components/listado/listado.component';
 
 const routes: Routes = [
   {
@@ -45,7 +46,7 @@ const routes: Routes = [
         ],
       },
 
-
+      { path: 'productos/listado', component: ListadoComponent },
 
       { path: 'enviar-sugerencia', component: PaginaInicioComponent },
       { path: 'cerrar-sesion', component: PaginaInicioComponent },

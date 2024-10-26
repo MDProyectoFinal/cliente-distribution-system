@@ -10,6 +10,7 @@ import { PromocionesProductoComponent } from './components/promociones/promocion
 import { NuevaPromocionProductoComponent } from './components/promociones/nueva-promocion-producto/nueva-promocion-producto.component';
 import { PromocionesModule } from '../promociones/promociones.module';
 import { EditarPromocionComponent } from '../promociones/components/editar-promocion/editar-promocion.component';
+import { ListadoComponent } from './components/listado/listado.component';
 
 
 
@@ -18,7 +19,8 @@ import { EditarPromocionComponent } from '../promociones/components/editar-promo
     ListaProductosComponent,
     EditarProductoComponent,
     PromocionesProductoComponent,
-    NuevaPromocionProductoComponent
+    NuevaPromocionProductoComponent,
+    ListadoComponent
   ],
   imports: [
     CommonModule,

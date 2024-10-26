@@ -28,7 +28,9 @@
               </nav>
 
               <button class="text-right">
-                <fa-icon [icon]="cartIcon" class="cartIcon mr-lg-3"></fa-icon>
+
+                <fa-icon [ngClass]="{'fas' : cantidadEnCarrito > 0}" [icon]="cartIcon" class="cartIcon mr-lg-3 fas" [attr.data-count]="cantidadEnCarrito"></fa-icon>
+
               </button>
 
               <button class="text-right">

@@ -1,4 +1,5 @@
-import { identity } from 'rxjs';
+import { CarritoPedidoService } from './../../../productos/services/carrito-pedido.service';
+import { identity, Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../usuarios/services/authentication.service';
 import { Component } from '@angular/core';
 import { faBars, faBell, faCartShopping, faGear } from '@fortawesome/free-solid-svg-icons'
@@ -15,8 +16,10 @@ export class PrincipalNavComponent {
   public decodedToken: any;
   public imagen: string = '';
   public nombreUsuario: string = '';
+  cantidadCarritoSub: Subscription
+  cantidadEnCarrito: number;
 
-  constructor(private authService: AuthenticationService){
+  constructor(private authService: AuthenticationService, private  carritoService:CarritoPedidoService ){
 
     this.login = this.authService.estaAutenticado()
 
@@ -26,13 +29,21 @@ export class PrincipalNavComponent {
     this.imagen = this.authService.usuarioActual?.imagen ?? this.authService.decodedToken.imagen;
     this.nombreUsuario = this.authService.usuarioActual?.nombre_usuario ?? this.authService.decodedToken.nombre_usuario;
 
-    var identity = localStorage.getItem('identity');
+    this.cantidadCarritoSub = carritoService.cantidadEnCarrito$.subscribe(
+      cantidad => {this.cantidadEnCarrito = cantidad}
+    )
 
-    console.log(this.login)
+    carritoService.setCantidadEnCarrito(0)
+
   }
 
   public cerrarSesion(): void {
     this.authService.cerrarSesion();
+  }
+
+  ngOnDestroy(): void {
+    this.cantidadCarritoSub.unsubscribe();
+
   }
 
   menuHamburguesaIcon = faBars;

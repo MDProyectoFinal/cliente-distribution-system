@@ -1,0 +1,9 @@
+
+<div *ngIf="productosFiltrados">
+
+    <div *ngFor="let prod of productosFiltrados">
+        <p>{{prod.nombre}}</p>
+        <button (click)="agregarItemCarrito()" >agregar</button>
+    </div>
+
+</div>
