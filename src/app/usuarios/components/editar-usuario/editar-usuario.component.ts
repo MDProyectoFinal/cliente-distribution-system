@@ -1,8 +1,18 @@
+import { AuthenticationService } from '../../services/authentication.service';
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IPersonaEdicion } from 'src/app/models/IPersonaEdicion';
 import { PersonaService } from 'src/app/personas/services/persona.service';
-import { AuthenticationService } from '../../services/authentication.service';
 import { UsuarioService } from '../../services/usuario.service';
+
+const formVacio = {
+  id: '',
+  nombre: '',
+  apellido: '',
+  direccion: '',
+  telefono: '',
+  urlImagen: ''
+}
 
 @Component({
   selector: 'usuarios-editar-usuario',
@@ -13,7 +23,6 @@ export class EditarUsuarioComponent {
   nombre: string = 'asd';
   apellido: string = '';
   direccion: string = '';
-  email: string = '';
   telefono: string = '';
   //urlImagen: string = '';
 
@@ -25,20 +34,61 @@ export class EditarUsuarioComponent {
   imagenSubir: any;
 
   public titulo: string | undefined;
-  public personaEdicion: any = {};
+  public personaEdicion: IPersonaEdicion;
 
   public filesToUpload: Array<File> = [];
+
+  public myForm: FormGroup = this._fb.group({
+    id: ['', [Validators.required]],  // El campo "id" es obligatorio
+    nombre: ['', [Validators.required, Validators.minLength(3)] ],  // El campo "nombre" es obligatorio
+    apellido: ['', [Validators.required, Validators.minLength(3)] ],
+    direccion: ['', [Validators.required, Validators.minLength(5)] ],
+    telefono: ['', [Validators.required, Validators.minLength(8)]],
+    urlImagen: [''],
+  })
 
   constructor(
     private _personaService: PersonaService,
     private authenticationService: AuthenticationService,
-    private _usuarioService: UsuarioService
+    private _usuarioService: UsuarioService,
+    private _fb: FormBuilder
   )
   {
       this.titulo = 'Actualizar mis datos';
   }
 
+  // Para evitar duplicar este código en el html
+  isValidField( field:string ): boolean | null {
+    return this.myForm.controls[field].errors
+      && this.myForm.controls[field].touched;
+  }
+
+  // Función que devuelve el error específico dado. Genérico para todos los campo.
+  getFieldError( field:string ): string | null {
+
+    // Vemos si tiene el campo
+    if( !this.myForm.controls[field] ) return null;
+
+    const errors = this.myForm.controls[field].errors || {};
+
+    // recorre y obtiene todas las llaves de los errores
+    for (const key of Object.keys(errors) ) {
+      switch(key){
+        case 'required':
+          return 'Este campo es requerido';
+        case 'minlength':
+          return `Mínimo ${errors['minlength'].requiredLength } caracteres.`;
+      }
+    }
+
+    return null;
+  }
+
   ngOnInit(): void {
+
+    // reseteamos el formulario ni bien entramos en la pantalla
+    this.myForm.reset(formVacio);
+
     this._personaService.obtenerPersona(this.authenticationService.decodedToken.persona).subscribe({
       next: (data) => {
 
@@ -50,14 +100,26 @@ export class EditarUsuarioComponent {
           nombre: data.user[0].nombre,
           telefono: data.user[0].telefono,
         };
-        
+
+        var idUsuario = this.authenticationService.usuarioActual?._id ?? this.authenticationService.decodedToken.sub;
+
         // Obtenemos la imagen del usuario
-        this._usuarioService.obtenerAvatarUsuario(this.authenticationService.decodedToken.sub).subscribe({
+        this._usuarioService.obtenerAvatarUsuario(idUsuario).subscribe({
           next: (imagen: any) => {
             debugger;
             this.urlImagen = imagen;
           }
         })
+
+        // NUEVO LLENADO DE VARIABLES - Actualiza el formulario con los valores iniciales
+        this.myForm.patchValue({
+          id: this.personaEdicion.id, // Ver si es necesario
+          nombre: this.personaEdicion.nombre,
+          apellido: this.personaEdicion.apellido,
+          direccion: this.personaEdicion.direccion,
+          telefono: this.personaEdicion.telefono,
+          urlImagen: data.user[0].urlImagen
+        });
 
         console.log(this.personaEdicion);
       },
@@ -69,9 +131,17 @@ export class EditarUsuarioComponent {
 
   async onSubmit() {
 
+        // Validamos el formulario previo a la actualización y para poder actualizar.
+        if (this.myForm.invalid) {
+          // Si el formulario es inválido, marcar todos los campos como tocados
+          this.myForm.markAllAsTouched();
+          return;  // Evita que se procese el submit si el formulario es inválido
+        }
+
         this.isLoading = true;
 
-        this._personaService.actualizarDatosPersonalesUsuario(this.personaEdicion, this.imagenSubir).subscribe({
+        // Al ser formulario reactivo, debemos enviar el myForm. Ya no tenemos el two-way data binding de formularios por template
+        this._personaService.actualizarDatosPersonalesUsuario(this.myForm.value, this.imagenSubir).subscribe({
           next:(data)=>{
 
             this.isLoading = false;
@@ -82,7 +152,7 @@ export class EditarUsuarioComponent {
             setTimeout(() => this.mensajeExito = null, 3000); // Desaparece después de 3 segundos
 
             console.log( { PersonaFinal: data});
-
+            console.log(this.myForm.value);
 
           },
           error: (e) =>{
@@ -95,69 +165,8 @@ export class EditarUsuarioComponent {
           }
         })
 
-    //   try {
-    //       // A la respuesta la declaramos del tipo interfaz para poder trabajar con el user y persona dentro
-    //       var response: RespuestaUsuarioPersona = <any>await this._usuarioServicio.actualizarUsuario(this.usuario_persona_actualizacion);
-    //       console.log({ resp: response, message: "Respuesta del metodo actualizarUsuario desde onSubmit"});
-    //       if( response != null ){
-    //           // Hacer el mapeo del "usuario" (response.user) y la "persona" (response.persona)
-    //           const { user, persona } = response;
-    //           this.usuario_persona_actualizacion = <any>new UsuarioPersona('', new Persona('','','','','',''),'','','','ROLE_USER', '');
-    //           this.usuario_persona_actualizacion.persona = persona;
-    //           this.usuario_persona_actualizacion._id = user._id;
-    //           this.usuario_persona_actualizacion.correo_electronico = user.correo_electronico;
-    //           this.usuario_persona_actualizacion.nombre_usuario = user.nombre_usuario;
-    //           this.usuario_persona_actualizacion.password = user.password;
-    //           this.usuario_persona_actualizacion.rol = user.rol;
-    //           this.usuario_persona_actualizacion.imagen = user.imagen;
-    //           // Actualizamos el "identity" del "LocalStorage"
-    //           localStorage.setItem('identity', JSON.stringify(this.usuario_persona_actualizacion));
-    //           // ***** Actualizamos mediante DOM, la variable del nombre de usuario y la imagen. *****
-    //           // Ya que el "nombre_usuario" mostrado por pantalla no se actualiza sino al guardar. Muestra el viejo sino.
-    //           const element = document.getElementById("identity_nombre_usuario");
-    //           if (element !== null) {
-    //               // Si el elemento existe, asignar el valor a innerHTML
-    //               element.innerHTML = this.usuario_persona_actualizacion.nombre_usuario;
-    //           }
-    //           // Subida de arhivos de imagen (si es que existen)
-    //           if(!this.filesToUpload){
-    //               // Redireccion
-    //           }else{
-    //               try {
-    //                   var respuesta = this.makeFileRequest(this.url + 'actualizar-imagen-usuario/' + this.usuario_persona_actualizacion._id, [], this.filesToUpload)
-    //                       .then(
-    //                           ( result: any ) => {
-    //                               this.usuario_persona_actualizacion.imagen = result.imagen
-    //                               // Actualizar imagen de usuario en app, porque no reflejaba al actualizar sino.
-    //                               let imagen_path = this.url + 'obtener-archivo-imagen/' + this.usuario_persona_actualizacion.imagen;
-    //                               document.getElementById("imagen-logueado")?.setAttribute('src', imagen_path);
-    //                           }
-    //                       )
-    //                       .catch(
-    //                           ( result: any ) => {
-    //                               console.log("error capturado: " + result);
-    //                           }
-    //                       );
-    //               } catch (error) {
-    //                   console.log("Falla al intentar actualizar la imagen:" + error);
-    //               }
-    //           }
-    //           // Actualizamos la variable que llena el modelo en html, para reflejar los cambios
-    //           this.identity = JSON.parse(<any>this._usuarioServicio.getIdentity());// Convertir la cadena JSON en un objeto JavaScript
-    //           //this.identity = this._usuarioServicio.getIdentity();
-    //           // Actualizamos la variable que usamos para el html de actualizacion (asi refleja en los input)
-    //           this.usuario_persona_actualizacion = this.identity; // JSON.parse(this.identity);
-    //           // Actualizamos el "identity" del "LocalStorage"
-    //           localStorage.setItem('identity', JSON.stringify(this.usuario_persona_actualizacion));
-    //           // Mostramos msj de éxito en la actualización
-    //           this.alertaActualizacion = 'Usuario actualizado correctamente!!';
-    //       } else{
-    //           this.alertaActualizacion = 'Ocurrió un error en la respuesta al actualizar el usuario';
-    //       }
-    //   } catch (error) {
-    //       this.alertaActualizacion = <any>error;
-    //       console.error('Ocurrió un error el OnSubmit:', error);
-    //   }
+
+
   }
 
   async fileChangeEvent(fileInput: any) {

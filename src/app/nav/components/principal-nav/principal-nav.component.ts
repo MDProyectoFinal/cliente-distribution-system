@@ -23,8 +23,8 @@ export class PrincipalNavComponent {
     var token = localStorage.getItem('token') as string;
     this.decodedToken = this.jwtHelper.decodeToken(token);
 
-    this.imagen = this.authService.decodedToken.imagen; // this.decodedToken.imagen;
-    this.nombreUsuario = this.authService.decodedToken.nombre_usuario;
+    this.imagen = this.authService.usuarioActual?.imagen ?? this.authService.decodedToken.imagen;
+    this.nombreUsuario = this.authService.usuarioActual?.nombre_usuario ?? this.authService.decodedToken.nombre_usuario;
 
     var identity = localStorage.getItem('identity');
 

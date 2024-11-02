@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto.service';
 import { Router } from '@angular/router';
-import { Producto } from 'src/app/models/producto';
+import { Producto } from '../../interfaces/producto';
 import { Pagina } from 'src/app/shared/interfaces/Pagina';
+import { faCartShopping, faMagnifyingGlassDollar, faRankingStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-lista-productos',
@@ -12,6 +13,7 @@ import { Pagina } from 'src/app/shared/interfaces/Pagina';
 export class ListaProductosComponent implements OnInit {
   infoPagina: Pagina<Producto>;
   productosFiltrados: Producto[];
+  promoIcon = faMagnifyingGlassDollar;
 
   constructor(private service: ProductoService, private router: Router) {}
 

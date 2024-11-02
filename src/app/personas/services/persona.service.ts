@@ -6,6 +6,7 @@ import { GLOBAL } from 'src/app/config/global';
 
 import { IPersonaEdicion } from '../interfaces/persona-edicion.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthenticationService } from 'src/app/usuarios/services/authentication.service';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,7 @@ export class PersonaService {
   jwtHelper = new JwtHelperService();
   public decodedToken: any;
 
-  constructor( private _http: HttpClient) {
+  constructor( private _http: HttpClient, private _authenticationService: AuthenticationService) {
     this.url = GLOBAL.url;
   }
 
@@ -48,13 +49,14 @@ export class PersonaService {
       // 'Authorization': 'Bearer clave_secreta_trabajo_final'
     });
 
-
-    this.decodedToken = this.jwtHelper.decodeToken(localStorage.getItem('token') as string);
+    var idUsuario = this._authenticationService.usuarioActual?._id ?? this.jwtHelper.decodeToken(localStorage.getItem('token') as string)?.sub;
 
     // Crear un objeto FormData para enviar tanto la imagen como los datos
     const formData = new FormData();
-    formData.append('image', imagenSubir, imagenSubir.name); // Añadir la imagen al FormData
-    formData.append('idUsuario', this.decodedToken.sub);
+    if(imagenSubir != undefined ){
+      formData.append('image', imagenSubir, imagenSubir.name); // Añadir la imagen al FormData
+    }
+    formData.append('idUsuario', idUsuario);
     formData.append('id', personaEdicion.id);
     formData.append('nombre', personaEdicion.nombre);
     formData.append('apellido', personaEdicion.apellido);

@@ -15,24 +15,39 @@
     </div> -->
 
     <!-- Formualario -->
-    <form *ngIf="personaEdicion" #usuarioActualizacionForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-7">
-      <p>
+    <form [formGroup]="myForm" *ngIf="personaEdicion" (ngSubmit)="onSubmit()" class="col-md-7">
+      <div>
         <label>Nombre/s:</label>
-        <input type="text" name="nombre" [(ngModel)]="personaEdicion.nombre" class="form-control" required>
-      </p>
-      <p>
+        <input type="text" name="nombre" formControlName="nombre" class="form-control" required>
+        <span *ngIf="isValidField('nombre')"
+            class="form-text text-danger">
+            {{ getFieldError('nombre') }}
+        </span>
+      </div>
+      <div>
         <label>Apellido:</label>
-        <input type="text" name="apellido" [(ngModel)]="personaEdicion.apellido" class="form-control" required>
-      </p>
-      <p>
+        <input type="text" name="apellido" formControlName="apellido" class="form-control" required>
+        <span *ngIf="isValidField('apellido')"
+            class="form-text text-danger">
+            {{ getFieldError('apellido') }}
+        </span>
+      </div>
+      <div>
         <label>Dirección:</label>
-        <input type="text" name="direccion" [(ngModel)]="personaEdicion.direccion" class="form-control" required>
-      </p>
-      <p>
+        <input type="text" name="direccion" formControlName="direccion" class="form-control" required>
+        <span *ngIf="isValidField('direccion')"
+            class="form-text text-danger">
+            {{ getFieldError('direccion') }}
+        </span>
+      </div>
+      <div>
         <label>Teléfono:</label>
-        <input type="text"  name="telefono" [(ngModel)]="personaEdicion.telefono" class="form-control" required>
-
-      </p>
+        <input type="text"  name="telefono" formControlName="telefono" class="form-control" required>
+        <span *ngIf="isValidField('telefono')"
+            class="form-text text-danger">
+            {{ getFieldError('telefono') }}
+        </span>
+      </div>
 
       <br/>
       <!-- <div class="imagen_para_edicion" *ngIf="urlImagen">
@@ -45,13 +60,13 @@
         <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)" />
       </p> -->
 
-      <p>
+      <div>
         <label>Sube tu foto: </label><br>
 
         <img class="img-avatar-usuario" width="100px" height="100px" [src]="urlImagen" *ngIf="urlImagen" />
-        <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
+        <input type="file" id="btn-subir-imagen" formControlName="urlImagen" hidden (change)="onImageChanged($event)" />
         <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
-      </p>
+      </div>
 
       <hr>
 

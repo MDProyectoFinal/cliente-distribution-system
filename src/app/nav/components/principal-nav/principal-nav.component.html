@@ -2,23 +2,17 @@
   <div class="container-fluid d-flex justify-content-center w-100 px-0">
     <div class="row align-items-center justify-content-between w-100">
       <div class="col-12">
-
         <div class="container-fluid p-0">
-
           <div class="row">
-
             <div class="col-8 d-flex align-items-center">
-
               <button class="navbar-toggler mr-lg-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <fa-icon [icon]="menuHamburguesaIcon"></fa-icon>
-             </button>
+              </button>
 
               <a class="navbar-brand" href="#">Rosario Snack</a>
-
             </div>
 
             <div class="col-4 d-flex justify-content-end align-items-center">
-
               <nav id="user_logged" class="d-flex align-items-center mr-lg-3" style="color: grey;">
                 <div class="usuario-imagen d-none d-lg-block mt-0 mr-3">
                   <img [src]="this.imagen" alt="Imagen Usuario" style="border-radius: 50%;">
@@ -27,7 +21,8 @@
                   <span id="nombreUsuario" class="nombre-usuario d-block">
                     {{ this.nombreUsuario }}
                   </span>
-                  <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']" class="link-mis-datos">                    
+                  <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']" class="link-mis-datos">                   
+
                     Mis Datos
                   </a>
                 </div>
@@ -40,19 +35,14 @@
               <button class="text-right">
                 <fa-icon [icon]="bellIcon" class="bellIcon"></fa-icon>
               </button>
-             
             </div>
-
           </div>
        </div>
 
-
-
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
           <ul class="navbar-nav m-auto text-center mb-2 mb-lg-0">
             <li class="nav-item">
+
               <a [routerLink]="['/inicio']" [routerLinkActive]="['actived']" class="nav-link active" data-toggle="collapse" data-target="#navbarSupportedContent" aria-current="page" >Home</a>
             </li>
             <li class="nav-item">
@@ -60,6 +50,9 @@
             </li>
             <li class="nav-item">
               <a [routerLink]="['/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/productos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Productos</a>
             </li>
             <li class="nav-item">
               <a [routerLink]="['/listar-usuarios']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Usuarios</a>
@@ -78,7 +71,6 @@
             </li>
 
           </ul>
-
         </div>
       </div>
 
@@ -89,12 +81,8 @@
 
       </div> -->
     </div>
-
   </div>
 </nav>
-
-
-
 
 <nav id="navigation" class="navbar navbar-dark bg-dark justify-content-betwee d-none" *ngIf="login">
   <a [routerLink]="['/inicio']" [routerLinkActive]="['actived']" class="col-lg-1">
