@@ -5,6 +5,8 @@ import { EditarProductoComponent } from './components/editar-producto/editar-pro
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+
+import { PageProductoComponent } from './components/page-producto/page-producto.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PromocionesProductoComponent } from './components/promociones/promociones.component';
 import { NuevaPromocionProductoComponent } from './components/promociones/nueva-promocion-producto/nueva-promocion-producto.component';
@@ -14,10 +16,12 @@ import { ListadoComponent } from './components/listado/listado.component';
 
 
 
+
 @NgModule({
   declarations: [
     ListaProductosComponent,
     EditarProductoComponent,
+    PageProductoComponent,
     PromocionesProductoComponent,
     NuevaPromocionProductoComponent,
     ListadoComponent

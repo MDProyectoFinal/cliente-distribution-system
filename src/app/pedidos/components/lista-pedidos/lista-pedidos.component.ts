@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GLOBAL } from 'src/app/config/global';
 import { Pedido } from 'src/app/models/pedido';
@@ -6,6 +6,9 @@ import { UsuarioService } from 'src/app/usuarios/services/usuario.service';
 import { PedidoService } from '../../services/pedido.service';
 import { IPedidoBusqueda } from '../../interfaces/pedido-busqueda.interface';
 import { Producto } from 'src/app/models/producto';
+
+import { ModalCancelarConfirmarComponent } from 'src/app/shared/components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
+import { EstadosPedidos } from 'src/app/models/estadosPedidosEnum';
 
 const formVacio = {
   idPedido: '',
@@ -27,8 +30,15 @@ export class ListaPedidosComponent implements OnInit {
   public titulo: string;
 
   public pedidos: Pedido[] | null;
+  public pedidoDetalle: Pedido | null | undefined;
   public productos: Producto[];
-  public estados = ['Pendiente', 'En Despacho', 'En Distribucion']; //TODO: obtenerlo de la BD en el ngOnInit
+  //public estados = ['Pendiente', 'En Despacho', 'En Distribucion']; //TODO: obtenerlo de la BD en el ngOnInit
+
+  @ViewChild('modal') modal: ModalCancelarConfirmarComponent;
+  @ViewChild('modal2') modal2: ModalCancelarConfirmarComponent;
+
+  public estados: string[] = Object.values( EstadosPedidos );
+  public proximoEstado: string | undefined  = '';
 
   public busquedaPedidoFiltro: IPedidoBusqueda = {};
 
@@ -37,6 +47,18 @@ export class ListaPedidosComponent implements OnInit {
   public url: string;
 
   public isLoading: boolean = false;
+
+  public contadores: { [key: string]: number } = {
+    [EstadosPedidos.PENDIENTE]: 0,
+    [EstadosPedidos.EN_AUTORIZACION]: 0,
+    [EstadosPedidos.EN_PREPARACION]: 0,
+    [EstadosPedidos.EN_EMPAQUETADO]: 0,
+    [EstadosPedidos.EN_DESPACHO]: 0,
+    [EstadosPedidos.EN_DISTRIBUCION]: 0,
+    [EstadosPedidos.EN_FACTURACION]: 0,
+    [EstadosPedidos.COMPLETADO]: 0,
+    [EstadosPedidos.CANCELADO]: 0,
+  }
 
   // mensajeExito: string | null = null;
   mensajeError: string | null = null;
@@ -70,54 +92,6 @@ export class ListaPedidosComponent implements OnInit {
     this.productos = [];
   }
 
-  getEstadoClase( estado:string ):string {
-    var claseEstado: string = '';
-    switch( estado ){
-      case 'Pendiente':
-        claseEstado = 'estado-pendiente';
-        break;
-      case 'En Autorizacion':
-        claseEstado ='estado-autorizacion';
-        break;
-      case 'En Preparacion':
-        claseEstado ='estado-preparacion';
-        break;
-      case 'En Empaquetado':
-        claseEstado ='estado-empaquetado';
-        break;
-      case 'En Despacho':
-        claseEstado ='estado-despacho';
-        break;
-      case 'En Distribucion':
-        claseEstado ='estado-distribucion';
-        break;
-      case 'En Facturacion':
-        claseEstado ='estado-facturacion';
-        break;
-      default:
-        claseEstado = '';
-        break;
-    }
-
-    return claseEstado;
-
-  }
-
-  verDetallePedido(idPedido:string): Pedido|undefined {
-
-    debugger;
-    // TO DO: debemos mostrar en un MODAL toda la información del pedido
-    const pedido = this.pedidos?.find(pedido => pedido.idPedido == idPedido );
-    console.log( { pedidoEncontrado: pedido } );
-
-    return pedido;
-  }
-
-  cambiarEstado( idPedido:string ): void {
-    //TODO: desarrollador funcionalidad para cambiar el estado del pedido
-
-  }
-
   ngOnInit(): void {
     console.log('lista-pedidos.component.ts cargado');
 
@@ -145,20 +119,170 @@ export class ListaPedidosComponent implements OnInit {
     // reseteamos el formulario ni bien entramos en la pantalla
     this.myForm.reset(formVacio);
 
-    //TODO: Conseguir el listado de pedidos
+    // Llenamos la grilla con todos los pedidos existentes en la BD
+    this.buscar();
+  }
 
+  buscar() {
     this._pedidoServicio.obtenerTodosPedidos()
+    .subscribe({
+      next: (data: any) => {
+
+        this.pedidos = data;
+        this.contadorPedidos();
+
+      },
+      error: (e) => {
+        alert('No se puedieron recuperar los pedidos.');
+      },
+    });
+  }
+
+  getEstadoClase( estado:string ):string {
+    var claseEstado: string = '';
+    switch( estado ){
+      case 'Pendiente':
+        claseEstado = 'estado-pendiente';
+        break;
+      case 'En Autorizacion':
+        claseEstado ='estado-autorizacion';
+        break;
+      case 'En Preparacion':
+        claseEstado ='estado-preparacion';
+        break;
+      case 'En Empaquetado':
+        claseEstado ='estado-empaquetado';
+        break;
+      case 'En Despacho':
+        claseEstado ='estado-despacho';
+        break;
+      case 'En Distribucion':
+        claseEstado ='estado-distribucion';
+        break;
+      case 'En Facturacion':
+        claseEstado ='estado-facturacion';
+        break;
+      case 'Completado':
+          claseEstado ='estado-completado';
+          break;
+      case 'Cancelado':
+        claseEstado ='estado-cancelado';
+        break;
+      default:
+        claseEstado = '';
+        break;
+    }
+
+    return claseEstado;
+
+  }
+
+  abrirModal( idPedido:string ): void {
+
+    this.modal.isOpen = true;
+    this.verDetallePedido( idPedido );
+  }
+
+  // Modal de productos del pedido
+  onModalClose(){
+    this.modal.isOpen = false
+  }
+
+  // Modal para cambiar el estado del pedido
+  onModalClose2(){
+    this.modal2.isOpen = false
+  }
+
+  onModalConfirm(){
+    // TODO: ver si implementamos lógica. Aunque parece que no. Algo en el back o lo que sea.
+    // No ha lógica, no se necesita!
+  }
+
+  onModalConfirm2( idPedido: string | undefined ){
+
+    this._pedidoServicio.cambiarEstadoPedidoPorIdPedido( idPedido, this.proximoEstado )
       .subscribe({
         next: (data: any) => {
 
-          this.pedidos = data;
-          console.log({ infoPedidos: data, pedidos: this.pedidos });
+          // Cerramos el modal
+          this.modal2.isOpen = false;
+
+          // Actualizamos la grilla
+          this.buscar();
 
         },
         error: (e) => {
-          alert('No se puedieron recuperar los pedidos.');
+          alert('Error al cambiar el estado del pedido. Error: ' + e);
         },
     });
+
+  }
+
+  cancelarPedido( idPedido:string ): void {
+
+    // Obtengo el pedido a cancelar
+    this.pedidoDetalle = this.pedidos?.find(pedido => pedido.idPedido == idPedido );
+
+    // Seteo el estado "Cancelado" que se envíará la API para cambiar el estado.
+    const estadoCancelado = this.estados.find(estado => estado === 'Cancelado');
+    this.proximoEstado = estadoCancelado;
+
+    this.modal2.isOpen = true;
+
+  }
+
+  verDetallePedido(idPedido:string): Pedido|undefined {
+
+    // TO DO: debemos mostrar en un MODAL toda la información del pedido
+    this.pedidoDetalle = this.pedidos?.find(pedido => pedido.idPedido == idPedido );
+    console.log( { pedidoEncontrado: this.pedidoDetalle } );
+
+    return this.pedidoDetalle;
+  }
+
+  cambiarEstado( idPedido:string, estadoActual:string ): void {
+
+    // Obtenemos el índica del estado actual en el array de estados
+    const indiceEstadoActual = this.estados.indexOf(estadoActual);
+
+    // Verifica si el índice está dentro del rango y devuelve el siguiente estado
+    if (indiceEstadoActual !== -1 &&
+        indiceEstadoActual < this.estados.length - 1 &&
+        this.estados[indiceEstadoActual + 1] != EstadosPedidos.CANCELADO &&
+        this.estados[indiceEstadoActual] != EstadosPedidos.CANCELADO &&
+        this.estados[indiceEstadoActual] != EstadosPedidos.COMPLETADO
+      ) {
+
+      this.proximoEstado = this.estados[indiceEstadoActual + 1] as EstadosPedidos;
+      this.pedidoDetalle = this.pedidos?.find(pedido => pedido.idPedido == idPedido );
+
+      this.modal2.isOpen = true;
+
+    }else
+    {
+      alert('No puede realizar esta acción para este pedido.');
+    }
+
+  }
+
+
+  resetContadores():void {
+     // Reinicia todos los contadores a 0
+     Object.keys(this.contadores).forEach(estado => {
+      this.contadores[estado] = 0; // Asigna 0 a cada contador
+    });
+  }
+
+  contadorPedidos(): void{
+
+    this.resetContadores();
+
+    // Comparamos el "estado" de cada pedido con el valor del objeto de Estados. Dicho valor fue llenado con el valor del ENUM (ej. 'Pendiente")
+    this.pedidos?.forEach(pedido => {
+      if (Object.values(EstadosPedidos).includes(pedido.estado as EstadosPedidos)) {
+        this.contadores[pedido.estado] += 1; // Incrementa el contador correspondiente
+    }
+    })
 
   }
 
