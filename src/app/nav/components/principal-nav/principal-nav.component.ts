@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../../usuarios/services/authentication
 import { Component } from '@angular/core';
 import { faBars, faBell, faCartShopping, faGear } from '@fortawesome/free-solid-svg-icons';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'nav-principal',
@@ -20,7 +21,7 @@ export class PrincipalNavComponent {
   cantidadCarritoSub: Subscription;
   cantidadEnCarrito: number;
 
-  constructor(private authService: AuthenticationService, private carritoService: CarritoPedidoService) {
+  constructor(private router: Router, private authService: AuthenticationService, private carritoService: CarritoPedidoService) {
     this.login = this.authService.estaAutenticado();
 
     var token = localStorage.getItem('token') as string;
@@ -41,6 +42,13 @@ export class PrincipalNavComponent {
     let cantidad = cantidadLocal ? parseInt(cantidadLocal) : 0;
     this.carritoService.setCantidadEnCarrito(cantidad);
   }
+
+
+  public verCarrito(){
+    this.router.navigateByUrl('/carrito')
+
+  }
+
 
   public cerrarSesion(): void {
     this.authService.cerrarSesion();

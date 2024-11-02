@@ -16,6 +16,7 @@ import { PromocionesProductoComponent } from './productos/components/promociones
 import { NuevaPromocionProductoComponent } from './productos/components/promociones/nueva-promocion-producto/nueva-promocion-producto.component';
 import { EditarPromocionComponent } from './promociones/components/editar-promocion/editar-promocion.component';
 import { ListadoComponent } from './productos/components/listado/listado.component';
+import { CarritoPedidoComponent } from './pedidos/components/carrito-pedido/carrito-pedido.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
       },
 
       { path: 'productos/listado', component: ListadoComponent },
+      { path: 'carrito', component: CarritoPedidoComponent },
 
       { path: 'enviar-sugerencia', component: PaginaInicioComponent },
       { path: 'cerrar-sesion', component: PaginaInicioComponent },

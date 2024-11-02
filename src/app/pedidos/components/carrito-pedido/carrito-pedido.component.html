@@ -1,0 +1,25 @@
+<div class="detalle-carrito">
+  <h2 class="text-center">Detalle</h2>
+  <div *ngFor="let prod of productos">
+    <div class="card-carrito-container d-flex justify-content-between align-items-center">
+      <div class="producto">
+        <img src="{{ prod.producto.imagen }}" />
+        <div class="detalle-producto">
+          <span>{{ prod.producto.nombre }}</span>
+          <span>{{ prod.producto.descripcion }}</span>
+          <span>{{ prod.producto.precio_unitario }}</span>
+        </div>
+      </div>
+
+      <div class="botones">
+        <button (click) ="restarCantidad(prod)">-</button>
+        <input type="text" value="{{ prod.cantidad }}">
+        <button (click) ="sumarCantidad(prod)">+</button>
+      </div>
+
+      <div class="subtotal">
+        <span>{{ prod.producto.precio_unitario * prod.cantidad | currency:'ARS' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

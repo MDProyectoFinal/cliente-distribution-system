@@ -35,9 +35,9 @@ export class ListadoComponent {
     alert('Ocurrió un error cargando los productos');
   }
 
-  agregarItemCarrito(){
+  agregarItemCarrito(producto : Producto){
 
-    this.carritoService.agregarItem();
+    this.carritoService.agregarItem(producto);
 
   }
 }
