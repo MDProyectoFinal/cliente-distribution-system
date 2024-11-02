@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { IPedidoBusqueda } from "../interfaces/pedido-busqueda.interface";
 import { map, Observable } from "rxjs";
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { GLOBAL } from "src/app/config/global";
 import { IPedido } from "../interfaces/pedido.interface";
 
@@ -35,6 +35,27 @@ export class PedidoService {
     );
   }
 
+  cambiarEstadoPedidoPorIdPedido ( idPedido: string | undefined, estadoNuevo: string | undefined ): Observable<string | null>{
+
+    // Como usamos Js en el servidor tambien, definimos asi el Content-Type
+    let headers = new HttpHeaders({
+      'Content-Type':'application/json'
+    });
+
+    const body = { estadoNuevo }; // Formato JSON
+
+    return this._http.put(this.url + 'pedidos/cambiarEstadoPedido/' + idPedido, body, { headers: headers })
+      .pipe(
+        map( (response: any) => {
+
+          if (response.length == 0 ) return { mensaje: 'No se pudo realizar el cambio de estado'};
+
+          console.log( response );
+          return response.pedidoActualizado;
+
+        })
+      )
+  }
 
   obtenerPedidosPorFiltro( filtro: IPedidoBusqueda ): Observable<IPedido[]>{
 
