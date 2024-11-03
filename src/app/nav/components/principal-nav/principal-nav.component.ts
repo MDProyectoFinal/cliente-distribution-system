@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../../usuarios/services/authentication
 import { Component } from '@angular/core';
 import { faBars, faBell, faCartShopping, faGear } from '@fortawesome/free-solid-svg-icons'
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Roles } from 'src/app/usuarios/interfaces/roles-enum';
 
 @Component({
   selector: 'nav-principal',
@@ -16,7 +17,9 @@ export class PrincipalNavComponent {
   public imagen: string = '';
   public nombreUsuario: string = '';
 
-  constructor(private authService: AuthenticationService){
+  public roles: String[] = Object.values( Roles );
+
+  constructor(public authService: AuthenticationService){
 
     this.login = this.authService.estaAutenticado()
 

@@ -21,7 +21,7 @@
                   <span id="nombreUsuario" class="nombre-usuario d-block">
                     {{ this.nombreUsuario }}
                   </span>
-                  <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']" class="link-mis-datos">                   
+                  <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']" class="link-mis-datos">
 
                     Mis Datos
                   </a>
@@ -51,6 +51,7 @@
             <li class="nav-item">
               <a [routerLink]="['/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
             </li>
+            <!-- Ejemplo para ocutlar opcion. Aunque lo vamos a hacer por GUARD -> <a *ngIf="this.authService.userRol === 'ADMIN'" -->
             <li class="nav-item">
               <a [routerLink]="['/productos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Productos</a>
             </li>

@@ -15,6 +15,9 @@ import { authGuard } from './guards/auth.guard';
 import { PromocionesProductoComponent} from './productos/components/promociones/promociones.component';
 import { NuevaPromocionProductoComponent } from './productos/components/promociones/nueva-promocion-producto/nueva-promocion-producto.component';
 import { EditarPromocionComponent } from './promociones/components/editar-promocion/editar-promocion.component';
+import { roleGuard } from './guards/role.guard';
+import { Roles } from './usuarios/interfaces/roles-enum';
+import { NoAutorizadoComponent } from './shared/components/no-autorizado/no-autorizado.component';
 
 const routes: Routes = [
   {
@@ -25,7 +28,12 @@ const routes: Routes = [
       { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'mis-datos', component: EditarUsuarioComponent },
       { path: 'inicio', component: PaginaInicioComponent },
-      { path: 'pedidos', component: ListaPedidosComponent },
+      {
+        path: 'pedidos',
+        component: ListaPedidosComponent,
+        canActivate: [roleGuard],
+        data: { role: Roles.Admin }
+      },
       { path: 'cuenta', component: PaginaInicioComponent },
       { path: 'listar-usuarios', component: ListarUsuariosComponent },
       {
@@ -40,6 +48,7 @@ const routes: Routes = [
       { path: 'productos/nuevo', component: EditarProductoComponent },
       { path: 'enviar-sugerencia', component: PaginaInicioComponent },
       { path: 'cerrar-sesion', component: PaginaInicioComponent },
+      { path: 'no-autorizado', component: NoAutorizadoComponent }
     ],
   },
   {
