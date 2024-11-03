@@ -9,6 +9,7 @@ import { Producto } from 'src/app/models/producto';
 
 import { ModalCancelarConfirmarComponent } from 'src/app/shared/components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
 import { EstadosPedidos } from 'src/app/models/estadosPedidosEnum';
+import { AuthenticationService } from 'src/app/usuarios/services/authentication.service';
 
 const formVacio = {
   idPedido: '',
@@ -78,7 +79,8 @@ export class ListaPedidosComponent implements OnInit {
     // private _router: Router,
     private _usuarioServicio: UsuarioService,
     private _pedidoServicio: PedidoService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    public _authServices: AuthenticationService
   ){
 
     this.titulo = 'Listado de Pedidos';

@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs';
 import { GLOBAL } from 'src/app/config/global';
 import { Usuario } from '../interfaces/usuario.interface';
+import { Roles } from '../interfaces/roles-enum';
 
 @Injectable({
   providedIn: 'root',
@@ -16,16 +17,47 @@ export class AuthenticationService {
   private tokenKey = 'Bearer Token';
 
   private usuario?: Usuario;
+  public userRol: String = 'Invitado';
 
-  constructor(private http: HttpClient) {
-    this.autenticado = !!localStorage.getItem("token");
+  constructor(private http: HttpClient ) {
+
+    // Implementar lógica para obtener el rol del token
+    const token = localStorage.getItem('token') as string;
+    this.autenticado = !!token;
+
+    if(token){
+      this.decodedToken = this.jwtHelper.decodeToken(token);
+      this.userRol = this.getUserRoleFromToken();
+    }
+
   }
 
+  // Sirve solo si es cuando el usuario recién se logueo, y no hubo refresh (F5) de la página.
   get usuarioActual(): Usuario|undefined {
-
     if ( !this.usuario ) return undefined;
     return structuredClone( this.usuario );
+  }
 
+  /****  ROLES ****/
+  public getUserRoleFromToken(): string {
+    return String(this.decodedToken?.rol) || 'Invitado'; // Si no encuentra un rol, ponemos INVITADO, siempre.
+  }
+
+  // Si el rol actual del user logueado es "ADMIN"
+  isAdmin(): boolean {
+    return this.userRol === String(Roles.Admin);
+  }
+
+  get isCliente(): boolean {
+    return this.userRol === Roles.Cliente;
+  }
+
+  get isUsuario(): boolean {
+    return this.userRol === Roles.Usuario;
+  }
+
+  get isInvitado(): boolean {
+    return this.userRol === Roles.Invitado;
   }
 
   login(model: any) {

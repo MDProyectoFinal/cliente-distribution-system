@@ -73,6 +73,7 @@
                   <button (click)="abrirModal( pedido.idPedido )" title="Ver Detalles" class="btn btn-info mx-1">
                     <i class="fa fa-edit"></i>
                   </button>
+                  <!-- Si queres OCULTAR UN BOTON: *ngIf="this._authServices.userRol === 'ADMIN'" -->
                   <button (click)="cambiarEstado( pedido.idPedido, pedido.estado )" title="Cambiar estado" class="btn btn-info mx-1">
                     <i class="fa fa-exchange"></i>
                   </button>

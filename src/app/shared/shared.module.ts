@@ -6,6 +6,7 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { PaginadorComponent } from './components/paginador/paginador.component';
 import { ModalCancelarConfirmarComponent } from './components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
+import { NoAutorizadoComponent } from './components/no-autorizado/no-autorizado.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ModalCancelarConfirmarComponent } from './components/modal-cancelar-con
     BuscadorComponent,
     LoadingSpinnerComponent,
     PaginadorComponent,
-    ModalCancelarConfirmarComponent
+    ModalCancelarConfirmarComponent,
+    NoAutorizadoComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ModalCancelarConfirmarComponent } from './components/modal-cancelar-con
     BuscadorComponent,
     LoadingSpinnerComponent,
     PaginadorComponent,
-    ModalCancelarConfirmarComponent
+    ModalCancelarConfirmarComponent,
+    NoAutorizadoComponent
   ]
 })
 export class SharedModule { }
