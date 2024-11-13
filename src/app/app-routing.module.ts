@@ -1,6 +1,6 @@
 import { AnonimoMaquetadoComponent } from './maquetado/components/anonimo-maquetado/anonimo-maquetado.component';
 import { EditarUsuarioComponent } from './usuarios/components/editar-usuario/editar-usuario.component';
-import { ListaPedidosComponent } from './pedidos/components/lista-pedidos/lista-pedidos.component';
+import { ListaPedidosComponent } from './pedidos/components/admin/lista-pedidos/lista-pedidos.component';
 import { ListarUsuariosComponent } from './usuarios/components/listar-usuarios/listar-usuarios.component';
 import { LogueadoMaquetadoComponent } from './maquetado/components/logueado-maquetado/logueado-maquetado.component';
 import { LoguearUsuarioComponent } from './usuarios/components/loguear-usuario/loguear-usuario.component';
@@ -28,19 +28,31 @@ const routes: Routes = [
       { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'mis-datos', component: EditarUsuarioComponent },
       { path: 'inicio', component: PaginaInicioComponent },
-      {
-        path: 'pedidos',
-        component: ListaPedidosComponent,
-        canActivate: [roleGuard],
-        data: { role: Roles.Admin }
-      },
+      // {
+      //   path: 'pedidos',
+      //   component: ListaPedidosComponent,
+      //   canActivate: [roleGuard],
+      //   data: { role: Roles.Admin }
+      // },
       { path: 'cuenta', component: PaginaInicioComponent },
       { path: 'listar-usuarios', component: ListarUsuariosComponent },
       {
         path: 'informacion',
         loadChildren: () => import('./informacion/informacion.module').then(m => m.InformacionModule),
       },
-      { path: 'productos', component: ListaProductosComponent },
+
+      // Probando aplicación del roleGuard para varios casos con el prefijo ADMIN
+      {
+        path: 'admin',
+        data: { role: Roles.Admin },
+        canActivate: [ roleGuard ],
+        children: [
+          { path: 'pedidos', component: ListaPedidosComponent },
+          { path: 'productos', component: ListaProductosComponent },
+        ]
+      },
+
+
       { path: 'productos/detalle/:id', component: EditarProductoComponent },
       { path: 'productos/:id/promociones', component: PromocionesProductoComponent },
       { path: 'productos/:id/promociones/nueva', component: NuevaPromocionProductoComponent },
