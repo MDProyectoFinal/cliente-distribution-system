@@ -7,7 +7,7 @@
         <div class="detalle-producto">
           <span>{{ prod.producto.nombre }}</span>
           <span>{{ prod.producto.descripcion }}</span>
-          <span>{{ prod.producto.precio_unitario }}</span>
+          <span>{{ prod.producto.precio_unitario | currency:'ARS'}}</span>
         </div>
       </div>
 

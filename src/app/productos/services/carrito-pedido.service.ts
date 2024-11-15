@@ -32,15 +32,24 @@ export class CarritoPedidoService {
     } else {
       const nuevaLineaProducto = new LineaProducto(producto);
       this.productos.add(nuevaLineaProducto);
-      this.setCantidadEnCarrito(this.productos.size);
+
     }
 
-    console.log(JSON.stringify(this.productos.entries()));
+    let cant = 0;
+
+    Array.from(this.productos).map((p) => p.cantidad).forEach((c : number) => cant +=c)
+
+    this.setCantidadEnCarrito(cant);
 
     localStorage.setItem('carrito', JSON.stringify(this.getProductos()))
   }
 
   getProductos(): LineaProducto[] {
     return [...this.productos]
+  }
+
+  limpiar(){
+    localStorage.removeItem('cantidad_carrito')
+    localStorage.removeItem('carrito')
   }
 }
