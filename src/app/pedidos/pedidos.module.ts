@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { ListarPedidosComponent } from './components/client/listar-pedidos/listar-pedidos.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { RouterModule } from '@angular/router';
   ],
   declarations: [
     EditarPedidoComponent,
-    ListaPedidosComponent
+    ListaPedidosComponent,
+    ListarPedidosComponent
   ],
   providers: [],
 })
