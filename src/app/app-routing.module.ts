@@ -18,6 +18,7 @@ import { EditarPromocionComponent } from './promociones/components/editar-promoc
 import { roleGuard } from './guards/role.guard';
 import { Roles } from './usuarios/interfaces/roles-enum';
 import { NoAutorizadoComponent } from './shared/components/no-autorizado/no-autorizado.component';
+import { ListarPedidosComponent } from './pedidos/components/client/listar-pedidos/listar-pedidos.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,16 @@ const routes: Routes = [
         children: [
           { path: 'pedidos', component: ListaPedidosComponent },
           { path: 'productos', component: ListaProductosComponent },
+        ]
+      },
+
+      // Probando aplicación del roleGuard para varios casos con el prefijo CLIENTE
+      {
+        path: 'client',
+        data: { role: Roles.Cliente },
+        canActivate: [ roleGuard ],
+        children: [
+          { path: 'pedidos', component: ListarPedidosComponent },
         ]
       },
 
