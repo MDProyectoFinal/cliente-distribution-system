@@ -26,7 +26,7 @@
       <div class="total">
         <span>Total: {{ calcularTotal() | currency:'ARS' }}</span>
       </div>
-      <button class="btn btn-primary">Continuar a checkout</button>
+      <button class="btn btn-primary" (click)="checkout()">Continuar a checkout</button>
     </div>
   </div>
 </div>

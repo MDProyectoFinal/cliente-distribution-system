@@ -17,28 +17,31 @@ export class CarritoPedidoComponent implements OnInit {
 
   restarCantidad(lineaProducto: LineaProducto) {
     if (lineaProducto.cantidad > 1) {
-      lineaProducto.cantidad--;
+      this.carritoService.quitarItem(lineaProducto.producto)
     }
   }
 
   sumarCantidad(lineaProducto: LineaProducto) {
-    lineaProducto.cantidad++;
+    this.carritoService.agregarItem(lineaProducto.producto)
   }
 
   calcularTotal(): number {
-    
+
     if (this.productos.length < 1) {
       return 0;
     }
     const sum = this.productos
-      .map((lp) =>{ 
-        console.log(this)
-        console.log(lp)
+      .map((lp) =>{
         return lp.getSubtotal()} )
       .reduce((acc, curr) => (acc += curr));
 
       console.log(sum)
 
     return sum;
+  }
+
+  checkout(){
+    this.carritoService.generarPedido();
+
   }
 }
