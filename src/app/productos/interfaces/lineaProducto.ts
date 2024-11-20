@@ -3,10 +3,24 @@ import { Producto } from "./producto";
 export class LineaProducto{
     producto: Producto
     cantidad: number = 0
-    constructor(producto: Producto){
-        this.producto = producto
-        this.cantidad = 1;
+    constructor(producto?: Producto, cantidad?: number){
+        if(producto){
+            this.producto = producto
+            this.cantidad = 1;
+        }
+
+        if(cantidad){
+            this.cantidad = cantidad
+        }
+
+
+
     }
+
+    public static fromJson(json: any){
+        return new LineaProducto(json.producto, json.cantidad)
+    }
+
 
 
     getSubtotal() : number{

@@ -13,8 +13,15 @@ export class CarritoPedidoService {
   cantidadEnCarrito$ = this.cantidadEnCarrito.asObservable();
 
   constructor() {
-    let prod = JSON.parse(localStorage.getItem("carrito")|| '{}')
-    this.productos =  Object.keys(prod).length === 0 ? new Set<LineaProducto>() : new Set<LineaProducto>(prod)
+    let prods = JSON.parse(localStorage.getItem("carrito")|| '{}');
+    let lineaProds = []
+
+    for (let index = 0; index < prods.length; index++) {
+      const element = prods[index];
+      lineaProds.push(LineaProducto.fromJson(element))
+    }
+
+    this.productos =  Object.keys(prods).length === 0 ? new Set<LineaProducto>() : new Set<LineaProducto>(lineaProds)
   }
 
   setCantidadEnCarrito(cantidad: number) {
