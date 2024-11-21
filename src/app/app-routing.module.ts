@@ -1,6 +1,6 @@
 import { AnonimoMaquetadoComponent } from './maquetado/components/anonimo-maquetado/anonimo-maquetado.component';
 import { EditarUsuarioComponent } from './usuarios/components/editar-usuario/editar-usuario.component';
-import { ListaPedidosComponent } from './pedidos/components/lista-pedidos/lista-pedidos.component';
+import { ListaPedidosComponent } from './pedidos/components/admin/lista-pedidos/lista-pedidos.component';
 import { ListarUsuariosComponent } from './usuarios/components/listar-usuarios/listar-usuarios.component';
 import { LogueadoMaquetadoComponent } from './maquetado/components/logueado-maquetado/logueado-maquetado.component';
 import { LoguearUsuarioComponent } from './usuarios/components/loguear-usuario/loguear-usuario.component';
@@ -17,6 +17,10 @@ import { NuevaPromocionProductoComponent } from './productos/components/promocio
 import { EditarPromocionComponent } from './promociones/components/editar-promocion/editar-promocion.component';
 import { ListadoComponent } from './productos/components/listado/listado.component';
 import { CarritoPedidoComponent } from './pedidos/components/carrito-pedido/carrito-pedido.component';
+import { roleGuard } from './guards/role.guard';
+import { Roles } from './usuarios/interfaces/roles-enum';
+import { NoAutorizadoComponent } from './shared/components/no-autorizado/no-autorizado.component';
+import { ListarPedidosComponent } from './pedidos/components/client/listar-pedidos/listar-pedidos.component';
 
 const routes: Routes = [
   {
@@ -27,7 +31,12 @@ const routes: Routes = [
       { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'mis-datos', component: EditarUsuarioComponent },
       { path: 'inicio', component: PaginaInicioComponent },
-      { path: 'pedidos', component: ListaPedidosComponent },
+      // {
+      //   path: 'pedidos',
+      //   component: ListaPedidosComponent,
+      //   canActivate: [roleGuard],
+      //   data: { role: Roles.Admin }
+      // },
       { path: 'cuenta', component: PaginaInicioComponent },
       { path: 'listar-usuarios', component: ListarUsuariosComponent },
       {
@@ -35,23 +44,39 @@ const routes: Routes = [
         loadChildren: () => import('./informacion/informacion.module').then((m) => m.InformacionModule),
       },
 
+      // Probando aplicación del roleGuard para varios casos con el prefijo ADMIN
       {
         path: 'admin',
+        data: { role: Roles.Admin },
+        canActivate: [ roleGuard ],
         children: [
+          { path: 'pedidos', component: ListaPedidosComponent },
           { path: 'productos', component: ListaProductosComponent },
-          { path: 'productos/detalle/:id', component: EditarProductoComponent },
-          { path: 'productos/:id/promociones', component: PromocionesProductoComponent },
-          { path: 'productos/:id/promociones/nueva', component: NuevaPromocionProductoComponent },
-          { path: 'promociones/:id', component: EditarPromocionComponent },
-          { path: 'productos/nuevo', component: EditarProductoComponent },
-        ],
+        ]
+      },
+
+      // Probando aplicación del roleGuard para varios casos con el prefijo CLIENTE
+      {
+        path: 'client',
+        data: { role: Roles.Cliente },
+        canActivate: [ roleGuard ],
+        children: [
+          { path: 'pedidos', component: ListarPedidosComponent },
+        ]
       },
 
       { path: 'productos/listado', component: ListadoComponent },
       { path: 'carrito', component: CarritoPedidoComponent },
 
+
+      { path: 'productos/detalle/:id', component: EditarProductoComponent },
+      { path: 'productos/:id/promociones', component: PromocionesProductoComponent },
+      { path: 'productos/:id/promociones/nueva', component: NuevaPromocionProductoComponent },
+      { path: 'promociones/:id', component: EditarPromocionComponent },
+      { path: 'productos/nuevo', component: EditarProductoComponent },
       { path: 'enviar-sugerencia', component: PaginaInicioComponent },
       { path: 'cerrar-sesion', component: PaginaInicioComponent },
+      { path: 'no-autorizado', component: NoAutorizadoComponent }
     ],
   },
   {

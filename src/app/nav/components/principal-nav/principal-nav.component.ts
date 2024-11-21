@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 import { faBars, faBell, faCartShopping, faGear } from '@fortawesome/free-solid-svg-icons';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { Roles } from 'src/app/usuarios/interfaces/roles-enum';
 
 @Component({
   selector: 'nav-principal',
@@ -21,8 +22,12 @@ export class PrincipalNavComponent {
   cantidadCarritoSub: Subscription;
   cantidadEnCarrito: number;
 
-  constructor(private router: Router, private authService: AuthenticationService, private carritoService: CarritoPedidoService) {
-    this.login = this.authService.estaAutenticado();
+
+  public roles: String[] = Object.values( Roles );
+
+  constructor(private router: Router, private authService: AuthenticationService, private carritoService: CarritoPedidoService){
+
+    this.login = this.authService.estaAutenticado()
 
     var token = localStorage.getItem('token') as string;
     this.decodedToken = this.jwtHelper.decodeToken(token);

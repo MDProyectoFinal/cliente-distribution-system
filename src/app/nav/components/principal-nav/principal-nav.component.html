@@ -21,7 +21,7 @@
                   <span id="nombreUsuario" class="nombre-usuario d-block">
                     {{ this.nombreUsuario }}
                   </span>
-                  <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']" class="link-mis-datos">                   
+                  <a [routerLink]="['/mis-datos']" [routerLinkActive]="['actived']" class="link-mis-datos">
 
                     Mis Datos
                   </a>
@@ -51,10 +51,12 @@
               <a class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Buscar</a>
             </li>
             <li class="nav-item">
-              <a [routerLink]="['/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
+              <a *ngIf="this.authService.userRol === 'ADMIN'" [routerLink]="['/admin/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
+              <a *ngIf="this.authService.userRol === 'CLIENTE'" [routerLink]="['/client/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
             </li>
+            <!-- Ejemplo para ocutlar opcion. Aunque lo vamos a hacer por GUARD -> <a *ngIf="this.authService.userRol === 'ADMIN'" -->
             <li class="nav-item">
-              <a [routerLink]="['/productos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Productos</a>
+              <a [routerLink]="['/admin/productos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Productos</a>
             </li>
             <li class="nav-item">
               <a [routerLink]="['/listar-usuarios']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Usuarios</a>

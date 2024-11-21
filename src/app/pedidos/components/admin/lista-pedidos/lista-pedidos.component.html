@@ -73,6 +73,7 @@
                   <button (click)="abrirModal( pedido.idPedido )" title="Ver Detalles" class="btn btn-info mx-1">
                     <i class="fa fa-edit"></i>
                   </button>
+                  <!-- Si queres OCULTAR UN BOTON: *ngIf="this._authServices.userRol === 'ADMIN'" -->
                   <button (click)="cambiarEstado( pedido.idPedido, pedido.estado )" title="Cambiar estado" class="btn btn-info mx-1">
                     <i class="fa fa-exchange"></i>
                   </button>
@@ -103,7 +104,7 @@
     </div>
 </div>
 
-<shared-footer></shared-footer>
+<!-- <shared-footer></shared-footer> -->
 
 <!-- MODAL: Cambiar estado -->
 <app-modal-cancelar-confirmar #modal2 [title]="'CAMBIAR ESTADO'" (closeModalEvent)="onModalClose2()" (confirmEvent)="onModalConfirm2( pedidoDetalle?.idPedido )">

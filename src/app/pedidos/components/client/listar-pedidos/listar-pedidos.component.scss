@@ -1,0 +1,167 @@
+@import "/src/app/app.component.scss";
+
+/* Estilos para la línea de separación */
+hr.lineaSeparacion {
+  border: 0; /* Elimina el borde predeterminado */
+  border-top: 1px solid rgb(109, 105, 105); /* Línea superior con color y grosor */
+  margin: 10px 0; /* Espaciado vertical */
+  width: 100%; /* Ancho de la línea (opcional) */
+  border-radius: 5px; /* Redondear las esquinas */
+}
+
+.estado-pendiente {
+  background-color: rgb(226, 226, 109); /* Cambia el color a lo que necesites */
+  color: rgb(0, 0, 0); /* Opcional: Cambia el color del texto para que sea legible */
+  padding: 5px;
+  border-radius: 12px;
+  text-align: center;
+  display: inline-block; /* Ajusta el tamaño al contenido */
+  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+}
+
+.estado-autorizacion {
+  background-color: green; /* Cambia el color a lo que necesites */
+  color: white; /* Opcional: Cambia el color del texto para que sea legible */
+  padding: 5px;
+  border-radius: 12px;
+  text-align: center;
+  display: inline-block; /* Ajusta el tamaño al contenido */
+  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+}
+
+.estado-preparacion {
+  background-color: rgb(234, 123, 54); /* Cambia el color a lo que necesites */
+  color: black; /* Opcional: Cambia el color del texto para que sea legible */
+  padding: 5px;
+  border-radius: 12px;
+  text-align: center;
+  display: inline-block; /* Ajusta el tamaño al contenido */
+  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+}
+
+.estado-empaquetado {
+  background-color: rgb(13, 59, 129); /* Cambia el color a lo que necesites */
+  color: white; /* Opcional: Cambia el color del texto para que sea legible */
+  padding: 5px;
+  border-radius: 12px;
+  text-align: center;
+  display: inline-block; /* Ajusta el tamaño al contenido */
+  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+}
+
+.estado-despacho {
+  background-color: rgb(121, 6, 145); /* Cambia el color a lo que necesites */
+  color: white; /* Opcional: Cambia el color del texto para que sea legible */
+  padding: 5px;
+  border-radius: 12px;
+  text-align: center;
+  display: inline-block; /* Ajusta el tamaño al contenido */
+  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+}
+
+.estado-distribucion {
+  background-color: rgb(6, 101, 145); /* Cambia el color a lo que necesites */
+  color: white; /* Opcional: Cambia el color del texto para que sea legible */
+  padding: 5px;
+  border-radius: 12px;
+  text-align: center;
+  display: inline-block; /* Ajusta el tamaño al contenido */
+  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+}
+
+.estado-facturacion {
+  background-color: rgb(89, 105, 72); /* Cambia el color a lo que necesites */
+  color: white; /* Opcional: Cambia el color del texto para que sea legible */
+  padding: 5px;
+  border-radius: 12px;
+  text-align: center;
+  display: inline-block; /* Ajusta el tamaño al contenido */
+  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+}
+
+.estado-cancelado {
+  background-color: rgb(154, 39, 39); /* Cambia el color a lo que necesites */
+  color: white; /* Opcional: Cambia el color del texto para que sea legible */
+  padding: 5px;
+  border-radius: 12px;
+  text-align: center;
+  display: inline-block; /* Ajusta el tamaño al contenido */
+  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+}
+
+.estado-completado {
+  background-color: rgb(39, 154, 54); /* Cambia el color a lo que necesites */
+  color: white; /* Opcional: Cambia el color del texto para que sea legible */
+  padding: 5px;
+  border-radius: 12px;
+  text-align: center;
+  display: inline-block; /* Ajusta el tamaño al contenido */
+  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+}
+
+.content {
+  margin-bottom: 80px; /* Ajusta este valor según la altura del footer */
+
+  //***** Whatsapp ******//
+  .whatsapp-link {
+    color: white;
+    background-color: #25d366;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .whatsapp-link i {
+    margin-right: 8px;
+    font-size: 20px;
+  }
+
+  .hr-separador {
+    height: 3px;
+  }
+
+  //***** DETALLE PRODUCTO *******//
+  .producto-detalle {
+    display: flex;
+    align-items: center; /* Alinea verticalmente la imagen y la información */
+    gap: 20px; /* Espacio entre la imagen y la información */
+  }
+
+  .producto-imagen img {
+    border-radius: 5px; /* Bordes redondeados para la imagen */
+  }
+
+  .producto-info {
+    flex-grow: 1; /* Hace que el texto ocupe todo el espacio restante */
+  }
+
+  //***** MODAL CAMBIAR ESTADO *******//
+  /* Fondo del modal */
+  .modal-content {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Estilo del título */
+  .modal-header h5 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Texto del cuerpo */
+  .modal-body p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #555;
+  }
+
+  /* Destacar el estado actual y el próximo estado */
+  .modal-body strong {
+    font-weight: bold;
+    color: #007bff;
+  }
+}

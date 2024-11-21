@@ -69,6 +69,32 @@ button {
     border-bottom: none;
 }
 
+.nombre-usuario{
+    color: $color-primary;
+    font-weight: 700;
+}
+
+.link-mis-datos{
+    color: gray;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.link-mis-datos:hover,
+#user_logged a:hover{
+    color: gray;
+    text-decoration: underline;
+    transition: all 0.2s ease-in-out;
+}
+
+.link-mis-datos .actived,
+#user_logged .actived{
+    color: gray;
+    text-decoration: underline;
+    transition: all 0.2s ease-in-out;
+    border-bottom: none;
+}
+
 .usuario-imagen img {
   width: 40px; /* Ajusta el tamaño según tus necesidades */
   height: 40px; /* Asegúrate de que el ancho y alto sean iguales para un círculo perfecto */

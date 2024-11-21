@@ -17,6 +17,7 @@ import { ListadoComponent } from './components/listado/listado.component';
 
 
 
+
 @NgModule({
   declarations: [
     ListaProductosComponent,
