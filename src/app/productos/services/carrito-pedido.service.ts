@@ -78,19 +78,14 @@ export class CarritoPedidoService {
     this.setCantidadEnCarrito(cant);
   }
 
-  generarPedido(){
-
-    let arr = Array.from(this.productos)
-    .map((p) => {return { idProducto: p.producto._id, cantidad: p.cantidad}})
-
-  }
-
   getProductos(): LineaProducto[] {
     return [...this.productos];
   }
 
   limpiar() {
+    this.productos.clear();
     localStorage.removeItem('cantidad_carrito');
     localStorage.removeItem('carrito');
+    this.calcularSetearCantidad();
   }
 }
