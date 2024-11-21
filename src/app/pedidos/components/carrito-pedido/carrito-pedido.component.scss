@@ -50,6 +50,17 @@
           span {
             display: block;
           }
+
+          .producto-con-promocion {
+            display: flex;
+            span {
+              color: green;
+            }
+            small {
+              margin-left: 0.3rem;
+              text-decoration: line-through;
+            }
+          }
         }
 
         @media (max-width: 768px) {
@@ -58,25 +69,25 @@
         }
       }
 
-      .botones{
+      .botones {
         flex-basis: 20%;
         display: flex;
         justify-content: space-between;
         align-items: center;
 
-        input{
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
-            width: 2rem;
-            text-align: center;
+        input {
+          margin-left: 0.5rem;
+          margin-right: 0.5rem;
+          width: 2rem;
+          text-align: center;
         }
 
-        button{
-            height: 1.8rem;
-            width: 1.8rem;
-            border: 0.1rem solid purple ;
-            border-radius: 50%;
-            background-color: #FAFAFA;
+        button {
+          height: 1.8rem;
+          width: 1.8rem;
+          border: 0.1rem solid purple;
+          border-radius: 50%;
+          background-color: #fafafa;
         }
 
         @media (max-width: 768px) {
@@ -85,7 +96,7 @@
         }
       }
 
-      .subtotal{
+      .subtotal {
         margin-right: 2rem;
 
         @media (max-width: 768px) {

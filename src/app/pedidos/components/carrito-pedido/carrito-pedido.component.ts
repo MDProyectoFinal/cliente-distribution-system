@@ -51,4 +51,9 @@ export class CarritoPedidoComponent implements OnInit {
     });
 
   }
+
+  limpiarCarrito(){
+    this.carritoService.limpiar();
+    this.productos = []
+  }
 }

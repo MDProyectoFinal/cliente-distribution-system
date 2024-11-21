@@ -8,7 +8,16 @@
             <div class="detalle-producto">
               <span>{{ prod.producto.nombre }}</span>
               <span>{{ prod.producto.descripcion }}</span>
-              <span>{{ prod.producto.precio_unitario | currency:'ARS'}}</span>
+              <ng-container *ngIf="prod.producto.promocionActiva; else elseTemplate">
+                <div class="producto-con-promocion">
+                <span>{{ prod.producto.promocionActiva.precio| currency:'ARS'}}</span>
+                <small>{{ prod.producto.precio_unitario| currency:'ARS'}}</small>
+              </div>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <span>{{ prod.producto.precio_unitario| currency:'ARS'}}</span>
+              </ng-template>
+
             </div>
           </div>
           <div class="botones">
@@ -21,6 +30,8 @@
           </div>
         </div>
       </div>
+
+      <button class="btn btn-primary" (click)="limpiarCarrito()">Limpiar</button>
     </div>
     <div class="total-carrito d-flex align-items-center flex-column">
       <div class="total">
