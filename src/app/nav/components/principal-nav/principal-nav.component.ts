@@ -25,7 +25,7 @@ export class PrincipalNavComponent {
 
   public roles: String[] = Object.values( Roles );
 
-  constructor(private router: Router, private authService: AuthenticationService, private carritoService: CarritoPedidoService){
+  constructor(private router: Router, public authService: AuthenticationService, private carritoService: CarritoPedidoService){
 
     this.login = this.authService.estaAutenticado()
 
