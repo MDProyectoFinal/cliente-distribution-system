@@ -2,11 +2,11 @@
 
 /* Estilos para la línea de separación */
 hr.lineaSeparacion {
-  border: 0; /* Elimina el borde predeterminado */
+  border: 0;              /* Elimina el borde predeterminado */
   border-top: 1px solid rgb(109, 105, 105); /* Línea superior con color y grosor */
-  margin: 10px 0; /* Espaciado vertical */
-  width: 100%; /* Ancho de la línea (opcional) */
-  border-radius: 5px; /* Redondear las esquinas */
+  margin: 10px 0;         /* Espaciado vertical */
+  width: 100%;             /* Ancho de la línea (opcional) */
+  border-radius: 5px;     /* Redondear las esquinas */
 }
 
 .estado-pendiente {
@@ -19,7 +19,7 @@ hr.lineaSeparacion {
   min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
 }
 
-.estado-autorizacion {
+.estado-autorizacion{
   background-color: green; /* Cambia el color a lo que necesites */
   color: white; /* Opcional: Cambia el color del texto para que sea legible */
   padding: 5px;
@@ -99,43 +99,43 @@ hr.lineaSeparacion {
   min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
 }
 
-.content {
-  margin-bottom: 80px; /* Ajusta este valor según la altura del footer */
 
-  //***** Whatsapp ******//
-  .whatsapp-link {
-    color: white;
-    background-color: #25d366;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-  }
+//***** Whatsapp ******//
+.whatsapp-link {
+  color: white;
+  background-color: #25d366;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
 
-  .whatsapp-link i {
-    margin-right: 8px;
-    font-size: 20px;
-  }
+.whatsapp-link i {
+  margin-right: 8px;
+  font-size: 20px;
+}
 
-  .hr-separador {
-    height: 3px;
-  }
 
-  //***** DETALLE PRODUCTO *******//
-  .producto-detalle {
-    display: flex;
-    align-items: center; /* Alinea verticalmente la imagen y la información */
-    gap: 20px; /* Espacio entre la imagen y la información */
-  }
+.hr-separador {
+  height: 3px;
+}
 
-  .producto-imagen img {
-    border-radius: 5px; /* Bordes redondeados para la imagen */
-  }
+//***** DETALLE PRODUCTO *******//
+.producto-detalle {
+  display: flex;
+  align-items: center; /* Alinea verticalmente la imagen y la información */
+  gap: 20px; /* Espacio entre la imagen y la información */
+}
 
-  .producto-info {
-    flex-grow: 1; /* Hace que el texto ocupe todo el espacio restante */
-  }
+.producto-imagen img {
+  border-radius: 5px; /* Bordes redondeados para la imagen */
+}
+
+.producto-info {
+  flex-grow: 1; /* Hace que el texto ocupe todo el espacio restante */
+}
+
 
   //***** MODAL CAMBIAR ESTADO *******//
   /* Fondo del modal */
@@ -164,4 +164,4 @@ hr.lineaSeparacion {
     font-weight: bold;
     color: #007bff;
   }
-}
+
