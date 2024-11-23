@@ -16,15 +16,7 @@ export class CarritoPedidoComponent implements OnInit {
     this.productos = this.carritoService.getProductos();
   }
 
-  restarCantidad(lineaProducto: LineaProducto) {
-    if (lineaProducto.cantidad > 1) {
-      this.carritoService.quitarItem(lineaProducto.producto)
-    }
-  }
 
-  sumarCantidad(lineaProducto: LineaProducto) {
-    this.carritoService.agregarItem(lineaProducto.producto)
-  }
 
   calcularTotal(): number {
 
