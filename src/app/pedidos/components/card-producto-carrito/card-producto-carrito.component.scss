@@ -1,91 +1,90 @@
 .card-carrito-container {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid purple;
-    border-radius: 1rem;
-    font-weight: 700;
     padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    @media (max-width: 768px) {
-      flex-direction: column;
-      align-items: center;
-    }
+  .imagen {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .producto {
-      flex-basis: 50%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      img {
-        margin: 0.5rem;
-        width: 80px;
-        height: 80px;
-        background-color: red;
-        display: inline-block;
+    img {
+        min-width: 50px;
+        min-height: 50px;
+        max-width: 150px;
+        max-height: 150px;
       }
+  }
 
-      .detalle-producto {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-left: 1rem;
+  .detalle-producto {
+    width: 40%;
+    padding: 1rem;
+  }
 
-        span {
-          display: block;
-        }
+  .nombre-producto {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
 
-        .producto-con-promocion {
-          display: flex;
-          span {
-            color: green;
-          }
-          small {
-            margin-left: 0.3rem;
-            text-decoration: line-through;
-          }
-        }
-      }
+  .descripcion-producto {
+    font-size: 0.9rem;
+    color: #666;
+  }
 
-      @media (max-width: 768px) {
-        flex-basis: 100%;
-        margin-bottom: 1rem;
-      }
-    }
+  .precio-producto {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 
-    .botones {
-      flex-basis: 20%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  .producto-con-promocion {
+    display: flex;
+    align-items: center;
+  }
 
-      input {
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-        width: 2rem;
-        text-align: center;
-      }
+  .precio-promocion {
+    color: #008000;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 
-      button {
-        height: 1.8rem;
-        width: 1.8rem;
-        border: 0.1rem solid purple;
-        border-radius: 50%;
-        background-color: #fafafa;
-      }
+  .precio-original {
+    font-size: 0.9rem;
+    color: #666;
+  }
 
-      @media (max-width: 768px) {
-        flex-basis: 100%;
-        margin-bottom: 1rem;
-      }
-    }
+  .tachado {
+    text-decoration: line-through;
+  }
 
-    .subtotal {
-      margin-right: 2rem;
+  .botones {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-      @media (max-width: 768px) {
-        margin-right: 0;
-      }
-    }
+
+  }
+
+  .form-control {
+    width: 2rem;
+    text-align: center;
+  }
+
+  .subtotal {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .subtotal-valor {
+    font-size: 1.2rem;
+    font-weight: bold;
   }

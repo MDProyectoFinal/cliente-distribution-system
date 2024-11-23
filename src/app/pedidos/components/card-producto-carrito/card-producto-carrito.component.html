@@ -1,26 +1,28 @@
 <div class="card-carrito-container d-flex justify-content-between align-items-center">
-    <div class="producto">
-      <img src="{{ producto.imagen }}" />
-      <div class="detalle-producto">
-        <span>{{ producto.nombre }}</span>
-        <span>{{ producto.descripcion }}</span>
+    <div class="imagen">
+      <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" class="img-fluid rounded">
+    </div>
+    <div class="detalle-producto">
+      <h5 class="nombre-producto">{{ producto.nombre }}</h5>
+      <p class="descripcion-producto">{{ producto.descripcion }}</p>
+      <div class="precio-producto">
         <ng-container *ngIf="producto.promocionActiva; else elseTemplate">
           <div class="producto-con-promocion">
-            <span>{{ producto.promocionActiva.precio | currency:'ARS' }}</span>
-            <small>{{ producto.precio_unitario | currency:'ARS' }}</small>
+            <span class="precio-promocion">{{ producto.promocionActiva.precio | currency:'ARS' }}</span>
+            <small class="precio-original tachado">{{ producto.precio_unitario | currency:'ARS' }}</small>
           </div>
         </ng-container>
         <ng-template #elseTemplate>
-          <span>{{ producto.precio_unitario | currency:'ARS' }}</span>
+          <span class="precio-original ">{{ producto.precio_unitario | currency:'ARS' }}</span>
         </ng-template>
       </div>
     </div>
     <div class="botones">
-      <button (click)="restarCantidad()">-</button>
-      <input type="text" value="{{ cantidad }}">
-      <button (click)="sumarCantidad()">+</button>
+      <button class="btn btn-sm btn-secondary" (click)="restarCantidad()">-</button>
+      <input type="text" value="{{ cantidad }}" class="form-control form-control-sm">
+      <button class="btn btn-sm btn-secondary" (click)="sumarCantidad()">+</button>
     </div>
     <div class="subtotal">
-      <span>{{ subtotal | currency:'ARS' }}</span>
+      <span class="subtotal-valor">{{ subtotal | currency:'ARS' }}</span>
     </div>
   </div>

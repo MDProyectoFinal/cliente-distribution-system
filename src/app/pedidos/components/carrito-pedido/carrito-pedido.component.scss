@@ -1,5 +1,4 @@
 @import "/src/app/app.component.scss";
-
 .detalle-carrito {
   padding: 2rem;
 
@@ -11,32 +10,28 @@
     .carrito {
       width: 70%;
       padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
       .borde-productos {
-        border: 1px solid $color-secondary;
         padding: 1rem;
-        border-radius: 1rem;
       }
-
-
-
-
-
     }
 
     .total-carrito {
       width: 30%;
       padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-left: 3rem;
 
       .total {
         text-align: center;
         margin-top: 1rem;
         margin-bottom: 1rem;
         font-weight: 600;
-
-        @media (max-width: 768px) {
-          text-align: center;
-        }
       }
     }
   }
