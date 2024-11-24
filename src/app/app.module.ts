@@ -18,12 +18,14 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { PromocionesModule } from './promociones/promociones.module';
 import { registerLocaleData } from '@angular/common';
+import { RealizarPagoComponent } from './pagos/components/realizar-pago/realizar-pago.component';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
 @NgModule({
   declarations: [
     AppComponent,
+    RealizarPagoComponent,
   ],
   imports: [
     AppRoutingModule,
