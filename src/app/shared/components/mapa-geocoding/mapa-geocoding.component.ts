@@ -20,7 +20,9 @@ export class MapaGeocodingComponent implements OnInit{
       subdomains: ['a', 'b', 'c']
     }).addTo(this.mapa);
 
-    this.marcador = L.marker([-32.95, -60.65],{draggable : true}).addTo(this.mapa);
+    this.marcador = L.marker([-32.95, -60.65],{draggable : true,
+    })
+    .addTo(this.mapa);
     this.marcador.on('dragend', () => {
       const posicion = this.marcador.getLatLng();
       this.latitud = posicion.lat;
@@ -36,7 +38,10 @@ export class MapaGeocodingComponent implements OnInit{
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.direccion = data.display_name;
+        const direccionConvertida = `${data.address.road} ${data.address.house_number ?? ''}, ${data.address.city}`
+        this.direccion = direccionConvertida;
+
+        this.marcador.bindTooltip(direccionConvertida, {permanent : true, direction: 'top', offset: [-15,-20]})
       })
       .catch(error => console.error(error));
   }
