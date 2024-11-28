@@ -32,13 +32,15 @@
             {{ getFieldError('apellido') }}
         </span>
       </div>
-      <div>
+      <div class="direccion">
         <label>Dirección:</label>
         <input type="text" name="direccion" formControlName="direccion" class="form-control" required>
+
         <span *ngIf="isValidField('direccion')"
             class="form-text text-danger">
             {{ getFieldError('direccion') }}
         </span>
+        <mapa-geocoding class="mapa"></mapa-geocoding>
       </div>
       <div>
         <label>Teléfono:</label>
