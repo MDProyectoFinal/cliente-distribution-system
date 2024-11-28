@@ -6,7 +6,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { CarritoPedidoComponent } from './components/carrito-pedido/carrito-pedido.component';
 import { ListarPedidosComponent } from './components/client/listar-pedidos/listar-pedidos.component';
+import { CardProductoCarritoComponent } from './components/card-producto-carrito/card-producto-carrito.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { ListarPedidosComponent } from './components/client/listar-pedidos/lista
   declarations: [
     EditarPedidoComponent,
     ListaPedidosComponent,
-    ListarPedidosComponent
+    CarritoPedidoComponent,
+    ListarPedidosComponent,
+    CardProductoCarritoComponent
   ],
   providers: [],
 })

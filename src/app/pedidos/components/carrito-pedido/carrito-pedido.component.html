@@ -1,0 +1,17 @@
+<div class="detalle-carrito">
+  <div class="container-carrito">
+    <div class="carrito borde-productos">
+      <div class="borde-productos">
+        <app-card-producto-carrito *ngFor="let prod of productos" [producto]="prod.producto" [cantidad]="prod.cantidad" [subtotal]="prod.getSubtotal()"></app-card-producto-carrito>
+    </div>
+
+      <button class="btn btn-primary" (click)="limpiarCarrito()">Limpiar</button>
+    </div>
+    <div class="total-carrito d-flex align-items-center flex-column">
+      <div class="total">
+        <span>Total: {{ calcularTotal() | currency:'ARS' }}</span>
+      </div>
+      <button class="btn btn-primary" (click)="checkout()">Continuar a checkout</button>
+    </div>
+  </div>
+</div>

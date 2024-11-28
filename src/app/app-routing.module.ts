@@ -12,9 +12,11 @@ import { EditarProductoComponent } from './productos/components/editar-producto/
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
-import { PromocionesProductoComponent} from './productos/components/promociones/promociones.component';
+import { PromocionesProductoComponent } from './productos/components/promociones/promociones.component';
 import { NuevaPromocionProductoComponent } from './productos/components/promociones/nueva-promocion-producto/nueva-promocion-producto.component';
 import { EditarPromocionComponent } from './promociones/components/editar-promocion/editar-promocion.component';
+import { ListadoComponent } from './productos/components/listado/listado.component';
+import { CarritoPedidoComponent } from './pedidos/components/carrito-pedido/carrito-pedido.component';
 import { roleGuard } from './guards/role.guard';
 import { Roles } from './usuarios/interfaces/roles-enum';
 import { NoAutorizadoComponent } from './shared/components/no-autorizado/no-autorizado.component';
@@ -39,7 +41,7 @@ const routes: Routes = [
       { path: 'listar-usuarios', component: ListarUsuariosComponent },
       {
         path: 'informacion',
-        loadChildren: () => import('./informacion/informacion.module').then(m => m.InformacionModule),
+        loadChildren: () => import('./informacion/informacion.module').then((m) => m.InformacionModule),
       },
 
       // Probando aplicación del roleGuard para varios casos con el prefijo ADMIN
@@ -62,6 +64,9 @@ const routes: Routes = [
           { path: 'pedidos', component: ListarPedidosComponent },
         ]
       },
+
+      { path: 'productos/listado', component: ListadoComponent },
+      { path: 'carrito', component: CarritoPedidoComponent },
 
 
       { path: 'productos/detalle/:id', component: EditarProductoComponent },

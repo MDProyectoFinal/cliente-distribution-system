@@ -52,6 +52,18 @@ export class ListarPedidosComponent implements OnInit {
 
   public isLoading: boolean = false;
 
+  public contadores: { [key: string]: number } = {
+    [EstadosPedidos.PENDIENTE]: 0,
+    [EstadosPedidos.EN_AUTORIZACION]: 0,
+    [EstadosPedidos.EN_PREPARACION]: 0,
+    [EstadosPedidos.EN_EMPAQUETADO]: 0,
+    [EstadosPedidos.EN_DESPACHO]: 0,
+    [EstadosPedidos.EN_DISTRIBUCION]: 0,
+    [EstadosPedidos.EN_FACTURACION]: 0,
+    [EstadosPedidos.COMPLETADO]: 0,
+    [EstadosPedidos.CANCELADO]: 0,
+  }
+
   // mensajeExito: string | null = null;
   mensajeError: string | null = null;
 
