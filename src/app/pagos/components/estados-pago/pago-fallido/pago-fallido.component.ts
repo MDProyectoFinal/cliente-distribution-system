@@ -13,7 +13,7 @@ export class PagoFallidoComponent {
   reintentarPago() {
 
     // TODO: ver que hacer con esto
-    this.router.navigate(['/admin/pago']);
+    this.router.navigate(['/client/pago']);
   }
 
 }

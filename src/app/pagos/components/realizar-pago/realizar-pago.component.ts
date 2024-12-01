@@ -4,7 +4,7 @@ import { IPreferencesPago } from '../../interfaces/preferences-pago.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationService } from 'src/app/usuarios/services/authentication.service';
 
-declare var MercadoPago: any;
+// declare var MercadoPago: any;
 
 @Component({
   selector: 'pagos-realizar-pago',
@@ -28,7 +28,7 @@ export class RealizarPagoComponent {
   public email: string = "";
 
   // TODO: crear archivo "env" o poner en config -> global esa key
-  mercadoPago = new MercadoPago('APP_USR-d79f1964-73cf-4b79-b1f7-7a0453139132'); // PUBLICC-KEY - Credencial de produccion de ambiente de prueba - VENDEDOR
+  // mercadoPago = new MercadoPago('APP_USR-d79f1964-73cf-4b79-b1f7-7a0453139132'); // PUBLICC-KEY - Credencial de produccion de ambiente de prueba - VENDEDOR
 
   constructor( private _pagoServices: PagoService, private _authService: AuthenticationService) {
 

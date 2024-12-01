@@ -9,7 +9,7 @@ import { GLOBAL } from 'src/app/config/global';
 export class PagoService {
 
   public url: string;
-  private access_token: string = 'APP_USR-3595488656828811-112515-31c2962634f5c18f330f4bb8ead67d88-2116426284'
+  private access_token: string = 'APP_USR-3595488656828811-112515-31c2962634f5c18f330f4bb8ead67d88-2116426284' // Del VENDEDOR (TEST)
 
   constructor( private _http: HttpClient ){
     this.url = GLOBAL.url;
@@ -18,7 +18,7 @@ export class PagoService {
   createPreference(data: any) {
     let headers = new HttpHeaders({
       'Content-Type':'application/json',
-      'Authorization': `Bearer ${ this.access_token }`
+      Authorization: `Bearer ${ this.access_token }`
     });
 
     return this._http.post<{}>(this.url + 'pagos/', data, { headers: headers })
