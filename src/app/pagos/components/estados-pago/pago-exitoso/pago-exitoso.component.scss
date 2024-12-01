@@ -1,0 +1,49 @@
+.payment-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f7f9fa;
+  text-align: center;
+
+  .icon-container {
+    background-color: #e6f9eb;
+    border-radius: 50%;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    i {
+      font-size: 4rem;
+      color: #28a745; // Verde para indicar éxito
+    }
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  .return-button {
+    background-color: #28a745; // Verde para éxito
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #218838; // Verde más oscuro al pasar el mouse
+    }
+  }
+}
