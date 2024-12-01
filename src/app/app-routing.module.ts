@@ -19,6 +19,10 @@ import { roleGuard } from './guards/role.guard';
 import { Roles } from './usuarios/interfaces/roles-enum';
 import { NoAutorizadoComponent } from './shared/components/no-autorizado/no-autorizado.component';
 import { ListarPedidosComponent } from './pedidos/components/client/listar-pedidos/listar-pedidos.component';
+import { RealizarPagoComponent } from './pagos/components/realizar-pago/realizar-pago.component';
+import { PagoExitosoComponent } from './pagos/components/estados-pago/pago-exitoso/pago-exitoso.component';
+import { PagoFallidoComponent } from './pagos/components/estados-pago/pago-fallido/pago-fallido.component';
+import { PagoPendienteComponent } from './pagos/components/estados-pago/pago-pendiente/pago-pendiente.component';
 
 const routes: Routes = [
   {
@@ -50,6 +54,11 @@ const routes: Routes = [
         children: [
           { path: 'pedidos', component: ListaPedidosComponent },
           { path: 'productos', component: ListaProductosComponent },
+          // { path: 'pago', component: RealizarPagoComponent },
+          // { path: 'pago-success', component: PagoExitosoComponent },
+          // { path: 'pago-failure', component: PagoFallidoComponent },
+          // { path: 'pago-pending', component: PagoPendienteComponent },
+
         ]
       },
 
@@ -60,6 +69,10 @@ const routes: Routes = [
         canActivate: [ roleGuard ],
         children: [
           { path: 'pedidos', component: ListarPedidosComponent },
+          { path: 'pago', component: RealizarPagoComponent },
+          { path: 'pago-success', component: PagoExitosoComponent },
+          { path: 'pago-failure', component: PagoFallidoComponent },
+          { path: 'pago-pending', component: PagoPendienteComponent },
         ]
       },
 
