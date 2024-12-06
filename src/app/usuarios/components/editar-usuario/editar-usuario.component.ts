@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IPersonaEdicion } from 'src/app/models/IPersonaEdicion';
 import { PersonaService } from 'src/app/personas/services/persona.service';
 import { UsuarioService } from '../../services/usuario.service';
+import { faMap } from '@fortawesome/free-solid-svg-icons';
+
 
 const formVacio = {
   id: '',
@@ -24,8 +26,9 @@ export class EditarUsuarioComponent {
   apellido: string = '';
   direccion: string = '';
   telefono: string = '';
-  //urlImagen: string = '';
 
+  mostrarMapa: boolean = false
+  mapIcon = faMap
   public isLoading: boolean = false;
   mensajeExito: string | null = null;
   mensajeError: string | null = null;

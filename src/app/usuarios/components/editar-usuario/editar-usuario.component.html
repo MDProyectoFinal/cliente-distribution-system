@@ -1,77 +1,77 @@
 <!-- LOADING -->
 <shared-loading-spinner *ngIf="isLoading" textoCarga="Editando datos personales.."></shared-loading-spinner>
 
-<hr>
-<div class="col-lg-6" style="margin: 15px" >
-    <h1>{{ titulo }}</h1>
+<hr />
+<div class="col-lg-6" style="margin: 15px">
+  <h1>{{ titulo }}</h1>
 
-    <div *ngIf="mensajeExito" class="alert alert-success">{{ mensajeExito }}</div>
-    <div *ngIf="mensajeError" class="alert alert-danger">{{ mensajeError }}</div>
+  <div *ngIf="mensajeExito" class="alert alert-success">{{ mensajeExito }}</div>
+  <div *ngIf="mensajeError" class="alert alert-danger">{{ mensajeError }}</div>
 
-    <!-- <div *ngIf="alertaActualizacion">
+  <!-- <div *ngIf="alertaActualizacion">
       <div class="alert alert-info" role="alert">
         {{alertaActualizacion}}
       </div>
     </div> -->
 
-    <!-- Formualario -->
-    <form [formGroup]="myForm" *ngIf="personaEdicion" (ngSubmit)="onSubmit()" class="col-md-7">
-      <div>
-        <label>Nombre/s:</label>
-        <input type="text" name="nombre" formControlName="nombre" class="form-control" required>
-        <span *ngIf="isValidField('nombre')"
-            class="form-text text-danger">
-            {{ getFieldError('nombre') }}
-        </span>
-      </div>
-      <div>
-        <label>Apellido:</label>
-        <input type="text" name="apellido" formControlName="apellido" class="form-control" required>
-        <span *ngIf="isValidField('apellido')"
-            class="form-text text-danger">
-            {{ getFieldError('apellido') }}
-        </span>
-      </div>
-      <div class="direccion">
+  <!-- Formualario -->
+  <form [formGroup]="myForm" *ngIf="personaEdicion" (ngSubmit)="onSubmit()" class="col-md-7">
+    <div>
+      <label>Nombre/s:</label>
+      <input type="text" name="nombre" formControlName="nombre" class="form-control" required />
+      <span *ngIf="isValidField('nombre')" class="form-text text-danger">
+        {{ getFieldError("nombre") }}
+      </span>
+    </div>
+    <div>
+      <label>Apellido:</label>
+      <input type="text" name="apellido" formControlName="apellido" class="form-control" required />
+      <span *ngIf="isValidField('apellido')" class="form-text text-danger">
+        {{ getFieldError("apellido") }}
+      </span>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
         <label>Dirección:</label>
-        <input type="text" name="direccion" formControlName="direccion" class="form-control" required>
+        <input type="text" name="direccion" formControlName="direccion" class="form-control" required />
 
-        <span *ngIf="isValidField('direccion')"
-            class="form-text text-danger">
-            {{ getFieldError('direccion') }}
-        </span>
-        <mapa-geocoding class="mapa"></mapa-geocoding>
-      </div>
-      <div>
-        <label>Teléfono:</label>
-        <input type="text"  name="telefono" formControlName="telefono" class="form-control" required>
-        <span *ngIf="isValidField('telefono')"
-            class="form-text text-danger">
-            {{ getFieldError('telefono') }}
+        <span *ngIf="isValidField('direccion')" class="form-text text-danger">
+          {{ getFieldError("direccion") }}
         </span>
       </div>
 
-      <br/>
-      <!-- <div class="imagen_para_edicion" *ngIf="urlImagen">
+      <button class="col-md-2 form-control btn btn-primary btn-mapa" (click)="mostrarMapa = !mostrarMapa"><fa-icon [icon]="mapIcon" class="mr-lg-3"></fa-icon></button>
+      <mapa-geocoding class="mapa  col-md-12" *ngIf="mostrarMapa"></mapa-geocoding>
+    </div>
+    <div>
+      <label>Teléfono:</label>
+      <input type="text" name="telefono" formControlName="telefono" class="form-control" required />
+      <span *ngIf="isValidField('telefono')" class="form-text text-danger">
+        {{ getFieldError("telefono") }}
+      </span>
+    </div>
+
+    <br />
+    <!-- <div class="imagen_para_edicion" *ngIf="urlImagen">
         <img id="imagen-logueado" src="{{ url + 'obtener-archivo-imagen/' + usuario_persona_actualizacion.imagen }}" style="width: 50px"/>
       </div> -->
 
-      <!-- VIEJO! -->
-      <!-- <p>
+    <!-- VIEJO! -->
+    <!-- <p>
         <label>Sube tu foto: </label><br>
         <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)" />
       </p> -->
 
-      <div>
-        <label>Sube tu foto: </label><br>
+    <div>
+      <label>Sube tu foto: </label><br />
 
-        <img class="img-avatar-usuario" width="100px" height="100px" [src]="urlImagen" *ngIf="urlImagen" />
-        <input type="file" id="btn-subir-imagen" formControlName="urlImagen" hidden (change)="onImageChanged($event)" />
-        <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
-      </div>
+      <img class="img-avatar-usuario" width="100px" height="100px" [src]="urlImagen" *ngIf="urlImagen" />
+      <input type="file" id="btn-subir-imagen" formControlName="urlImagen" hidden (change)="onImageChanged($event)" />
+      <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
+    </div>
 
-      <hr>
+    <hr />
 
-      <input type="submit" value="Actualizar mis datos" class="btn btn-primary" required>
-    </form>
-  </div>
+    <input type="submit" value="Actualizar mis datos" class="btn btn-primary" required />
+  </form>
+</div>
