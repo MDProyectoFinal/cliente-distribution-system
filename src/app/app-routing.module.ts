@@ -25,6 +25,9 @@ import { RealizarPagoComponent } from './pagos/components/realizar-pago/realizar
 import { PagoExitosoComponent } from './pagos/components/estados-pago/pago-exitoso/pago-exitoso.component';
 import { PagoFallidoComponent } from './pagos/components/estados-pago/pago-fallido/pago-fallido.component';
 import { PagoPendienteComponent } from './pagos/components/estados-pago/pago-pendiente/pago-pendiente.component';
+import { RegistrarProveedorComponent } from './proveedores/components/registrar-proveedor/registrar-proveedor.component';
+import { ListarProveedoresComponent } from './proveedores/components/listar-proveedores/listar-proveedores.component';
+import { PaginaPrincipalProveedoresComponent } from './proveedores/pages/pagina-principal-proveedores/pagina-principal-proveedores.component';
 
 const routes: Routes = [
   {
@@ -35,12 +38,6 @@ const routes: Routes = [
       { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'mis-datos', component: EditarUsuarioComponent },
       { path: 'inicio', component: PaginaInicioComponent },
-      // {
-      //   path: 'pedidos',
-      //   component: ListaPedidosComponent,
-      //   canActivate: [roleGuard],
-      //   data: { role: Roles.Admin }
-      // },
       { path: 'cuenta', component: PaginaInicioComponent },
       { path: 'listar-usuarios', component: ListarUsuariosComponent },
       {
@@ -56,11 +53,9 @@ const routes: Routes = [
         children: [
           { path: 'pedidos', component: ListaPedidosComponent },
           { path: 'productos', component: ListaProductosComponent },
-          // { path: 'pago', component: RealizarPagoComponent },
-          // { path: 'pago-success', component: PagoExitosoComponent },
-          // { path: 'pago-failure', component: PagoFallidoComponent },
-          // { path: 'pago-pending', component: PagoPendienteComponent },
-
+          { path: 'proveedores', component: PaginaPrincipalProveedoresComponent },
+          { path: 'proveedores/obtenerProveedores', component: ListarProveedoresComponent },
+          { path: 'proveedores/registrarProveedores', component: RegistrarProveedorComponent },
         ]
       },
 
