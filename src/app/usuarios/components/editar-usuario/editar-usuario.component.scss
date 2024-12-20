@@ -10,11 +10,14 @@
 
 .mapa {
   display: inline-block;
-  width: 400px;
+  width: 100%;
   height: 300px;
   border: 1px solid #ccc;
-  margin-left: 20px;
   overflow: hidden;
+}
+
+.mapa-container{
+  margin-top: 1rem;
 }
 
 .btn-mapa{
@@ -22,4 +25,10 @@
   max-height: 50px;
   display: block;
   cursor: pointer;
+  position: absolute;
+  bottom: 0;
+}
+
+.col-md-7>div{
+  margin-top: 1.3rem;
 }
