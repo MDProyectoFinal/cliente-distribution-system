@@ -9,6 +9,7 @@ import { RegistroUsuarioComponent } from './components/registro-usuario/registro
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 import { InformacionModule } from "../informacion/informacion.module";
 import { SharedModule } from "../shared/shared.module";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SharedModule } from "../shared/shared.module";
     RouterModule,
     InformacionModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   exports: [
     ListarUsuariosComponent,

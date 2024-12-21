@@ -3,5 +3,7 @@ export interface IPersonaEdicion {
     telefono:string,
     nombre:string,
     apellido:string,
-    direccion:string
+    direccion:string,
+    latitud : number,
+    longitud: number
 }

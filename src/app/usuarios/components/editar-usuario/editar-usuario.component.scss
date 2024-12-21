@@ -1,7 +1,34 @@
+@import "/src/app/app.component.scss";
+
 .lbl-subir-imagen {
   padding: 0.5rem;
   border-radius: 0.3rem;
   border: #AAA 1px dashed;
   cursor: pointer;
   margin-top: 1rem;
+}
+
+.mapa {
+  display: inline-block;
+  width: 100%;
+  height: 300px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.mapa-container{
+  margin-top: 1rem;
+}
+
+.btn-mapa{
+  max-width: 50px;
+  max-height: 50px;
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+}
+
+.col-md-7>div{
+  margin-top: 1.3rem;
 }
