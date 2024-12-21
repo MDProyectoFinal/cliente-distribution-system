@@ -28,8 +28,10 @@
                 </div>
               </nav>
 
-              <button class="text-right">
-                <fa-icon [icon]="cartIcon" class="cartIcon mr-lg-3"></fa-icon>
+              <button class="text-right" (click)= "verCarrito()">
+
+                <fa-icon [ngClass]="{'fas' : cantidadEnCarrito > 0}" [icon]="cartIcon" class="cartIcon mr-lg-3 fas" [attr.data-count]="cantidadEnCarrito"></fa-icon>
+
               </button>
 
               <button class="text-right">
@@ -58,6 +60,9 @@
             </li>
             <li class="nav-item">
               <a [routerLink]="['/listar-usuarios']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Usuarios</a>
+            </li>
+            <li class="nav-item">
+              <a *ngIf="this.authService.userRol === 'ADMIN'" [routerLink]="['/admin/proveedores']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Proveedores</a>
             </li>
             <li class="nav-item">
               <a [routerLink]="['/informacion/informacion-general']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Información</a>

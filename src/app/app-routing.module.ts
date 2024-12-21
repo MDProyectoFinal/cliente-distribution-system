@@ -12,13 +12,22 @@ import { EditarProductoComponent } from './productos/components/editar-producto/
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
-import { PromocionesProductoComponent} from './productos/components/promociones/promociones.component';
+import { PromocionesProductoComponent } from './productos/components/promociones/promociones.component';
 import { NuevaPromocionProductoComponent } from './productos/components/promociones/nueva-promocion-producto/nueva-promocion-producto.component';
 import { EditarPromocionComponent } from './promociones/components/editar-promocion/editar-promocion.component';
+import { ListadoComponent } from './productos/components/listado/listado.component';
+import { CarritoPedidoComponent } from './pedidos/components/carrito-pedido/carrito-pedido.component';
 import { roleGuard } from './guards/role.guard';
 import { Roles } from './usuarios/interfaces/roles-enum';
 import { NoAutorizadoComponent } from './shared/components/no-autorizado/no-autorizado.component';
 import { ListarPedidosComponent } from './pedidos/components/client/listar-pedidos/listar-pedidos.component';
+import { RealizarPagoComponent } from './pagos/components/realizar-pago/realizar-pago.component';
+import { PagoExitosoComponent } from './pagos/components/estados-pago/pago-exitoso/pago-exitoso.component';
+import { PagoFallidoComponent } from './pagos/components/estados-pago/pago-fallido/pago-fallido.component';
+import { PagoPendienteComponent } from './pagos/components/estados-pago/pago-pendiente/pago-pendiente.component';
+import { RegistrarProveedorComponent } from './proveedores/components/registrar-proveedor/registrar-proveedor.component';
+import { ListarProveedoresComponent } from './proveedores/components/listar-proveedores/listar-proveedores.component';
+import { PaginaPrincipalProveedoresComponent } from './proveedores/pages/pagina-principal-proveedores/pagina-principal-proveedores.component';
 
 const routes: Routes = [
   {
@@ -29,17 +38,11 @@ const routes: Routes = [
       { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'mis-datos', component: EditarUsuarioComponent },
       { path: 'inicio', component: PaginaInicioComponent },
-      // {
-      //   path: 'pedidos',
-      //   component: ListaPedidosComponent,
-      //   canActivate: [roleGuard],
-      //   data: { role: Roles.Admin }
-      // },
       { path: 'cuenta', component: PaginaInicioComponent },
       { path: 'listar-usuarios', component: ListarUsuariosComponent },
       {
         path: 'informacion',
-        loadChildren: () => import('./informacion/informacion.module').then(m => m.InformacionModule),
+        loadChildren: () => import('./informacion/informacion.module').then((m) => m.InformacionModule),
       },
 
       // Probando aplicación del roleGuard para varios casos con el prefijo ADMIN
@@ -50,6 +53,9 @@ const routes: Routes = [
         children: [
           { path: 'pedidos', component: ListaPedidosComponent },
           { path: 'productos', component: ListaProductosComponent },
+          { path: 'proveedores', component: PaginaPrincipalProveedoresComponent },
+          { path: 'proveedores/obtenerProveedores', component: ListarProveedoresComponent },
+          { path: 'proveedores/registrarProveedores', component: RegistrarProveedorComponent },
         ]
       },
 
@@ -60,8 +66,15 @@ const routes: Routes = [
         canActivate: [ roleGuard ],
         children: [
           { path: 'pedidos', component: ListarPedidosComponent },
+          { path: 'pago', component: RealizarPagoComponent },
+          { path: 'pago-success', component: PagoExitosoComponent },
+          { path: 'pago-failure', component: PagoFallidoComponent },
+          { path: 'pago-pending', component: PagoPendienteComponent },
         ]
       },
+
+      { path: 'productos/listado', component: ListadoComponent },
+      { path: 'carrito', component: CarritoPedidoComponent },
 
 
       { path: 'productos/detalle/:id', component: EditarProductoComponent },

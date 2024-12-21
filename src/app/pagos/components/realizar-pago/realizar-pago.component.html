@@ -1,0 +1,39 @@
+
+<!-- LOADING -->
+<shared-loading-spinner *ngIf="isLoading" textoCarga="Procesando pago.."></shared-loading-spinner>
+
+<div class="payment-summary-container">
+  <h2>Resumen de tu pedido</h2>
+
+  <div class="user-info">
+    <h3>Cliente:</h3>
+    <p>{{ nombreUsuario }} ({{ email }})</p>
+  </div>
+
+  <div class="order-details">
+    <h3>Detalles del Pedido:</h3>
+    <ul>
+      <li *ngFor="let item of preferenceData.items">
+        <span>{{ item.title }}</span>
+        <span>x{{ item.quantity }}</span>
+        <span>${{ item.unit_price * item.quantity }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="total-amount">
+    <!-- Deberiamos poner el total del campo subtotal de "Pedidos" -->
+    <h2>Total: ${{ totalPedido }}</h2>
+  </div>
+
+  <div class="payment-button">
+    <button (click)="pay()">Pagar con Mercado Pago</button>
+  </div>
+
+  <hr>
+  <div *ngIf="procesandoPago" class="alert alert-info" role="alert">
+    ¡Estás en la etapa final del proceso de Pago!
+  </div>
+
+</div>
+

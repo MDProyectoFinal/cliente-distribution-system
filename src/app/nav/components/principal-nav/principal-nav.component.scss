@@ -1,47 +1,72 @@
 @import "/src/app/app.component.scss";
 
-.navbar{
-    box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.1);
-    -webkit-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.1);
-    -moz-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.1);
+.navbar {
+  box-shadow: 0px 7px 5px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 7px 5px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 7px 5px 0px rgba(0, 0, 0, 0.1);
 }
 
-.navbar .nav-link.actived{
-    border-bottom: none ;
-    font-weight: 700;
+.navbar .nav-link.actived {
+  border-bottom: none;
+  font-weight: 700;
 }
 
-.navbar .nav-link:hover{
-    color: $color-primary;
-    font-weight: 700;
-    transition: all .3s ease-in-out;
+.navbar .nav-link:hover {
+  color: $color-primary;
+  font-weight: 700;
+  transition: all 0.3s ease-in-out;
 }
 
-
-.navbar-brand{
-    color: $color-primary;
-    font-weight: 600;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    margin-right: 0;
+.navbar-brand {
+  color: $color-primary;
+  font-weight: 600;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin-right: 0;
 }
 
 .navbar-light .navbar-toggler,
-button{
-    border: none;
-    color: $color-primary;
-    background-color: transparent;
+button {
+  border: none;
+  color: $color-primary;
+  background-color: transparent;
 
-    .bellIcon,
-    .cartIcon{
-        font-size: 20px;
-    }
+  .bellIcon,
+  .cartIcon {
+    font-size: 20px;
+  }
 }
 
 .navbar-toggler:focus,
 .navbar-toggler:active,
 .navbar-toggler-icon:focus {
-    outline: none;
-    box-shadow: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.nombre-usuario{
+    color: $color-primary;
+    font-weight: 700;
+}
+
+.link-mis-datos{
+    color: gray;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.link-mis-datos:hover,
+#user_logged a:hover{
+    color: gray;
+    text-decoration: underline;
+    transition: all 0.2s ease-in-out;
+}
+
+.link-mis-datos .actived,
+#user_logged .actived{
+    color: gray;
+    text-decoration: underline;
+    transition: all 0.2s ease-in-out;
+    border-bottom: none;
 }
 
 .nombre-usuario{
@@ -71,9 +96,31 @@ button{
 }
 
 .usuario-imagen img {
-    width: 40px; /* Ajusta el tamaño según tus necesidades */
-    height: 40px; /* Asegúrate de que el ancho y alto sean iguales para un círculo perfecto */
-    border-radius: 50%; /* Esto hace que la imagen sea circular */
-    object-fit: cover; /* Esto asegura que la imagen cubra el área sin deformarse */
-    border: 2px solid #ccc; /* Opcional: agrega un borde */
-  }
+  width: 40px; /* Ajusta el tamaño según tus necesidades */
+  height: 40px; /* Asegúrate de que el ancho y alto sean iguales para un círculo perfecto */
+  border-radius: 50%; /* Esto hace que la imagen sea circular */
+  object-fit: cover; /* Esto asegura que la imagen cubra el área sin deformarse */
+  border: 2px solid #ccc; /* Opcional: agrega un borde */
+}
+
+.fas[data-count] {
+  position: relative;
+}
+.fas[data-count]:after {
+  position: absolute;
+  right: -0.75em;
+  bottom: -0.75em;
+  content: attr(data-count);
+  padding: 0.5em;
+  border-radius: 10em;
+  line-height: 0.9em;
+  color: white;
+  background: rgba(255, 0, 0, 0.85);
+  text-align: center;
+  min-width: 2em;
+  font: bold 0.56rem sans-serif;
+}
+
+.cartIcon:hover{
+  cursor: pointer;
+}

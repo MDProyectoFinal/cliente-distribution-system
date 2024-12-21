@@ -1,0 +1,103 @@
+<!-- LOADING -->
+<shared-loading-spinner *ngIf="isLoading" textoCarga="Insertando proveedor.."></shared-loading-spinner>
+
+<div class="container">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="form-centered">
+    <div class="form-group">
+      <h3>Registrar Proveedor</h3>
+    </div>
+    <hr>
+
+    <div *ngIf="mensajeExito" class="alert alert-success">{{ mensajeExito }}</div>
+    <div *ngIf="mensajeError" class="alert alert-danger">{{ mensajeError }}</div>
+
+    <div class="form-group">
+      <label for="razon_social">Razón Social</label>
+      <input
+        id="razon_social"
+        type="text"
+        class="form-control"
+        formControlName="razon_social"
+        placeholder="Ingrese la razón social">
+      <div *ngIf="myForm.get('razon_social')?.touched && myForm.get('razon_social')?.invalid" class="text-danger">
+        <small *ngIf="myForm.get('razon_social')?.errors?.['required']">La razón social es obligatoria.</small>
+        <small *ngIf="myForm.get('razon_social')?.errors?.['minlength']">Debe tener al menos 3 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cuit">CUIT</label>
+      <input
+        id="cuit"
+        type="text"
+        class="form-control"
+        formControlName="cuit"
+        placeholder="Ingrese el CUIT">
+      <div *ngIf="myForm.get('cuit')?.touched && myForm.get('cuit')?.invalid" class="text-danger">
+        <small *ngIf="myForm.get('cuit')?.errors?.['required']">El CUIT es obligatorio.</small>
+        <small *ngIf="myForm.get('cuit')?.errors?.['pattern']">Debe ser un número de 11 dígitos.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input
+        id="telefono"
+        type="text"
+        class="form-control"
+        formControlName="telefono"
+        placeholder="Ingrese el teléfono">
+      <div *ngIf="myForm.get('telefono')?.touched && myForm.get('telefono')?.invalid" class="text-danger">
+        <small *ngIf="myForm.get('telefono')?.errors?.['required']">El teléfono es obligatorio.</small>
+        <small *ngIf="myForm.get('telefono')?.errors?.['pattern']">Debe ser un número de 10 dígitos.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="direccion">Dirección</label>
+      <input
+        id="direccion"
+        type="text"
+        class="form-control"
+        formControlName="direccion"
+        placeholder="Ingrese la dirección">
+      <div *ngIf="myForm.get('direccion')?.touched && myForm.get('direccion')?.invalid" class="text-danger">
+        <small *ngIf="myForm.get('direccion')?.errors?.['required']">La dirección es obligatoria.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        class="form-control"
+        formControlName="email"
+        placeholder="Ingrese el correo electrónico">
+      <div *ngIf="myForm.get('email')?.touched && myForm.get('email')?.invalid" class="text-danger">
+        <small *ngIf="myForm.get('email')?.errors?.['required']">El correo electrónico es obligatorio.</small>
+        <small *ngIf="myForm.get('email')?.errors?.['email']">El formato del correo no es válido.</small>
+      </div>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="activo">Activo</label>
+      <input
+        id="activo"
+        type="checkbox"
+        class="form-check-input"
+        formControlName="activo">
+    </div> -->
+
+    <div class="form-group">
+      <label for="nota_adicional">Nota Adicional</label>
+      <textarea
+        id="nota_adicional"
+        class="form-control"
+        formControlName="nota_adicional"
+        placeholder="Ingrese una nota adicional"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Guardar</button>
+  </form>
+</div>
