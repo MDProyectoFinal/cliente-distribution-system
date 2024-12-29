@@ -28,6 +28,7 @@ import { PagoPendienteComponent } from './pagos/components/estados-pago/pago-pen
 import { RegistrarProveedorComponent } from './proveedores/components/registrar-proveedor/registrar-proveedor.component';
 import { ListarProveedoresComponent } from './proveedores/components/listar-proveedores/listar-proveedores.component';
 import { PaginaPrincipalProveedoresComponent } from './proveedores/pages/pagina-principal-proveedores/pagina-principal-proveedores.component';
+import { GenerarPedidoProveedorComponent } from './proveedores/components/generar-pedido-proveedor/generar-pedido-proveedor.component';
 
 const routes: Routes = [
   {
@@ -53,9 +54,19 @@ const routes: Routes = [
         children: [
           { path: 'pedidos', component: ListaPedidosComponent },
           { path: 'productos', component: ListaProductosComponent },
+
+          // VER ESTO!!!
+          { path: 'productos/detalle/:id', component: EditarProductoComponent },
+          { path: 'productos/:id/promociones', component: PromocionesProductoComponent },
+          { path: 'productos/:id/promociones/nueva', component: NuevaPromocionProductoComponent },
+          { path: 'promociones/:id', component: EditarPromocionComponent },
+          { path: 'productos/nuevo', component: EditarProductoComponent },
+          // VER ESTO!!!
+
           { path: 'proveedores', component: PaginaPrincipalProveedoresComponent },
           { path: 'proveedores/obtenerProveedores', component: ListarProveedoresComponent },
           { path: 'proveedores/registrarProveedores', component: RegistrarProveedorComponent },
+          { path: 'proveedores/generarPedidoProveedor', component: GenerarPedidoProveedorComponent },
         ]
       },
 
@@ -77,11 +88,7 @@ const routes: Routes = [
       { path: 'carrito', component: CarritoPedidoComponent },
 
 
-      { path: 'productos/detalle/:id', component: EditarProductoComponent },
-      { path: 'productos/:id/promociones', component: PromocionesProductoComponent },
-      { path: 'productos/:id/promociones/nueva', component: NuevaPromocionProductoComponent },
-      { path: 'promociones/:id', component: EditarPromocionComponent },
-      { path: 'productos/nuevo', component: EditarProductoComponent },
+
       { path: 'enviar-sugerencia', component: PaginaInicioComponent },
       { path: 'cerrar-sesion', component: PaginaInicioComponent },
       { path: 'no-autorizado', component: NoAutorizadoComponent }

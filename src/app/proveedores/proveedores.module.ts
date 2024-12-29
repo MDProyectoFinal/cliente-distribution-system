@@ -7,6 +7,7 @@ import { ListarProveedoresComponent } from './components/listar-proveedores/list
 import { SharedModule } from '../shared/shared.module';
 import { ActivoPipe } from '../pipes/activo.pipe';
 import { PaginaPrincipalProveedoresComponent } from './pages/pagina-principal-proveedores/pagina-principal-proveedores.component';
+import { GenerarPedidoProveedorComponent } from './components/generar-pedido-proveedor/generar-pedido-proveedor.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { PaginaPrincipalProveedoresComponent } from './pages/pagina-principal-pr
     RegistrarProveedorComponent,
     ListarProveedoresComponent,
     ActivoPipe,
-    PaginaPrincipalProveedoresComponent
+    PaginaPrincipalProveedoresComponent,
+    GenerarPedidoProveedorComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { PaginaPrincipalProveedoresComponent } from './pages/pagina-principal-pr
   exports: [
     RegistrarProveedorComponent,
     ListarProveedoresComponent,
-    PaginaPrincipalProveedoresComponent
+    PaginaPrincipalProveedoresComponent,
+    GenerarPedidoProveedorComponent
   ]
 })
 export class ProveedoresModule { }

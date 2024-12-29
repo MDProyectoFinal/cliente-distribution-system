@@ -4,6 +4,8 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { GLOBAL } from 'src/app/config/global';
 import { IProveedor } from '../interfaces/proveedor.interface';
 import { UsuarioService } from 'src/app/usuarios/services/usuario.service';
+import { Producto } from "src/app/productos/interfaces/producto";
+import { IGenerarReporte } from '../interfaces/generar-reporte.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +100,36 @@ export class ProveedorService {
     );
   }
 
+  generarReporte( provedorSelec: IProveedor, listProdSelec: Producto[] ) {
 
+    const body: IGenerarReporte = {
+      proveedor: provedorSelec,
+      productos: listProdSelec,
+    };
 
+    console.log('Proveedor:', body.proveedor);
+    console.log('Productos:', body.productos);
+
+    // Como usamos Js en el servidor tambien, definimos asi el Content-Type
+    let headers = new HttpHeaders({
+        'Content-Type':'application/json',
+        'authorization': JSON.parse(this._usuarioServices.getToken())
+    });
+
+    this._httpClient.post(this.url + 'generarReporte', body,
+      {
+        headers: headers,
+        responseType: 'blob'
+      }
+    ).subscribe({
+      next: (res) => {
+        const blob = new Blob([res], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      error: (error) => {
+        console.error('Error al generar el reporte', error); // Manejo de error para el usuario
+      }
+    });
+  }
 }

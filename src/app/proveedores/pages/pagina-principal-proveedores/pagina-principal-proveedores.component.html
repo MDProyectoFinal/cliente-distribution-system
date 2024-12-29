@@ -14,12 +14,20 @@
             <i class="fa fa-user-plus me-2"></i> Registrar Proveedor
           </a>
         </div>
-        <div class="col-12">
+        <div class="col-12 mb-3">
           <a
             [routerLink]="['/admin/proveedores/obtenerProveedores']"
             class="btn btn-secondary btn-lg w-100 d-flex align-items-center justify-content-center"
             role="button">
             <i class="fa fa-list me-2"></i> Listar Proveedores
+          </a>
+        </div>
+        <div class="col-12">
+          <a
+            [routerLink]="['/admin/proveedores/generarPedidoProveedor']"
+            class="btn btn-info btn-lg w-100 d-flex align-items-center justify-content-center"
+            role="button">
+            <i class="fa fa-plus-circle me-2"></i> Generar Pedido Proveedor
           </a>
         </div>
       </div>
