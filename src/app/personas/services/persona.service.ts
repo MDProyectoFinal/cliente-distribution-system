@@ -61,7 +61,9 @@ export class PersonaService {
     formData.append('nombre', personaEdicion.nombre);
     formData.append('apellido', personaEdicion.apellido);
     formData.append('direccion', personaEdicion.direccion);
-    formData.append('telefono', personaEdicion.telefono);
+    formData.append('latitud', personaEdicion.latitud);
+    formData.append('longitud', personaEdicion.longitud);
+        formData.append('telefono', personaEdicion.telefono);
 
     // OPCION 2 - VER!
     // for (var key in personaEdicion) {
