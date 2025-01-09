@@ -35,6 +35,7 @@ export class EditarProductoComponent implements OnInit {
       nombre: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
       imagen: new FormControl(''),
+      destacado: new FormControl(false),
       precio_unitario: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+(.[0-9]+)?$')]),
       stock: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
       tipoProducto: new FormControl('', [Validators.required]),
@@ -56,7 +57,8 @@ export class EditarProductoComponent implements OnInit {
           this.productoForm.patchValue(data);
         },
 
-        error: (e) => {},
+        error: (e) => {console.log("ERR RECUPERAR");
+        },
       });
     }
   }
@@ -94,7 +96,9 @@ export class EditarProductoComponent implements OnInit {
         },
       });
     } else {
-      this.servicioProducto.editarProducto(this.productoForm.value, this.imagenSubir).subscribe({
+      console.log(this.productoForm.value);
+
+      this.servicioProducto.editarProducto(this.id, this.productoForm.value, this.imagenSubir).subscribe({
         complete: () => alert('Producto modificado exitosamente.'),
         error: (e) => {
           if (e.status == 400) {
