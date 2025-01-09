@@ -22,6 +22,12 @@
       </div>
 
       <div class="campo">
+        <label>Destacado:</label>
+        <input formControlName="destacado" type="checkbox" class="mx-2" />
+
+      </div>
+
+      <div class="campo">
         <label>Stock:</label>
         <input formControlName="stock" type="text" class="form-control" />
         <div *ngIf="productoForm.get('stock')?.invalid && (productoForm.get('stock')?.dirty || productoForm.get('stock')?.touched)" class="alert alert-danger">Stock es requerido y debe ser un número entero</div>
@@ -68,7 +74,7 @@
 
   <app-modal-cancelar-confirmar #modal [title]="'EDIT'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
 
-  <app-editar-promocion #editarPromocion [promocion]="producto?.promocionActiva" [precioProducto]="producto?.precio_unitario" />
+  <app-editar-promocion *ngIf="producto?.promocionActiva" #editarPromocion [promocion]="producto?.promocionActiva" [precioProducto]="producto?.precio_unitario" />
 
   </app-modal-cancelar-confirmar>
 
