@@ -1,1 +1,16 @@
 @import "/src/app/app.component.scss";
+
+
+.titulo-bienvenido {
+  font-size: 2rem; /* Tamaño de texto para resaltar el mensaje */
+  color: bn $color-primary;; /* Un tono verde agradable para transmitir positividad */
+  font-weight: bold; /* Resalta el texto */
+  text-align: center; /* Centra el texto horizontalmente */
+  margin-top: 2rem; /* Espaciado superior */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil para dar profundidad */
+  background: linear-gradient(to right, #e3ffe7, #d9e7ff); /* Fondo degradado */
+  padding: 1rem; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra de la caja para efecto elegante */
+}
+
