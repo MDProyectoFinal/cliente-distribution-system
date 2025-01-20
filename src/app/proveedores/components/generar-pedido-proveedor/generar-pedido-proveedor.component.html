@@ -1,0 +1,50 @@
+<div class="container">
+  <h2 class="text-center mb-4">Generar Pedido a Proveedor</h2>
+
+  <!-- Seleccionar Proveedor -->
+  <div class="form-group mb-3">
+    <label for="proveedorSelect" class="form-label"><strong>Proveedor:</strong></label>
+    <select id="proveedorSelect" class="form-select form-control" [(ngModel)]="proveedorSeleccionado">
+      <option value="" disabled selected>Seleccione un proveedor</option>
+      <option *ngFor="let proveedor of listaProveedores" [ngValue]="proveedor">
+        {{ proveedor.razon_social }}
+      </option>
+    </select>
+  </div>
+
+
+  <!-- Lista de Productos -->
+  <div class="mb-3">
+    <h4>Productos Disponibles</h4>
+    <ul class="list-group">
+      <li
+        *ngFor="let producto of listaProductos"
+        class="list-group-item d-flex justify-content-between align-items-center">
+        {{ producto.nombre }} - {{ producto.descripcion }} - {{ producto.precio_unitario | currency:'ARS' }}
+        <button class="btn btn-success btn-sm" (click)="agregarProducto(producto)">
+          Añadir
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Productos Seleccionados -->
+  <div class="mb-3">
+    <h4>Productos Seleccionados</h4>
+    <ul class="list-group">
+      <li
+        *ngFor="let producto of listaProductosSeleccionados"
+        class="list-group-item d-flex justify-content-between align-items-center">
+        {{ producto.nombre }} - {{ producto.descripcion }} - {{ producto.precio_unitario | currency:'ARS' }}
+        <button class="btn btn-danger btn-sm" (click)="eliminarProducto(producto)">
+          Quitar
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Botón Generar Reporte -->
+  <button class="btn btn-primary w-100 mt-3" (click)="generarReporte()">
+    Generar Ticket
+  </button>
+</div>

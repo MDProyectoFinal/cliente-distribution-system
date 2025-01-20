@@ -1,0 +1,49 @@
+.payment-failure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8d7da;
+  text-align: center;
+
+  .icon-container {
+    background-color: #f5c6cb;
+    border-radius: 50%;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    i {
+      font-size: 4rem;
+      color: #dc3545; // Rojo para indicar error
+    }
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: #721c24; // Rojo oscuro para el título
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #721c24;
+    margin-bottom: 30px;
+  }
+
+  .retry-button {
+    background-color: #dc3545; // Rojo para botón
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #c82333; // Rojo más oscuro al pasar el mouse
+    }
+  }
+}

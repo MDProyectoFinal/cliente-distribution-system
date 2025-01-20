@@ -1,0 +1,36 @@
+<div class="container mt-5 d-flex justify-content-center align-items-center">
+  <div class="card shadow-lg p-4" style="max-width: 500px; width: 100%;">
+    <div class="card-body text-center">
+      <h2 class="card-title mb-4">Gestión de Proveedores</h2>
+      <p class="card-text text-muted mb-4">
+        Seleccione una opción para gestionar proveedores en el sistema.
+      </p>
+      <div class="row">
+        <div class="col-12 mb-3">
+          <a
+            [routerLink]="['/admin/proveedores/registrarProveedores']"
+            class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center"
+            role="button">
+            <i class="fa fa-user-plus me-2"></i> Registrar Proveedor
+          </a>
+        </div>
+        <div class="col-12 mb-3">
+          <a
+            [routerLink]="['/admin/proveedores/obtenerProveedores']"
+            class="btn btn-secondary btn-lg w-100 d-flex align-items-center justify-content-center"
+            role="button">
+            <i class="fa fa-list me-2"></i> Listar Proveedores
+          </a>
+        </div>
+        <div class="col-12">
+          <a
+            [routerLink]="['/admin/proveedores/generarPedidoProveedor']"
+            class="btn btn-info btn-lg w-100 d-flex align-items-center justify-content-center"
+            role="button">
+            <i class="fa fa-plus-circle me-2"></i> Generar Pedido Proveedor
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

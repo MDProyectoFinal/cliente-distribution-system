@@ -6,6 +6,8 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { PaginadorComponent } from './components/paginador/paginador.component';
 import { ModalCancelarConfirmarComponent } from './components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
+import { NoAutorizadoComponent } from './components/no-autorizado/no-autorizado.component';
+import { MapaGeocodingComponent } from './components/mapa-geocoding/mapa-geocoding.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { ModalCancelarConfirmarComponent } from './components/modal-cancelar-con
     BuscadorComponent,
     LoadingSpinnerComponent,
     PaginadorComponent,
-    ModalCancelarConfirmarComponent
+    ModalCancelarConfirmarComponent,
+    NoAutorizadoComponent,
+    MapaGeocodingComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +28,9 @@ import { ModalCancelarConfirmarComponent } from './components/modal-cancelar-con
     BuscadorComponent,
     LoadingSpinnerComponent,
     PaginadorComponent,
-    ModalCancelarConfirmarComponent
+    ModalCancelarConfirmarComponent,
+    NoAutorizadoComponent,
+    MapaGeocodingComponent
   ]
 })
 export class SharedModule { }

@@ -18,6 +18,8 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { PromocionesModule } from './promociones/promociones.module';
 import { registerLocaleData } from '@angular/common';
+import { PagosModule } from './pagos/pagos.module';
+import { ProveedoresModule } from './proveedores/proveedores.module';
 
 registerLocaleData(localeEsAR, 'es-Ar');
 
@@ -40,7 +42,9 @@ registerLocaleData(localeEsAR, 'es-Ar');
     SharedModule,
     UsuariosModule,
     PromocionesModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    PagosModule,
+    ProveedoresModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-AR' }

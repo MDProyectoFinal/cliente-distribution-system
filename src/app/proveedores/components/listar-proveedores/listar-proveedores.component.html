@@ -1,0 +1,93 @@
+<h3>{{ titulo }}</h3>
+
+<!-- LOADING -->
+<shared-loading-spinner *ngIf="isLoading" textoCarga="Buscando proveedores.."></shared-loading-spinner>
+
+<!-- BUSCADOR -->
+<shared-buscador
+    placeholder="Ingrese la razón social del proveedor.."
+    (onValue)="buscarPorRazonSocialProveedor($event)"
+    ></shared-buscador>
+
+<div *ngIf="listaProveedores.length === 0" class="alert alert-warning text-centes">
+  No hay preoveedores para mostrar
+</div>
+
+<div *ngIf="listaProveedores.length > 0">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Razón Social</th>
+          <th>Cuit</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Email</th>
+          <th>Estado</th>
+          <th>Nota Adicional</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let proveedor of listaProveedores; let i = index" [ngClass]="{'table-danger': !proveedor.activo}">
+          <td>{{ i + 1 }}</td>
+          <td>{{ proveedor.razon_social}}</td>
+          <td>{{ proveedor.cuit }}</td>
+          <td>{{ proveedor.telefono }}</td>
+          <td>{{ proveedor.direccion }}</td>
+          <td>{{ proveedor.email }}</td>
+          <td>{{ proveedor.activo | activo }}</td>
+          <td>{{ proveedor.nota_adicional }}</td>
+          <td>
+            <div class="d-flex">
+              <button (click)="abrirModal( proveedor._id || '' )" title="Dar de Baja" class="btn btn-info mx-1">
+                <i class="fa fa-edit"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MODAL: Dar de BAJA el proveedor -->
+<app-modal-cancelar-confirmar #modal [title]="'DAR DE BAJA PROVEEDOR'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm( proveedorDetalle?._id || '' )">
+
+
+
+  <div class="row mb-2">
+    <div class="col-12">
+      <p class="text-center font-weight-bold">
+        ¿Ud. está seguro que quiere dar de BAJA el siguiente proveedor?
+      </p>
+    </div>
+  </div>
+
+  <hr>
+  <h5 class="mb-3">Detalles del proveedor</h5>
+  <hr>
+
+  <div class="row mb-3">
+    <div class="col-6">
+      <span><strong>Razón Social:</strong> {{ proveedorDetalle?.razon_social }}</span>
+    </div>
+    <div class="col-6">
+      <span><strong>Teléfono:</strong> {{ proveedorDetalle?.telefono }}</span>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-6">
+      <span><strong>Dirección:</strong> {{ proveedorDetalle?.direccion }}</span>
+    </div>
+    <div class="col-6">
+      <span><strong>Email:</strong> {{ proveedorDetalle?.email }}</span>
+    </div>
+  </div>
+  <hr>
+
+</app-modal-cancelar-confirmar>
+
+<!-- Pie de Página -->
+<shared-footer></shared-footer>
