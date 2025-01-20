@@ -18,7 +18,7 @@
     <label>Valor:</label>
     <input formControlName="valorPromocion" type="number" class="form-control col-lg-4"/>
   </div>
-  <div class="campo">
+  <div class="campo" *ngIf="promocion">
     <label for="precio">Precio promocional:</label>
     <span class="precio col-lg-4" *ngIf="promocion" id="precio">{{ promocion.precio  }}</span>
   </div>
