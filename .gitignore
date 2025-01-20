@@ -58,3 +58,4 @@ testem.log
 /typings
 .angular
 .prettierrc
+.codegpt

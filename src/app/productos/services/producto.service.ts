@@ -74,6 +74,8 @@ export class ProductoService {
   }
 
   recuperarProducto(idProducto: string): Observable<any> {
+    console.log(idProducto);
+
     return this.httpClient.get(this.url + idProducto).pipe(
       map((response: any) => {
         return response;
@@ -86,6 +88,7 @@ export class ProductoService {
     for (var key in producto) {
       formData.append(key, producto[key]);
     }
+
     if (imagenSubir) {
       formData.append('image', imagenSubir, imagenSubir.name);
     }
@@ -96,15 +99,17 @@ export class ProductoService {
     );
   }
 
-  editarProducto(producto: any, imagenSubir: any): Observable<any> {
+  editarProducto(idProducto: string, productoForm: any, imagenSubir: any): Observable<any> {
     const formData = new FormData();
-    for (var key in producto) {
-      formData.append(key, producto[key]);
+    for (var key in productoForm) {
+      formData.append(key, productoForm[key]);
     }
+
     if (imagenSubir) {
       formData.append('image', imagenSubir, imagenSubir.name);
     }
-    return this.httpClient.put(this.url + producto._id, formData).pipe(
+
+    return this.httpClient.put(this.url + idProducto, formData).pipe(
       catchError((err: HttpErrorResponse) => {
         throw err;
       })
