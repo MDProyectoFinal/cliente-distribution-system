@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CarritoPedidoService } from 'src/app/productos/services/carrito-pedido.service';
 import { LineaProducto } from 'src/app/productos/interfaces/lineaProducto';
 import { PedidoService } from '../../services/pedido.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito-pedido',
@@ -11,7 +12,7 @@ import { PedidoService } from '../../services/pedido.service';
 export class CarritoPedidoComponent implements OnInit {
   productos: LineaProducto[];
 
-  constructor(private carritoService: CarritoPedidoService, private pedidoService : PedidoService) {}
+  constructor(private router : Router, private carritoService: CarritoPedidoService, private pedidoService : PedidoService) {}
   ngOnInit(): void {
     this.productos = this.carritoService.getProductos();
   }
@@ -32,15 +33,18 @@ export class CarritoPedidoComponent implements OnInit {
   }
 
   checkout(){
-    this.pedidoService.guardarPedido().subscribe({
-      next: (data) => {
-        this.carritoService.limpiar()
 
-      },
+    this.router.navigateByUrl('/client/pago')
 
-      error: (e) => {console.log(e);
-      },
-    });
+    // this.pedidoService.guardarPedido().subscribe({
+    //   next: (data) => {
+    //     this.carritoService.limpiar()
+
+    //   },
+
+    //   error: (e) => {console.log(e);
+    //   },
+    // });
 
   }
 
