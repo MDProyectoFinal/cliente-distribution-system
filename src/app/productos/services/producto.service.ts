@@ -65,6 +65,14 @@ export class ProductoService {
     );
   }
 
+  recuperarTodos(): Observable<Producto[]> {
+    return this.httpClient.get(this.url).pipe(
+      map( (response: Producto[] | any) => {
+        return response;
+      })
+    )
+  }
+
   recuperarProducto(idProducto: string): Observable<any> {
     console.log(idProducto);
 

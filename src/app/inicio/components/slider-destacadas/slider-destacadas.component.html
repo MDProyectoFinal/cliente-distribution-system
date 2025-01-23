@@ -1,9 +1,9 @@
 <swiper-container class="sliderDestacadas"  init="false">
-    <swiper-slide *ngFor="let image of sliderImages" class="mb-2">
+    <swiper-slide *ngFor="let producto of listaProductos" class="mb-2">
         <div class="d-flex flex-column align-items-center">
-            <img class="imagen" [src]="image">
-            <span class="mt-3 nombreProducto">Lays</span>
-            <span class="mt-2 precioProducto">$1000</span>
+            <img class="imagen" [src]="producto.imagen">
+            <span class="mt-3 nombreProducto">{{ producto.descripcion }}</span>
+            <span class="mt-2 precioProducto">${{ producto.precio_unitario }}</span>
         </div>
     </swiper-slide>
 </swiper-container>

@@ -8,6 +8,7 @@ export class Producto{
         public imagen: string,
         public precio_unitario: number,
         public stock: number,
+        public destacado: boolean,
         public tipoProducto: string,
         public promocionActiva : Promocion
     ){}
