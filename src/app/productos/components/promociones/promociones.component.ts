@@ -27,7 +27,6 @@ export class PromocionesProductoComponent implements OnInit {
     this.servicioPromocion.recuperarTodasPorProducto(this.id).subscribe({
       next: (data) => {
         this.producto = data;
-        console.log(data);
       },
 
       error: (e) => {},
@@ -62,7 +61,6 @@ export class PromocionesProductoComponent implements OnInit {
       this.servicioPromocion.insertarPromocionProducto(this.producto._id, this.promocion).subscribe({
         complete: () => (this.modal.isOpen = false),
         next : (data) => {
-          console.log(data);
           this.producto.promociones.push(data)
         },
         error: (e) => {
