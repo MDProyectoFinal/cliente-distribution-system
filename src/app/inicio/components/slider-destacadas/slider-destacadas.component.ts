@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, Input, Directive } from '@angular/core';
+import { Component, OnInit, signal, Input } from '@angular/core';
 import { switchMap, tap } from 'rxjs';
 import { Producto } from '../../../productos/interfaces/producto';
 import { ProductoService } from 'src/app/productos/services/producto.service';
@@ -16,25 +16,16 @@ export class SliderDestacadasComponent implements OnInit {
 
   @Input() sliderClass: any;
 
-  listaProductos: Producto[];
+  listaProductos: Producto[] = [];
 
   swiperElement = signal<SwiperContainer | null>(null);
   public sliderImages: String[] = [];
-
-  // sliderImages = [
-  //   '../../assets/img/imagen1.jpg',
-  //   '../../assets/img/imagen2.jpg',
-  //   '../../assets/img/imagen3.jpg',
-  //   '../../assets/img/imagen4.jpg',
-  // ];
 
   constructor( private _productosServices: ProductoService ){
 
   }
 
   ngOnInit(): void {
-
-    console.log('.' + this.sliderClass);
 
     const swiperElementConstructor1 = document.querySelector('.' + this.sliderClass);
 
@@ -62,21 +53,28 @@ export class SliderDestacadasComponent implements OnInit {
   }
 
   async cargarImagenesProductos(){
-    debugger;
+
     if( this.listaProductos != null && this.listaProductos.length > 0 ){
-      debugger;
-      this.listaProductos.forEach(producto => {
-        debugger;
-        this.sliderImages.push( producto.imagen );
+
+      this.listaProductos
+        .filter(producto => producto.destacado === true )
+        .forEach(producto => {
+
+          this.sliderImages.push( producto.imagen );
       });
     }
   }
 
   async cargarProductos(){
-    debugger;
+
     this._productosServices.recuperarTodos().pipe(
         tap((productos: Producto[]) => {
-          this.listaProductos = productos; // Asignar productos cargados
+
+          // Solo lo llenamos con los "Productos Destacados"
+          this.listaProductos = productos.filter(
+            producto => producto.destacado === true
+          );
+
         }),
         switchMap(() => {
           // Llama al siguiente método una vez que cargarProductos ha terminado
