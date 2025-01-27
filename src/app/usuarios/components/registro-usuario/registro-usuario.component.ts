@@ -12,6 +12,7 @@ import { Globals } from 'src/app/app.globals';
 @Component({
   selector: 'app-registro-usuario',
   templateUrl: './registro-usuario.component.html',
+  styleUrls: ['./registro-usuario.component.scss'],
   providers: [ Globals ]
 })
 export class RegistroUsuarioComponent {
@@ -36,6 +37,7 @@ export class RegistroUsuarioComponent {
 
     this.authService.registrarUsuario(usuario).subscribe({
       next: (v) => {
+        alert('Usuario creado con éxito. Será redireccionado al login.');
         console.log(v);
       },
       error: (e) => {
@@ -46,6 +48,11 @@ export class RegistroUsuarioComponent {
       },
     });
   }
+
+  volverInicio() {
+    this.router.navigate(['/inicio']);
+  }
+
 }
 
 

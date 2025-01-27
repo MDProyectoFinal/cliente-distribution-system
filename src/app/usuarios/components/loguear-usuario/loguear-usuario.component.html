@@ -6,6 +6,10 @@
       <img src={{logoImage}} alt={{logoImageAlt}} />
       <!-- <img src="./assets/img/logo-rosario-snack.png" alt="rosario-snack"> -->
 
+      <span *ngIf="mensajeErrorLogin" class="alert alert-danger">
+        {{ mensajeErrorLogin }}
+      </span>
+
       <form #loginForm="ngForm" ngNativeValidate (ngSubmit)="onSubmit()" class="col-md-7">
         <p>
           <label>Usuario:</label>
@@ -18,7 +22,7 @@
         <input type="submit" value="Ingresar" class="btn btn-primary w-100 mt-4" required />
       </form>
 
-      <a [routerLink]="['']" class="link-olvido-contraseña mt-4">Olvidó su contraseña?</a>
+      <a [routerLink]="['/olvide-mi-password']" [routerLinkActive]="['actived']" class="link-olvido-contraseña mt-4">Olvidó su contraseña?</a>
 
       <a [routerLink]="['/registro']" class="link-nuevo-cliente mt-4">Nuevo cliente</a>
 

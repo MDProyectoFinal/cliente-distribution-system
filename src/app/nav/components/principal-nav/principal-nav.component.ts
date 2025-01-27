@@ -32,7 +32,7 @@ export class PrincipalNavComponent {
     var token = localStorage.getItem('token') as string;
     this.decodedToken = this.jwtHelper.decodeToken(token);
 
-    this.imagen = this.authService.usuarioActual?.imagen ?? this.authService.decodedToken.imagen;
+    this.imagen = this.cargarImagenUsuario();
     this.nombreUsuario = this.authService.usuarioActual?.nombre_usuario ?? this.authService.decodedToken.nombre_usuario;
 
     this.cantidadCarritoSub = carritoService.cantidadEnCarrito$.subscribe((cantidad) => {
@@ -40,6 +40,18 @@ export class PrincipalNavComponent {
     });
 
     this.cargarCantidadEnCarrito();
+  }
+
+  public cargarImagenUsuario(): string{
+    let imagen = '';
+    imagen = this.authService.usuarioActual?.imagen ?? this.authService.decodedToken.imagen;
+
+    // Si no encontramos una imagen del usuario cargada en BD, forzamos una imagen por defecto, amigable.
+    if(imagen === '' || imagen === 'null' || imagen === null){
+      imagen = 'https://res.cloudinary.com/frlv73/image/upload/v1737894126/pznyvwuw1cpwcwls5j5z.jpg';
+    }
+
+    return imagen;
   }
 
   private cargarCantidadEnCarrito() {

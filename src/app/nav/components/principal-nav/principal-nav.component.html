@@ -59,7 +59,7 @@
               <a [routerLink]="['/admin/productos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Productos</a>
             </li>
             <li class="nav-item">
-              <a [routerLink]="['/listar-usuarios']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Usuarios</a>
+              <a [routerLink]="['/admin/listar-usuarios']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Usuarios</a>
             </li>
             <li class="nav-item">
               <a *ngIf="this.authService.userRol === 'ADMIN'" [routerLink]="['/admin/proveedores']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Proveedores</a>

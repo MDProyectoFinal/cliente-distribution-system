@@ -11,4 +11,6 @@ export interface Usuario {
   fecha_registro?: Date;
   fecha_ultimo_inicio_sesion?: Date;
   gethash: boolean;
+  reseteo_password_token?: string;
+  reseteo_password_expira?: string;
 }
