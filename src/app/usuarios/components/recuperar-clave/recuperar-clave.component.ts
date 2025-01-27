@@ -22,8 +22,6 @@ export class RecuperarClaveComponent implements OnInit {
 
   ngOnInit(): void {
 
-    debugger;
-
     // Obtenemos el token del parámetro de la URL. Ya que está en el link del correo enviado
     this.token = this._route.snapshot.queryParamMap.get('token') || '';
 
