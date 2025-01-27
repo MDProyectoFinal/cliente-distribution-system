@@ -11,7 +11,9 @@ export class Usuario{
        public imagen: string,
        public fecha_registro: Date,
        public fecha_ultimo_inicio_sesion: Date,
-       public gethash: boolean
+       public gethash: boolean,
+       public reseteo_password_token?: string,
+       public reseteo_password_expira?: string
 
     ){}
 }

@@ -41,14 +41,19 @@
       </div>
 
       <div class="col-md-2">
-      <button type="button" class="col-md-2 form-control btn btn-primary btn-mapa" (click)="toggleMapa()"><fa-icon [icon]="mapIcon" class="mr-lg-3"></fa-icon></button>
-    </div>
+        <button type="button" class="col-md-2 form-control btn btn-primary btn-mapa" (click)="toggleMapa()"><fa-icon [icon]="mapIcon" class="mr-lg-3"></fa-icon></button>
+      </div>
     </div>
     <div *ngIf="mostrarMapa" class="mapa-container" >
       <small><strong>Completar correctamente el campo dirección. El pin del mapa será una aproximación a lo ingresado con fines orientativos.</strong></small>
-    <mapa-geocoding class="mapa col-md-12" [latitudInicial]="personaEdicion.latitud" [longitudInicial]="personaEdicion.longitud" (latitudChange)="onLatitudChange($event)" (longitudChange)="onLongitudChange($event)"
+      <mapa-geocoding class="mapa col-md-12" [latitudInicial]="personaEdicion.latitud" [longitudInicial]="personaEdicion.longitud" (latitudChange)="onLatitudChange($event)" (longitudChange)="onLongitudChange($event)"
        > ></mapa-geocoding>
-      </div>
+
+       <span *ngIf="mapaNoValido" class="form-text text-danger">
+        {{ getFieldError("latitud") }}
+       </span>
+
+    </div>
     <div>
 
       <label>Teléfono:</label>

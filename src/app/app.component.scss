@@ -31,6 +31,13 @@ label{
     color: rgb(168, 168, 168);
   }
 
+main {
+  padding-bottom: 70px; /* Añadir espacio para evitar que el contenido quede tapado */
+}
+
+body {
+  padding-bottom: 70px; /* Agrega espacio en la parte inferior del cuerpo */
+}
 
 .page-container {
     height: 100%;
@@ -39,7 +46,7 @@ label{
 
     main {
         height: 100%;
-        padding: 18px 24px;
+        padding: 70px;
     }
 
 }
@@ -91,7 +98,7 @@ label{
 
     main {
         height: 100%;
-        padding: 18px 24px;
+        padding: 70px;
     }
 
 }
@@ -180,7 +187,19 @@ swiper-slide .imagen {
 
 /* NUEVO Diseño */
 
+.hr-separador {
+  border: none;
+  height: 3px; /* Ajusta el grosor de la línea */
+  background-color: #333; /* Ajusta el color de la línea */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
+.error-message{
+  color: red; /* Cambia el color del texto a rojo */
+  font-size: 14px; /* Tamaño de la fuente */
+  font-weight: bold; /* Otras propiedades de estilo opcionales */
+}
 
 .nombreProducto{
     color: $color-primary;

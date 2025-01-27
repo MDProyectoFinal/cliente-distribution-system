@@ -14,6 +14,8 @@ export class LoguearUsuarioComponent {
   formEnviado: boolean = false;
   public titulo: string = 'Identificate';
 
+  mensajeErrorLogin: string|null = null;
+
   constructor(
     private authService: AuthenticationService,
     private router: Router,
@@ -32,8 +34,8 @@ export class LoguearUsuarioComponent {
 
       },
       error: (e) => {
-        alert('Error de identificación');
-        console.log({ estadoUsuario: this.authService.usuarioActual});
+
+        this.mensajeErrorLogin = e.error.message;
         console.log("ERROR AL ACTUALIZAR EL USUARIO");
       },
       complete: () => {

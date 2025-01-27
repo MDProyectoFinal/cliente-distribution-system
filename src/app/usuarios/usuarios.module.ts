@@ -10,13 +10,17 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
 import { InformacionModule } from "../informacion/informacion.module";
 import { SharedModule } from "../shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { OlvideMiPasswordComponent } from './components/olvide-mi-password/olvide-mi-password.component';
+import { RecuperarClaveComponent } from './components/recuperar-clave/recuperar-clave.component';
 
 @NgModule({
   declarations: [
     ListarUsuariosComponent,
     LoguearUsuarioComponent,
     RegistroUsuarioComponent,
-    EditarUsuarioComponent
+    EditarUsuarioComponent,
+    OlvideMiPasswordComponent,
+    RecuperarClaveComponent
   ],
   imports: [
     CommonModule,
