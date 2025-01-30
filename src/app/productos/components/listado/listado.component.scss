@@ -12,11 +12,10 @@
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   min-height: 20vh;
-  flex: 1 1 20%;
   display: flex;
   flex-direction: column;
   flex-basis: calc(24% - 2em);
-  flex: 0 0 calc(24% - 2em);
+  flex: 1 1 calc(24% - 2em);
 }
 
 .imagen {
@@ -44,8 +43,8 @@
 }
 
 .card-text {
-  overflow: auto;
-  overflow-y: scroll;
+  overflow-y: auto;
+  max-height: 10vh;
   color: #666;
   flex-grow: 1; /* Ocupa el espacio disponible */
 }
@@ -81,23 +80,6 @@
   font-size: 1.5em;
 }
 
-.info-promocion {
-  background-color: #f7f7f7;
-  padding: 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 1em;
-}
-
-.mensaje-promocion {
-  font-size: 1em;
-  color: #666;
-}
-
-.fecha-promocion {
-  font-size: 0.8em;
-  color: #999;
-}
 
 .btn-primary{
   width: 100%;
