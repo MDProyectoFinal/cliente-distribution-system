@@ -31,29 +31,6 @@ label{
     color: rgb(168, 168, 168);
   }
 
-main {
-  padding-bottom: 70px; /* Añadir espacio para evitar que el contenido quede tapado */
-}
-
-body {
-  padding-bottom: 70px; /* Agrega espacio en la parte inferior del cuerpo */
-}
-
-.page-container {
-    height: 100%;
-    background-color: #ffffff;
-    color: #000;
-
-    main {
-        height: 100%;
-        padding: 70px;
-    }
-
-}
-
-
-// Variables de colores
-
 $color-primary: #002B53;
 $color-secondary: #483DA7;
 
