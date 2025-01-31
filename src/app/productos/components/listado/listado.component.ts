@@ -12,11 +12,18 @@ import { Producto } from '../../interfaces/producto';
 })
 export class ListadoComponent {
   infoPagina: Pagina<Producto>;
+  productos: Producto[];
   productosFiltrados: Producto[];
+  tipoProductoFiltro: string;
+  precioMaximoFiltro: number;
+  tiposDeProductos: string[] = [];
+
   constructor(private service: ProductoService, private router: Router, private carritoService :CarritoPedidoService ) {}
 
   ngOnInit(): void {
     this.cargarProductos();
+    this.tiposDeProductos = [...new Set(this.productos.map(p => p.tipoProducto))];
+
   }
 
   private cargarProductos() {
@@ -40,6 +47,14 @@ export class ListadoComponent {
     this.carritoService.agregarItem(producto);
 
   }
+
+  aplicarFiltros(): void {
+    this.productosFiltrados = this.productos.filter(p => {
+      const coincideTipo = this.tipoProductoFiltro === '' || p.tipoProducto === this.tipoProductoFiltro;
+      const coincidePrecio = this.precioMaximoFiltro === 0 || p.precio_unitario <= this.precioMaximoFiltro;
+      return coincideTipo && coincidePrecio;
+    })
+  };
 
   getTextoBoton(producto: Producto): string {
     const cantidad = this.carritoService.getCantidadEnCarrito(producto);
