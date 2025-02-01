@@ -20,7 +20,7 @@
       <li
         *ngFor="let producto of listaProductos"
         class="list-group-item d-flex justify-content-between align-items-center">
-        {{ producto.nombre }} - {{ producto.descripcion }} - {{ producto.precio_unitario | currency:'ARS' }}
+         {{ producto.nombre }} - {{ producto.descripcion }}
         <button class="btn btn-success btn-sm" (click)="agregarProducto(producto)">
           Añadir
         </button>
@@ -35,7 +35,7 @@
       <li
         *ngFor="let producto of listaProductosSeleccionados"
         class="list-group-item d-flex justify-content-between align-items-center">
-        {{ producto.nombre }} - {{ producto.descripcion }} - {{ producto.precio_unitario | currency:'ARS' }}
+        {{ producto.nombre }} - {{ producto.descripcion }}
         <button class="btn btn-danger btn-sm" (click)="eliminarProducto(producto)">
           Quitar
         </button>
