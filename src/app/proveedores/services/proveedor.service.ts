@@ -4,8 +4,8 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { GLOBAL } from 'src/app/config/global';
 import { IProveedor } from '../interfaces/proveedor.interface';
 import { UsuarioService } from 'src/app/usuarios/services/usuario.service';
-import { Producto } from "src/app/productos/interfaces/producto";
 import { IGenerarReporte } from '../interfaces/generar-reporte.interface';
+import { IProductoReporte } from '../interfaces/producto-reporte.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -100,11 +100,11 @@ export class ProveedorService {
     );
   }
 
-  generarReporte( provedorSelec: IProveedor, listProdSelec: Producto[] ) {
+  generarReporte( provedorSelec: IProveedor, listProdSelec: IProductoReporte[] ) {
 
     const body: IGenerarReporte = {
       proveedor: provedorSelec,
-      productos: listProdSelec,
+      productos: listProdSelec
     };
 
     console.log('Proveedor:', body.proveedor);

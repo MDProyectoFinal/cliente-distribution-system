@@ -5,6 +5,8 @@ import { ProveedorService } from '../../services/proveedor.service';
 import { ProductoService } from 'src/app/productos/services/producto.service';
 import { Observable } from 'rxjs';
 import { Pagina } from 'src/app/shared/interfaces/Pagina';
+import { IGenerarReporte } from '../../interfaces/generar-reporte.interface';
+import { IProductoReporte } from '../../interfaces/producto-reporte.interface';
 
 @Component({
   selector: 'proveedor-generar-pedido-proveedor',
@@ -23,6 +25,9 @@ export class GenerarPedidoProveedorComponent implements OnInit {
   productosFiltrados: Producto[];
   public listaProductos: Producto[] = [];
   public listaProductosSeleccionados: Producto[] = [];
+  public listaProdcutosSeleccionadosReporte: IProductoReporte[] = [];
+
+  public datosGeneracionReporte: IGenerarReporte | null = null;
 
   public listaProveedores: IProveedor[] = [];
   public proveedorSeleccionado: IProveedor | null = null;
@@ -68,7 +73,27 @@ export class GenerarPedidoProveedorComponent implements OnInit {
       return;
     }
 
-    this._proveedorServices.generarReporte( this.proveedorSeleccionado, this.listaProductosSeleccionados );
+    // #INICIO
+    // Recorremos y agrupamos si hay 2 productos agregado, para setear la cantidad! Uso de "map"
+    const reporteMap = new Map<string, IProductoReporte>();
+
+    this.listaProductosSeleccionados.forEach(producto => {
+      if (reporteMap.has(producto.nombre)) {
+        let prod = reporteMap.get(producto.nombre)!;
+        prod.cantidad = (parseInt(prod.cantidad) + 1).toString();
+      } else {
+        reporteMap.set(producto.nombre, {
+          nombre: producto.nombre,
+          descripcion: producto.descripcion,
+          cantidad: '1'
+        });
+      }
+    });
+
+    this.listaProdcutosSeleccionadosReporte = Array.from(reporteMap.values());
+    // #FIN
+
+    this._proveedorServices.generarReporte( this.proveedorSeleccionado, this.listaProdcutosSeleccionadosReporte );
   }
 
   obtenerProveedores():Observable<IProveedor[]> {
