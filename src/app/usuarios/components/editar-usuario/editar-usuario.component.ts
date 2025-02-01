@@ -26,6 +26,8 @@ export class EditarUsuarioComponent {
   direccion: string = '';
   telefono: string = '';
 
+  mapaNoValido: boolean = false;
+
   mostrarMapa: boolean = false;
   mapIcon = faMap;
   public isLoading: boolean = false;
@@ -99,10 +101,10 @@ export class EditarUsuarioComponent {
 
         var idUsuario = this.authenticationService.usuarioActual?._id ?? this.authenticationService.decodedToken.sub;
 
+
         // Obtenemos la imagen del usuario
         this._usuarioService.obtenerAvatarUsuario(idUsuario).subscribe({
           next: (imagen: any) => {
-            debugger;
             this.urlImagen = imagen;
           },
         });
@@ -137,6 +139,13 @@ export class EditarUsuarioComponent {
     if (this.myForm.invalid) {
       // Si el formulario es inválido, marcar todos los campos como tocados
       this.myForm.markAllAsTouched();
+
+      // Parque por problema con mapa
+      const controlMapa = this.myForm.get('latitud');
+      if( !!controlMapa && controlMapa.touched && controlMapa.invalid){
+        alert('Debe ingresar su dirección en el mapa por favor.');
+      }
+
       return; // Evita que se procese el submit si el formulario es inválido
     }
 
@@ -156,13 +165,12 @@ export class EditarUsuarioComponent {
         this.mensajeError = null;
         setTimeout(() => (this.mensajeExito = null), 6000); // Desaparece después de 3 segundos
 
-
       },
       error: (e) => {
         console.log(e);
         this.mensajeError = 'Error al actualizar los datos personales';
         this.mensajeExito = null;
-        setTimeout(() => (this.mensajeError = null), 3000); // Desaparece después de 3 segundos
+        setTimeout(() => (this.mensajeError = null), 5000); // Desaparece después de 3 segundos
 
         alert('Error al actualizar datos');
       },

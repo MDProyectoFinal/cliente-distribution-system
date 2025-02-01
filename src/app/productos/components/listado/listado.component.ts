@@ -40,4 +40,9 @@ export class ListadoComponent {
     this.carritoService.agregarItem(producto);
 
   }
+
+  getTextoBoton(producto: Producto): string {
+    const cantidad = this.carritoService.getCantidadEnCarrito(producto);
+    return cantidad > 0 ? `Agregar al carrito (${cantidad})` : 'Agregar al carrito';
+  }
 }

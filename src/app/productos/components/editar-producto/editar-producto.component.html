@@ -70,6 +70,8 @@
       <button (click)="back()" type="button" class="btn-cancelar mt-3">Cancelar</button>
       <button class="btn-primary" type="submit">{{isAgregar ? 'Guardar' : 'Editar'}}</button>
     </form>
+
+    <br><br><br>
   </div>
 
   <app-modal-cancelar-confirmar #modal [title]="'EDIT'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
@@ -77,8 +79,6 @@
   <app-editar-promocion *ngIf="producto?.promocionActiva" #editarPromocion [promocion]="producto?.promocionActiva" [precioProducto]="producto?.precio_unitario" />
 
   </app-modal-cancelar-confirmar>
-
-
 
 </div>
 

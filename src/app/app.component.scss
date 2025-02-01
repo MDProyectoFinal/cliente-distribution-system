@@ -31,22 +31,6 @@ label{
     color: rgb(168, 168, 168);
   }
 
-
-.page-container {
-    height: 100%;
-    background-color: #ffffff;
-    color: #000;
-
-    main {
-        height: 100%;
-        padding: 18px 24px;
-    }
-
-}
-
-
-// Variables de colores
-
 $color-primary: #002B53;
 $color-secondary: #483DA7;
 
@@ -91,7 +75,7 @@ label{
 
     main {
         height: 100%;
-        padding: 18px 24px;
+        padding: 70px;
     }
 
 }
@@ -180,7 +164,19 @@ swiper-slide .imagen {
 
 /* NUEVO Diseño */
 
+.hr-separador {
+  border: none;
+  height: 3px; /* Ajusta el grosor de la línea */
+  background-color: #333; /* Ajusta el color de la línea */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
+.error-message{
+  color: red; /* Cambia el color del texto a rojo */
+  font-size: 14px; /* Tamaño de la fuente */
+  font-weight: bold; /* Otras propiedades de estilo opcionales */
+}
 
 .nombreProducto{
     color: $color-primary;

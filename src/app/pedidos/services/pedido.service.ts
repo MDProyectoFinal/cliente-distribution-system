@@ -79,9 +79,6 @@ export class PedidoService {
       'Content-Type': 'application/json',
     });
 
-    console.log(body);
-
-
     return this._http.post(this.url + 'pedidos/', body, { headers: headers }).pipe(
       map((response: any) => {
         return response;

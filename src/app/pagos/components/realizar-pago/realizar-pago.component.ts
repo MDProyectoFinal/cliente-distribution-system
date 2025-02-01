@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PagoService } from '../../services/pago.service';
 import { IPreferencesPago } from '../../interfaces/preferences-pago.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthenticationService } from 'src/app/usuarios/services/authentication.service';
+import { CarritoPedidoService } from 'src/app/productos/services/carrito-pedido.service';
 
 // declare var MercadoPago: any;
 
@@ -11,7 +12,7 @@ import { AuthenticationService } from 'src/app/usuarios/services/authentication.
   templateUrl: './realizar-pago.component.html',
   styleUrls: ['./realizar-pago.component.scss']
 })
-export class RealizarPagoComponent {
+export class RealizarPagoComponent implements OnInit{
 
   public isLoading: boolean = false;
   public procesandoPago: boolean = false; // Sólo para mostrar al apretar "Pagar con MP"
@@ -30,7 +31,7 @@ export class RealizarPagoComponent {
   // TODO: crear archivo "env" o poner en config -> global esa key
   // mercadoPago = new MercadoPago('APP_USR-d79f1964-73cf-4b79-b1f7-7a0453139132'); // PUBLICC-KEY - Credencial de produccion de ambiente de prueba - VENDEDOR
 
-  constructor( private _pagoServices: PagoService, private _authService: AuthenticationService) {
+  constructor( private _pagoServices: PagoService, private _authService: AuthenticationService, private carritoService:CarritoPedidoService) {
 
     // Inicializo todo el Data que llenaremos y enviaremos para el pago
     this.preferenceData = {
@@ -43,51 +44,67 @@ export class RealizarPagoComponent {
     this.decodedToken = this.jwtHelper.decodeToken(token);
     this.nombreUsuario = this._authService.decodedToken.nombre_usuario;
     this.email = this._authService.decodedToken.email;
-
+  }
+  ngOnInit(): void {
     this.llenarPreferencesPago()
-    this.totalPedido = this.obtenerImporteTotal() // VER SI ES NECESARIO. YA QUE EL "Pedido", ya tendrá un subtotal
-
   }
 
   // TODO: Debemos tener el "Pedido Actual" para llenar los "items" con los "Pedidos"
   llenarPreferencesPago() {
 
+
+
     // TODO: debemos llenarlo con el "PEDIDO" actual que se va a pagar. Recorrer los productos y llenando
     this.preferenceData = {
       payer_email: 'test_user_63594283@testuser.com', // Mail del comprador
-      items: [
-        {
-          title: 'Coca Cola 500ml', // IMPORTANTE
-          quantity: 1, // IMPORTANTE: cantidad del producto
-          unit_price: 2500, // IMPORTANTE: Precio por unidad
-          id: "item-ID-1234",
-          currency_id: "ARS", // IMPORTANTE: moneda de pago
-          picture_url: "http://res.cloudinary.com/frlv73/image/upload/v1728732951/y0w5nrbetondycne5jvp.jpg",
-          description: "Botella de vidrio Coca Cola",
-          category_id: "art",
-        },
-        {
-          title: 'Fanta 500ml', // IMPORTANTE
-          quantity: 2, // IMPORTANTE: cantidad del producto
-          unit_price: 2000, // Precio por unidad
-          id: "item-ID-5678",
-          currency_id: "ARS", // IMPORTANTE: moneda de pago
-          picture_url: "http://res.cloudinary.com/frlv73/image/upload/v1728732951/sample_fanta.jpg",
-          description: "Botella de vidrio Fanta",
-          category_id: "art",
-        },
-        {
-          title: 'Sprite 500ml', // IMPORTANTE
-          quantity: 1, // IMPORTANTE: cantidad del producto
-          unit_price: 1500, // Precio por unidad
-          id: "item-ID-9101",
-          currency_id: "ARS", // IMPORTANTE: moneda de pago
-          picture_url: "http://res.cloudinary.com/frlv73/image/upload/v1728732951/sample_sprite.jpg",
-          description: "Botella de vidrio Sprite",
-          category_id: "art",
-        },
-      ],
+      items:[]
+      // items: [
+      //   {
+      //     title: 'Coca Cola 500ml', // IMPORTANTE
+      //     quantity: 1, // IMPORTANTE: cantidad del producto
+      //     unit_price: 2500, // IMPORTANTE: Precio por unidad
+      //     id: "item-ID-1234",
+      //     currency_id: "ARS", // IMPORTANTE: moneda de pago
+      //     picture_url: "http://res.cloudinary.com/frlv73/image/upload/v1728732951/y0w5nrbetondycne5jvp.jpg",
+      //     description: "Botella de vidrio Coca Cola",
+      //     category_id: "art",
+      //   },
+      //   {
+      //     title: 'Fanta 500ml', // IMPORTANTE
+      //     quantity: 2, // IMPORTANTE: cantidad del producto
+      //     unit_price: 2000, // Precio por unidad
+      //     id: "item-ID-5678",
+      //     currency_id: "ARS", // IMPORTANTE: moneda de pago
+      //     picture_url: "http://res.cloudinary.com/frlv73/image/upload/v1728732951/sample_fanta.jpg",
+      //     description: "Botella de vidrio Fanta",
+      //     category_id: "art",
+      //   },
+      //   {
+      //     title: 'Sprite 500ml', // IMPORTANTE
+      //     quantity: 1, // IMPORTANTE: cantidad del producto
+      //     unit_price: 1500, // Precio por unidad
+      //     id: "item-ID-9101",
+      //     currency_id: "ARS", // IMPORTANTE: moneda de pago
+      //     picture_url: "http://res.cloudinary.com/frlv73/image/upload/v1728732951/sample_sprite.jpg",
+      //     description: "Botella de vidrio Sprite",
+      //     category_id: "art",
+      //   },
+      // ],
     }
+
+
+    this.carritoService.getProductos().forEach(element => {
+      this.preferenceData.items.push({
+        title : element.producto.nombre,
+        unit_price:element.producto.precio_unitario,
+        currency_id:'ARS',
+        picture_url:element.producto.imagen,
+        quantity:element.cantidad,
+        id:element.producto._id,
+        category_id:element.producto.tipoProducto,
+        description:element.producto.descripcion
+      })
+    });
   }
 
   // VER!! NO HACE FALTA PORQUE EL PEDIDO TIENE UN "subtotal"
@@ -95,6 +112,7 @@ export class RealizarPagoComponent {
     var subTotalPedido: number = 0;
 
     this.preferenceData.items.forEach(producto => {
+      console.log(producto.quantity);
       subTotalPedido += producto.quantity * producto.unit_price
     });
 

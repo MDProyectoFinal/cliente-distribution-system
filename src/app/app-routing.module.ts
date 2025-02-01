@@ -29,6 +29,8 @@ import { RegistrarProveedorComponent } from './proveedores/components/registrar-
 import { ListarProveedoresComponent } from './proveedores/components/listar-proveedores/listar-proveedores.component';
 import { PaginaPrincipalProveedoresComponent } from './proveedores/pages/pagina-principal-proveedores/pagina-principal-proveedores.component';
 import { GenerarPedidoProveedorComponent } from './proveedores/components/generar-pedido-proveedor/generar-pedido-proveedor.component';
+import { OlvideMiPasswordComponent } from './usuarios/components/olvide-mi-password/olvide-mi-password.component';
+import { RecuperarClaveComponent } from './usuarios/components/recuperar-clave/recuperar-clave.component';
 
 const routes: Routes = [
   {
@@ -40,7 +42,6 @@ const routes: Routes = [
       { path: 'mis-datos', component: EditarUsuarioComponent },
       { path: 'inicio', component: PaginaInicioComponent },
       { path: 'cuenta', component: PaginaInicioComponent },
-      { path: 'listar-usuarios', component: ListarUsuariosComponent },
       {
         path: 'informacion',
         loadChildren: () => import('./informacion/informacion.module').then((m) => m.InformacionModule),
@@ -54,19 +55,18 @@ const routes: Routes = [
         children: [
           { path: 'pedidos', component: ListaPedidosComponent },
           { path: 'productos', component: ListaProductosComponent },
-
-          // VER ESTO!!!
           { path: 'productos/detalle/:id', component: EditarProductoComponent },
           { path: 'productos/:id/promociones', component: PromocionesProductoComponent },
           { path: 'productos/:id/promociones/nueva', component: NuevaPromocionProductoComponent },
           { path: 'promociones/:id', component: EditarPromocionComponent },
           { path: 'productos/nuevo', component: EditarProductoComponent },
-          // VER ESTO!!!
 
           { path: 'proveedores', component: PaginaPrincipalProveedoresComponent },
           { path: 'proveedores/obtenerProveedores', component: ListarProveedoresComponent },
           { path: 'proveedores/registrarProveedores', component: RegistrarProveedorComponent },
           { path: 'proveedores/generarPedidoProveedor', component: GenerarPedidoProveedorComponent },
+
+          { path: 'listar-usuarios', component: ListarUsuariosComponent },
         ]
       },
 
@@ -100,6 +100,8 @@ const routes: Routes = [
     children: [
       { path: 'login', component: LoguearUsuarioComponent },
       { path: 'registro', component: RegistroUsuarioComponent },
+      { path: 'olvide-mi-password', component: OlvideMiPasswordComponent },
+      { path: 'reset-password', component: RecuperarClaveComponent }
     ],
   },
   { path: '**', redirectTo: '/inicio' },
