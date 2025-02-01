@@ -149,8 +149,13 @@ export class EditarUsuarioComponent {
 
         // Mostrar mensaje de éxito
         this.mensajeExito = 'Datos actualizados correctamente';
+        alert('Datos actualizados correctamente.');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazar arriba con animación
+
         this.mensajeError = null;
-        setTimeout(() => (this.mensajeExito = null), 3000); // Desaparece después de 3 segundos
+        setTimeout(() => (this.mensajeExito = null), 6000); // Desaparece después de 3 segundos
+
 
       },
       error: (e) => {
