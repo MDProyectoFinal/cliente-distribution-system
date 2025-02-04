@@ -1,3 +1,8 @@
-<router-outlet></router-outlet>
+<div [@fadeAnimation]="oRouterOutlet.activatedRouteData['animation']">
+  <router-outlet #oRouterOutlet="outlet"></router-outlet>
+  <shared-footer></shared-footer>
+</div>
 
-<shared-footer></shared-footer>
+<!-- <router-outlet></router-outlet> -->
+
+

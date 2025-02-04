@@ -1,6 +1,14 @@
 <div class="container">
   <h2 class="text-center mb-4">Generar Pedido a Proveedor</h2>
 
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/admin/proveedores']">Gestiones de proveedores</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Generar pedido de proveedores</li>
+    </ol>
+  </nav>
+
   <!-- Seleccionar Proveedor -->
   <div class="form-group mb-3">
     <label for="proveedorSelect" class="form-label"><strong>Proveedor:</strong></label>

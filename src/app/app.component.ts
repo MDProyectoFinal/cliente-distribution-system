@@ -8,11 +8,22 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 // import { AuthService } from './services/auth.service';
 import { AuthenticationService } from './usuarios/services/authentication.service';
 
+// Animaciones
+import { animate, style, transition, trigger } from '@angular/animations';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['app.component.scss'],
-  providers: [UsuarioService, PersonaService]
+  providers: [UsuarioService, PersonaService],
+  animations: [
+    trigger('fadeAnimation', [
+      transition('* <=> *', [
+        style({ opacity: 0 }),
+        animate('300ms ease-in-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 
 export class AppComponent implements OnInit{
