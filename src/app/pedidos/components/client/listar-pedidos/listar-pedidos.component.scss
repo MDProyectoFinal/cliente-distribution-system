@@ -9,94 +9,59 @@ hr.lineaSeparacion {
   border-radius: 5px;     /* Redondear las esquinas */
 }
 
-.estado-pendiente {
-  background-color: rgb(226, 226, 109); /* Cambia el color a lo que necesites */
-  color: rgb(0, 0, 0); /* Opcional: Cambia el color del texto para que sea legible */
+.estado {
+  margin-top: 1rem;
+  white-space: nowrap;
   padding: 5px;
   border-radius: 12px;
   text-align: center;
-  display: inline-block; /* Ajusta el tamaño al contenido */
-  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
-}
+  display: inline-block;
+  min-width: 80%;
 
-.estado-autorizacion{
-  background-color: green; /* Cambia el color a lo que necesites */
-  color: white; /* Opcional: Cambia el color del texto para que sea legible */
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block; /* Ajusta el tamaño al contenido */
-  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
-}
+  &.pendiente {
+    background-color: rgb(226, 226, 109);
+    color: rgb(0, 0, 0);
+  }
 
-.estado-preparacion {
-  background-color: rgb(234, 123, 54); /* Cambia el color a lo que necesites */
-  color: black; /* Opcional: Cambia el color del texto para que sea legible */
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block; /* Ajusta el tamaño al contenido */
-  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
-}
+  &.autorizacion {
+    background-color: green;
+    color: white;
+  }
 
-.estado-empaquetado {
-  background-color: rgb(13, 59, 129); /* Cambia el color a lo que necesites */
-  color: white; /* Opcional: Cambia el color del texto para que sea legible */
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block; /* Ajusta el tamaño al contenido */
-  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
-}
+  &.preparacion {
+    background-color: rgb(234, 123, 54);
+    color: black;
+  }
 
-.estado-despacho {
-  background-color: rgb(121, 6, 145); /* Cambia el color a lo que necesites */
-  color: white; /* Opcional: Cambia el color del texto para que sea legible */
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block; /* Ajusta el tamaño al contenido */
-  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
-}
+  &.empaquetado {
+    background-color: rgb(13, 59, 129);
+    color: white;
+  }
 
-.estado-distribucion {
-  background-color: rgb(6, 101, 145); /* Cambia el color a lo que necesites */
-  color: white; /* Opcional: Cambia el color del texto para que sea legible */
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block; /* Ajusta el tamaño al contenido */
-  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
-}
+  &.despacho {
+    background-color: rgb(121, 6, 145);
+    color: white;
+  }
 
-.estado-facturacion {
-  background-color: rgb(89, 105, 72); /* Cambia el color a lo que necesites */
-  color: white; /* Opcional: Cambia el color del texto para que sea legible */
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block; /* Ajusta el tamaño al contenido */
-  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
-}
+  &.distribucion {
+    background-color: rgb(6, 101, 145);
+    color: white;
+  }
 
-.estado-cancelado {
-  background-color: rgb(154, 39, 39); /* Cambia el color a lo que necesites */
-  color: white; /* Opcional: Cambia el color del texto para que sea legible */
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block; /* Ajusta el tamaño al contenido */
-  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
-}
+  &.facturacion {
+    background-color: rgb(89, 105, 72);
+    color: white;
+  }
 
-.estado-completado {
-  background-color: rgb(39, 154, 54); /* Cambia el color a lo que necesites */
-  color: white; /* Opcional: Cambia el color del texto para que sea legible */
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block; /* Ajusta el tamaño al contenido */
-  min-width: 80%; /* Opcional: asegura que no sea demasiado estrecho */
+  &.cancelado {
+    background-color: rgb(154, 39, 39);
+    color: white;
+  }
+
+  &.completado {
+    background-color: rgb(39, 154, 54);
+    color: white;
+  }
 }
 
 
