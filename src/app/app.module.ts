@@ -21,8 +21,6 @@ import { registerLocaleData } from '@angular/common';
 import { PagosModule } from './pagos/pagos.module';
 import { ProveedoresModule } from './proveedores/proveedores.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 registerLocaleData(localeEsAR, 'es-Ar');
 
 @NgModule({
@@ -46,8 +44,7 @@ registerLocaleData(localeEsAR, 'es-Ar');
     PromocionesModule,
     FontAwesomeModule,
     PagosModule,
-    ProveedoresModule,
-    BrowserAnimationsModule
+    ProveedoresModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-AR' }
