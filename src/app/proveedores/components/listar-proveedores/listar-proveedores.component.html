@@ -3,6 +3,14 @@
 <!-- LOADING -->
 <shared-loading-spinner *ngIf="isLoading" textoCarga="Buscando proveedores.."></shared-loading-spinner>
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/admin/proveedores']">Gestiones de proveedores</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Listado de proveedores</li>
+  </ol>
+</nav>
+
 <!-- BUSCADOR -->
 <shared-buscador
     placeholder="Ingrese la razón social del proveedor.."

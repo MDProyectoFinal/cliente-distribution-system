@@ -60,12 +60,10 @@ const routes: Routes = [
           { path: 'productos/:id/promociones/nueva', component: NuevaPromocionProductoComponent },
           { path: 'promociones/:id', component: EditarPromocionComponent },
           { path: 'productos/nuevo', component: EditarProductoComponent },
-
-          { path: 'proveedores', component: PaginaPrincipalProveedoresComponent },
-          { path: 'proveedores/obtenerProveedores', component: ListarProveedoresComponent },
-          { path: 'proveedores/registrarProveedores', component: RegistrarProveedorComponent },
-          { path: 'proveedores/generarPedidoProveedor', component: GenerarPedidoProveedorComponent },
-
+          {
+            path: 'proveedores',
+            loadChildren: () => import('./proveedores/proveedores.module').then((m) => m.ProveedoresModule),
+          },
           { path: 'listar-usuarios', component: ListarUsuariosComponent },
         ]
       },
@@ -86,8 +84,6 @@ const routes: Routes = [
 
       { path: 'productos/listado', component: ListadoComponent },
       { path: 'carrito', component: CarritoPedidoComponent },
-
-
 
       { path: 'enviar-sugerencia', component: PaginaInicioComponent },
       { path: 'cerrar-sesion', component: PaginaInicioComponent },

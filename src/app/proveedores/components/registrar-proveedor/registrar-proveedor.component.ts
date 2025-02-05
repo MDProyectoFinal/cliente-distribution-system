@@ -48,6 +48,7 @@ export class RegistrarProveedorComponent {
 
     this.isLoading = true;
 
+
     // Lógica del envío del guardado del proveedor
     this._proveedorServices.insertarProveedor(this.myForm.value).subscribe({
       next: (data) => {

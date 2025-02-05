@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ActivoPipe } from '../pipes/activo.pipe';
 import { PaginaPrincipalProveedoresComponent } from './pages/pagina-principal-proveedores/pagina-principal-proveedores.component';
 import { GenerarPedidoProveedorComponent } from './components/generar-pedido-proveedor/generar-pedido-proveedor.component';
+import { ProveedoresRoutingModule } from './proveedores-routing.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { GenerarPedidoProveedorComponent } from './components/generar-pedido-pro
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    ProveedoresRoutingModule
   ],
   exports: [
     RegistrarProveedorComponent,

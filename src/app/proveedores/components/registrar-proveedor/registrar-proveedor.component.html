@@ -1,6 +1,14 @@
 <!-- LOADING -->
 <shared-loading-spinner *ngIf="isLoading" textoCarga="Insertando proveedor.."></shared-loading-spinner>
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/admin/proveedores']">Gestiones de proveedores</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Registrar proveedores</li>
+  </ol>
+</nav>
+
 <div class="container">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="form-centered">
     <div class="form-group">
