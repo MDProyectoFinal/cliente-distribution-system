@@ -141,34 +141,35 @@ export class ListaPedidosComponent implements OnInit {
   }
 
   getEstadoClase( estado:string ):string {
-    var claseEstado: string = '';
-    switch( estado ){
-      case 'Pendiente':
-        claseEstado = 'estado-pendiente';
+    var claseEstado: string = 'estado ';
+
+    switch (estado.toUpperCase()) {
+      case 'PENDIENTE':
+        claseEstado += 'pendiente';
         break;
-      case 'En Autorizacion':
-        claseEstado ='estado-autorizacion';
+      case 'EN AUTORIZACION':
+        claseEstado += 'autorizacion';
         break;
-      case 'En Preparacion':
-        claseEstado ='estado-preparacion';
+      case 'EN PREPARACION':
+        claseEstado += 'preparacion';
         break;
-      case 'En Empaquetado':
-        claseEstado ='estado-empaquetado';
+      case 'EN EMPAQUETADO':
+        claseEstado += 'empaquetado';
         break;
-      case 'En Despacho':
-        claseEstado ='estado-despacho';
+      case 'EN DESPACHO':
+        claseEstado += 'despacho';
         break;
-      case 'En Distribucion':
-        claseEstado ='estado-distribucion';
+      case 'EN DISTRIBUCION':
+        claseEstado += 'distribucion';
         break;
-      case 'En Facturacion':
-        claseEstado ='estado-facturacion';
+      case 'EN FACTURACION':
+        claseEstado += 'facturacion';
         break;
-      case 'Completado':
-          claseEstado ='estado-completado';
-          break;
-      case 'Cancelado':
-        claseEstado ='estado-cancelado';
+      case 'COMPLETADO':
+        claseEstado += 'completado';
+        break;
+      case 'CANCELADO':
+        claseEstado += 'cancelado';
         break;
       default:
         claseEstado = '';
