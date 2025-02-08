@@ -25,5 +25,5 @@ export class RegistroUsuario implements IInfoRegistro {
     nombreUsuario: string = '';
     password: string = '';
     email: string = '';
-    rol: string = 'USER';
+    rol: string = 'CLIENT';
 }
