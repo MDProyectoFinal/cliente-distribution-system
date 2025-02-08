@@ -62,6 +62,15 @@ export class AuthenticationService {
     return this.userRol === Roles.Invitado;
   }
 
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+    this.decodedToken = this.decodeToken(token);
+  }
+
+  decodeToken(token: string) {
+    return token ? this.jwtHelper.decodeToken(token) : null;
+  }
+
   login(model: any) {
     model.gethash = true;
     return this.http.post(GLOBAL.url + 'usuarios/loguear-usuario', model)

@@ -48,15 +48,13 @@
               <a [routerLink]="['/inicio']" [routerLinkActive]="['actived']" class="nav-link active" data-toggle="collapse" data-target="#navbarSupportedContent" aria-current="page" >Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Buscar</a>
-            </li>
-            <li class="nav-item">
               <a *ngIf="this.authService.userRol === 'ADMIN'" [routerLink]="['/admin/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
-              <a *ngIf="this.authService.userRol === 'CLIENTE'" [routerLink]="['/client/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
+              <a *ngIf="this.authService.userRol === 'CLIENT'" [routerLink]="['/client/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
             </li>
             <!-- Ejemplo para ocutlar opcion. Aunque lo vamos a hacer por GUARD -> <a *ngIf="this.authService.userRol === 'ADMIN'" -->
             <li class="nav-item">
-              <a [routerLink]="['/admin/productos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Productos</a>
+              <a *ngIf="this.authService.userRol === 'ADMIN'" [routerLink]="['/admin/productos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Productos</a>
+              <a *ngIf="this.authService.userRol === 'CLIENT'" [routerLink]="['/productos/listado']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Productos</a>
             </li>
             <li class="nav-item">
               <a [routerLink]="['/admin/listar-usuarios']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Usuarios</a>
@@ -66,9 +64,6 @@
             </li>
             <li class="nav-item">
               <a [routerLink]="['/informacion/informacion-general']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Información</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent"  href="#">Enviar sugerencias</a>
             </li>
             <li class="nav-item">
               <a [routerLink]="['/mis-datos']" class="d-lg-none d-block nav-link" data-toggle="collapse">Mis Datos</a>
@@ -95,9 +90,6 @@
   <a [routerLink]="['/inicio']" [routerLinkActive]="['actived']" class="col-lg-1">
     <span aria-hidden="true"><i class="fa fa-home"></i> Inicio</span>
   </a>
-  <a href="#" class="col-lg-1">
-    <span aria-hidden="true"><i class="fa fa-search"></i> Buscar</span>
-  </a>
   <a [routerLink]="['/pedidos']" [routerLinkActive]="['actived']" class="col-lg-1">
     <span aria-hidden="true"><i class="fa fa-gear"></i> Pedidos</span>
   </a>
@@ -106,9 +98,6 @@
   </a>
   <a [routerLink]="['/informacion/informacion-general']" [routerLinkActive]="['actived']" class="col-lg-1">
     <span aria-hidden="true"><i class="fa fa-info"></i> Información</span>
-  </a>
-  <a href="#" class="col-lg-1">
-    <span aria-hidden="true"><i class="fa fa-share"></i> Enviar Sugerencia</span>
   </a>
   <a href="#" (click)="cerrarSesion()" class="col-lg-1">
     <span aria-hidden="true"><i class="fa fa-sign-out"></i> Cerrar Sesión</span>
