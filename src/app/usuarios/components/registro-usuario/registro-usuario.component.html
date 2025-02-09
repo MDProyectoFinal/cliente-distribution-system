@@ -27,9 +27,18 @@
           </p>
           <p>
             <label>Dirección:</label>
-            <input type="text" name="direccion" placeholder="Oroño 1550" [(ngModel)]="registro.direccion" class="form-control" required>
-
+            <input type="text" name="direccion" placeholder="Oroño 1550" [(ngModel)]="registro.direccion" class="form-control" required >
+            <button type="button" class="mt-1 form-control btn btn-primary btn-mapa mr-lg-3" (click)="toggleMapa()"><b>Indicar posición en mapa</b></button>
           </p>
+
+          <div *ngIf="mostrarMapa" class="mapa-container" >
+            <small><strong>Completar correctamente el campo dirección. El pin del mapa será una aproximación a lo ingresado con fines orientativos.</strong></small>
+            <mapa-geocoding class="mapa col-md-12" [latitudInicial]="registro.latitud" [longitudInicial]="registro.longitud"
+            (latitudChange)="onLatitudChange($event)" (longitudChange)="onLongitudChange($event)"></mapa-geocoding>
+          </div>
+
+
+
           <p>
             <label>Teléfono:</label>
             <input type="text"  name="telefono" placeholder="3415554000" [(ngModel)]="registro.telefono" class="form-control" required>
@@ -49,9 +58,9 @@
             <input type="text"  name="email" placeholder="mail@ejemplo.com.ar" [(ngModel)]="registro.email" class="form-control" required>
 
           </p>
-          <input type="submit" value="Registrarse" class="btn btn-primary w-100 mt-4" required>
+          <input type="submit" value="Registrarse" class="btn btn-primary w-100 mt-4 font-weight-bold" required>
           <button class="btn btn-info w-100 mt-2" (click)="volverInicio()">
-            <i class="fa fa-arrow-left"></i> Volver al inicio
+            <i class="fa fa-arrow-left"></i> <b> Volver al inicio</b>
           </button>
         </form>
     </div>
