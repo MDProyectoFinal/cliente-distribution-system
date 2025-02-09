@@ -111,6 +111,9 @@ export class EditarUsuarioComponent {
           },
         });
 
+        console.log(this.personaEdicion);
+
+
         // NUEVO LLENADO DE VARIABLES - Actualiza el formulario con los valores iniciales
         this.myForm.patchValue({
           id: this.personaEdicion.id, // Ver si es necesario
