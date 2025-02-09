@@ -28,6 +28,11 @@ export class CarritoPedidoService {
     this.cantidadEnCarrito.next(cantidad);
   }
 
+  getCantidadEnCarrito(producto: Producto): number {
+    const lineaProducto = Array.from(this.productos).find((lp) => lp.producto._id === producto._id);
+    return lineaProducto ? lineaProducto.cantidad : 0;
+  }
+
   agregarItem(producto: Producto) {
     const lineaProductoExistente = Array.from(this.productos).find((lp) => lp.producto._id === producto._id);
 

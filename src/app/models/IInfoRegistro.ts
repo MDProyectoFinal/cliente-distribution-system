@@ -27,5 +27,5 @@ export class RegistroUsuario implements IInfoRegistro {
     email: string = '';
     latitud: number = -32.95;
     longitud:number = -60.65;
-    rol: string = 'USER';
+    rol: string = 'CLIENT';
 }

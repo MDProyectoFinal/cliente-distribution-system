@@ -8,16 +8,17 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 // import { AuthService } from './services/auth.service';
 import { AuthenticationService } from './usuarios/services/authentication.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['app.component.scss'],
-  providers: [UsuarioService, PersonaService]
+  providers: [UsuarioService, PersonaService],
 })
 
 export class AppComponent implements OnInit{
   jwtHelper: JwtHelperService = new JwtHelperService();
-
+  title: string = '';
 
   constructor(private authenticationService: AuthenticationService ){}
 

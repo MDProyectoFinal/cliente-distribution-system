@@ -62,9 +62,13 @@ export class RealizarPagoComponent implements OnInit{
 
 
     this.carritoService.getProductos().forEach(element => {
+
+      const producto = element.producto;
+      const precioFinal = producto.promocionActiva ? producto.promocionActiva.precio : producto.precio_unitario;
+
       this.preferenceData.items.push({
         title : element.producto.nombre,
-        unit_price:element.producto.precio_unitario,
+        unit_price: precioFinal,
         currency_id:'ARS',
         picture_url:element.producto.imagen,
         quantity:element.cantidad,

@@ -1,5 +1,12 @@
 <h3>{{ titulo }}</h3>
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Listado de usuarios</li>
+  </ol>
+</nav>
+
 <!-- LOADING -->
 <shared-loading-spinner *ngIf="isLoading" textoCarga="Buscando usuarios.."></shared-loading-spinner>
 

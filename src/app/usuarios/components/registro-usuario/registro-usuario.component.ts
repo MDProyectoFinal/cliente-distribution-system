@@ -45,7 +45,7 @@ export class RegistroUsuarioComponent {
         console.log(v);
       },
       error: (e) => {
-        alert('Error de identificación');
+        alert(e.error?.mensaje);
       },
       complete: () => {
         setTimeout(() => this.router.navigateByUrl('/login'), 2000);
