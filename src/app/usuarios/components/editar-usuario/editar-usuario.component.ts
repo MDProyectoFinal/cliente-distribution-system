@@ -6,6 +6,8 @@ import { PersonaService } from 'src/app/personas/services/persona.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { faMap } from '@fortawesome/free-solid-svg-icons';
 
+import { ChangeDetectorRef } from '@angular/core';
+
 const formVacio = {
   id: '',
   nombre: '',
@@ -53,7 +55,7 @@ export class EditarUsuarioComponent {
     longitud: ['', [Validators.required]],
   });
 
-  constructor(private _personaService: PersonaService, private authenticationService: AuthenticationService, private _usuarioService: UsuarioService, private _fb: FormBuilder) {
+  constructor(private _personaService: PersonaService, private authenticationService: AuthenticationService, private _usuarioService: UsuarioService, private _fb: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.titulo = 'Actualizar mis datos';
   }
 
@@ -109,6 +111,9 @@ export class EditarUsuarioComponent {
           },
         });
 
+        console.log(this.personaEdicion);
+
+
         // NUEVO LLENADO DE VARIABLES - Actualiza el formulario con los valores iniciales
         this.myForm.patchValue({
           id: this.personaEdicion.id, // Ver si es necesario
@@ -156,10 +161,23 @@ export class EditarUsuarioComponent {
       next: (data) => {
         this.isLoading = false;
 
+        // Actualizamos el token para que se reflejen los datos cambiados el usuario
+        const infoActualizacion = data;
+
+        // Guardamos el token
+        this.authenticationService.setToken(infoActualizacion.token);
+
+        // Forzar detección de cambios de los datos del usuario actualizado
+        this.cdRef.detectChanges();
+
         // Mostrar mensaje de éxito
         this.mensajeExito = 'Datos actualizados correctamente';
+        alert('Datos actualizados correctamente.');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazar arriba con animación
+
         this.mensajeError = null;
-        setTimeout(() => (this.mensajeExito = null), 5000); // Desaparece después de 3 segundos
+        setTimeout(() => (this.mensajeExito = null), 6000); // Desaparece después de 3 segundos
 
       },
       error: (e) => {

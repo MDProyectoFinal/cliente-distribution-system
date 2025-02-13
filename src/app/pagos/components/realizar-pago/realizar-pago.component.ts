@@ -56,47 +56,19 @@ export class RealizarPagoComponent implements OnInit{
 
     // TODO: debemos llenarlo con el "PEDIDO" actual que se va a pagar. Recorrer los productos y llenando
     this.preferenceData = {
-      payer_email: 'test_user_63594283@testuser.com', // Mail del comprador
+      payer_email: this.email, // Mail del comprador
       items:[]
-      // items: [
-      //   {
-      //     title: 'Coca Cola 500ml', // IMPORTANTE
-      //     quantity: 1, // IMPORTANTE: cantidad del producto
-      //     unit_price: 2500, // IMPORTANTE: Precio por unidad
-      //     id: "item-ID-1234",
-      //     currency_id: "ARS", // IMPORTANTE: moneda de pago
-      //     picture_url: "http://res.cloudinary.com/frlv73/image/upload/v1728732951/y0w5nrbetondycne5jvp.jpg",
-      //     description: "Botella de vidrio Coca Cola",
-      //     category_id: "art",
-      //   },
-      //   {
-      //     title: 'Fanta 500ml', // IMPORTANTE
-      //     quantity: 2, // IMPORTANTE: cantidad del producto
-      //     unit_price: 2000, // Precio por unidad
-      //     id: "item-ID-5678",
-      //     currency_id: "ARS", // IMPORTANTE: moneda de pago
-      //     picture_url: "http://res.cloudinary.com/frlv73/image/upload/v1728732951/sample_fanta.jpg",
-      //     description: "Botella de vidrio Fanta",
-      //     category_id: "art",
-      //   },
-      //   {
-      //     title: 'Sprite 500ml', // IMPORTANTE
-      //     quantity: 1, // IMPORTANTE: cantidad del producto
-      //     unit_price: 1500, // Precio por unidad
-      //     id: "item-ID-9101",
-      //     currency_id: "ARS", // IMPORTANTE: moneda de pago
-      //     picture_url: "http://res.cloudinary.com/frlv73/image/upload/v1728732951/sample_sprite.jpg",
-      //     description: "Botella de vidrio Sprite",
-      //     category_id: "art",
-      //   },
-      // ],
     }
 
 
     this.carritoService.getProductos().forEach(element => {
+
+      const producto = element.producto;
+      const precioFinal = producto.promocionActiva ? producto.promocionActiva.precio : producto.precio_unitario;
+
       this.preferenceData.items.push({
         title : element.producto.nombre,
-        unit_price:element.producto.precio_unitario,
+        unit_price: precioFinal,
         currency_id:'ARS',
         picture_url:element.producto.imagen,
         quantity:element.cantidad,

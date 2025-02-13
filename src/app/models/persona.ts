@@ -6,5 +6,7 @@ export class Persona{
         public fecha_nacimiento: string,
         public direccion: string,
         public telefono: string,
+        public latitud: number,
+        public longitud: number
     ){}
-} 
+}

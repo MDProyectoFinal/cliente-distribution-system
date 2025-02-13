@@ -65,8 +65,8 @@
           <tbody>
             <tr *ngFor="let pedido of pedidos">
               <td>{{ pedido.idPedido }}</td>
-              <td [ngClass]="getEstadoClase(pedido.estado)" style="white-space: nowrap;">
-                {{ pedido.estado }}
+              <td [ngClass]="getEstadoClase(pedido.estado)" class="estado">
+                {{ pedido.estado.toUpperCase() }}
               </td>
               <td>{{ pedido.fechaAlta | date:'dd/MM/yyyy HH:mm:ss' }}</td>
               <td>{{ pedido.subtotal | currency:'ARS':'symbol':'1.2-2' }}</td>
