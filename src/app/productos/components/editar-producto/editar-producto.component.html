@@ -62,7 +62,7 @@
       </div>
 
       <ng-template #btnNuevaPromocion>
-        <div>
+        <div *ngIf="!isAgregar">
           <a class="btn-primary px-2 py-1" [routerLink]="['/admin/productos', producto._id, 'promociones']" routerLinkActive="router-link-active">Nueva Promoción</a>
         </div>
       </ng-template>
