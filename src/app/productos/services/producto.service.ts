@@ -101,9 +101,11 @@ export class ProductoService {
   }
 
 
-  filtrarProductos(tipoProducto:string): Observable<Pagina<Producto>> {
+  filtrarProductos(tipoProducto:string, precioMinimo:number, precioMaximo:number): Observable<Pagina<Producto>> {
     let params = new HttpParams()
     params= params.set('tipo', tipoProducto)
+    params= params.set('precioMinimo', precioMinimo)
+    params= params.set('precioMaximo', precioMaximo)
     return this.httpClient
       .get(this.url, {
         observe: 'response',

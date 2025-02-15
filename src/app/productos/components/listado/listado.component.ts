@@ -62,8 +62,10 @@ export class ListadoComponent {
   }
 
   aplicarFiltros(): void {
-
-    this.service.filtrarProductos(this.formFiltros.value.tipoProductoSeleccionado).subscribe({
+    const min= this.formFiltros.value.precioMinimoFiltro
+    const max =this.formFiltros.value.precioMaximoFiltro
+    const tipo = this.formFiltros.value.tipoProductoSeleccionado
+    this.service.filtrarProductos(tipo, min, max).subscribe({
       next: (data) => {
         this.infoPagina = data;
         this.productosFiltrados = data.elementos
