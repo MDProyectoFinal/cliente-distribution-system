@@ -4,6 +4,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { GLOBAL } from 'src/app/config/global';
 import { Producto } from '../interfaces/producto'
 import { Pagina } from 'src/app/shared/interfaces/Pagina';
+import { TipoProducto } from 'src/app/models/tipoProducto';
 
 @Injectable({
   providedIn: 'root',
@@ -57,9 +58,9 @@ export class ProductoService {
       );
   }
 
-  recuperarTiposProductos(): Observable<any> {
+  recuperarTiposProductos(): Observable<TipoProducto[]> {
     return this.httpClient.get(GLOBAL.url + 'tiposProductos').pipe(
-      map((response: any) => {
+      map((response: TipoProducto[] | any) => {
         return response;
       })
     );
@@ -99,6 +100,29 @@ export class ProductoService {
     );
   }
 
+
+  filtrarProductos(tipoProducto:string, precioMinimo:number, precioMaximo:number): Observable<Pagina<Producto>> {
+    let params = new HttpParams()
+    params= params.set('tipo', tipoProducto)
+    params= params.set('precioMinimo', precioMinimo)
+    params= params.set('precioMaximo', precioMaximo)
+    return this.httpClient
+      .get(this.url, {
+        observe: 'response',
+        params:params
+      },
+      )
+      .pipe(
+        map((response: HttpResponse<any>) => {
+          console.log(response.url);
+
+          const respuesta: Pagina<Producto> = this.crearPagina(response);
+          return respuesta;
+        })
+      );
+  }
+
+
   editarProducto(idProducto: string, productoForm: any, imagenSubir: any): Observable<any> {
     const formData = new FormData();
     for (var key in productoForm) {
@@ -115,6 +139,8 @@ export class ProductoService {
       })
     );
   }
+
+
 
   eliminarProducto(idProducto: string): Observable<any> {
     return this.httpClient.delete(this.url + idProducto).pipe(

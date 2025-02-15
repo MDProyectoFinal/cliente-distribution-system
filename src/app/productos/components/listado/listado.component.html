@@ -1,29 +1,48 @@
 <div *ngIf="productosFiltrados">
-  <div class="container">
+
     <div class="row">
-      <div class="cards-container">
-        <div class="card mb-2 shadow-sm" *ngFor="let prod of productosFiltrados">
-          <img src="{{ prod.imagen }}" alt="{{ prod.nombre }}" class="imagen" />
-          <div class="card-body">
-            <h5 class="card-title" title="{{prod.nombre}}">{{ prod.nombre }}</h5>
-            <p class="card-text">{{ prod.descripcion }}</p>
-            <div class="precios" *ngIf="!prod.promocionActiva; else conPromocion">
-              <span class="precio-unitario">${{ prod.precio_unitario }}</span>
-            </div>
-
-            <ng-template #conPromocion>
-              <div class="precios">
-                <span class="precio-promocion" *ngIf="prod.promocionActiva">${{ prod.promocionActiva.precio }}</span>
-                <span class="precio-unitario tiene-promocion">${{ prod.precio_unitario }}</span>
+      <div class="col-md-2">
+        <h5>Filtros</h5>
+        <form [formGroup]="formFiltros">
+          <div class="form-group">
+            <label>Tipo de producto</label>
+            <select class="form-control" formControlName="tipoProductoSeleccionado">
+              <option value="">Todos</option>
+              <option *ngFor="let tipo of tiposDeProductos" [value]="tipo.descripcion">{{ tipo.descripcion }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Precio</label>
+            <input type="number" class="form-control" min="0" formControlName="precioMinimoFiltro" placeholder="Mínimo">
+            <input type="number" class="form-control my-2" min="productoForm.get('precioMinimoFiltro')" formControlName="precioMaximoFiltro" placeholder="Máximo">
+          </div>
+          <button type="button" class="btn btn-primary" (click)="aplicarFiltros()">Aplicar filtros</button>
+        </form>
+      </div>
+      <div class="col-md-9">
+        <div class="cards-container">
+          <div class="card mb-2 shadow-sm" *ngFor="let prod of productosFiltrados">
+            <img src="{{ prod.imagen }}" alt="{{ prod.nombre }}" class="imagen" />
+            <div class="card-body">
+              <h5 class="card-title" title="{{prod.nombre}}">{{ prod.nombre }}</h5>
+              <p class="card-text">{{ prod.descripcion }}</p>
+              <div class="precios" *ngIf="!prod.promocionActiva; else conPromocion">
+                <span class="precio-unitario">${{ prod.precio_unitario }}</span>
               </div>
-            </ng-template>
 
-            <button type="button" class="btn btn-primary" (click)="agregarItemCarrito(prod)">
-              {{getTextoBoton(prod)}}
-            </button>
+              <ng-template #conPromocion>
+                <div class="precios">
+                  <span class="precio-promocion" *ngIf="prod.promocionActiva">${{ prod.promocionActiva.precio }}</span>
+                  <span class="precio-unitario tiene-promocion">${{ prod.precio_unitario }}</span>
+                </div>
+              </ng-template>
+
+              <button type="button" class="btn btn-primary" (click)="agregarItemCarrito(prod)">
+                {{getTextoBoton(prod)}}
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
