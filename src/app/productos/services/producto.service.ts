@@ -4,6 +4,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { GLOBAL } from 'src/app/config/global';
 import { Producto } from '../interfaces/producto'
 import { Pagina } from 'src/app/shared/interfaces/Pagina';
+import { TipoProducto } from 'src/app/models/tipoProducto';
 
 @Injectable({
   providedIn: 'root',
@@ -57,9 +58,9 @@ export class ProductoService {
       );
   }
 
-  recuperarTiposProductos(): Observable<any> {
+  recuperarTiposProductos(): Observable<TipoProducto[]> {
     return this.httpClient.get(GLOBAL.url + 'tiposProductos').pipe(
-      map((response: any) => {
+      map((response: TipoProducto[] | any) => {
         return response;
       })
     );
