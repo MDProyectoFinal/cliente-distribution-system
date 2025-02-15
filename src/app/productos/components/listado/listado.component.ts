@@ -10,7 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
-  styleUrls: ['./listado.component.scss']
+  styleUrls: ['./listado.component.scss'],
 })
 export class ListadoComponent {
   infoPagina: Pagina<Producto>;
@@ -19,18 +19,16 @@ export class ListadoComponent {
   tiposDeProductos: Array<TipoProducto> = [];
   formFiltros: FormGroup;
 
-  constructor(private service: ProductoService, private router: Router, private carritoService :CarritoPedidoService ) {}
+  constructor(private service: ProductoService, private router: Router, private carritoService: CarritoPedidoService) {}
 
   ngOnInit(): void {
-    this.cargarTiposProductos()
+    this.cargarTiposProductos();
     this.cargarProductos();
     this.formFiltros = new FormGroup({
       tipoProductoSeleccionado: new FormControl(''),
-      precioMaximoFiltro: new FormControl('')
+      precioMaximoFiltro: new FormControl(''),
+      precioMinimoFiltro: new FormControl(''),
     });
-
-
-
   }
 
   private cargarProductos() {
@@ -40,12 +38,10 @@ export class ListadoComponent {
     });
   }
 
-  private cargarTiposProductos(){
+  private cargarTiposProductos() {
     this.service.recuperarTiposProductos().subscribe({
       next: (data) => {
-        this.tiposDeProductos = data
-
-
+        this.tiposDeProductos = data;
       },
 
       error: (e) => {},
@@ -61,21 +57,27 @@ export class ListadoComponent {
     alert('Ocurrió un error cargando los productos');
   }
 
-  agregarItemCarrito(producto : Producto){
-
+  agregarItemCarrito(producto: Producto) {
     this.carritoService.agregarItem(producto);
-
   }
 
   aplicarFiltros(): void {
-    this.productosFiltrados = this.productos.filter(p => {
-      const coincideTipo = this.formFiltros.value.tipoProductoSeleccionado === '' || p.tipoProducto === this.formFiltros.value.tipoProductoSeleccionado;
-      const coincidePrecio = this.formFiltros.value.precioMaximoFiltro === 0 || p.precio_unitario <= this.formFiltros.value.precioMaximoFiltro;
-      return coincideTipo && coincidePrecio;
-    })
 
+    this.service.filtrarProductos(this.formFiltros.value.tipoProductoSeleccionado).subscribe({
+      next: (data) => {
+        this.infoPagina = data;
+        this.productosFiltrados = data.elementos
+      },
 
-  };
+      error: (e) => {},
+    });
+
+    // this.productosFiltrados = this.productos.filter(p => {
+    //   const coincideTipo = this.formFiltros.value.tipoProductoSeleccionado === '' || p.tipoProducto === this.formFiltros.value.tipoProductoSeleccionado;
+    //   const coincidePrecio = this.formFiltros.value.precioMaximoFiltro === 0 || p.precio_unitario <= this.formFiltros.value.precioMaximoFiltro;
+    //   return coincideTipo && coincidePrecio;
+    // })
+  }
 
   getTextoBoton(producto: Producto): string {
     const cantidad = this.carritoService.getCantidadEnCarrito(producto);

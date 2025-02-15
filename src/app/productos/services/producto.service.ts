@@ -100,6 +100,27 @@ export class ProductoService {
     );
   }
 
+
+  filtrarProductos(tipoProducto:string): Observable<Pagina<Producto>> {
+    let params = new HttpParams()
+    params= params.set('tipo', tipoProducto)
+    return this.httpClient
+      .get(this.url, {
+        observe: 'response',
+        params:params
+      },
+      )
+      .pipe(
+        map((response: HttpResponse<any>) => {
+          console.log(response.url);
+
+          const respuesta: Pagina<Producto> = this.crearPagina(response);
+          return respuesta;
+        })
+      );
+  }
+
+
   editarProducto(idProducto: string, productoForm: any, imagenSubir: any): Observable<any> {
     const formData = new FormData();
     for (var key in productoForm) {
@@ -116,6 +137,8 @@ export class ProductoService {
       })
     );
   }
+
+
 
   eliminarProducto(idProducto: string): Observable<any> {
     return this.httpClient.delete(this.url + idProducto).pipe(

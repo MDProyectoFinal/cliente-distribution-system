@@ -8,12 +8,13 @@
             <label>Tipo de producto</label>
             <select class="form-control" formControlName="tipoProductoSeleccionado">
               <option value="">Todos</option>
-              <option *ngFor="let tipo of tiposDeProductos" [value]="tipo._id">{{ tipo.descripcion }}</option>
+              <option *ngFor="let tipo of tiposDeProductos" [value]="tipo.descripcion">{{ tipo.descripcion }}</option>
             </select>
           </div>
           <div class="form-group">
             <label>Precio</label>
-            <input type="number" class="form-control" formControlName="precioMaximoFiltro">
+            <input type="number" class="form-control" min="0" formControlName="precioMinimoFiltro" placeholder="Mínimo">
+            <input type="number" class="form-control my-2" min="productoForm.get('precioMinimoFiltro')" formControlName="precioMaximoFiltro" placeholder="Máximo">
           </div>
           <button type="button" class="btn btn-primary" (click)="aplicarFiltros()">Aplicar filtros</button>
         </form>
