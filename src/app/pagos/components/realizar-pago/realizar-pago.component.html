@@ -1,4 +1,3 @@
-
 <!-- LOADING -->
 <shared-loading-spinner *ngIf="isLoading" textoCarga="Procesando pago.."></shared-loading-spinner>
 
@@ -26,14 +25,10 @@
     <h2>Total: ${{ obtenerImporteTotal() }}</h2>
   </div>
 
-  <div class="payment-button">
-    <button (click)="pay()">Pagar con Mercado Pago</button>
-  </div>
+  <button class="payment-button" (click)="pay()">Pagar con Mercado Pago</button>
 
-  <hr>
-  <div *ngIf="procesandoPago" class="alert alert-info" role="alert">
-    ¡Estás en la etapa final del proceso de Pago!
-  </div>
+  <button class="payment-button guardar mt-4" (click)="save()">Guardar sin pago</button>
 
+  <hr />
+  <div *ngIf="procesandoPago" class="alert alert-info" role="alert">¡Estás en la etapa final del proceso de Pago!</div>
 </div>
-

@@ -9,7 +9,8 @@ export class Pedido {
     public estado: string,
     public cliente: Usuario, // ID del cliente
     public items: ItemPedido[], // Lista de items
-    public subtotal: number // CALCULO: this.subtotal = this.items.reduce((sum, item) => sum + item.total, 0);
+    public subtotal: number, // CALCULO: this.subtotal = this.items.reduce((sum, item) => sum + item.total, 0);
+    public pagado : boolean
   ) {}
 
   // SI NO QUEREMOS TENER LA PROPIEDAD "subtotal" ->

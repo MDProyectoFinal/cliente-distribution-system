@@ -10,6 +10,7 @@ import { Producto } from 'src/app/models/producto';
 import { ModalCancelarConfirmarComponent } from 'src/app/shared/components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
 import { EstadosPedidos } from 'src/app/models/estadosPedidosEnum';
 import { AuthenticationService } from 'src/app/usuarios/services/authentication.service';
+import { PagoService } from 'src/app/pagos/services/pago.service';
 
 const formVacio = {
   idPedido: '',
@@ -78,12 +79,11 @@ export class ListarPedidosComponent implements OnInit {
   })
 
   constructor(
-    // private _route: ActivatedRoute,
-    // private _router: Router,
     private _usuarioServicio: UsuarioService,
     private _pedidoServicio: PedidoService,
     private _fb: FormBuilder,
-    public _authServices: AuthenticationService
+    public _authServices: AuthenticationService,
+    private pagoSerivce : PagoService
   ){
 
     this.titulo = 'Listado de Pedidos';
@@ -181,6 +181,22 @@ export class ListarPedidosComponent implements OnInit {
 
     this.modal.isOpen = true;
     this.verDetallePedido( idPedido );
+  }
+
+  pagarPedido(idPedido:string){
+
+    this.pagoSerivce.pagarPedido(idPedido).subscribe({
+      next: (res: any) => {
+       console.log(res);
+
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error al crear la conectarse con Mercado Pago:', err);
+        this.isLoading = false;
+      },
+    });
+
   }
 
   // Modal de productos del pedido
