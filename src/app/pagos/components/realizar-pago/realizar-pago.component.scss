@@ -1,24 +1,4 @@
-.mercado-pago-button {
-  background-color: #009ee3; /* Color oficial celeste de Mercado Pago */
-  color: #ffffff;           /* Texto blanco */
-  border: none;             /* Sin bordes */
-  border-radius: 8px;       /* Bordes redondeados */
-  padding: 12px 24px;       /* Espaciado interno */
-  font-size: 16px;          /* Tamaño de fuente */
-  font-weight: bold;        /* Fuente en negrita */
-  cursor: pointer;          /* Manito al pasar el mouse */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
-  transition: all 0.3s ease; /* Efecto de transición */
-}
-
-.mercado-pago-button:hover {
-  background-color: #007bbd; /* Oscurece el color al pasar el mouse */
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Aumenta la sombra */
-}
-
-.mercado-pago-button:active {
-  transform: scale(0.98); /* Pequeño efecto de clic */
-}
+@import "/src/app/app.component.scss";
 
 // Pantalla propiamente dicha
 .payment-summary-container {
@@ -90,21 +70,33 @@
     }
   }
 
-  .payment-button {
+
     button {
       width: 100%;
       padding: 15px;
       font-size: 18px;
       color: #fff;
-      background-color: #00a8e1;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
 
-      &:hover {
-        background-color: #007bb8;
+      &.payment-button {
+        background-color: #00a8e1;
+
+        &:hover {
+          background-color: #007bb8;
+        }
       }
-    }
+
+      &.guardar {
+        background-color: $color-primary;
+
+        &:hover {
+          background-color: lighten($color-primary, 5)
+        }
+      }
+
+
   }
 }
