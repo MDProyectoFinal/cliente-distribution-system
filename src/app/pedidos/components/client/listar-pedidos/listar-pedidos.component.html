@@ -2,7 +2,7 @@
 
 <shared-loading-spinner *ngIf="isLoading" textoCarga="Obteniendo pedidos.."></shared-loading-spinner>
 
-<hr>
+<hr />
 <div class="container-fluid">
   <h1>{{ titulo }}</h1>
   <hr />
@@ -40,26 +40,24 @@
     </div>
   </form>
 
-
   <hr />
 
   <!-- MENSAJE SI NO HAY PEDIDOS -->
-  <div *ngIf="pedidos?.length === 0" class="alert alert-warning text-center">
-    No hay pedidos para mostrar
-  </div>
+  <div *ngIf="pedidos?.length === 0" class="alert alert-warning text-center">No hay pedidos para mostrar</div>
 
   <!-- GRILLA DE RESULTADOS -->
   <div class="row">
     <div class="col-12 col-md-8">
       <div class="table-responsive">
-        <table class="table mt-4 " style="width: 100%;" > <!-- tabla-grilla table mt-4  -->
+        <table class="table mt-4" style="width: 100%">
+          <!-- tabla-grilla table mt-4  -->
           <thead>
             <tr>
               <th>ID Pedido</th>
               <th>Estado</th>
               <th>Fecha Alta</th>
               <th>Total</th>
-              <th style="width: 150px;">Acciones</th>
+              <th style="width: 150px">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -68,12 +66,15 @@
               <td [ngClass]="getEstadoClase(pedido.estado)" class="estado">
                 {{ pedido.estado.toUpperCase() }}
               </td>
-              <td>{{ pedido.fechaAlta | date:'dd/MM/yyyy HH:mm:ss' }}</td>
-              <td>{{ pedido.subtotal | currency:'ARS':'symbol':'1.2-2' }}</td>
+              <td>{{ pedido.fechaAlta | date : "dd/MM/yyyy HH:mm:ss" }}</td>
+              <td>{{ pedido.subtotal | currency : "ARS" : "symbol" : "1.2-2" }}</td>
               <td>
                 <div class="d-flex">
                   <button (click)="abrirModal(pedido.idPedido)" title="Ver Detalles" class="btn btn-info mx-1">
                     <i class="fa fa-edit"></i>
+                  </button>
+                  <button *ngIf="!pedido.pagado" (click)="pagarPedido(pedido._id)" title="Ver Detalles" class="btn btn-warning mx-1">
+                    <i class="fa fa-credit-card"></i>
                   </button>
                 </div>
               </td>
@@ -81,13 +82,8 @@
           </tbody>
         </table>
 
-        <hr class="hr-separador">
-        <a
-          [href]="'https://wa.me/' + numero + '?text=' + mensaje"
-          target="_blank"
-          class="whatsapp-link">
-          <i class="fa fa-whatsapp"></i> ¿Deseas cancelar un pedido?
-        </a>
+        <hr class="hr-separador" />
+        <a [href]="'https://wa.me/' + numero + '?text=' + mensaje" target="_blank" class="whatsapp-link"> <i class="fa fa-whatsapp"></i> ¿Deseas cancelar un pedido? </a>
 
         <!-- <span>Si desea <strong>cancelar</strong> un pedido, comuníquese al <strong><i style="color: green;" class="fa fa-whatsapp"></i> +543401414992 </strong></span> -->
       </div>
@@ -95,14 +91,11 @@
   </div>
 </div>
 
-
-
 <!-- <shared-footer></shared-footer> -->
-
 
 <!-- MODAL: Detalle pedido -->
 <app-modal-cancelar-confirmar #modal [title]="'VER DETALLE'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
-  <div class="row" >
+  <div class="row">
     <div class="col-6">
       <!-- <strong>ID Pedido:</strong>  {{ pedido.idPedido }} -->
       <strong>ID Pedido:</strong> {{ pedidoDetalle?.idPedido }}
@@ -122,14 +115,14 @@
         <li class="list-group-item" *ngFor="let producto of pedidoDetalle?.items">
           <div class="producto-detalle">
             <div class="producto-imagen">
-              <img [src]="producto.idProducto.imagen" width="100" height="100" alt="Producto Imagen">
+              <img [src]="producto.idProducto.imagen" width="100" height="100" alt="Producto Imagen" />
             </div>
             <div class="producto-info">
               <strong>{{ producto.idProducto.descripcion }}</strong>
               <ul class="ps-3">
-                <li>Precio: {{ producto.precio | currency:'ARS':'symbol':'1.2-2' }}</li>
+                <li>Precio: {{ producto.precio | currency : "ARS" : "symbol" : "1.2-2" }}</li>
                 <li>Cantidad: {{ producto.cantidad }}</li>
-                <li>Total: {{ producto.total | currency:'ARS':'symbol':'1.2-2' }}</li>
+                <li>Total: {{ producto.total | currency : "ARS" : "symbol" : "1.2-2" }}</li>
               </ul>
             </div>
           </div>
@@ -141,18 +134,11 @@
   <hr />
 
   <div class="row">
-    <div class="col-6">
-      <strong>Estado:</strong> {{ pedidoDetalle?.estado }}
-    </div>
-    <div class="col-6">
-      <strong>Fecha de Alta:</strong> {{ pedidoDetalle?.fechaAlta | date:'shortDate' }}
-    </div>
+    <div class="col-6"><strong>Estado:</strong> {{ pedidoDetalle?.estado }}</div>
+    <div class="col-6"><strong>Fecha de Alta:</strong> {{ pedidoDetalle?.fechaAlta | date : "shortDate" }}</div>
   </div>
 
   <div class="row mt-3">
-    <div class="col-12 text-end">
-      <strong>Total del Pedido:</strong> {{ pedidoDetalle?.subtotal | currency:'ARS':'symbol':'1.2-2' }}
-    </div>
+    <div class="col-12 text-end"><strong>Total del Pedido:</strong> {{ pedidoDetalle?.subtotal | currency : "ARS" : "symbol" : "1.2-2" }}</div>
   </div>
-
 </app-modal-cancelar-confirmar>
