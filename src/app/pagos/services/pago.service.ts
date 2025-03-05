@@ -11,10 +11,14 @@ import { AuthenticationService } from 'src/app/usuarios/services/authentication.
 export class PagoService {
 
 
-  registrarPago(pid: string) {
+  registrarPago(pid: string) : Observable<any> {
 
-    return this._http.post<{}>(this.url + `pagos/pedido/${pid}/pagar`,{}).pipe(
+    return this._http.post<{}>(this.url + `pagos/pedido/${pid}/pagar`,{}, {
+      observe: 'response'
+    }).pipe(
       map((response: any) => {
+        console.log(response);
+        
         if (response.length == 0) return { mensaje: 'No se pudo realizar el pago' };
         return response;
       })
