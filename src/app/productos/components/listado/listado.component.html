@@ -37,7 +37,8 @@
                 </div>
               </ng-template>
 
-              <button type="button" class="btn btn-primary" (click)="agregarItemCarrito(prod)">
+              <p *ngIf="prod.stock <1" class="sin-stock">SIN STOCK</p>
+              <button type="button" class="btn btn-primary" [disabled]="prod.stock <1" (click)="agregarItemCarrito(prod)">
                 {{getTextoBoton(prod)}}
               </button>
             </div>
