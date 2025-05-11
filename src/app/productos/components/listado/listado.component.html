@@ -27,13 +27,13 @@
               <h5 class="card-title" title="{{prod.nombre}}">{{ prod.nombre }}</h5>
               <p class="card-text">{{ prod.descripcion }}</p>
               <div class="precios" *ngIf="!prod.promocionActiva; else conPromocion">
-                <span class="precio-unitario">${{ prod.precio_unitario }}</span>
+                <span class="precio-unitario">{{ prod.precio_unitario | currency : "ARS"   }}</span>
               </div>
 
               <ng-template #conPromocion>
                 <div class="precios">
-                  <span class="precio-promocion" *ngIf="prod.promocionActiva">${{ prod.promocionActiva.precio }}</span>
-                  <span class="precio-unitario tiene-promocion">${{ prod.precio_unitario }}</span>
+                  <span class="precio-promocion" *ngIf="prod.promocionActiva">{{ prod.promocionActiva.precio | currency : "ARS" }}</span>
+                  <span class="precio-unitario tiene-promocion">{{ prod.precio_unitario  | currency : "ARS"  }}</span>
                 </div>
               </ng-template>
 

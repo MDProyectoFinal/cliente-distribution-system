@@ -15,14 +15,14 @@
       <li *ngFor="let item of preferenceData.items">
         <span>{{ item.title }}</span>
         <span>x{{ item.quantity }}</span>
-        <span>${{ item.unit_price * item.quantity }}</span>
+        <span>{{ item.unit_price * item.quantity  |  currency:'ARS' }}</span>
       </li>
     </ul>
   </div>
 
   <div class="total-amount">
     <!-- Deberiamos poner el total del campo subtotal de "Pedidos" -->
-    <h2>Total: ${{ obtenerImporteTotal() }}</h2>
+    <h2>Total: {{ obtenerImporteTotal() |  currency:'ARS'  }}</h2>
   </div>
 
   <button class="payment-button" (click)="pay()">Pagar con Mercado Pago</button>
