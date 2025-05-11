@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { CarritoPedidoComponent } from './components/carrito-pedido/carrito-pedido.component';
 import { ListarPedidosComponent } from './components/client/listar-pedidos/listar-pedidos.component';
 import { CardProductoCarritoComponent } from './components/card-producto-carrito/card-producto-carrito.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { CardProductoCarritoComponent } from './components/card-producto-carrito
     FormsModule,
     SharedModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   exports: [
     EditarPedidoComponent,

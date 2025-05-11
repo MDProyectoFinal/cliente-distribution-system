@@ -14,10 +14,15 @@ export class CarritoPedidoComponent implements OnInit {
 
   constructor(private router : Router, private carritoService: CarritoPedidoService, private pedidoService : PedidoService) {}
   ngOnInit(): void {
-    this.productos = this.carritoService.getProductos();
+    this.getProductosEnCarrito();
+    this.carritoService.cantidadEnCarrito$.subscribe((cantidad =>{
+      this.getProductosEnCarrito();
+    }))
   }
 
-
+  private getProductosEnCarrito() {
+    this.productos = this.carritoService.getProductos();
+  }
 
   calcularTotal(): number {
 

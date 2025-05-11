@@ -1,90 +1,107 @@
+@import "/src/app/app.component.scss";
+
 .card-carrito-container {
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 1rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.imagen {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 150px;
+    max-height: 150px;
   }
+}
 
-  .imagen {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.detalle-producto {
+  width: 40%;
+  padding: 1rem;
+}
 
-    img {
-        min-width: 50px;
-        min-height: 50px;
-        max-width: 150px;
-        max-height: 150px;
-      }
+.nombre-producto {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.descripcion-producto {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.precio-producto {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.producto-con-promocion {
+  display: flex;
+  align-items: center;
+}
+
+.precio-promocion {
+  color: #008000;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.precio-original {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.tachado {
+  text-decoration: line-through;
+}
+
+.botones {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.borrar {
+  display: flex;
+  flex-direction: column;
+
+
+
+  .quitar-producto {
+    font-size: 20px;
+    border: none;
+    color: $color-primary;
+    background-color: transparent;
+    align-self: flex-end;
+    &:hover{
+      cursor: pointer;
+    }
   }
+}
+.form-control {
+  width: 2rem;
+  text-align: center;
+}
 
-  .detalle-producto {
-    width: 40%;
-    padding: 1rem;
-  }
+.subtotal {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .nombre-producto {
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-
-  .descripcion-producto {
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  .precio-producto {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-
-  .producto-con-promocion {
-    display: flex;
-    align-items: center;
-  }
-
-  .precio-promocion {
-    color: #008000;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-
-  .precio-original {
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  .tachado {
-    text-decoration: line-through;
-  }
-
-  .botones {
-    width: 20%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-
-  }
-
-  .form-control {
-    width: 2rem;
-    text-align: center;
-  }
-
-  .subtotal {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .subtotal-valor {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
+.subtotal-valor {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
