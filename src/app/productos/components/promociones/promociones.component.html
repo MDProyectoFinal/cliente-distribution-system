@@ -5,7 +5,7 @@
         <th scope="col">Desde</th>
         <th scope="col">Hasta</th>
         <th scope="col">Precio</th>
-        <th scope="col">Activa</th>
+        <th scope="col">Estado</th>
         <th scope="col"></th>
     </thead>
     <tbody>
@@ -13,7 +13,7 @@
             <td>{{promo.fecha_inicio | date}}</td>
             <td>{{promo.fecha_fin | date}}</td>
             <td>{{promo.precio | currency:'ARS'}}</td>
-            <td>{{promo.activa }}</td>
+            <td>{{promo.activa ? "Activa" : "Inactiva" }}</td>
             <td><a (click)="abrirModal(promo)" title="Editar"><i class="fa fa-edit"></i></a></td>
         </tr>
     </tbody>
