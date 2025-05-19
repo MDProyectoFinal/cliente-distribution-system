@@ -7,6 +7,7 @@ import { LineaProducto } from '../interfaces/lineaProducto';
   providedIn: 'root',
 })
 export class CarritoPedidoService {
+
   private cantidadEnCarrito = new ReplaySubject<number>(0);
   private productos = new Set<LineaProducto>();
   cantidadEnCarrito$ = this.cantidadEnCarrito.asObservable();
@@ -65,6 +66,17 @@ export class CarritoPedidoService {
 
     this.calcularSetearCantidad();
 
+    this.guardarEnStorage();
+  }
+
+  eliminarItem(producto: Producto) {
+    const lineaProductoExistente = Array.from(this.productos).find((lp) => lp.producto._id === producto._id);
+
+    if (lineaProductoExistente) {
+      this.productos.delete(lineaProductoExistente);
+    }
+
+    this.calcularSetearCantidad();
     this.guardarEnStorage();
   }
 

@@ -25,4 +25,7 @@
     <div class="subtotal">
       <span class="subtotal-valor">{{ subtotal | currency:'ARS' }}</span>
     </div>
+    <div class="borrar">
+      <button type="button" class="quitar-producto" title="Quitar del carrito" (click)="eliminarItem()" ><fa-icon  class="fas" [icon]="trash"></fa-icon> </button>
+    </div>
   </div>

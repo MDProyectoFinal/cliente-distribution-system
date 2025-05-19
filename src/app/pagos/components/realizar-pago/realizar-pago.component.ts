@@ -79,7 +79,6 @@ export class RealizarPagoComponent implements OnInit {
     var subTotalPedido: number = 0;
 
     this.preferenceData.items.forEach((producto) => {
-      console.log(producto.quantity);
       subTotalPedido += producto.quantity * producto.unit_price;
     });
 

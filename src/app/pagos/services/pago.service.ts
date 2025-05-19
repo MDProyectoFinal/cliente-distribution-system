@@ -17,8 +17,6 @@ export class PagoService {
       observe: 'response'
     }).pipe(
       map((response: any) => {
-        console.log(response);
-        
         if (response.length == 0) return { mensaje: 'No se pudo realizar el pago' };
         return response;
       })
@@ -36,7 +34,6 @@ export class PagoService {
         if (response.length == 0) return { mensaje: 'No se pudo realizar el pago' };
 
         // TODO 1: En esta etapa podemos poner ya el estado del pedido como "pendiente"
-
         // TODO 2: VER CUAL USAR!! Para mi misma pestaña total vuelve con el back url
         // Redirigir al usuario al checkout de Mercado Pago
         //window.open(response.data.init_point, '_blank'); // PESTAÑA NUEVA

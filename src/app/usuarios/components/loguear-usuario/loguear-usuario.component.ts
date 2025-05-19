@@ -36,7 +36,6 @@ export class LoguearUsuarioComponent {
       error: (e) => {
 
         this.mensajeErrorLogin = e.error.message;
-        console.log("ERROR AL ACTUALIZAR EL USUARIO");
       },
       complete: () => {
         console.log('Redireccionando');
