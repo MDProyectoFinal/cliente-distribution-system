@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { Pagina } from 'src/app/shared/interfaces/Pagina';
 import { IGenerarReporte } from '../../interfaces/generar-reporte.interface';
 import { IProductoReporte } from '../../interfaces/producto-reporte.interface';
+import { IProductosProveedor } from '../../interfaces/productos-proveedor.interface';
+import { IProductosSeleccionadosProveedor } from 'src/app/productos/interfaces/productosProveedor';
 
 @Component({
   selector: 'proveedor-generar-pedido-proveedor',
@@ -21,10 +23,12 @@ export class GenerarPedidoProveedorComponent implements OnInit {
   public mensajeExito: string | null = null;
   public mensajeError: string | null = null;
 
-  infoPagina: Pagina<Producto>;
-  productosFiltrados: Producto[];
+  // infoPagina: Pagina<Producto>;
+  // productosFiltrados: Producto[];
   public listaProductos: Producto[] = [];
   public listaProductosSeleccionados: Producto[] = [];
+  public listaProductosSeleccionadorProveedor: IProductosSeleccionadosProveedor[] = [];
+
   public listaProdcutosSeleccionadosReporte: IProductoReporte[] = [];
 
   public datosGeneracionReporte: IGenerarReporte | null = null;
@@ -32,6 +36,10 @@ export class GenerarPedidoProveedorComponent implements OnInit {
   public listaProveedores: IProveedor[] = [];
   public proveedorSeleccionado: IProveedor | null = null;
 
+  public listaProductosPorProveedor: IProductosProveedor[] = [];
+  public mensajeSinProductos: string = '';
+
+  public precioTotalUnitarioSeleccionado: number = 0;
 
   constructor(
     private _proveedorServices: ProveedorService,
@@ -45,30 +53,69 @@ export class GenerarPedidoProveedorComponent implements OnInit {
     // Obtener los proveedores para el combo
     this.obtenerProveedores().subscribe((data: IProveedor[]) => {
         this.listaProveedores = data;
-        console.log({ cantidadProve: this.listaProveedores.length });
     })
 
-    // Obtener los productos para el combo
-    // Obtener los productos para el combo
-    this.obtenerProductos().subscribe({
-      next: (data: Pagina<Producto>) => this.actualizarProductos(data),
-      error: (e) => this.mostrarMensajeError()
-    });
+  }
+
+  obtenerProductosPorIdProveedor(idProveedor: string): Observable<IProductosProveedor[]> {
+    return this._proveedorServices.obtenerProductosPorProveedor(idProveedor);
+  }
+
+  sumarPrecio(valor: number): void {
+    this.precioTotalUnitarioSeleccionado += valor;
+  }
+
+  onProveedorSeleccionado(): void {
+
+    // Limpiamos TODO al cambiar de proveedor.
+    this.mensajeSinProductos = '';
+    this.listaProductosSeleccionadorProveedor = [];
+    this.listaProdcutosSeleccionadosReporte = [];
+    this.precioTotalUnitarioSeleccionado = 0;
+
+    if (!this.proveedorSeleccionado) {
+      this.listaProductos = [];
+      return;
+    }
+
+    const idProveedor = this.proveedorSeleccionado._id; // O el campo correcto de tu modelo
+
+    this.obtenerProductosPorIdProveedor(<any>idProveedor)
+      .subscribe({
+        next: (productos: IProductosProveedor[]) => {
+          if( productos.length === 0) { this.mensajeSinProductos = 'No hay productos cargados para este proveedor.'}
+          this.listaProductosPorProveedor = productos;
+        },
+        error: (err) => {
+          console.error('Error al obtener productos del provedor:', err);
+        }
+      });
 
   }
 
-  agregarProducto(producto: Producto): void {
-    this.listaProductosSeleccionados.push( producto );
+  agregarProducto(producto: IProductosProveedor): void {
+
+    // Crear instancia del objeto que querés guardar en la lista
+    const productoSeleccionado: IProductosSeleccionadosProveedor = {
+      _id: producto.producto_id._id,
+      producto: producto.producto_id,            // O el objeto directamente si ya viene populado
+      precio_unitario_proveedor: producto.precio_unitario, // o producto.precio_unitario_proveedor
+      cantidad: 1                                // opcional, si manejás cantidad
+    };
+
+    this.listaProductosSeleccionadorProveedor.push( productoSeleccionado );
+    this.precioTotalUnitarioSeleccionado += productoSeleccionado.precio_unitario_proveedor;
   }
 
-  eliminarProducto( producto: Producto ): void {
-    this.listaProductosSeleccionados = this.listaProductosSeleccionados.filter(
-      (prod) => prod._id !== producto._id
+  eliminarProducto( producto: IProductosSeleccionadosProveedor ): void {
+    this.listaProductosSeleccionadorProveedor = this.listaProductosSeleccionadorProveedor.filter(
+      (prod) => prod._id !== producto.producto._id
     )
+    this.precioTotalUnitarioSeleccionado -= producto.precio_unitario_proveedor;
   }
 
   generarReporte(): void {
-    if (!this.proveedorSeleccionado || this.listaProductosSeleccionados.length === 0) {
+    if (!this.proveedorSeleccionado || this.listaProductosSeleccionadorProveedor.length === 0) {
       alert('Por favor seleccione un proveedor y algún producto a pedir');
       return;
     }
@@ -77,14 +124,14 @@ export class GenerarPedidoProveedorComponent implements OnInit {
     // Recorremos y agrupamos si hay 2 productos agregado, para setear la cantidad! Uso de "map"
     const reporteMap = new Map<string, IProductoReporte>();
 
-    this.listaProductosSeleccionados.forEach(producto => {
-      if (reporteMap.has(producto.nombre)) {
-        let prod = reporteMap.get(producto.nombre)!;
+    this.listaProductosSeleccionadorProveedor.forEach(productoSelecc => {
+      if (reporteMap.has(productoSelecc.producto.nombre)) {
+        let prod = reporteMap.get(productoSelecc.producto.nombre)!;
         prod.cantidad = (parseInt(prod.cantidad) + 1).toString();
       } else {
-        reporteMap.set(producto.nombre, {
-          nombre: producto.nombre,
-          descripcion: producto.descripcion,
+        reporteMap.set(productoSelecc.producto.nombre, {
+          nombre: productoSelecc.producto.nombre,
+          descripcion: productoSelecc.producto.descripcion,
           cantidad: '1'
         });
       }
@@ -107,10 +154,4 @@ export class GenerarPedidoProveedorComponent implements OnInit {
   mostrarMensajeError() {
     alert('Ocurrió un error cargando los productos');
   }
-
-  private actualizarProductos(data: Pagina<Producto>) {
-    this.infoPagina = data;
-    this.listaProductos = data.elementos;
-  }
-
 }
