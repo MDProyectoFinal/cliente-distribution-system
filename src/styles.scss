@@ -14,3 +14,35 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         padding-bottom: 100px;
     }
 }
+
+
+
+$color-primary: #002B53;
+$color-secondary: #483DA7;
+
+:root{
+   --ajs-primary-color: #{$color-primary};
+   --ajs-btn-primary-bg: #{$color-primary};
+   --ajs-header-color: #fafafa;
+   --ajs-error-header-color: rgb(180, 56, 56);
+   --ajs-error-button-color: rgb(180, 56, 56);
+}
+
+.alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
+    color: var(--ajs-primary-color);
+    cursor: pointer;
+}
+
+.alertify .ajs-header{
+    color: var(--ajs-header-color);
+    background: var(--ajs-btn-primary-bg);
+}
+
+.alertify.ajs-error-dialog .ajs-header{
+    color: var(--ajs-header-color);
+    background: var(--ajs-error-header-color);
+}
+
+.alertify.ajs-error-dialog .ajs-footer .ajs-buttons .ajs-button.ajs-ok{
+    color: var(--ajs-error-button-color);
+}

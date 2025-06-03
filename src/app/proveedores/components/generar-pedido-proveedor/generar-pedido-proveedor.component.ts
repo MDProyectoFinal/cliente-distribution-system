@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Pagina } from 'src/app/shared/interfaces/Pagina';
 import { IGenerarReporte } from '../../interfaces/generar-reporte.interface';
 import { IProductoReporte } from '../../interfaces/producto-reporte.interface';
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 
 @Component({
   selector: 'proveedor-generar-pedido-proveedor',
@@ -31,11 +32,12 @@ export class GenerarPedidoProveedorComponent implements OnInit {
 
   public listaProveedores: IProveedor[] = [];
   public proveedorSeleccionado: IProveedor | null = null;
-
+  private readonly nombreHeaderAlert= 'Error';
 
   constructor(
     private _proveedorServices: ProveedorService,
-    private _productoServices: ProductoService
+    private _productoServices: ProductoService,
+    private alertifyService:AlertifyService
   ){
 
   }
@@ -69,7 +71,7 @@ export class GenerarPedidoProveedorComponent implements OnInit {
 
   generarReporte(): void {
     if (!this.proveedorSeleccionado || this.listaProductosSeleccionados.length === 0) {
-      alert('Por favor seleccione un proveedor y algún producto a pedir');
+       this.alertifyService.alert(this.nombreHeaderAlert, 'Por favor seleccione un proveedor y algún producto a pedir');
       return;
     }
 
@@ -105,7 +107,7 @@ export class GenerarPedidoProveedorComponent implements OnInit {
   }
 
   mostrarMensajeError() {
-    alert('Ocurrió un error cargando los productos');
+     this.alertifyService.alert(this.nombreHeaderAlert, 'Ocurrió un error cargando los productos');
   }
 
   private actualizarProductos(data: Pagina<Producto>) {

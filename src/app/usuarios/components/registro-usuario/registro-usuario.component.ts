@@ -6,23 +6,19 @@ import { Persona } from 'src/app/models/persona';
 import { UsuarioPersona } from 'src/app/models/usuarioPersona';
 import { Globals } from 'src/app/app.globals';
 import { faMap } from '@fortawesome/free-solid-svg-icons';
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 
 @Component({
   selector: 'app-registro-usuario',
   templateUrl: './registro-usuario.component.html',
   styleUrls: ['./registro-usuario.component.scss'],
-  providers: [ Globals ]
+  providers: [Globals],
 })
 export class RegistroUsuarioComponent {
-
   public titulo: string = 'Registrate';
   public registro: RegistroUsuario;
 
-  constructor(
-      private authService: AuthenticationService,
-      private router: Router,
-      private globals: Globals
-  ) {
+  constructor(private authService: AuthenticationService, private router: Router, private globals: Globals, private alertifyService: AlertifyService) {
     this.registro = new RegistroUsuario();
   }
 
@@ -35,20 +31,16 @@ export class RegistroUsuarioComponent {
   mapIcon = faMap;
 
   public async onSubmitRegistro() {
-    let persona = new Persona('', this.registro.nombre, this.registro.apellido, this.registro.fechaNacimiento.toString(), this.registro.direccion,
-    this.registro.telefono, this.registro.latitud, this.registro.longitud);
+    let persona = new Persona('', this.registro.nombre, this.registro.apellido, this.registro.fechaNacimiento.toString(), this.registro.direccion, this.registro.telefono, this.registro.latitud, this.registro.longitud);
     let usuario = new UsuarioPersona('', persona, this.registro.nombreUsuario, this.registro.password, this.registro.email, this.registro.rol, '');
 
     this.authService.registrarUsuario(usuario).subscribe({
       next: (v) => {
-        alert('Usuario creado con éxito. Será redireccionado al login.');
+        this.alertifyService.alert("Registro", 'Usuario creado con éxito. Será redireccionado al login.', this.alertifyService.CLASE_SUCCESS, () => setTimeout(() => this.router.navigateByUrl('/login'), 2000));
         console.log(v);
       },
       error: (e) => {
-        alert(e.error?.mensaje);
-      },
-      complete: () => {
-        setTimeout(() => this.router.navigateByUrl('/login'), 2000);
+        this.alertifyService.alert("Error", e.error?.mensaje);
       },
     });
   }
@@ -57,17 +49,14 @@ export class RegistroUsuarioComponent {
     this.router.navigate(['/inicio']);
   }
 
-  toggleMapa(){
-    this.mostrarMapa = !this.mostrarMapa
+  toggleMapa() {
+    this.mostrarMapa = !this.mostrarMapa;
   }
 
   onLongitudChange(longitud: number) {
-    this.registro.longitud = longitud
+    this.registro.longitud = longitud;
   }
   onLatitudChange(latitud: number) {
     this.registro.latitud = latitud;
   }
-
 }
-
-

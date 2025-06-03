@@ -1,3 +1,4 @@
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -43,6 +44,7 @@ export class EditarUsuarioComponent {
   public personaEdicion: IPersonaEdicion;
 
   public filesToUpload: Array<File> = [];
+  private nombreHeaderAlert : string = "Error"
 
   public myForm: FormGroup = this._fb.group({
     id: ['', [Validators.required]], // El campo "id" es obligatorio
@@ -55,7 +57,8 @@ export class EditarUsuarioComponent {
     longitud: ['', [Validators.required]],
   });
 
-  constructor(private _personaService: PersonaService, private authenticationService: AuthenticationService, private _usuarioService: UsuarioService, private _fb: FormBuilder, private cdRef: ChangeDetectorRef) {
+  constructor(private _personaService: PersonaService, private authenticationService: AuthenticationService, private _usuarioService: UsuarioService,
+     private _fb: FormBuilder, private cdRef: ChangeDetectorRef, private alertifyService:AlertifyService) {
     this.titulo = 'Actualizar mis datos';
   }
 
@@ -128,7 +131,7 @@ export class EditarUsuarioComponent {
 
       },
       error: (e) => {
-        alert('No pudieron recuperarse datos personales');
+         this.alertifyService.alert(this.nombreHeaderAlert, 'No pudieron recuperarse datos personales');
       },
     });
   }
@@ -148,7 +151,7 @@ export class EditarUsuarioComponent {
       // Parque por problema con mapa
       const controlMapa = this.myForm.get('latitud');
       if( !!controlMapa && controlMapa.touched && controlMapa.invalid){
-        alert('Debe ingresar su dirección en el mapa por favor.');
+         this.alertifyService.alert(this.nombreHeaderAlert, 'Debe ingresar su dirección en el mapa por favor.');
       }
 
       return; // Evita que se procese el submit si el formulario es inválido
@@ -172,7 +175,7 @@ export class EditarUsuarioComponent {
 
         // Mostrar mensaje de éxito
         this.mensajeExito = 'Datos actualizados correctamente';
-        alert('Datos actualizados correctamente.');
+         this.alertifyService.success('Datos actualizados correctamente.');
 
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazar arriba con animación
 
@@ -186,7 +189,7 @@ export class EditarUsuarioComponent {
         this.mensajeExito = null;
         setTimeout(() => (this.mensajeError = null), 5000); // Desaparece después de 3 segundos
 
-        alert('Error al actualizar datos');
+         this.alertifyService.alert(this.nombreHeaderAlert, 'Error al actualizar datos');
       },
     });
   }
@@ -219,7 +222,7 @@ export class EditarUsuarioComponent {
 
     const tipoImagen = archivos[0].type;
     if (tipoImagen.match(/image\/*/) == null) {
-      alert('Solamente se aceptan imágenes');
+       this.alertifyService.alert(this.nombreHeaderAlert, 'Solamente se aceptan imágenes');
     }
 
     this.imagenSubir = archivos[0];

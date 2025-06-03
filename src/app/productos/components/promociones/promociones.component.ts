@@ -4,6 +4,7 @@ import { EditarPromocionComponent } from 'src/app/promociones/components/editar-
 import { Promocion } from 'src/app/promociones/interfaces/promocion';
 import { PromocionService } from 'src/app/promociones/services/promocion.service';
 import { ModalCancelarConfirmarComponent } from 'src/app/shared/components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 
 @Component({
   selector: 'app-promociones',
@@ -18,8 +19,9 @@ export class PromocionesProductoComponent implements OnInit {
   producto: any;
   tituloModal: string = 'Nueva promoción';
   promocion: Promocion;
+  private readonly nombreHeaderAlert= 'Error';
 
-  constructor(private route: ActivatedRoute, private servicioPromocion: PromocionService) {}
+  constructor(private route: ActivatedRoute, private servicioPromocion: PromocionService, private alertifyService:AlertifyService) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -52,7 +54,7 @@ export class PromocionesProductoComponent implements OnInit {
         complete: () => (this.modal.isOpen = false),
         error: (e) => {
           if (e.status == 400) {
-            alert(e.error);
+             this.alertifyService.alert(this.nombreHeaderAlert, e.error);
           }
         },
       });
@@ -67,7 +69,7 @@ export class PromocionesProductoComponent implements OnInit {
           if (e.status == 400) {
             console.log(JSON.stringify(e.error));
 
-            alert(e.error.message);
+             this.alertifyService.alert(this.nombreHeaderAlert, e.error.message);
           }
         },
       });

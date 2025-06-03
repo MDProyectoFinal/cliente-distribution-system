@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Producto } from '../../interfaces/producto';
 import { Pagina } from 'src/app/shared/interfaces/Pagina';
 import { faCartShopping, faMagnifyingGlassDollar, faRankingStar } from '@fortawesome/free-solid-svg-icons';
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 
 @Component({
   selector: 'app-lista-productos',
@@ -15,7 +16,9 @@ export class ListaProductosComponent implements OnInit {
   productosFiltrados: Producto[];
   promoIcon = faMagnifyingGlassDollar;
 
-  constructor(private service: ProductoService, private router: Router) {}
+  private readonly nombreHeaderModal = 'Productos';
+
+  constructor(private service: ProductoService, private router: Router, private alertifyService: AlertifyService) {}
 
   ngOnInit(): void {
     this.cargarProductos();
@@ -23,7 +26,7 @@ export class ListaProductosComponent implements OnInit {
 
   confirmarEliminacion(idProducto: string) {
     const producto = this.productosFiltrados.find((p) => p._id === idProducto)!!;
-    if (confirm(`¿Está seguro de que desea eliminar ${producto.nombre}?`)) {
+    this.alertifyService.confirm(this.nombreHeaderModal, `¿Está seguro de que desea eliminar ${producto.nombre}?`, () => {
       this.service.eliminarProducto(idProducto).subscribe({
         next: () => {
           this.productosFiltrados.splice(this.productosFiltrados.indexOf(producto), 1);
@@ -31,7 +34,7 @@ export class ListaProductosComponent implements OnInit {
 
         error: (e) => this.mostrarMensajeError(),
       });
-    }
+    });
   }
 
   buscarProductoPorNombre(nombre: string): void {
@@ -78,6 +81,6 @@ export class ListaProductosComponent implements OnInit {
   }
 
   mostrarMensajeError() {
-    alert('Ocurrió un error cargando los productos');
+    this.alertifyService.alert(this.nombreHeaderModal, 'Ocurrió un error cargando los productos', this.alertifyService.CLASE_ALERT);
   }
 }
