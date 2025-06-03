@@ -6,6 +6,8 @@ import { AuthenticationService } from 'src/app/usuarios/services/authentication.
 import { CarritoPedidoService } from 'src/app/productos/services/carrito-pedido.service';
 import { PedidoService } from 'src/app/pedidos/services/pedido.service';
 import { Router } from '@angular/router';
+import * as alertifyjs from 'alertifyjs';
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 
 // declare var MercadoPago: any;
 
@@ -32,7 +34,8 @@ export class RealizarPagoComponent implements OnInit {
   // TODO: crear archivo "env" o poner en config -> global esa key
   // mercadoPago = new MercadoPago('APP_USR-d79f1964-73cf-4b79-b1f7-7a0453139132'); // PUBLICC-KEY - Credencial de produccion de ambiente de prueba - VENDEDOR
 
-  constructor(private _pagoServices: PagoService, private _authService: AuthenticationService, private carritoService: CarritoPedidoService, private pedidoService: PedidoService, private router: Router) {
+  constructor(private _pagoServices: PagoService, private _authService: AuthenticationService, private carritoService: CarritoPedidoService,
+    private pedidoService: PedidoService, private router: Router, private alertifyService: AlertifyService) {
     // Inicializo todo el Data que llenaremos y enviaremos para el pago
     this.preferenceData = {
       payer_email: '', // Mail del Comprador
@@ -108,14 +111,14 @@ export class RealizarPagoComponent implements OnInit {
 
     this.pedidoService.guardarPedido().subscribe({
       next: (res: any) => {
-        alert('Pedido pendiente de pago guardado con éxito.');
+        this.alertifyService.success('Pedido pendiente de pago guardado con éxito.');
         this.carritoService.limpiar();
         this.isLoading = false;
         this.volverInicio();
       },
       error: (err) => {
         this.isLoading = false;
-        alert(`Error al guardar pedido sin pago: ${err.error}`);
+        this.alertifyService.alert('Pagos', `Error al guardar pedido sin pago: ${err.error}`, this.alertifyService.CLASE_ALERT);
       },
     });
   }

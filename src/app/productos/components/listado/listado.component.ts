@@ -1,3 +1,4 @@
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 import { CarritoPedidoService } from './../../services/carrito-pedido.service';
 import { Component } from '@angular/core';
 import { ProductoService } from '../../services/producto.service';
@@ -19,7 +20,9 @@ export class ListadoComponent {
   tiposDeProductos: Array<TipoProducto> = [];
   formFiltros: FormGroup;
 
-  constructor(private service: ProductoService, private router: Router, private carritoService: CarritoPedidoService) {}
+  private readonly nombreHeaderAlert= 'Productos';
+
+  constructor(private service: ProductoService, private router: Router, private carritoService: CarritoPedidoService, private alertifyService:AlertifyService) {}
 
   ngOnInit(): void {
     this.cargarTiposProductos();
@@ -54,7 +57,7 @@ export class ListadoComponent {
   }
 
   mostrarMensajeError() {
-    alert('Ocurrió un error cargando los productos');
+    this.alertifyService.alert(this.nombreHeaderAlert, 'Ocurrió un error cargando los productos');
   }
 
   agregarItemCarrito(producto: Producto) {

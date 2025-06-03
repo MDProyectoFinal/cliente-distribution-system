@@ -1,3 +1,4 @@
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from '../../services/producto.service';
@@ -18,6 +19,7 @@ export class EditarProductoComponent implements OnInit {
 
   id: string;
   isAgregar: boolean;
+  private nombreHeaderAlert :string = "Error"
 
   @Input()
   producto: any = {};
@@ -26,7 +28,7 @@ export class EditarProductoComponent implements OnInit {
   imagenSubir: any;
   productoForm!: FormGroup;
 
-  constructor(private route: ActivatedRoute, private servicioProducto: ProductoService, private servicioPromocion: PromocionService, private location: Location) {}
+  constructor(private route: ActivatedRoute, private servicioProducto: ProductoService, private servicioPromocion: PromocionService, private location: Location, private alertifyService:AlertifyService) {}
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.isAgregar = !this.id;
@@ -71,7 +73,7 @@ export class EditarProductoComponent implements OnInit {
 
     const tipoImagen = archivos[0].type;
     if (tipoImagen.match(/image\/*/) == null) {
-      alert('Solamente se aceptan imágenes');
+       this.alertifyService.alert(this.nombreHeaderAlert, 'Solamente se aceptan imágenes');
     }
 
     this.imagenSubir = archivos[0];
@@ -86,12 +88,12 @@ export class EditarProductoComponent implements OnInit {
     if (this.isAgregar) {
       this.servicioProducto.insertarProducto(this.productoForm.value, this.imagenSubir).subscribe({
         complete: () => {
-          alert('Producto agregado exitosamente.');
+           this.alertifyService.alert(this.nombreHeaderAlert, 'Producto agregado exitosamente.');
           this.location.back();
         },
         error: (e) => {
           if (e.status == 400) {
-            alert(e.error);
+             this.alertifyService.alert(this.nombreHeaderAlert, e.error);
           }
         },
       });
@@ -99,10 +101,10 @@ export class EditarProductoComponent implements OnInit {
       console.log(this.productoForm.value);
 
       this.servicioProducto.editarProducto(this.id, this.productoForm.value, this.imagenSubir).subscribe({
-        complete: () => alert('Producto modificado exitosamente.'),
+        complete: () =>  this.alertifyService.success('Producto modificado exitosamente.'),
         error: (e) => {
           if (e.status == 400) {
-            alert(e.error);
+             this.alertifyService.alert(this.nombreHeaderAlert, e.error);
           }
         },
       });
@@ -130,7 +132,7 @@ export class EditarProductoComponent implements OnInit {
       complete: () => (this.modal.isOpen = false),
       error: (e) => {
         if (e.status == 400) {
-          alert(e.error);
+           this.alertifyService.alert(this.nombreHeaderAlert, e.error);
         }
       },
     });

@@ -1,3 +1,4 @@
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 import { Component, Input } from '@angular/core';
 import { LineaProducto } from 'src/app/productos/interfaces/lineaProducto';
 import { CarritoPedidoService } from 'src/app/productos/services/carrito-pedido.service';
@@ -15,7 +16,7 @@ export class CardProductoCarritoComponent {
 
   trash = faTrashCan;
 
-  constructor(private carritoService: CarritoPedidoService) {}
+  constructor(private carritoService: CarritoPedidoService, private alertifyService: AlertifyService) {}
   restarCantidad() {
     if (this.cantidad > 1) {
       this.carritoService.quitarItem(this.producto);
@@ -27,9 +28,6 @@ export class CardProductoCarritoComponent {
   }
 
   eliminarItem(){
-    if(confirm("¿Quitar producto del carrito?")){
-      this.carritoService.eliminarItem(this.producto)
-    }
-
+    this.alertifyService.confirm('Carrito', '¿Quitar producto del carrito?', ()=> this.carritoService.eliminarItem(this.producto))
   }
 }

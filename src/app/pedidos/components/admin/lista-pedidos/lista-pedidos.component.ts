@@ -1,3 +1,4 @@
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GLOBAL } from 'src/app/config/global';
@@ -46,6 +47,7 @@ export class ListaPedidosComponent implements OnInit {
   public identity: any;
   public token: any;
   public url: string;
+  private nombreHeaderAlert :string = 'Error'
 
   public isLoading: boolean = false;
 
@@ -79,7 +81,8 @@ export class ListaPedidosComponent implements OnInit {
     private _usuarioServicio: UsuarioService,
     private _pedidoServicio: PedidoService,
     private _fb: FormBuilder,
-    public _authServices: AuthenticationService
+    public _authServices: AuthenticationService,
+    private alertifyService: AlertifyService
   ) {
     this.titulo = 'Listado de Pedidos';
 
@@ -98,24 +101,6 @@ export class ListaPedidosComponent implements OnInit {
     // reseteamos el formulario ni bien entramos en la pantalla
     this.myForm.reset(formVacio);
 
-    // INSERTAR PEDIDO FORZADO
-    // this.pedidos = [{
-    //   _id: '1',
-    //   cliente: '', // Es el ObjectId del usuario (cliente)
-    //   fechaAlta: new Date(),
-    //   items: [{
-    //     idProducto: '', // Es el ObjectId del producto
-    //     cantidad: 10,
-    //     precio: 10,
-    //     // total y totalCalc son lo mismo, solo q uno es seteado y el otro calculado
-    //     total: 100,
-    //     totalCalc: 100
-    //   }], // Array de items
-    //   estado: 'Pendiente',
-    //   subtotal: 0,
-    //   totalPedido: 100
-    // }]
-
     // reseteamos el formulario ni bien entramos en la pantalla
     this.myForm.reset(formVacio);
 
@@ -130,7 +115,7 @@ export class ListaPedidosComponent implements OnInit {
         this.contadorPedidos();
       },
       error: (e) => {
-        alert('No se puedieron recuperar los pedidos.');
+        this.alertifyService.alert(this.nombreHeaderAlert, 'No se puedieron recuperar los pedidos.');
       },
     });
   }
@@ -194,25 +179,27 @@ export class ListaPedidosComponent implements OnInit {
   }
 
   pagarPedido(idPedido: string) {
-    if (confirm('¿Está seguro de que desea registrar el pago de este pedido?')) {
-      this.pagoService.registrarPago(idPedido).subscribe({
-        next: (res: any) => {
-          console.log("A ver");
-          
-         this.pedidos[this.pedidos?.findIndex((p) => p._id === idPedido)].pagado = true;
-          
-          this.pedidos = [...this.pedidos]
-          this.isLoading = false;
-          alert('Pago de pedido registrado');
-        },
-        error: (err) => {
-          console.log("ERR");
-          
-          console.error('Error al crear la conectarse con Mercado Pago:', err);
-          this.isLoading = false;
-        },
-      });
-    }
+    this.alertifyService.confirm('Pedidos', '¿Está seguro de que desea registrar el pago de este pedido?', () => this.registrarPago(idPedido))
+  }
+
+  private registrarPago(idPedido: string) {
+    this.pagoService.registrarPago(idPedido).subscribe({
+      next: (res: any) => {
+        console.log("A ver");
+
+        this.pedidos[this.pedidos?.findIndex((p) => p._id === idPedido)].pagado = true;
+
+        this.pedidos = [...this.pedidos];
+        this.isLoading = false;
+        this.alertifyService.success('Pago de pedido registrado');
+      },
+      error: (err) => {
+        console.log("ERR");
+
+        console.error('Error al crear la conectarse con Mercado Pago:', err);
+        this.isLoading = false;
+      },
+    });
   }
 
   onModalConfirm2(idPedido: string | undefined) {
@@ -227,7 +214,7 @@ export class ListaPedidosComponent implements OnInit {
           this.buscar();
         },
         error: (e) => {
-          alert('Error al cambiar el estado del pedido. Error: ' + e);
+          this.alertifyService.alert(this.nombreHeaderAlert, 'Error al cambiar el estado del pedido. Error: ' + e);
         },
       });
   }
@@ -278,7 +265,7 @@ export class ListaPedidosComponent implements OnInit {
 
       this.modal2.isOpen = true;
     } else {
-      alert('No puede realizar esta acción para este pedido.');
+      this.alertifyService.alert(this.nombreHeaderAlert, 'No puede realizar esta acción para este pedido.');
     }
   }
 
@@ -340,7 +327,7 @@ export class ListaPedidosComponent implements OnInit {
         this.mensajeError = 'Error al obtener los pedidos';
         setTimeout(() => (this.mensajeError = null), 4000); // Desaparece después de 3 segundos
 
-        alert('Error al obtener los pedidos');
+        this.alertifyService.alert(this.nombreHeaderAlert, 'Error al obtener los pedidos');
       },
     });
   }

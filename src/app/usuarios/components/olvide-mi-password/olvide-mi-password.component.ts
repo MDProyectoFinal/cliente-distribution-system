@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 
 @Component({
   selector: 'usuarios-olvide-mi-password',
@@ -13,7 +14,7 @@ export class OlvideMiPasswordComponent {
   olvidePasswordForm: FormGroup;
   public mailEnviado: boolean = false;
 
-  constructor( private fb: FormBuilder, private authService: AuthenticationService, private _router: Router ){
+  constructor( private fb: FormBuilder, private authService: AuthenticationService, private _router: Router, private alertifyService:AlertifyService ){
     this.olvidePasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
@@ -28,7 +29,7 @@ export class OlvideMiPasswordComponent {
         .subscribe({
           next: () => {
             this.mailEnviado = true;
-            alert('Correo enviado con éxito. Revisa tu bandeja.')
+             this.alertifyService.success('Correo enviado con éxito. Revisa tu bandeja.')
           },
           error: (err:any) => console.error('Error al enviar el correo:', err)
         });

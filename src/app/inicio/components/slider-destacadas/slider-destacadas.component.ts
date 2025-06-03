@@ -1,3 +1,4 @@
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 import { Component, OnInit, signal, Input } from '@angular/core';
 import { switchMap, tap } from 'rxjs';
 import { Producto } from '../../../productos/interfaces/producto';
@@ -21,7 +22,7 @@ export class SliderDestacadasComponent implements OnInit {
   swiperElement = signal<SwiperContainer | null>(null);
   public sliderImages: String[] = [];
 
-  constructor( private _productosServices: ProductoService ){
+  constructor( private _productosServices: ProductoService, private alertifyService:AlertifyService ){
 
   }
 
@@ -92,7 +93,7 @@ export class SliderDestacadasComponent implements OnInit {
   }
 
   mostrarMensajeError() {
-    alert('Ocurrió un error cargando los productos');
+    this.alertifyService.alert('Error', 'Ocurrió un error cargando los productos', this.alertifyService.CLASE_ALERT);
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 
 @Component({
   selector: 'usuarios-recuperar-clave',
@@ -12,12 +13,14 @@ export class RecuperarClaveComponent implements OnInit {
 
   recuperarClaveForm!: FormGroup;
   token: string = '';
+  private readonly nombreHeaderAlert= 'Error';
 
   constructor(
     private _fb: FormBuilder,
     private _authService: AuthenticationService,
     private _route: ActivatedRoute,
-    private _router: Router){
+    private _router: Router,
+    private alertifyService:AlertifyService){
   }
 
   ngOnInit(): void {
@@ -55,12 +58,12 @@ export class RecuperarClaveComponent implements OnInit {
       // Llamamos al servicio de autenticación para actualizar la clave
       this._authService.actualizarClave(this.token, nuevaClave).subscribe({
         next: () => {
-          alert('Contraseña actualizada con éxito.');
+           this.alertifyService.success('Contraseña actualizada con éxito.');
           this._router.navigate(['/login']); // Redirige al login
         },
         error: (err: any) => {
           console.error('Error al actualizar la contraseña:', err);
-          alert('Ocurrió un error. Inténtalo nuevamente.');
+           this.alertifyService.alert(this.nombreHeaderAlert, 'Ocurrió un error. Inténtalo nuevamente.');
         },
       });
     }

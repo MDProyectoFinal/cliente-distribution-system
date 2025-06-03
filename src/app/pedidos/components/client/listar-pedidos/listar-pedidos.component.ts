@@ -1,3 +1,4 @@
+import { AlertifyService } from 'src/app/shared/services/alertify.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GLOBAL } from 'src/app/config/global';
@@ -50,6 +51,7 @@ export class ListarPedidosComponent implements OnInit {
   public identity: any;
   public token: any;
   public url: string;
+  private nombreHeaderAlert :string = "Error"
 
   public isLoading: boolean = false;
 
@@ -83,7 +85,8 @@ export class ListarPedidosComponent implements OnInit {
     private _pedidoServicio: PedidoService,
     private _fb: FormBuilder,
     public _authServices: AuthenticationService,
-    private pagoSerivce : PagoService
+    private pagoSerivce : PagoService,
+    private alertifyService: AlertifyService
   ){
 
     this.titulo = 'Listado de Pedidos';
@@ -132,7 +135,7 @@ export class ListarPedidosComponent implements OnInit {
 
       },
       error: (e) => {
-        alert('No se puedieron recuperar los pedidos.');
+        this.alertifyService.alert(this.nombreHeaderAlert, 'No se puedieron recuperar los pedidos.');
       },
     });
   }
@@ -263,7 +266,7 @@ export class ListarPedidosComponent implements OnInit {
           this.mensajeError = 'Error al obtener los pedidos';
           setTimeout(() => this.mensajeError = null, 4000); // Desaparece después de 3 segundos
 
-          alert('Error al obtener los pedidos');
+          this.alertifyService.alert(this.nombreHeaderAlert, 'Error al obtener los pedidos');
         },
     });
   }
