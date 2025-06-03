@@ -6,6 +6,7 @@ import { IProveedor } from '../interfaces/proveedor.interface';
 import { UsuarioService } from 'src/app/usuarios/services/usuario.service';
 import { IGenerarReporte } from '../interfaces/generar-reporte.interface';
 import { IProductoReporte } from '../interfaces/producto-reporte.interface';
+import { IProductosProveedor } from '../interfaces/productos-proveedor.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,33 @@ import { IProductoReporte } from '../interfaces/producto-reporte.interface';
 export class ProveedorService {
 
   url: string;
+  url2: string;
   public token:any;
 
   constructor(private _httpClient: HttpClient, private _usuarioServices: UsuarioService ) {
     this.url = GLOBAL.url + 'proveedor/';
+    this.url2 = GLOBAL.url + 'proveedorProducto/';
   }
 
   recuperarTodos(): Observable<IProveedor[]>{
 
     return this._httpClient.get<{ proveedores: IProveedor[] }>(this.url).pipe(
       map(response => response.proveedores)
+    );
+
+  }
+
+  obtenerProductosPorProveedor(idProveedor: string): Observable<IProductosProveedor[] | any>{
+    // Como usamos Js en el servidor tambien, definimos asi el Content-Type
+    let headers = new HttpHeaders({
+      'Content-Type':'application/json',
+      //'authorization': JSON.parse(this._usuarioServices.getToken()),
+    });
+
+    return this._httpClient.get<{ productos: IProductosProveedor[] }>(`${ this.url2 }${idProveedor}`, { headers: headers })
+    .pipe(
+      map(response => response.productos),
+      catchError( () => of([]))
     );
 
   }

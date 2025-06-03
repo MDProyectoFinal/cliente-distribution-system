@@ -12,23 +12,30 @@
   <!-- Seleccionar Proveedor -->
   <div class="form-group mb-3">
     <label for="proveedorSelect" class="form-label"><strong>Proveedor:</strong></label>
-    <select id="proveedorSelect" class="form-select form-control" [(ngModel)]="proveedorSeleccionado">
-      <option value="" disabled selected>Seleccione un proveedor</option>
-      <option *ngFor="let proveedor of listaProveedores" [ngValue]="proveedor">
-        {{ proveedor.razon_social }}
-      </option>
+    <select id="proveedorSelect" class="form-select form-control"
+      [(ngModel)]="proveedorSeleccionado"
+      (ngModelChange)="onProveedorSeleccionado()">
+        <option [ngValue]="null" disabled>Seleccione un proveedor</option>
+        <option *ngFor="let proveedor of listaProveedores" [ngValue]="proveedor">
+          {{ proveedor.razon_social }}
+        </option>
     </select>
   </div>
 
 
   <!-- Lista de Productos -->
   <div class="mb-3">
-    <h4>Productos Disponibles</h4>
+    <h4 *ngIf="listaProductosPorProveedor?.length">Productos Disponibles</h4>
+
+    <div *ngIf="!listaProductosPorProveedor?.length && mensajeSinProductos != '' " class="alert alert-warning mt-3" role="alert">
+      <h6 class="mb-0">{{ mensajeSinProductos }}</h6>
+    </div>
+
     <ul class="list-group">
       <li
-        *ngFor="let producto of listaProductos"
+        *ngFor="let producto of listaProductosPorProveedor"
         class="list-group-item d-flex justify-content-between align-items-center">
-         {{ producto.nombre }} - {{ producto.descripcion }}
+         {{ producto.producto_id.nombre }} | {{ producto.producto_id.descripcion }} | Precio Unitario: {{ producto.precio_unitario }}
         <button class="btn btn-success btn-sm" (click)="agregarProducto(producto)">
           Añadir
         </button>
@@ -38,21 +45,23 @@
 
   <!-- Productos Seleccionados -->
   <div class="mb-3">
-    <h4>Productos Seleccionados</h4>
+    <h4 *ngIf="listaProductosSeleccionadorProveedor?.length">Productos Seleccionados</h4>
     <ul class="list-group">
       <li
-        *ngFor="let producto of listaProductosSeleccionados"
+        *ngFor="let productoSeleccionado of listaProductosSeleccionadorProveedor"
         class="list-group-item d-flex justify-content-between align-items-center">
-        {{ producto.nombre }} - {{ producto.descripcion }}
-        <button class="btn btn-danger btn-sm" (click)="eliminarProducto(producto)">
+        {{ productoSeleccionado.producto.nombre }} | {{ productoSeleccionado.producto.descripcion }} | {{ productoSeleccionado.precio_unitario_proveedor }}
+        <button class="btn btn-danger btn-sm" (click)="eliminarProducto(productoSeleccionado)">
           Quitar
         </button>
       </li>
     </ul>
   </div>
 
+  <h5 *ngIf="precioTotalUnitarioSeleccionado != 0">Total: {{ precioTotalUnitarioSeleccionado | currency:'ARS':'symbol' }}</h5>
+
   <!-- Botón Generar Reporte -->
-  <button class="btn btn-primary w-100 mt-3" (click)="generarReporte()">
+  <button *ngIf="listaProductosSeleccionadorProveedor?.length" class="btn btn-primary w-100 mt-3" (click)="generarReporte()">
     Generar Ticket
   </button>
 </div>
