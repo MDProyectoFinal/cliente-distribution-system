@@ -8,6 +8,8 @@ import { PaginadorComponent } from './components/paginador/paginador.component';
 import { ModalCancelarConfirmarComponent } from './components/modal-cancelar-confirmar/modal-cancelar-confirmar.component';
 import { NoAutorizadoComponent } from './components/no-autorizado/no-autorizado.component';
 import { MapaGeocodingComponent } from './components/mapa-geocoding/mapa-geocoding.component';
+import { CardProductoDestacadoComponent } from './components/card-producto-destacado/card-producto-destacado.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,13 @@ import { MapaGeocodingComponent } from './components/mapa-geocoding/mapa-geocodi
     PaginadorComponent,
     ModalCancelarConfirmarComponent,
     NoAutorizadoComponent,
-    MapaGeocodingComponent
+    MapaGeocodingComponent,
+    CardProductoDestacadoComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FontAwesomeModule
   ],
   exports: [
     FooterComponent,
@@ -30,7 +34,8 @@ import { MapaGeocodingComponent } from './components/mapa-geocoding/mapa-geocodi
     PaginadorComponent,
     ModalCancelarConfirmarComponent,
     NoAutorizadoComponent,
-    MapaGeocodingComponent
+    MapaGeocodingComponent,
+    CardProductoDestacadoComponent
   ]
 })
 export class SharedModule { }

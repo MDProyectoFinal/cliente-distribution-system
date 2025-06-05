@@ -6,10 +6,11 @@ import { SliderDestacadasComponent } from './components/slider-destacadas/slider
 import { SliderExclusivosComponent } from './components/slider-exclusivos/slider-exclusivos.component'
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
-  imports: [BrowserModule, FontAwesomeModule],
+  imports: [BrowserModule, SharedModule],
   exports: [
     PaginaInicioComponent,
     SliderOfertasComponent,
@@ -20,7 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     PaginaInicioComponent,
     SliderOfertasComponent,
     SliderDestacadasComponent,
-    SliderExclusivosComponent
+    SliderExclusivosComponent,
   ],
   providers: [],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
