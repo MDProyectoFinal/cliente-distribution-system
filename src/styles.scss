@@ -45,3 +45,8 @@ $color-secondary: #483DA7;
 .alertify.ajs-error-dialog .ajs-footer .ajs-buttons .ajs-button.ajs-ok{
     color: var(--ajs-error-button-color);
 }
+
+.alertify-notifier .ajs-message.ajs-success{
+    background-color: var(--ajs-primary-color);
+    border-color: $color-primary;
+}
