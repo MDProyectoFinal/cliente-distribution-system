@@ -1,12 +1,16 @@
-<swiper-container class="sliderOfertas"  init="false">
-    <swiper-slide *ngFor="let producto of listaProductos" class="mb-2">
-      <div class="d-flex flex-column align-items-center">
-        <img class="imagen" [src]="producto.imagen">
-        <span class="mt-3 nombreProducto">{{ producto.descripcion }}</span>
-        <div class="precios mt-2">
-            <span class="precio-unitario">${{ producto.precio_unitario }}</span>
-            <span class="precio-promocion">${{ producto.promocionActiva.precio }}</span>
-        </div>
+<swiper-container class="sliderOfertas" init="false">
+  <swiper-slide *ngFor="let producto of listaProductos" class="mb-2">
+    <div class="d-flex flex-column align-items-center w-100 position-relative h-100">
+      <img class="imagen" [src]="producto.imagen" />
+      <span class="mt-3 nombreProducto">{{ producto.descripcion }}</span>
+
+      <div class="precios mt-2 text-center w-100">
+        <span class="precio-unitario">${{ producto.precio_unitario }}</span>
+        <span class="precio-promocion">${{ producto.promocionActiva.precio }}</span>
       </div>
-    </swiper-slide>
+
+      <button (click)="agregarCarrito(producto)" title="Agregar a carrito" type="button" class="btn-carrito position-absolute"><fa-icon [icon]="plusIcon" class="fas" ></fa-icon></button>
+
+    </div>
+  </swiper-slide>
 </swiper-container>

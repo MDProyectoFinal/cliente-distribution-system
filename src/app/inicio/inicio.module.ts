@@ -5,10 +5,11 @@ import { SliderOfertasComponent } from './components/slider-ofertas/slider-ofert
 import { SliderDestacadasComponent } from './components/slider-destacadas/slider-destacadas.component'
 import { SliderExclusivosComponent } from './components/slider-exclusivos/slider-exclusivos.component'
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
-  imports: [BrowserModule],
+  imports: [BrowserModule, FontAwesomeModule],
   exports: [
     PaginaInicioComponent,
     SliderOfertasComponent,
