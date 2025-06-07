@@ -19,14 +19,13 @@
   border: none;
   color: $color-primary;
   background-color: transparent;
-
+ font-size: 1.5rem;
   &:hover {
     cursor: pointer;
   }
 
-  .fas{
-    font-size: 1.5rem;
-  }
+
+
 }
 
 .imagen {
