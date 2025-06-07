@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 html, body { height: 100%; background: white; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .page-container {
@@ -19,6 +20,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 $color-primary: #002B53;
 $color-secondary: #483DA7;
+
+
 
 :root{
    --ajs-primary-color: #{$color-primary};
@@ -46,3 +49,4 @@ $color-secondary: #483DA7;
 .alertify.ajs-error-dialog .ajs-footer .ajs-buttons .ajs-button.ajs-ok{
     color: var(--ajs-error-button-color);
 }
+@import "bootstrap/scss/bootstrap";
