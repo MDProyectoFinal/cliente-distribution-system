@@ -118,7 +118,7 @@ export class GenerarPedidoProveedorComponent implements OnInit {
   }
 
   generarReporte(): void {
-    if (!this.proveedorSeleccionado || this.listaProductosSeleccionados.length === 0) {
+    if (!this.proveedorSeleccionado || this.listaProductosSeleccionadorProveedor.length === 0) {
        this.alertifyService.alert(this.nombreHeaderAlert, 'Por favor seleccione un proveedor y algún producto a pedir');
       return;
     }
