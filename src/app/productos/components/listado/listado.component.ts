@@ -14,6 +14,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./listado.component.scss'],
 })
 export class ListadoComponent {
+
   infoPagina: Pagina<Producto>;
   productos: Producto[];
   productosFiltrados: Producto[];
@@ -54,6 +55,7 @@ export class ListadoComponent {
   private actualizarProductos(data: Pagina<Producto>) {
     this.infoPagina = data;
     this.productosFiltrados = this.productos = data.elementos;
+    this.infoPagina = data
   }
 
   mostrarMensajeError() {
@@ -76,16 +78,34 @@ export class ListadoComponent {
 
       error: (e) => {},
     });
-
-    // this.productosFiltrados = this.productos.filter(p => {
-    //   const coincideTipo = this.formFiltros.value.tipoProductoSeleccionado === '' || p.tipoProducto === this.formFiltros.value.tipoProductoSeleccionado;
-    //   const coincidePrecio = this.formFiltros.value.precioMaximoFiltro === 0 || p.precio_unitario <= this.formFiltros.value.precioMaximoFiltro;
-    //   return coincideTipo && coincidePrecio;
-    // })
   }
 
   getTextoBoton(producto: Producto): string {
     const cantidad = this.carritoService.getCantidadEnCarrito(producto);
     return cantidad > 0 ? `Agregar al carrito (${cantidad})` : 'Agregar al carrito';
+  }
+
+    irPagina(numeroPagina: number) {
+    const link = [this.infoPagina.linkSiguiente, this.infoPagina.linkAnterior].find((link) => link != null);
+
+    if (link) {
+      const paginaNavegar = link.replace(/(numeroPagina=)[^\&]+/, '$1' + numeroPagina);
+      this.cargarProductosEnDireccion(paginaNavegar);
+    }
+  }
+
+  navegarSiguiente() {
+    this.cargarProductosEnDireccion(this.infoPagina.linkSiguiente);
+  }
+
+  navegarAnterior() {
+    this.cargarProductosEnDireccion(this.infoPagina.linkAnterior);
+  }
+
+  private cargarProductosEnDireccion(direccion: string) {
+    this.service.recuperarProductosEnDireccion(direccion).subscribe({
+      next: (data: Pagina<Producto>) => this.actualizarProductos(data),
+      error: (e) => this.mostrarMensajeError(),
+    });
   }
 }
