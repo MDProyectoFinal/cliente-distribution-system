@@ -3,7 +3,6 @@
 html, body { height: 100%; background: white; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .page-container {
-    height: 100%;
     background: #fafafa;
     color: #000;
     display: flex;
@@ -49,4 +48,10 @@ $color-secondary: #483DA7;
 .alertify.ajs-error-dialog .ajs-footer .ajs-buttons .ajs-button.ajs-ok{
     color: var(--ajs-error-button-color);
 }
+
+.alertify-notifier .ajs-message.ajs-success{
+    background-color: var(--ajs-primary-color);
+    border-color: $color-primary;
+}
+
 @import "bootstrap/scss/bootstrap";
