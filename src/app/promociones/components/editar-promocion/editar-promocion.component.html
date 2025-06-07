@@ -1,27 +1,44 @@
 <form [formGroup]="promocionForm">
-  <div class="campo">
-    <label>Desde</label>
-    <input formControlName="fechaInicio" type="date" class="form-control col-lg-4" />
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="fechaInicio">Desde:</label>
+      <input id="fechaInicio" formControlName="fechaInicio" type="date" class="form-control" />
+      </div>
+
+    <div class="col-md-6 mb-3">
+      <label for="fechaFin">Hasta:</label>
+      <input id="fechaFin" formControlName="fechaFin" type="date" class="form-control" />
+      </div>
   </div>
-  <div class="campo">
-    <label>Hasta</label>
-    <input formControlName="fechaFin" type="date" class="form-control col-lg-4" />
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="tipoPromocion">Tipo promoción:</label>
+      <select id="tipoPromocion" formControlName="tipoPromocion" class="form-control">
+        <option *ngFor="let tipo of tiposPromociones" [value]="tipo.nombre">{{ tipo.nombre }}</option>
+      </select>
+      <div *ngIf="promocionForm.get('tipoPromocion')?.invalid && (promocionForm.get('tipoPromocion')?.dirty || promocionForm.get('tipoPromocion')?.touched)" class="alert alert-danger mt-1">Tipo de promoción es requerido</div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label for="valorPromocion">Valor:</label>
+      <input id="valorPromocion" formControlName="valorPromocion" type="number" class="form-control" />
+      <div *ngIf="promocionForm.get('valorPromocion')?.errors?.['min'] && (promocionForm.get('valorPromocion')?.dirty || promocionForm.get('valorPromocion')?.touched)" class="alert alert-danger mt-1">El valor de la promoción no puede ser negativo.</div>
+      </div>
   </div>
-  <div class="campo">
-    <label>Tipo promoción:</label>
-    <select formControlName="tipoPromocion" class="form-control col-lg-4">
-      <option *ngFor="let tipo of tiposPromociones" [value]="tipo.nombre">{{ tipo.nombre }}</option>
-    </select>
-    <div *ngIf="promocionForm.get('tipoPromocion')?.invalid && (promocionForm.get('tipoPromocion')?.dirty || promocionForm.get('tipoPromocion')?.touched)" class="alert alert-danger">Tipo de promoción es requerido</div>
+
+  <div class="row mb-3" *ngIf="promocion">
+    <div class="col-12">
+      <p class="mb-0">
+        Precio Base: <span class="precio-base-info">{{ precioProducto | currency:'ARS' }}</span>
+      </p>
+      <p class="mb-0 mt-1"> Precio Promocional Calculado: <span class="precio-promocional-calculado">{{ promocion.precio ? (promocion.precio | currency:'ARS') : (precioProducto | currency:'ARS') }}</span>
+      </p>
+    </div>
   </div>
-  <div class="campo">
-    <label>Valor:</label>
-    <input formControlName="valorPromocion" type="number" class="form-control col-lg-4"/>
+
+  <div class="form-check mt-3">
+    <input name="activa" id="activa" type="checkbox" formControlName="activa" class="form-check-input" />
+    <label class="form-check-label  mt-1 mx-1" for="activa">Activa</label>
   </div>
-  <div class="campo" *ngIf="promocion">
-    <label for="precio">Precio promocional:</label>
-    <span class="precio col-lg-4" *ngIf="promocion" id="precio">{{ promocion.precio ? promocion.precio : precioProducto }}</span>
-  </div>
-  <label for="activa">Activa</label>
-  <input name="activa" id="activa" type="checkbox" formControlName="activa" />
 </form>
