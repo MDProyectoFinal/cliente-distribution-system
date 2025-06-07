@@ -46,4 +46,5 @@
         </div>
       </div>
     </div>
+     <paginador class="paginador-productos" *ngIf="infoPagina" [paginaActual]="infoPagina.paginaActual" [linkSiguiente]="infoPagina.linkSiguiente" [linkAnterior]="infoPagina.linkAnterior" [totalPaginas]="infoPagina.totalPaginas" [totalElementos]="infoPagina.totalElementos" (navegar)="irPagina($event)" (navegarAnterior)="navegarAnterior()" (navegarSiguiente)="navegarSiguiente()"></paginador>
   </div>

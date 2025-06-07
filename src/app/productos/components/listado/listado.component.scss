@@ -74,7 +74,7 @@
   align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
-  text-decoration: underline;  
+  text-decoration: underline;
 }
 
 .precio-unitario {
@@ -108,6 +108,13 @@
   margin-top: auto;
 
 }
+
+.paginador-productos {
+  text-align: center;
+  display: block;
+  background-color: transparent;
+}
+
 
 @media (max-width: 768px) {
   .card {
