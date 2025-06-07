@@ -1,15 +1,1 @@
 @import "/src/app/app.component.scss";
-
-
-.precio-unitario {
-  text-decoration: line-through; /* Tachar el precio */
-  color: #b0b0b0; /* Color gris para el precio original */
-  font-size: 1.0em; /* Tamaño ligeramente más pequeño */
-  margin-right: 0.5rem; /* Espacio entre precios */
-}
-
-.precio-promocion {
-  color: green; /* Color rojo para resaltar el precio promocional */
-  font-weight: bold; /* Hacer el texto más prominente */
-  font-size: 1.2em; /* Un tamaño más grande */
-}

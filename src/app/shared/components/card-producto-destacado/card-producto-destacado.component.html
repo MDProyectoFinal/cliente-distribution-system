@@ -1,0 +1,12 @@
+<div class="d-flex flex-column align-items-center">
+  <img class="imagen" [src]="item.imagen" />
+  <span class="mt-3 nombreProducto">{{ item.nombre }}</span>
+
+  <div class="precios mt-2 text-center w-100">
+    <span class="precio-unitario">{{ item.precio_unitario | currency : "ARS" }}</span>
+    <span class="precio-promocion">{{ item.promocionActiva.precio | currency : "ARS" }}</span>
+  </div>
+</div>
+<button (click)="agregarCarrito()" type="button" class="btn-carrito position-absolute" title="Agregar a carrito">
+  <fa-icon [icon]="plusIcon" class="fas"></fa-icon>
+</button>

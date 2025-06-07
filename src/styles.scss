@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
 html, body { height: 100%; background: white; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .page-container {
-
     background: #fafafa;
     color: #000;
     display: flex;
@@ -19,6 +19,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 $color-primary: #002B53;
 $color-secondary: #483DA7;
+
+
 
 :root{
    --ajs-primary-color: #{$color-primary};
@@ -47,6 +49,11 @@ $color-secondary: #483DA7;
     color: var(--ajs-error-button-color);
 }
 
+.alertify-notifier .ajs-message.ajs-success{
+    background-color: var(--ajs-primary-color);
+    border-color: $color-primary;
+}
+
 /* TITULOS */
 .page-title {
   font-size: clamp(1.8rem, 2.5vw, 2.5rem);
@@ -73,3 +80,6 @@ $color-secondary: #483DA7;
   }
 }
 /* FIN TITULOS */
+
+@import "bootstrap/scss/bootstrap";
+
