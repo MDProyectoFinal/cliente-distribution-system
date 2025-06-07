@@ -1,76 +1,96 @@
+/* src/app/productos/components/editar-producto/editar-producto.component.scss */
+
 @import 'src/_variables.scss';
 
+// Estilos para la imagen del producto
 .img-producto {
   display: block;
-  max-height: 200px;
-  max-width: 200px;
+  max-height: $base-spacing * 12.5; // 200px
+  max-width: $base-spacing * 12.5; // 200px
+  margin-top: $base-spacing;
+  margin-bottom: $base-spacing;
+  box-shadow: $shadow-sm;
+  border-radius: $base-spacing * 0.25;
 }
 
-.btn-cancelar {
-  margin-right: 1rem;
-  cursor: pointer;
-  padding: 0.3rem;
-  border: none;
-
-  &:hover {
-    background-color: #ccc;
-  }
-
-  &:focus {
-    outline: none;
-  }
+.form-check {
+    display: flex;
+    align-items: center;
 }
 
-.lbl-subir-imagen {
-  padding: 0.5rem;
-  border-radius: 0.3rem;
-  border: #aaa 1px dashed;
-  cursor: pointer;
-  margin-top: 1rem;
+.form-check-input {
+  width: $base-spacing * 1.25;
+    height: $base-spacing * 1.25;
+    margin-right: $base-spacing * 0.5;
 }
 
-.precio-promocional {
-  padding: 0.5rem;
-  border-radius: 0.3rem;
-  border: $color-secondary 2px dashed;
-  display: flex;
-  justify-content: space-between;
+.form-check-label {
+    margin-bottom: 0;
+}
 
-  .precio {
-    font-weight: 700;
-    color: #07743a;
-  }
 
-  a {
-    margin-right: 1rem;
-    color: $color-secondary;
-
+// --- Botón Cancelar (btn btn-light) ---
+// Apuntamos directamente a la clase de Bootstrap.
+// Esto aplicará a todos los btn-light que uses si no hay un selector más específico.
+.btn-light {
     &:hover {
-      color: lighten($color-secondary, 10);
-      cursor: pointer;
+        background-color: lighten(#dee2e6, 5%); // Un gris ligeramente más claro al hacer hover
+        border-color: lighten(#dee2e6, 5%);
     }
-
-
-  }
-
-  i {
-    font-size: 1.5rem;
-  }
 }
 
-.eliminacion{
-  color: rgb(219, 81, 81);
-
-  &:hover {
-    color: lighten(rgb(219, 81, 81), 10);
-    cursor: pointer;
-  }
+// --- Botón Nueva Promoción (ahora solo .btn.btn-primary) ---
+// El bloque .btn.btn-primary.btn-sm se vuelve obsoleto si quitaste btn-sm del HTML.
+// Si quieres efectos de transición/hover específicos para *todos* los btn-primary:
+.btn-primary {
+    transition: all 0.2s ease-in-out; // Añadir transición para hover/focus
+    &:hover {
+        opacity: 0.9; // Ligero oscurecimiento al hacer hover
+        transform: translateY(-1px); // Sutil elevación
+    }
+}
+.promo-admin-box {
+  background-color: lighten($color-secondary, 45%); // Fondo claro basado en $color-secondary
+  border: 1px solid lighten($color-secondary, 30%); // Borde un poco más oscuro
+  border-left: 5px solid $color-secondary; // Borde izquierdo más grueso para destacar
+  border-radius: $base-spacing * 0.5;
+  padding: $base-spacing * 0.75 $base-spacing; // Padding interno
+  display: flex;
+  flex-direction: column;
+  box-shadow: $shadow-sm;
+  color: $text-color; // Usamos tu $text-color directamente
 }
 
-.select-tipo {
-  padding-right: 1rem;
+.promo-admin-box p {
+    margin-bottom: 0;
 }
 
-.campo {
-  margin-top: 1rem;
+.promo-icon {
+  color: $color-secondary;
+  font-size: $base-spacing * 1.1;
+}
+
+.precio-promocional-admin {
+  font-size: $base-spacing * 1.3;
+  font-weight: 700;
+  color: $promo-color;
+}
+
+.promo-vigencia-admin {
+    font-size: $base-spacing * 0.85;
+    color: lighten($text-color, 20%);
+    i {
+        color: lighten($text-color, 20%);
+    }
+}
+
+
+.btn.btn-outline-secondary {
+    font-size: $base-spacing * 0.9;
+    padding: $base-spacing * 0.4 $base-spacing * 0.7;
+    &:hover {
+        background-color: $color-secondary;
+        color: $white-background;
+        border-color: $color-secondary;
+    }
 }
