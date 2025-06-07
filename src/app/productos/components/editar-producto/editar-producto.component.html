@@ -1,9 +1,11 @@
 <div class="container mt-4">
   <h3 class="page-title">
-    {{ isAgregar ? 'Nuevo Producto' : 'Editar Producto' }}
+    {{ isAgregar ? "Nuevo Producto" : "Editar Producto" }}
   </h3>
 
-  <div class="row justify-content-center"> <div class="col-md-10 col-lg-8"> <form [formGroup]="productoForm" (ngSubmit)="enviar()">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <form [formGroup]="productoForm" (ngSubmit)="enviar()">
         <div class="form-group mb-3">
           <label for="nombre">Nombre:</label>
           <input id="nombre" formControlName="nombre" type="text" class="form-control" />
@@ -47,21 +49,17 @@
           <label for="btn-subir-imagen" class="btn btn-outline-primary mt-3">Seleccione una imagen</label>
         </div>
 
- <div class="promo-admin-box mb-3" *ngIf="producto.promocionActiva; else btnNuevaPromocion">
+        <div class="promo-admin-box mb-3" *ngIf="producto.promocionActiva; else btnNuevaPromocion">
           <div class="d-flex justify-content-between align-items-center">
             <p class="mb-0">
               <i class="fas fa-tags me-2 promo-icon"></i>
-              Precio Promocional Activo: <span class="precio-promocional-admin">{{ producto.promocionActiva.precio | currency:'ARS' }}</span>
+              Precio Promocional Activo: <span class="precio-promocional-admin">{{ producto.promocionActiva.precio | currency : "ARS" }}</span>
             </p>
             <div>
-              <a (click)="abrirModal()" title="Editar Promoción" class="btn btn-sm btn-outline-secondary">
-                <i class="fas fa-edit me-1"></i> Editar
-              </a>
-              </div>
+              <a (click)="abrirModal()" title="Editar Promoción" class="btn btn-sm btn-outline-secondary"> <i class="fas fa-edit me-1"></i> Editar </a>
+            </div>
           </div>
-          <p class="promo-vigencia-admin mb-0 mt-1">
-             <i class="far fa-calendar-alt me-1"></i> Vigente hasta: {{ producto.promocionActiva.fecha_fin | date:'dd/MM/yyyy HH:mm' }}
-          </p>
+          <p class="promo-vigencia-admin mb-0 mt-1"><i class="far fa-calendar-alt me-1"></i> Vigente hasta: {{ producto.promocionActiva.fecha_fin | date : "dd/MM/yyyy HH:mm" }}</p>
         </div>
 
         <ng-template #btnNuevaPromocion>
@@ -72,7 +70,7 @@
 
         <div class="d-flex justify-content-start mt-4">
           <button (click)="back()" type="button" class="btn btn-light me-2">Cancelar</button>
-          <button class="btn btn-primary mx-2" type="submit">{{isAgregar ? 'Guardar' : 'Editar'}}</button>
+          <button class="btn btn-primary mx-2" type="submit">{{ isAgregar ? "Guardar" : "Editar" }}</button>
         </div>
       </form>
     </div>

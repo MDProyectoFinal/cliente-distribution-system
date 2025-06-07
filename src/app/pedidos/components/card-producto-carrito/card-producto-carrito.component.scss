@@ -1,107 +1,177 @@
-@import 'src/_variables.scss';
+@import "src/_variables.scss";
 
-.card-carrito-container {
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.card-carrito {
+  background-color: #ffffff;
+  border: none;
+  border-radius: $base-spacing * 0.75;
+  box-shadow: none;
+  transition: none;
 }
 
-.imagen {
-  width: 20%;
+.card-carrito:hover {
+  box-shadow: none;
+}
+
+.imagen-carrito {
   display: flex;
   justify-content: center;
   align-items: center;
 
   img {
-    min-width: 50px;
-    min-height: 50px;
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: contain;
   }
 }
 
-.detalle-producto {
-  width: 40%;
-  padding: 1rem;
+.detalle-producto-carrito {
+  @media (max-width: 767.98px) {
+    .nombre-producto-carrito {
+      font-size: $base-spacing * 0.95;
+    }
+    .descripcion-producto-carrito {
+      font-size: $base-spacing * 0.75;
+    }
+  }
 }
 
-.nombre-producto {
-  font-weight: bold;
-  font-size: 1.2rem;
+.nombre-producto-carrito {
+  font-weight: $heading-font-weight;
+  font-size: $base-spacing * 1.05;
+  color: $color-primary;
+  word-break: break-word;
 }
 
-.descripcion-producto {
-  font-size: 0.9rem;
-  color: #666;
+.descripcion-producto-carrito {
+  font-size: $base-spacing * 0.85;
+  color: lighten($text-color, 15%);
+  max-height: $base-spacing * 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-y: auto;
 }
 
-.precio-producto {
-  font-size: 1.2rem;
-  font-weight: bold;
+.precio-producto-carrito {
+  font-size: $base-spacing * 1.1;
+  font-weight: 700;
+  color: $color-primary;
+  letter-spacing: 0.05rem;
 }
 
-.producto-con-promocion {
+.producto-con-promocion-carrito {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: $base-spacing * 0.25;
 }
 
-.precio-promocion {
-  color: #008000;
-  font-size: 1.2rem;
-  font-weight: bold;
+.precio-promocion-carrito {
+  color: $promo-color;
+  font-size: $base-spacing;
+  font-weight: $heading-font-weight;
+  letter-spacing: 0.05rem;
 }
 
-.precio-original {
-  font-size: 0.9rem;
-  color: #666;
+.precio-original-carrito {
+  font-size: $base-spacing * 0.8;
+  color: lighten($text-color, 30%);
 }
 
 .tachado {
   text-decoration: line-through;
 }
 
-.botones {
-  width: 20%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.borrar {
-  display: flex;
-  flex-direction: column;
-
-
-
-  .quitar-producto {
-    font-size: 20px;
-    border: none;
-    color: $color-primary;
-    background-color: transparent;
-    align-self: flex-end;
-    &:hover{
-      cursor: pointer;
-    }
-  }
-}
-.form-control {
-  width: 2rem;
-  text-align: center;
-}
-
-.subtotal {
-  width: 20%;
+.botones-cantidad {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .input-group {
+    max-width: 120px;
+    min-width: 100px;
+    margin: 0 auto;
+  }
 }
 
-.subtotal-valor {
-  font-size: 1.2rem;
-  font-weight: bold;
+.cantidad-input.form-control {
+  width: $base-spacing * 3;
+  text-align: center;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  min-width: 40px;
+}
+
+.subtotal-carrito {
+  @media (max-width: 576px) {
+    .subtotal-valor-carrito {
+      font-size: $base-spacing * 1.1;
+    }
+  }
+
+  @media (min-width: 576px) and (max-width: 1030px) {
+    .subtotal-valor-carrito {
+      font-size: $base-spacing * 0.8;
+    }
+  }
+}
+
+.subtotal-valor-carrito {
+  font-size: $base-spacing * 1.25;
+  font-weight: $heading-font-weight;
+  color: $color-primary;
+}
+
+.borrar-item {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+.quitar-producto {
+  font-size: $base-spacing * 1.5;
+  border: none;
+  background-color: transparent;
+  color: $color-danger;
+  &:hover {
+    cursor: pointer;
+    color: darken($color-danger, 10%);
+  }
+}
+
+.quitar-producto-sm {
+  font-size: $base-spacing * 1.1;
+  color: $white-background;
+  background-color: $color-danger;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid $color-danger;
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color-danger, 10%);
+    border-color: darken($color-danger, 10%);
+  }
+}
+
+.card-body .row {
+  @media (min-width: 576px) {
+    margin-left: -5px;
+    margin-right: -5px;
+
+    > [class*="col-"] {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    margin-left: -10px;
+    margin-right: -10px;
+
+    > [class*="col-"] {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
 }
