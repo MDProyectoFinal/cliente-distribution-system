@@ -1,52 +1,65 @@
-<div *ngIf="productosFiltrados">
+<div *ngIf="productosFiltrados" class="container-fluid py-4">
+  <h3 class="page-title">Listado de Productos</h3>
 
-    <h3 class="page-title">Listado de Productos</h3>
+  <div class="row">
+    <div class="col-12 col-md-3 col-lg-2 mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-3 d-md-block">
+        <h5 class="filters-title mb-0">Filtros</h5>
+        <button class="btn btn-outline-secondary d-md-none" type="button" data-toggle="collapse" data-target="#filtersCollapse" aria-expanded="false" aria-controls="filtersCollapse"><i class="fas fa-filter"></i> Mostrar/Ocultar</button>
+      </div>
 
-    <div class="row">
-      <div class="col-md-2">
-        <h5>Filtros</h5>
+      <div class="collapse d-md-block" id="filtersCollapse">
         <form [formGroup]="formFiltros">
-          <div class="form-group">
-            <label>Tipo de producto</label>
-            <select class="form-control" formControlName="tipoProductoSeleccionado">
+          <div class="form-group mb-3">
+            <label for="tipoProducto" class="form-label">Tipo de producto</label>
+            <select id="tipoProducto" class="form-control" formControlName="tipoProductoSeleccionado">
               <option value="">Todos</option>
               <option *ngFor="let tipo of tiposDeProductos" [value]="tipo.descripcion">{{ tipo.descripcion }}</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Precio</label>
-            <input type="number" class="form-control" min="0" formControlName="precioMinimoFiltro" placeholder="Mínimo">
-            <input type="number" class="form-control my-2" min="productoForm.get('precioMinimoFiltro')" formControlName="precioMaximoFiltro" placeholder="Máximo">
+          <div class="form-group mb-3">
+            <label class="form-label">Precio</label>
+            <input type="number" class="form-control mb-2" min="0" formControlName="precioMinimoFiltro" placeholder="Mínimo" />
+            <input type="number" class="form-control" [min]="formFiltros.get('precioMinimoFiltro')?.value || 0" formControlName="precioMaximoFiltro" placeholder="Máximo" />
           </div>
-          <button type="button" class="btn btn-primary" (click)="aplicarFiltros()">Aplicar filtros</button>
+          <button type="button" class="btn btn-primary btn-block" (click)="aplicarFiltros()">Aplicar filtros</button>
+          <!-- <button type="button" class="btn btn-light btn-block mt-2" (click)="resetFiltros()">Limpiar filtros</button> -->
         </form>
       </div>
-      <div class="col-md-9">
-        <div class="cards-container">
-          <div class="card mb-2 shadow-sm" *ngFor="let prod of productosFiltrados">
-            <img src="{{ prod.imagen }}" alt="{{ prod.nombre }}" class="imagen" />
-            <div class="card-body">
-              <h5 class="card-title" title="{{prod.nombre}}">{{ prod.nombre }}</h5>
-              <p class="card-text">{{ prod.descripcion }}</p>
-              <div class="precios" *ngIf="!prod.promocionActiva; else conPromocion">
-                <span class="precio-unitario">{{ prod.precio_unitario | currency : "ARS"   }}</span>
+    </div>
+
+    <div class="col-12 col-md-9 col-lg-10">
+      <div class="row product-cards-grid">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let prod of productosFiltrados">
+          <div class="card h-100 shadow-sm product-card">
+            <img src="{{ prod.imagen }}" alt="{{ prod.nombre }}" class="card-img-top product-image" />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title product-title" title="{{ prod.nombre }}">{{ prod.nombre }}</h5>
+              <p class="card-text product-description">{{ prod.descripcion }}</p>
+
+              <div class="precios mt-auto">
+                <span class="precio-unitario" *ngIf="!prod.promocionActiva; else conPromocion">{{ prod.precio_unitario | currency : "ARS" }}</span>
+
+                <ng-template #conPromocion>
+                  <div class="d-flex flex-column align-items-center">
+                    <span class="precio-promocion">{{ prod.promocionActiva.precio | currency : "ARS" }}</span>
+                    <span class="precio-unitario original-price">{{ prod.precio_unitario | currency : "ARS" }}</span>
+                  </div>
+                </ng-template>
               </div>
 
-              <ng-template #conPromocion>
-                <div class="precios">
-                  <span class="precio-promocion" *ngIf="prod.promocionActiva">{{ prod.promocionActiva.precio | currency : "ARS" }}</span>
-                  <span class="precio-unitario tiene-promocion">{{ prod.precio_unitario  | currency : "ARS"  }}</span>
-                </div>
-              </ng-template>
-
-              <p *ngIf="prod.stock <1" class="sin-stock">SIN STOCK</p>
-              <button type="button" class="btn btn-primary" [disabled]="prod.stock <1" (click)="agregarItemCarrito(prod)">
-                {{getTextoBoton(prod)}}
+              <p *ngIf="prod.stock < 1" class="sin-stock">SIN STOCK</p>
+              <button type="button" class="btn btn-primary mt-3 btn-block" [disabled]="prod.stock < 1" (click)="agregarItemCarrito(prod)">
+                {{ getTextoBoton(prod) }}
               </button>
             </div>
           </div>
         </div>
       </div>
+      <div *ngIf="productosFiltrados.length === 0" class="alert alert-info text-center mt-4">No se encontraron productos con los filtros aplicados.</div>
     </div>
-     <paginador class="paginador-productos" *ngIf="infoPagina" [paginaActual]="infoPagina.paginaActual" [linkSiguiente]="infoPagina.linkSiguiente" [linkAnterior]="infoPagina.linkAnterior" [totalPaginas]="infoPagina.totalPaginas" [totalElementos]="infoPagina.totalElementos" (navegar)="irPagina($event)" (navegarAnterior)="navegarAnterior()" (navegarSiguiente)="navegarSiguiente()"></paginador>
   </div>
+  <div class="d-flex justify-content-center">
+    <paginador class="paginador-productos" *ngIf="infoPagina" [paginaActual]="infoPagina.paginaActual" [linkSiguiente]="infoPagina.linkSiguiente" [linkAnterior]="infoPagina.linkAnterior" [totalPaginas]="infoPagina.totalPaginas" [totalElementos]="infoPagina.totalElementos" (navegar)="irPagina($event)" (navegarAnterior)="navegarAnterior()" (navegarSiguiente)="navegarSiguiente()"></paginador>
+  </div>
+</div>
