@@ -6,6 +6,7 @@ import { Globals } from 'src/app/app.globals';
 @Component({
   selector: 'usuarios-loguear-usuario',
   templateUrl: './loguear-usuario.component.html',
+  styleUrls: ['./loguear-usuario.component.scss'],
   providers: [ Globals ]
 })
 export class LoguearUsuarioComponent {

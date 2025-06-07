@@ -1,11 +1,44 @@
 @import "/src/app/app.component.scss";
 
-.link-olvido-contraseña{
-    color: $color-primary;
-    font-weight: 200;
+// .link-olvido-contraseña{
+//     color: $color-primary;
+//     font-weight: 200;
+// }
+
+// .link-nuevo-cliente{
+//     color: $color-primary;
+//     font-weight: 600;
+// }
+
+.link-nuevo-cliente {
+  font-weight: 600;
+  color: #007bff; /* azul llamativo */
+  font-size: 1.05rem;
+  text-decoration: underline;
+  transition: color 0.3s ease;
 }
 
-.link-nuevo-cliente{
-    color: $color-primary;
-    font-weight: 600;
+.link-nuevo-cliente:hover {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+.link-olvido-contraseña {
+  color: #6c757d; /* gris más tenue */
+  font-size: 0.95rem;
+}
+
+.btn-ingresar {
+  background-color: $color-secondary;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  display: inline-block;
+  margin-top: 0.5rem;
+
+  &:hover {
+    background-color: lighten($color-secondary, 10);
+    text-decoration: none;
+  }
 }

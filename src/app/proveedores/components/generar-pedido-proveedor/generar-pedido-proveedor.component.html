@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 class="text-center mb-4">Generar Pedido a Proveedor</h2>
+  <h2 class="page-title text-center mb-4">Generar Pedido a Proveedor</h2>
 
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -35,7 +35,7 @@
       <li
         *ngFor="let producto of listaProductosPorProveedor"
         class="list-group-item d-flex justify-content-between align-items-center">
-         {{ producto.producto_id.nombre }} | {{ producto.producto_id.descripcion }} | Precio Unitario: {{ producto.precio_unitario }}
+         <p>{{ producto?.producto_id?.nombre }} | {{ producto?.producto_id?.descripcion }} | Precio Unitario: {{ producto?.precio_unitario }}</p>
         <button class="btn btn-success btn-sm" (click)="agregarProducto(producto)">
           Añadir
         </button>
