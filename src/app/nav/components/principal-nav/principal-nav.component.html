@@ -30,7 +30,7 @@
 
               <button class="text-right" (click)= "verCarrito()">
 
-                <fa-icon [ngClass]="{'fas' : cantidadEnCarrito > 0}" [icon]="cartIcon" class="cartIcon mr-lg-3 fas" [attr.data-count]="cantidadEnCarrito"></fa-icon>
+                <fa-icon [ngClass]="{'con-items' : cantidadEnCarrito > 0}" [icon]="cartIcon" class="cartIcon mr-lg-3" [attr.data-count]="cantidadEnCarrito"></fa-icon>
 
               </button>
 

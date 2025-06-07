@@ -103,10 +103,10 @@ button {
   border: 2px solid #ccc; /* Opcional: agrega un borde */
 }
 
-.fas[data-count] {
+.con-items[data-count] {
   position: relative;
 }
-.fas[data-count]:after {
+.con-items[data-count]:after {
   position: absolute;
   right: -0.75em;
   bottom: -0.75em;
