@@ -1,144 +1,137 @@
-<hr />
-
 <shared-loading-spinner *ngIf="isLoading" textoCarga="Obteniendo pedidos.."></shared-loading-spinner>
 
-<hr />
-<div class="container-fluid">
-  <h3 class="page-title">{{ titulo }}</h3>
-  <hr />
+<div class="container my-4">
+  <h1 class="page-title">{{ titulo }}</h1>
 
-  <!-- FORMULARIO PRINCIPAL CON FILTROS -->
-  <form [formGroup]="myForm" (ngSubmit)="aplicarFiltroBusqueda()" class="row gy-3">
-    <!-- Filtro por ID de pedido -->
-    <div class="col-12 col-md-4 col-lg-2">
-      <label for="idPedido">ID Pedido:</label>
-      <input type="text" id="idPedido" formControlName="idPedido" class="form-control" placeholder="Buscar por ID" />
+  <div class="p-3 d-lg-none">
+    <div class="section-header">
+      <h5 class="filters-title mb-0">Filtros de Búsqueda</h5>
+      <button class="btn btn-outline-primary" type="button" (click)="isFiltersCollapsed = !isFiltersCollapsed"
+              [attr.aria-expanded]="!isFiltersCollapsed" aria-controls="collapseFiltersMobile">
+        <i class="fa fa-filter me-2"></i> {{ isFiltersCollapsed ? 'Mostrar' : 'Ocultar' }}
+      </button>
     </div>
-
-    <div class="col-12 col-md-4 col-lg-2">
-      <label for="fechaDesde">Fecha Desde:</label>
-      <input type="date" id="fechaDesde" formControlName="fechaDesde" class="form-control" />
+    <div id="collapseFiltersMobile" class="collapse" [class.show]="!isFiltersCollapsed">
+      <form [formGroup]="myForm" (ngSubmit)="aplicarFiltroBusqueda()" class="row g-3">
+        <div class="col-12 col-sm-6">
+          <label for="idPedido" class="form-label">Nro. Pedido:</label>
+          <input type="text" id="idPedido" formControlName="idPedido" class="form-control" placeholder="Buscar por nro" />
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for="fechaDesde" class="form-label">Fecha Desde:</label>
+          <input type="date" id="fechaDesde" formControlName="fechaDesde" class="form-control" />
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for="fechaHasta" class="form-label">Fecha Hasta:</label>
+          <input type="date" id="fechaHasta" formControlName="fechaHasta" class="form-control" />
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for="estado" class="form-label">Estado:</label>
+          <select id="estado" formControlName="estado" class="form-select">
+            <option value="">Seleccionar Estado</option>
+            <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+          </select>
+        </div>
+        <div class="col-12 d-grid mt-3">
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+      </form>
+      <hr class="hr-separador">
     </div>
+  </div>
 
-    <div class="col-12 col-md-4 col-lg-2">
-      <label for="fechaHasta">Fecha Hasta:</label>
-      <input type="date" id="fechaHasta" formControlName="fechaHasta" class="form-control" />
-    </div>
-
-    <!-- Filtro por categoría -->
-    <div class="col-12 col-md-4 col-lg-2">
-      <label for="estado">Estado:</label>
-      <select id="estado" formControlName="estado" class="form-control">
-        <option value="">Seleccionar Estado</option>
-        <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
-      </select>
-    </div>
-
-    <!-- Botón para aplicar filtros -->
-    <div class="col-12 col-md-2 d-grid">
-      <button type="submit" class="btn btn-primary mt-md-4 mt-sm-2">Buscar</button>
-    </div>
-  </form>
-
-  <hr />
-
-  <!-- MENSAJE SI NO HAY PEDIDOS -->
-  <div *ngIf="pedidos?.length === 0" class="alert alert-warning text-center">No hay pedidos para mostrar</div>
-
-  <!-- GRILLA DE RESULTADOS -->
-  <div class="row">
-    <div class="col-12 col-md-8">
-      <div class="table-responsive">
-        <table class="table mt-4" style="width: 100%">
-          <!-- tabla-grilla table mt-4  -->
-          <thead>
-            <tr>
-              <th>Nro. Pedido</th>
-              <th>Estado</th>
-              <th>Fecha Alta</th>
-              <th>Total</th>
-              <th style="width: 150px">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let pedido of pedidos">
-              <td>{{ pedido.idPedido }}</td>
-              <td [ngClass]="getEstadoClase(pedido.estado)" class="estado">
-                {{ pedido.estado.toUpperCase() }}
-              </td>
-              <td>{{ pedido.fechaAlta | date : "dd/MM/yyyy HH:mm:ss" }}</td>
-              <td>{{ pedido.subtotal | currency : "ARS" : "symbol" : "1.2-2" }}</td>
-              <td>
-                <div class="d-flex">
-                  <button (click)="abrirModal(pedido.idPedido)" title="Ver Detalles" class="btn btn-info mx-1">
-                    <i class="fa fa-edit"></i>
-                  </button>
-                  <button *ngIf="!pedido.pagado" (click)="pagarPedido(pedido._id)" title="Ver Detalles" class="btn btn-warning mx-1">
-                    <i class="fa fa-credit-card"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <hr class="hr-separador" />
-        <a [href]="'https://wa.me/' + numero + '?text=' + mensaje" target="_blank" class="whatsapp-link"> <i class="fa fa-whatsapp"></i> ¿Deseas cancelar un pedido? </a>
-
-        <!-- <span>Si desea <strong>cancelar</strong> un pedido, comuníquese al <strong><i style="color: green;" class="fa fa-whatsapp"></i> +543401414992 </strong></span> -->
+  <div class="d-none d-lg-block mb-4 p-3 border rounded shadow-sm bg-light">
+    <form [formGroup]="myForm" (ngSubmit)="aplicarFiltroBusqueda()" class="row g-3">
+      <div class="col-12 col-md-4 col-lg-2">
+        <label for="idPedidoLg" class="form-label">ID Pedido:</label>
+        <input type="text" id="idPedidoLg" formControlName="idPedido" class="form-control" placeholder="Buscar por ID" />
       </div>
+      <div class="col-12 col-md-4 col-lg-2">
+        <label for="fechaDesdeLg" class="form-label">Fecha Desde:</label>
+        <input type="date" id="fechaDesdeLg" formControlName="fechaDesde" class="form-control" />
+      </div>
+      <div class="col-12 col-md-4 col-lg-2">
+        <label for="fechaHastaLg" class="form-label">Fecha Hasta:</label>
+        <input type="date" id="fechaHastaLg" formControlName="fechaHasta" class="form-control" />
+      </div>
+      <div class="col-12 col-md-4 col-lg-2">
+        <label for="estadoLg" class="form-label">Estado:</label>
+        <select id="estadoLg" formControlName="estado" class="form-select">
+          <option value="">Seleccionar Estado</option>
+          <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-2 d-grid align-self-end">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="pedidos?.length === 0" class="alert alert-warning text-center mb-4">No hay pedidos para mostrar</div>
+
+  <div class="row">
+    <div class="col-12">
+      <app-tabla-pedidos [pedidos]="pedidos" [mostrarColumnaCliente]="false" [mostrarBotonCambiarEstado]="false" [mostrarBotonCancelar]="false" (verDetalles)="abrirModal($event)" (marcarPagado)="pagarPedido($event)"> </app-tabla-pedidos>
+
+      <a [href]="'https://wa.me/' + numero + '?text=' + mensaje" target="_blank" class="whatsapp-link mt-5"> <i class="fa fa-whatsapp"></i> ¿Deseas cancelar un pedido? </a>
     </div>
   </div>
 </div>
 
-<!-- <shared-footer></shared-footer> -->
-
-<!-- MODAL: Detalle pedido -->
 <app-modal-cancelar-confirmar #modal [title]="'VER DETALLE'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
-  <div class="row">
-    <div class="col-6">
-      <!-- <strong>ID Pedido:</strong>  {{ pedido.idPedido }} -->
-      <strong>ID Pedido:</strong> {{ pedidoDetalle?.idPedido }}
+  <div class="modal-body-content">
+    <div class="row mb-3">
+      <div class="col-md-6"><strong>ID Pedido:</strong> {{ pedidoDetalle?.idPedido }}</div>
+      <div class="col-md-6"><strong>Cliente:</strong> {{ pedidoDetalle?.cliente?.nombre_usuario }}</div>
     </div>
-    <div class="col-6">
-      <!-- <strong>Cliente:</strong> {{ pedido.cliente.nombreCompleto }} -->
-      <strong>Cliente:</strong> {{ pedidoDetalle?.cliente?.nombre_usuario }}
-    </div>
-  </div>
 
-  <hr />
+    <hr class="my-3" />
 
-  <div class="row">
-    <div class="col-12">
-      <h6>Productos:</h6>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let producto of pedidoDetalle?.items">
-          <div class="producto-detalle">
-            <div class="producto-imagen">
-              <img [src]="producto.idProducto.imagen" width="100" height="100" alt="Producto Imagen" />
+    <div class="row">
+      <div class="col-12">
+        <h6 class="text-primary mb-3">Productos:</h6>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let producto of pedidoDetalle?.items">
+            <div class="d-flex align-items-center product-detail-item">
+              <div class="product-image me-3">
+                <img [src]="producto.idProducto.imagen" alt="Producto Imagen" class="img-fluid rounded" style="width: 80px; height: 80px; object-fit: contain" />
+              </div>
+              <div class="product-info flex-grow-1">
+                <strong class="text-dark">{{ producto.idProducto.descripcion }}</strong>
+                <ul class="list-unstyled mb-0 mt-1">
+                  <li>
+                    Precio: <span class="fw-bold">{{ producto.precio | currency : "ARS" : "symbol" : "1.2-2" }}</span>
+                  </li>
+                  <li>
+                    Cantidad: <span class="fw-bold">{{ producto.cantidad }}</span>
+                  </li>
+                  <li>
+                    Total: <span class="fw-bold">{{ producto.total | currency : "ARS" : "symbol" : "1.2-2" }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="producto-info">
-              <strong>{{ producto.idProducto.descripcion }}</strong>
-              <ul class="ps-3">
-                <li>Precio: {{ producto.precio | currency : "ARS" : "symbol" : "1.2-2" }}</li>
-                <li>Cantidad: {{ producto.cantidad }}</li>
-                <li>Total: {{ producto.total | currency : "ARS" : "symbol" : "1.2-2" }}</li>
-              </ul>
-            </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <hr />
+    <hr class="my-3" />
 
-  <div class="row">
-    <div class="col-6"><strong>Estado:</strong> {{ pedidoDetalle?.estado }}</div>
-    <div class="col-6"><strong>Fecha de Alta:</strong> {{ pedidoDetalle?.fechaAlta | date : "shortDate" }}</div>
-  </div>
+    <div class="row">
+      <div class="col-md-6 mb-2 mb-md-0">
+        <strong class="text-secondary">Estado:</strong>
+        <span [ngClass]="['estado-badge', getEstadoClase(pedidoDetalle?.estado || '')]">{{ pedidoDetalle?.estado?.toUpperCase() }}</span>
+      </div>
+      <div class="col-md-6 text-md-end"><strong class="text-secondary">Fecha de Alta:</strong> {{ pedidoDetalle?.fechaAlta | date : "dd/MM/yyyy HH:mm:ss" }}</div>
+    </div>
 
-  <div class="row mt-3">
-    <div class="col-12 text-end"><strong>Total del Pedido:</strong> {{ pedidoDetalle?.subtotal | currency : "ARS" : "symbol" : "1.2-2" }}</div>
+    <div class="row mt-3">
+      <div class="col-12 text-end">
+        <h5 class="mb-0 text-primary">
+          Total del Pedido: <span class="fw-bold">{{ pedidoDetalle?.subtotal | currency : "ARS" : "symbol" : "1.2-2" }}</span>
+        </h5>
+      </div>
+    </div>
   </div>
 </app-modal-cancelar-confirmar>

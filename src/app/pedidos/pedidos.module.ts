@@ -10,6 +10,7 @@ import { CarritoPedidoComponent } from './components/carrito-pedido/carrito-pedi
 import { ListarPedidosComponent } from './components/client/listar-pedidos/listar-pedidos.component';
 import { CardProductoCarritoComponent } from './components/card-producto-carrito/card-producto-carrito.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TablaPedidosComponent } from './components/tabla-pedidos/tabla-pedidos.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ListaPedidosComponent,
     CarritoPedidoComponent,
     ListarPedidosComponent,
-    CardProductoCarritoComponent
+    CardProductoCarritoComponent,
+    TablaPedidosComponent
   ],
   providers: [],
 })

@@ -1,69 +1,18 @@
 @import 'src/_variables.scss';
 
-/* Estilos para la línea de separación */
-hr.lineaSeparacion {
-  border: 0;              /* Elimina el borde predeterminado */
-  border-top: 1px solid rgb(109, 105, 105); /* Línea superior con color y grosor */
-  margin: 10px 0;         /* Espaciado vertical */
-  width: 100%;             /* Ancho de la línea (opcional) */
-  border-radius: 5px;     /* Redondear las esquinas */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $base-spacing * 0.75;
 }
 
-.estado {
-  margin-top: 1rem;
-  white-space: nowrap;
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block;
-  min-width: 80%;
-
-  &.pendiente {
-    background-color: rgb(226, 226, 109);
-    color: rgb(0, 0, 0);
-  }
-
-  &.autorizacion {
-    background-color: green;
-    color: white;
-  }
-
-  &.preparacion {
-    background-color: rgb(234, 123, 54);
-    color: black;
-  }
-
-  &.empaquetado {
-    background-color: rgb(13, 59, 129);
-    color: white;
-  }
-
-  &.despacho {
-    background-color: rgb(121, 6, 145);
-    color: white;
-  }
-
-  &.distribucion {
-    background-color: rgb(6, 101, 145);
-    color: white;
-  }
-
-  &.facturacion {
-    background-color: rgb(89, 105, 72);
-    color: white;
-  }
-
-  &.cancelado {
-    background-color: rgb(154, 39, 39);
-    color: white;
-  }
-
-  &.completado {
-    background-color: rgb(39, 154, 54);
-    color: white;
-  }
+.filters-title {
+  color: $color-primary;
+  font-weight: $heading-font-weight;
+  font-size: $base-spacing * 1.25;
+  margin-bottom: 0;
 }
-
 
 //***** Whatsapp ******//
 .whatsapp-link {
@@ -79,11 +28,6 @@ hr.lineaSeparacion {
 .whatsapp-link i {
   margin-right: 8px;
   font-size: 20px;
-}
-
-
-.hr-separador {
-  height: 3px;
 }
 
 //***** DETALLE PRODUCTO *******//
