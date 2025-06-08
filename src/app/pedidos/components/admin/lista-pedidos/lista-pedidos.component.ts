@@ -48,6 +48,8 @@ export class ListaPedidosComponent implements OnInit {
   public token: any;
   public url: string;
   private nombreHeaderAlert :string = 'Error'
+    isFiltersCollapsed = true;
+  isSummaryCollapsed = true;
 
   public isLoading: boolean = false;
 

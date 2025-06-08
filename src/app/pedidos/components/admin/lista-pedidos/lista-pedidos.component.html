@@ -3,40 +3,123 @@
 <div class="container my-4">
   <h1 class="page-title">{{ titulo }}</h1>
 
-  <form [formGroup]="myForm" (ngSubmit)="aplicarFiltroBusqueda()" class="row g-3 mb-4 p-3 border rounded shadow-sm bg-light">
-    <div class="col-12 col-sm-6 col-md-3">
-      <label for="idPedido" class="form-label">Nro. Pedido:</label>
-      <input type="text" id="idPedido" formControlName="idPedido" class="form-control" placeholder="Buscar por nro" />
+  <div class="p-3 d-lg-none">
+    <div class="section-header">
+      <h5 class="filters-title mb-0">Filtros de Búsqueda</h5>
+      <button class="btn btn-outline-primary" type="button" (click)="isFiltersCollapsed = !isFiltersCollapsed"
+              [attr.aria-expanded]="!isFiltersCollapsed" aria-controls="collapseFiltersMobile">
+        <i class="fa fa-filter me-2"></i> {{ isFiltersCollapsed ? 'Mostrar' : 'Ocultar' }}
+      </button>
     </div>
-
-    <div class="col-12 col-sm-6 col-md-2">
-      <label for="fechaDesde" class="form-label">Fecha Desde:</label>
-      <input type="date" id="fechaDesde" formControlName="fechaDesde" class="form-control" />
+    <div id="collapseFiltersMobile" class="collapse" [class.show]="!isFiltersCollapsed">
+      <form [formGroup]="myForm" (ngSubmit)="aplicarFiltroBusqueda()" class="row g-3">
+        <div class="col-12 col-sm-6">
+          <label for="idPedido" class="form-label">Nro. Pedido:</label>
+          <input type="text" id="idPedido" formControlName="idPedido" class="form-control" placeholder="Buscar por nro" />
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for="fechaDesde" class="form-label">Fecha Desde:</label>
+          <input type="date" id="fechaDesde" formControlName="fechaDesde" class="form-control" />
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for="fechaHasta" class="form-label">Fecha Hasta:</label>
+          <input type="date" id="fechaHasta" formControlName="fechaHasta" class="form-control" />
+        </div>
+        <div class="col-12 col-sm-6">
+          <label for="estado" class="form-label">Estado:</label>
+          <select id="estado" formControlName="estado" class="form-select">
+            <option value="">Seleccionar Estado</option>
+            <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+          </select>
+        </div>
+        <div class="col-12 d-grid mt-3">
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+      </form>
+      <hr class="hr-separador">
     </div>
+  </div>
 
-    <div class="col-12 col-sm-6 col-md-2">
-      <label for="fechaHasta" class="form-label">Fecha Hasta:</label>
-      <input type="date" id="fechaHasta" formControlName="fechaHasta" class="form-control" />
-    </div>
-
-    <div class="col-12 col-sm-6 col-md-3">
-      <label for="estado" class="form-label">Estado:</label>
-      <select id="estado" formControlName="estado" class="form-select">
-        <option value="">Seleccionar Estado</option>
-        <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
-      </select>
-    </div>
-
-    <div class="col-12 col-md-2 d-grid align-self-end">
-      <button type="submit" class="btn btn-primary">Buscar</button>
-    </div>
-  </form>
-
-  <div *ngIf="pedidos?.length === 0" class="alert alert-warning text-center">No hay pedidos para mostrar</div>
+  <div *ngIf="pedidos?.length === 0" class="alert alert-warning text-center mb-4">No hay pedidos para mostrar</div>
 
   <div class="row">
-    <div class="col-12 col-lg-9 col-md-12">
-      <div class="table-responsive bg-white rounded shadow-sm p-2">
+    <div class="col-12 d-none d-lg-block">
+      <form [formGroup]="myForm" (ngSubmit)="aplicarFiltroBusqueda()" class="row g-3 mb-4 p-3 border rounded shadow-sm bg-light">
+        <div class="col-12 col-sm-6 col-md-3">
+          <label for="idPedidoLg" class="form-label">Nro. Pedido:</label>
+          <input type="text" id="idPedidoLg" formControlName="idPedido" class="form-control" placeholder="Buscar por nro" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-2">
+          <label for="fechaDesdeLg" class="form-label">Fecha Desde:</label>
+          <input type="date" id="fechaDesdeLg" formControlName="fechaDesde" class="form-control" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-2">
+          <label for="fechaHastaLg" class="form-label">Fecha Hasta:</label>
+          <input type="date" id="fechaHastaLg" formControlName="fechaHasta" class="form-control" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+          <label for="estadoLg" class="form-label">Estado:</label>
+          <select id="estadoLg" formControlName="estado" class="form-select">
+            <option value="">Seleccionar Estado</option>
+            <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-2 d-grid align-self-end">
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-12 col-lg-3 order-lg-3">
+      <div class="px-3 mb-4 d-lg-none">
+        <div class="section-header">
+          <h5 class="filters-title mb-0">Resumen de Pedidos</h5>
+          <button class="btn btn-outline-primary" type="button" (click)="isSummaryCollapsed = !isSummaryCollapsed"
+                  [attr.aria-expanded]="!isSummaryCollapsed" aria-controls="collapseSummaryMobile">
+            <i class="fa fa-info-circle me-2"></i> {{ isSummaryCollapsed ? 'Mostrar' : 'Ocultar' }}
+          </button>
+        </div>
+        <div id="collapseSummaryMobile" class="collapse" [class.show]="!isSummaryCollapsed">
+          <table class="table border-top-0 table-sm mb-0 table-summary-pedidos">
+            <thead>
+              <tr>
+                <th>Estado</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let estado of estados" class="estado-contador">
+                <td [ngClass]="getEstadoClase(estado)" class="text-capitalize">{{ estado.split(" ").length > 1 ? estado.split(" ")[1] : estado }}</td>
+                <td [ngClass]="getEstadoClase(estado)" class="text-end fw-bold">{{ contadores[estado] }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr class="hr-separador">
+        </div>
+      </div>
+
+      <div class="card shadow-sm d-none d-lg-block">
+        <div class="card-body">
+          <table class="table border-top-0 table-sm mb-0 table-summary-pedidos">
+            <thead>
+              <tr>
+                <th>Estado</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let estado of estados" class="estado-contador">
+                <td [ngClass]="getEstadoClase(estado)" class="text-capitalize">{{ estado.split(" ").length > 1 ? estado.split(" ")[1] : estado }}</td>
+                <td [ngClass]="getEstadoClase(estado)" class="text-end fw-bold">{{ contadores[estado] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-9 order-lg-1">
+      <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
           <thead>
             <tr>
@@ -78,27 +161,6 @@
         </table>
       </div>
     </div>
-
-    <div class="col-12 col-lg-3 mt-5 mt-lg-0 col-md-12">
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <table class="table border-top-0 table-sm mb-0 table-resumen-pedidos">
-        <thead>
-          <tr>
-            <th>Estado</th>
-            <th>Cantidad</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let estado of estados" class="estado-contador">
-            <td [ngClass]="getEstadoClase(estado)" class="text-capitalize">{{ estado.split(" ").length > 1 ? estado.split(" ")[1] : estado }}</td>
-            <td [ngClass]="getEstadoClase(estado)" class="text-end fw-bold">{{ contadores[estado] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
   </div>
 </div>
 
