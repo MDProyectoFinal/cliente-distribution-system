@@ -12,6 +12,8 @@ import { SharedModule } from "../shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { OlvideMiPasswordComponent } from './components/olvide-mi-password/olvide-mi-password.component';
 import { RecuperarClaveComponent } from './components/recuperar-clave/recuperar-clave.component';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from "ng-recaptcha";
+import { environment } from "src/environments/environment";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,14 @@ import { RecuperarClaveComponent } from './components/recuperar-clave/recuperar-
     InformacionModule,
     SharedModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RecaptchaV3Module
+  ],
+  providers:[
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: environment.captchaSiteKey
+    }
   ],
   exports: [
     ListarUsuariosComponent,

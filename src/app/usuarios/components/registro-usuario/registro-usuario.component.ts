@@ -7,6 +7,7 @@ import { UsuarioPersona } from 'src/app/models/usuarioPersona';
 import { Globals } from 'src/app/app.globals';
 import { faMap } from '@fortawesome/free-solid-svg-icons';
 import { AlertifyService } from 'src/app/shared/services/alertify.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -18,7 +19,7 @@ export class RegistroUsuarioComponent {
   public titulo: string = 'Registrate';
   public registro: RegistroUsuario;
 
-  constructor(private authService: AuthenticationService, private router: Router, private globals: Globals, private alertifyService: AlertifyService) {
+  constructor(private authService: AuthenticationService, private router: Router, private globals: Globals, private alertifyService: AlertifyService, private recaptchaV3Service: ReCaptchaV3Service) {
     this.registro = new RegistroUsuario();
   }
 
@@ -34,7 +35,9 @@ export class RegistroUsuarioComponent {
     let persona = new Persona('', this.registro.nombre, this.registro.apellido, this.registro.fechaNacimiento.toString(), this.registro.direccion, this.registro.telefono, this.registro.latitud, this.registro.longitud);
     let usuario = new UsuarioPersona('', persona, this.registro.nombreUsuario, this.registro.password, this.registro.email, this.registro.rol, '');
 
-    this.authService.registrarUsuario(usuario).subscribe({
+     this.recaptchaV3Service.execute('registro').subscribe(
+      (token: string) => {
+    this.authService.registrarUsuario(usuario, token).subscribe({
       next: (v) => {
         this.alertifyService.alert("Registro", 'Usuario creado con éxito. Será redireccionado al login.', this.alertifyService.CLASE_SUCCESS, () => setTimeout(() => this.router.navigateByUrl('/login'), 2000));
         console.log(v);
@@ -43,6 +46,11 @@ export class RegistroUsuarioComponent {
         this.alertifyService.alert("Error", e.error?.mensaje);
       },
     });
+    },
+      (error) => {
+        this.alertifyService.alert("Error", 'No se pudo verificar reCAPTCHA. Inténtelo de nuevo.');
+      }
+    );
   }
 
   volverInicio() {
