@@ -21,23 +21,21 @@ export class AuthenticationService {
   private usuario?: Usuario;
   public userRol: String = 'Invitado';
 
-  constructor(private http: HttpClient, private _usuarioServices: UsuarioService, private _router: Router ) {
-
+  constructor(private http: HttpClient, private _usuarioServices: UsuarioService, private _router: Router) {
     // Implementar lógica para obtener el rol del token
     const token = localStorage.getItem('token') as string;
     this.autenticado = !!token;
 
-    if(token){
+    if (token) {
       this.decodedToken = this.jwtHelper.decodeToken(token);
       this.userRol = this.getUserRoleFromToken();
     }
-
   }
 
   // Sirve solo si es cuando el usuario recién se logueo, y no hubo refresh (F5) de la página.
-  get usuarioActual(): Usuario|undefined {
-    if ( !this.usuario ) return undefined;
-    return structuredClone( this.usuario );
+  get usuarioActual(): Usuario | undefined {
+    if (!this.usuario) return undefined;
+    return structuredClone(this.usuario);
   }
 
   /****  ROLES ****/
@@ -73,77 +71,75 @@ export class AuthenticationService {
 
   login(model: any) {
     model.gethash = true;
-    return this.http.post(GLOBAL.url + 'usuarios/loguear-usuario', model)
-      .pipe(
-        map((response: any) => {
-
-          // Guardamos el usuario actual
-          const user = response;
-          this.usuario = user.usuarioEncontrado;
-
-          // Guardamos el token
-          localStorage.setItem('token', user.token);
-          this.autenticado = true
-          this.decodedToken = this.jwtHelper.decodeToken(user.token);
-
-          console.log(this.decodedToken);
-        })
-    );
-  }
-
-  registrarUsuario(usuario: UsuarioPersona) {
-    return this.http.post(GLOBAL.url + 'personas/guardar-persona', usuario).pipe(
+    return this.http.post(GLOBAL.url + 'usuarios/loguear-usuario', model).pipe(
       map((response: any) => {
+        // Guardamos el usuario actual
         const user = response;
-        console.log(response)
+        this.usuario = user.usuarioEncontrado;
+
+        // Guardamos el token
+        localStorage.setItem('token', user.token);
+        this.autenticado = true;
+        this.decodedToken = this.jwtHelper.decodeToken(user.token);
+
+        console.log(this.decodedToken);
       })
     );
   }
 
-  olvideMiPassword( email: string ){
+  registrarUsuario(usuario: UsuarioPersona, captchaToken: string) {
 
+    const payload ={
+      ...usuario,
+      captchaToken
+    }
+
+    return this.http.post(GLOBAL.url + 'personas/guardar-persona', payload).pipe(
+      map((response: any) => {
+        const user = response;
+        console.log(response);
+      })
+    );
+  }
+
+  olvideMiPassword(email: string) {
     let headers = new HttpHeaders({
-      'Content-Type':'application/json',
+      'Content-Type': 'application/json',
       //'authorization': JSON.parse(this._usuarioServices.getToken())
     });
 
     const body = { email }; // Asegúrate de que sea un objeto
 
-    return this.http.post(GLOBAL.url + 'usuarios/olvide-mi-password', body, { headers: headers })
-    .pipe(
+    return this.http.post(GLOBAL.url + 'usuarios/olvide-mi-password', body, { headers: headers }).pipe(
       map((response: any) => {
         const user = response;
-        console.log(response)
+        console.log(response);
       })
     );
-
   }
 
-   // Método para actualizar la contraseña
-   actualizarClave(token: string, nuevaClave: string): Observable<any> {
-
+  // Método para actualizar la contraseña
+  actualizarClave(token: string, nuevaClave: string): Observable<any> {
     // Recibimos el token generado por mail para poder cambiar la clave y la nueva clave ingresada
 
     let headers = new HttpHeaders({
-      'Content-Type':'application/json',
+      'Content-Type': 'application/json',
       //'authorization': JSON.parse(this._usuarioServices.getToken())
     });
 
     const body = {
       token,
-      nuevaClave
-    }
+      nuevaClave,
+    };
 
-    return this.http.post(GLOBAL.url + 'usuarios/reset-password', body, { headers: headers })
-    .pipe(
+    return this.http.post(GLOBAL.url + 'usuarios/reset-password', body, { headers: headers }).pipe(
       map((response: any) => {
-        console.log(response)
+        console.log(response);
       })
     );
   }
 
   cerrarSesion(): void {
-
     // Eliminar los ítems del localStorage
     localStorage.removeItem('identity');
     localStorage.removeItem('token');
