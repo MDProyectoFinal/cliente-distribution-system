@@ -1,67 +1,59 @@
-@import "/src/app/app.component.scss";
+/* src/app/paginador/paginador.component.scss */
 
-.paginacion {
-  display: inline-block;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.25rem;
+@import 'src/_variables.scss';
 
-  .item-pagina {
-    display: inline;
+// El componente de paginación de Bootstrap ya tiene la mayoría de los estilos
+// Puedes sobrescribir sus variables en styles.scss (si quieres que aplique a todos los paginadores)
+// o definir estilos aquí para este paginador específico.
 
-    &:first-child,
-    .link-pagina {
-      margin-left: 0;
-      font-size: large;
-      border-bottom-left-radius: 0.25rem;
-      border-top-left-radius: 0.25rem;
-    }
+// Estilos para la paginación activa
+.pagination {
+  // Asegúrate de que los bordes redondeados sean consistentes si Bootstrap los quita o los quieres diferentes
+  // Bootstrap ya los maneja para .pagination y .page-item:first-child/.page-item:last-child
 
-    &:last-child,
-    .link-pagina {
-      margin-left: 0;
-      border-bottom-left-radius: 0.25rem;
-      border-top-left-radius: 0.25rem;
-    }
-
-    &.active .link-pagina,
-    &.active .link-pagina:hover,
-    &.active .link-pagina:focus
-    {
-        z-index: 2;
-        color: #fff;
-        cursor: default;
-        background-color: $color-primary;
-        border-color: $color-primary;
-
-
-
-    }
-
-
-  }
-
-  .link-pagina{
-    position: relative;
-  float: left;
-  padding: 0.5rem 0.75rem;
-  margin-left: -1px;
-  color: $color-primary;
-  text-decoration: none;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  cursor: pointer;
-
-  &.fa{
-    background-color: red;
-    font-size: large;
+  .page-item {
+    &.active {
+      .page-link {
+        // Usa tus variables de color
+        background-color: $color-primary; // El color principal de tu tema
+        border-color: $color-primary; // Borde del mismo color
+        color: $white-background; // Texto blanco
+        // Asegúrate de que z-index y cursor: default ya los maneje Bootstrap o si son necesarios
+        z-index: 2; // Bootstrap ya suele usar esto
+        cursor: default; // Bootstrap ya suele usar esto
       }
+    }
 
-  &:focus,
-  &:hover{
-    color: $color-primary;
-  background-color: #eceeef;
-  border-color: #ddd;
+    &.disabled {
+      .page-link {
+        color: lighten($text-color, 30%); // Color más claro para deshabilitado
+        pointer-events: none; // Deshabilita clics
+        cursor: not-allowed;
+        background-color: #e9ecef; // Un gris claro
+        border-color: #dee2e6;
+      }
+    }
   }
+
+  .page-link {
+    // Colores por defecto de los enlaces de página
+    color: $color-primary; // Color principal de tu tema
+    background-color: $white-background;
+    border: 1px solid #dee2e6; // Borde de Bootstrap
+    margin-left: -1px; // Para que se peguen bien
+
+    &:focus,
+    &:hover {
+      color: #dee2e6; // Mantiene el color del texto
+      background-color: lighten($color-primary, 15%); // Un fondo más claro al hacer hover
+      border-color: $color-primary; // Borde del mismo color al hacer hover/focus
+
+    }
+
+    // Si estás usando los iconos de Font Awesome, asegúrate de que se vean bien
+    i.fas {
+      font-size: 1rem; // Tamaño de ícono estándar
+      vertical-align: middle; // Alineación vertical
+    }
   }
 }

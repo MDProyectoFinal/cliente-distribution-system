@@ -1,0 +1,127 @@
+// src/_pedidos-variables.scss
+@import "src/_variables.scss"; // Importa tus variables generales si es necesario
+
+.estado-badge {
+  display: inline-block;
+  padding: $base-spacing * 0.35 $base-spacing * 0.75;
+  border-radius: $base-spacing * 0.65;
+  font-size: $base-spacing * 0.75;
+  font-weight: $heading-font-weight;
+  text-align: center;
+  white-space: nowrap;
+
+  &.pendiente {
+    background-color: #ffc107;
+    color: $text-color;
+  }
+  &.autorizacion {
+    background-color: $color-primary;
+    color: $white-background;
+  }
+  &.preparacion {
+    background-color: #fd7e14;
+    color: $white-background;
+  }
+  &.empaquetado {
+    background-color: #0d6efd;
+    color: $white-background;
+  }
+  &.despacho {
+    background-color: #6f42c1;
+    color: $white-background;
+  }
+  &.distribucion {
+    background-color: #20c997;
+    color: $text-color;
+  }
+  &.facturacion {
+    background-color: #6610f2;
+    color: $white-background;
+  }
+  &.cancelado {
+    background-color: $color-danger;
+    color: $white-background;
+  }
+  &.completado {
+    background-color: $promo-color;
+    color: $white-background;
+  }
+}
+
+.estado-contador {
+  font-size: $base-spacing * 0.9;
+  td:first-child {
+    color: $color-primary;
+    font-weight: 500;
+  }
+  td:last-child {
+    color: $text-color;
+  }
+}
+
+.product-detail-item {
+  border-bottom: 1px solid lighten($text-color, 65%);
+  padding-bottom: $base-spacing;
+  margin-bottom: $base-spacing;
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+.product-image {
+  flex-shrink: 0;
+}
+
+.product-info {
+  flex-grow: 1;
+}
+
+// Estilos de la tabla de resumen si se usa en el admin
+.card {
+  .table {
+    td {
+      &.pendiente {
+        color: #ffc107;
+        font-weight: $heading-font-weight;
+      }
+      &.autorizacion {
+        color: $color-primary;
+        font-weight: $heading-font-weight;
+      }
+      &.preparacion {
+        color: #fd7e14;
+        font-weight: $heading-font-weight;
+      }
+      &.empaquetado {
+        color: #0d6efd;
+        font-weight: $heading-font-weight;
+      }
+      &.despacho {
+        color: #6f42c1;
+        font-weight: $heading-font-weight;
+      }
+      &.distribucion {
+        color: #20c997;
+        font-weight: $heading-font-weight;
+      }
+      &.facturacion {
+        color: #6610f2;
+        font-weight: $heading-font-weight;
+      }
+      &.cancelado {
+        color: $color-danger;
+        font-weight: $heading-font-weight;
+      }
+      &.completado {
+        color: $promo-color;
+        font-weight: $heading-font-weight;
+      }
+    }
+  }
+}
+
+table.table thead th {
+    border-top: none;
+}

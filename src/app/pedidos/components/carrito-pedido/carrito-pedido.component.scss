@@ -1,38 +1,55 @@
-@import "/src/app/app.component.scss";
-.detalle-carrito {
-  padding: 2rem;
 
-  .container-carrito {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+@import 'src/_variables.scss';
 
-    .carrito {
-      width: 70%;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 1rem;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-      .borde-productos {
-        padding: 1rem;
-      }
-    }
+.carrito.card {
+  border: none;
+  border-radius: $base-spacing * 0.75;
+  box-shadow: 0 $base-spacing * 0.25 $base-spacing * 0.5 rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+}
 
-    .total-carrito {
-      width: 30%;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 1rem;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      margin-left: 3rem;
 
-      .total {
-        text-align: center;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
-      }
+.total-carrito.card {
+  border: none;
+  border-radius: $base-spacing * 0.75;
+  box-shadow: 0 $base-spacing * 0.25 $base-spacing * 0.5 rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+}
+
+.card-carrito .btn {
+  margin-top: $base-spacing;
+}
+
+.card-footer{
+  background-color: lighten($color-secondary, 40%);
+}
+
+.total-carrito .card-title {
+  color: $color-primary;
+  font-weight: $heading-font-weight;
+}
+
+.total-carrito .total {
+  font-size: $base-spacing * 1.5;
+  color: $color-primary;
+}
+
+.checkout-fixed-mobile {
+  z-index: 1030;
+  .total-fixed {
+    font-size: $base-spacing * 1.25;
+    color: $color-primary;
+    white-space: nowrap;
+  }
+  .btn {
+    font-weight: $heading-font-weight;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 767.98px) {
+    body {
+      padding-bottom: 70px;
     }
   }
 }

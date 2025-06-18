@@ -1,117 +1,215 @@
-@import "/src/app/app.component.scss";
+@import "src/_variables.scss";
+@import "../../../_pedidos-variables.scss";
 
-/* Estilos para la línea de separación */
-hr.lineaSeparacion {
-  border: 0;              /* Elimina el borde predeterminado */
-  border-top: 1px solid rgb(109, 105, 105); /* Línea superior con color y grosor */
-  margin: 10px 0;         /* Espaciado vertical */
-  width: 100%;             /* Ancho de la línea (opcional) */
-  border-radius: 5px;     /* Redondear las esquinas */
-}
-.estado {
-  margin-top: 1rem;
-  white-space: nowrap;
-  padding: 5px;
-  border-radius: 12px;
-  text-align: center;
-  display: inline-block;
-  min-width: 80%;
-  margin-inline: 1rem;
-
-  &.pendiente {
-    background-color: rgb(226, 226, 109);
-    color: rgb(0, 0, 0);
-  }
-
-  &.autorizacion {
-    background-color: green;
-    color: white;
-  }
-
-  &.preparacion {
-    background-color: rgb(234, 123, 54);
-    color: black;
-  }
-
-  &.empaquetado {
-    background-color: rgb(13, 59, 129);
-    color: white;
-  }
-
-  &.despacho {
-    background-color: rgb(121, 6, 145);
-    color: white;
-  }
-
-  &.distribucion {
-    background-color: rgb(6, 101, 145);
-    color: white;
-  }
-
-  &.facturacion {
-    background-color: rgb(89, 105, 72);
-    color: white;
-  }
-
-  &.cancelado {
-    background-color: rgb(154, 39, 39);
-    color: white;
-  }
-
-  &.completado {
-    background-color: rgb(39, 154, 54);
-    color: white;
-  }
-}
-
-.estado-contador{
-  font-size: smaller;
-}
-
-.content {
-  margin-bottom: 80px; /* Ajusta este valor según la altura del footer */
-}
-
-//***** DETALLE PRODUCTO *******//
-.producto-detalle {
+.section-header {
   display: flex;
-  align-items: center; /* Alinea verticalmente la imagen y la información */
-  gap: 20px; /* Espacio entre la imagen y la información */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $base-spacing * 0.75;
 }
 
-.producto-imagen img {
-  border-radius: 5px; /* Bordes redondeados para la imagen */
+.filters-title {
+  color: $color-primary;
+  font-weight: $heading-font-weight;
+  font-size: $base-spacing * 1.25;
+  margin-bottom: 0;
 }
 
-.producto-info {
-  flex-grow: 1; /* Hace que el texto ocupe todo el espacio restante */
+form {
+  background-color: $light-background;
+  border: 1px solid rgba($color-primary, 0.1);
+  border-radius: $base-spacing * 0.75;
+  box-shadow: $shadow-sm;
+  padding: $base-spacing * 1.5;
+  .form-label {
+    color: $color-primary;
+    font-weight: 600;
+    margin-bottom: $base-spacing * 0.25;
+  }
+  .form-control,
+  .form-select {
+    border: 1px solid $color-primary !important;
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.05);
+    &:focus {
+      border-color: $color-secondary !important;
+      box-shadow: 0 0 0 0.2rem rgba($color-secondary, 0.25);
+    }
+  }
+  .btn-primary {
+    @extend .btn-primary;
+  }
 }
 
-//***** MODAL CAMBIAR ESTADO *******//
-/* Fondo del modal */
-.modal-content {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+.form-control,
+.form-select {
+  border: 1px solid $color-primary !important;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.05);
+  height: 38px; // Por ejemplo, la altura por defecto de form-control en Bootstrap 4
+  &:focus {
+    border-color: $color-secondary !important;
+    box-shadow: 0 0 0 0.2rem rgba($color-secondary, 0.25);
+  }
 }
 
-/* Estilo del título */
-.modal-header h5 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
+.table-responsive {
+  border-radius: $base-spacing * 0.75;
+  box-shadow: $shadow-md;
+  background-color: $white-background;
+  padding: $base-spacing;
 }
 
-/* Texto del cuerpo */
-.modal-body p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #555;
+.table {
+  thead {
+    th {
+      color: $color-primary;
+      font-weight: $heading-font-weight;
+      border-bottom: 2px solid lighten($color-primary, 30%);
+      padding-bottom: $base-spacing * 0.75;
+      text-align: center;
+    }
+  }
+  tbody {
+    td {
+      padding: $base-spacing * 0.75;
+      vertical-align: middle;
+      color: $text-color;
+      border-top: 1px solid lighten($text-color, 65%);
+      text-align: center;
+    }
+    tr:first-child td {
+      border-top: none;
+    }
+  }
 }
 
-/* Destacar el estado actual y el próximo estado */
-.modal-body strong {
-  font-weight: bold;
-  color: #007bff;
+.table td .btn {
+  font-size: $base-spacing * 0.75;
+  padding: $base-spacing * 0.35 $base-spacing * 0.55;
+  border-radius: $base-spacing * 0.25;
+
+  &.btn-info {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    color: $white-background;
+    &:hover {
+      background-color: darken($color-primary, 5%);
+      border-color: darken($color-primary, 7.5%);
+    }
+  }
+  &.btn-secondary {
+    background-color: $color-secondary;
+    border-color: $color-secondary;
+    color: $white-background;
+    &:hover {
+      background-color: darken($color-secondary, 5%);
+      border-color: darken($color-secondary, 7.5%);
+    }
+  }
+  &.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: $text-color;
+    &:hover {
+      background-color: darken(#ffc107, 7.5%);
+      border-color: darken(#ffc107, 10%);
+    }
+  }
+  &.btn-danger {
+    background-color: $color-danger;
+    border-color: $color-danger;
+    &:hover {
+      background-color: darken($color-danger, 5%);
+      border-color: darken($color-danger, 7.5%);
+    }
+  }
 }
 
+app-modal-cancelar-confirmar {
+  .modal-content {
+    background-color: $white-background;
+    border-radius: $base-spacing * 0.75;
+    box-shadow: $shadow-lg;
+    padding: $base-spacing * 1.5;
+  }
+
+  .modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .modal-title {
+    font-size: $base-spacing * 1.25;
+    font-weight: $heading-font-weight;
+    color: $color-primary;
+  }
+
+  .modal-body-content {
+    padding: $base-spacing;
+    .text-secondary {
+      color: lighten($text-color, 15%) !important;
+    }
+    p.font-weight-bold {
+      font-weight: $heading-font-weight !important;
+      color: $text-color;
+    }
+  }
+
+  .producto-imagen img {
+    border-radius: $base-spacing * 0.5;
+    object-fit: contain;
+  }
+  .producto-info {
+    ul {
+      li {
+        font-size: $base-spacing * 0.9;
+        color: $text-color;
+        span {
+          font-weight: $heading-font-weight;
+          color: $color-primary;
+        }
+      }
+    }
+  }
+}
+#collapseSummaryMobile {
+  .table {
+    td {
+      &.pendiente {
+        color: #ffc107; // Color de Bootstrap warning
+        font-weight: $heading-font-weight; // Opcional: para que resalte
+      }
+      &.autorizacion {
+        color: $color-primary;
+        font-weight: $heading-font-weight;
+      }
+      &.preparacion {
+        color: #fd7e14; // Naranja
+        font-weight: $heading-font-weight;
+      }
+      &.empaquetado {
+        color: #0d6efd; // Azul
+        font-weight: $heading-font-weight;
+      }
+      &.despacho {
+        color: #6f42c1; // Púrpura
+        font-weight: $heading-font-weight;
+      }
+      &.distribucion {
+        color: #20c997; // Verde agua
+        font-weight: $heading-font-weight;
+      }
+      &.facturacion {
+        color: #6610f2; // Índigo
+        font-weight: $heading-font-weight;
+      }
+      &.cancelado {
+        color: $color-danger; // Usar tu $color-danger
+        font-weight: $heading-font-weight;
+      }
+      &.completado {
+        color: $promo-color; // Usar tu $promo-color
+        font-weight: $heading-font-weight;
+      }
+    }
+  }
+}

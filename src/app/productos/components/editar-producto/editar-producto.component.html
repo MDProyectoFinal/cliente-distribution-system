@@ -1,87 +1,82 @@
-<hr />
+<div class="container mt-4">
+  <h3 class="page-title">
+    {{ isAgregar ? "Nuevo Producto" : "Editar Producto" }}
+  </h3>
 
-<div class="row">
-  <div class="col-lg-6">
-    <form [formGroup]="productoForm" (ngSubmit)="enviar()" class="col-md-7">
-      <div class="campo">
-        <label>Nombre:</label>
-        <input formControlName="nombre" type="text" class="form-control" />
-        <div *ngIf="productoForm.get('nombre')?.invalid && (productoForm.get('nombre')?.dirty || productoForm.get('nombre')?.touched)" class="alert alert-danger">Nombre es requerido</div>
-      </div>
-
-      <div class="campo">
-        <label>Descripcion:</label>
-        <input formControlName="descripcion" type="text" class="form-control" />
-        <div *ngIf="productoForm.get('descripcion')?.invalid && (productoForm.get('descripcion')?.dirty || productoForm.get('descripcion')?.touched)" class="alert alert-danger">Descripcion es requerida</div>
-      </div>
-
-      <div class="campo">
-        <label>Precio Unitario:</label>
-        <input formControlName="precio_unitario" type="text" class="form-control" />
-        <div *ngIf="productoForm.get('precio_unitario')?.invalid && (productoForm.get('precio_unitario')?.dirty || productoForm.get('precio_unitario')?.touched)" class="alert alert-danger">Precio Unitario es requerido y debe ser un número</div>
-      </div>
-
-      <div class="campo">
-        <label>Destacado:</label>
-        <input formControlName="destacado" type="checkbox" class="mx-2" />
-
-      </div>
-
-      <div class="campo">
-        <label>Stock:</label>
-        <input formControlName="stock" type="text" class="form-control" />
-        <div *ngIf="productoForm.get('stock')?.invalid && (productoForm.get('stock')?.dirty || productoForm.get('stock')?.touched)" class="alert alert-danger">Stock es requerido y debe ser un número entero</div>
-      </div>
-
-      <div class="campo">
-        <label>Tipo:</label>
-        <select formControlName="tipoProducto" class="form-control" style="width: 200px">
-          <option *ngFor="let tipo of tiposProductos" [value]="tipo._id">{{ tipo.descripcion }}</option>
-        </select>
-        <div *ngIf="productoForm.get('tipoProducto')?.invalid && (productoForm.get('tipoProducto')?.dirty || productoForm.get('tipoProducto')?.touched)" class="alert alert-danger">Tipo de producto es requerido</div>
-      </div>
-
-      <br />
-
-      <div>
-        <img class="img-producto" [src]="urlImagen" [alt]="productoForm.get('nombre')?.value" *ngIf="urlImagen" />
-        <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
-        <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
-      </div>
-      <br />
-
-      <div class="precio-promocional" *ngIf="producto.promocionActiva; else btnNuevaPromocion">
-        <p>
-          Precio promocional: <span class="precio"> {{ producto.promocionActiva.precio | currency:'ARS' }}</span>
-        </p>
-        <div class="d-flex">
-
-          <!-- <a [routerLink]="['/promociones', producto.promocionActiva._id]" routerLinkActive="router-link-active" title="Promociones"><i class="fa fa-edit"></i></a> -->
-          <a (click)="abrirModal()" routerLinkActive="router-link-active" title="Promociones"><i class="fa fa-edit"></i></a>
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <form [formGroup]="productoForm" (ngSubmit)="enviar()">
+        <div class="form-group mb-3">
+          <label for="nombre">Nombre:</label>
+          <input id="nombre" formControlName="nombre" type="text" class="form-control" />
+          <div *ngIf="productoForm.get('nombre')?.invalid && (productoForm.get('nombre')?.dirty || productoForm.get('nombre')?.touched)" class="alert alert-danger mt-1">Nombre es requerido</div>
         </div>
-      </div>
 
-      <ng-template #btnNuevaPromocion>
-        <div *ngIf="!isAgregar">
-          <a class="btn-primary px-2 py-1" [routerLink]="['/admin/productos', producto._id, 'promociones']" routerLinkActive="router-link-active">Nueva Promoción</a>
+        <div class="form-group mb-3">
+          <label for="descripcion">Descripción:</label>
+          <input id="descripcion" formControlName="descripcion" type="text" class="form-control" />
+          <div *ngIf="productoForm.get('descripcion')?.invalid && (productoForm.get('descripcion')?.dirty || productoForm.get('descripcion')?.touched)" class="alert alert-danger mt-1">Descripción es requerida</div>
         </div>
-      </ng-template>
 
-      <button (click)="back()" type="button" class="btn-cancelar mt-3">Cancelar</button>
-      <button class="btn-primary" type="submit">{{isAgregar ? 'Guardar' : 'Editar'}}</button>
-    </form>
+        <div class="form-group mb-3">
+          <label for="precio_unitario">Precio Unitario:</label>
+          <input id="precio_unitario" formControlName="precio_unitario" type="text" class="form-control" />
+          <div *ngIf="productoForm.get('precio_unitario')?.invalid && (productoForm.get('precio_unitario')?.dirty || productoForm.get('precio_unitario')?.touched)" class="alert alert-danger mt-1">Precio Unitario es requerido y debe ser un número</div>
+        </div>
 
-    <br><br><br>
+        <div class="form-group form-check mb-3">
+          <input id="destacado" formControlName="destacado" type="checkbox" class="form-check-input" />
+          <label class="form-check-label mx-2" for="destacado">Destacado</label>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="stock">Stock:</label>
+          <input id="stock" formControlName="stock" type="text" class="form-control" />
+          <div *ngIf="productoForm.get('stock')?.invalid && (productoForm.get('stock')?.dirty || productoForm.get('stock')?.touched)" class="alert alert-danger mt-1">Stock es requerido y debe ser un número entero</div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="tipoProducto">Tipo:</label>
+          <select id="tipoProducto" formControlName="tipoProducto" class="form-control" style="width: 200px">
+            <option *ngFor="let tipo of tiposProductos" [value]="tipo._id">{{ tipo.descripcion }}</option>
+          </select>
+          <div *ngIf="productoForm.get('tipoProducto')?.invalid && (productoForm.get('tipoProducto')?.dirty || productoForm.get('tipoProducto')?.touched)" class="alert alert-danger mt-1">Tipo de producto es requerido</div>
+        </div>
+
+        <div class="mb-4">
+          <img class="img-fluid img-thumbnail img-producto" [src]="urlImagen" [alt]="productoForm.get('nombre')?.value" *ngIf="urlImagen" />
+          <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
+          <label for="btn-subir-imagen" class="btn btn-outline-primary mt-3">Seleccione una imagen</label>
+        </div>
+
+        <div class="promo-admin-box mb-3" *ngIf="producto.promocionActiva; else btnNuevaPromocion">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="mb-0">
+              <i class="fas fa-tags me-2 promo-icon"></i>
+              Precio Promocional Activo: <span class="precio-promocional-admin">{{ producto.promocionActiva.precio | currency : "ARS" }}</span>
+            </p>
+            <div>
+              <a (click)="abrirModal()" title="Editar Promoción" class="btn btn-sm btn-outline-secondary"> <i class="fas fa-edit me-1"></i> Editar </a>
+            </div>
+          </div>
+          <p class="promo-vigencia-admin mb-0 mt-1"><i class="far fa-calendar-alt me-1"></i> Vigente hasta: {{ producto.promocionActiva.fecha_fin | date : "dd/MM/yyyy HH:mm" }}</p>
+        </div>
+
+        <ng-template #btnNuevaPromocion>
+          <div *ngIf="!isAgregar" class="mb-3">
+            <a class="btn btn-primary btn-sm" [routerLink]="['/admin/productos', producto._id, 'promociones']" routerLinkActive="router-link-active">Nueva Promoción</a>
+          </div>
+        </ng-template>
+
+        <div class="d-flex justify-content-start mt-4">
+          <button (click)="back()" type="button" class="btn btn-light me-2">Cancelar</button>
+          <button class="btn btn-primary mx-2" type="submit">{{ isAgregar ? "Guardar" : "Editar" }}</button>
+        </div>
+      </form>
+    </div>
   </div>
-
-  <app-modal-cancelar-confirmar #modal [title]="'EDIT'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
-
-  <app-editar-promocion *ngIf="producto?.promocionActiva" #editarPromocion [promocion]="producto?.promocionActiva" [precioProducto]="producto?.precio_unitario" />
-
-  </app-modal-cancelar-confirmar>
-
 </div>
 
-<!-- <app-editar-promocion [promocion]="producto?.promocionActiva" [precioProducto]="producto?.precio_unitario" /> -->
-
-
+<app-modal-cancelar-confirmar #modal [title]="'EDIT'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
+  <app-editar-promocion *ngIf="producto?.promocionActiva" #editarPromocion [promocion]="producto?.promocionActiva" [precioProducto]="producto?.precio_unitario" />
+</app-modal-cancelar-confirmar>

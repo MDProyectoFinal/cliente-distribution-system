@@ -1,151 +1,185 @@
-@import "/src/app/app.component.scss";
+/* src/app/productos/components/listado-productos/listado-productos.component.scss */
 
-.cards-container{
+@import 'src/_variables.scss';
+
+.filters-title {
+  color: $color-primary;
+  font-weight: $heading-font-weight;
+  font-size: $base-spacing * 1.25;
+}
+
+.product-cards-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  margin-right: -($base-spacing * 0.75);
+  margin-left: -($base-spacing * 0.75);
+
+  .col-12, .col-sm-6, .col-md-4, .col-lg-3 {
+    padding-right: $base-spacing * 0.75;
+    padding-left: $base-spacing * 0.75;
+    padding-bottom: $base-spacing * 1.25;
+  }
 }
 
-.card {
-  margin: 1em;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  min-height: 20vh;
+.product-card {
+  background-color: $white-background;
+  border: none;
+  border-radius: $base-spacing * 0.75;
+  padding: $base-spacing;
+  box-shadow: 0 $base-spacing * 0.25 $base-spacing * 0.5 rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-  flex-basis: calc(24% - 2em);
-  flex: 1 1 calc(24% - 2em);
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  min-height: $base-spacing * 20;
 }
 
-.imagen {
+.product-card:hover {
+  transform: translateY(-$base-spacing * 0.625);
+  box-shadow: 0 $base-spacing * 0.5 $base-spacing * 1 rgba(0, 0, 0, 0.25);
+}
+
+.product-image {
   width: 100%;
-  height: 20vh;
-  padding: 1rem;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  max-height: $base-spacing * 9.375;
+  object-fit: contain;
+  border-radius: $base-spacing * 0.5;
+  margin-bottom: $base-spacing * 0.625;
+  padding: 0;
+  border: none;
 }
 
 .card-body {
-  padding: 0.8em;
+  padding: $base-spacing * 0.75;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.card-title {
-  font-weight: bold;
+.product-title {
+  font-weight: $heading-font-weight;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: center;
   text-transform: uppercase;
   color: $color-primary;
+  font-size: $base-spacing * 1.05;
+  margin-bottom: $base-spacing * 0.25;
 }
 
-.card-text {
+.product-description {
   overflow-y: auto;
-  max-height: 10vh;
-  color: #666;
-  flex-grow: 1; /* Ocupa el espacio disponible */
+  max-height: $base-spacing * 4;
+  color: lighten($text-color, 15%);
+  flex-grow: 1;
+  font-size: $base-spacing * 0.85;
+  line-height: 1.4;
+  margin-bottom: $base-spacing * 0.5;
+  text-align: center;
 }
 
 .precios {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 0.5em;
-  display: flex;
-  justify-content: center;
-  letter-spacing: 0.1rem;
-  font-weight: bold;
-  color: $color-primary
+  margin-top: $base-spacing * 0.5;
+  margin-bottom: $base-spacing * 0.75;
+  font-weight: 700;
+  color: $color-primary;
+  letter-spacing: 0.05rem;
 }
 
-.sin-stock{
+.sin-stock {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: $white-background;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-decoration: underline;
+  font-size: $base-spacing * 1.8;
+  font-weight: $heading-font-weight;
+  text-decoration: none;
+  text-transform: uppercase;
+  z-index: 5;
+  border-radius: $base-spacing * 0.75;
 }
 
 .precio-unitario {
-  font-size: 1.2em;
-  margin-right: 1em;
+  font-size: $base-spacing * 1.1;
+  margin-right: 0;
+}
 
-  &.tiene-promocion {
-    text-decoration: line-through;
-    color: #b0b0b0;
-    margin-left: 0.3em;
-    letter-spacing: 0.05rem;
-  }
+.original-price {
+  text-decoration: line-through;
+  color: lighten($text-color, 30%);
+  font-size: $base-spacing * 0.9;
+  font-weight: 400;
+  margin-top: $base-spacing * 0.125;
 }
 
 .precio-promocion {
-  letter-spacing: 0.05rem;
-  color: green;
-  font-weight: bold;
-  font-size: 1.5em;
+  letter-spacing: 0.02rem;
+  color: $promo-color;
+  font-weight: $heading-font-weight;
+  font-size: $base-spacing * 1.3;
+  margin-bottom: $base-spacing * 0.125;
 }
 
-
-.btn-primary{
+.btn-primary {
   width: 100%;
   text-transform: uppercase;
-  font-size: small;
-  font-weight: 600;
+  font-size: $base-spacing * 0.85;
+  font-weight: $heading-font-weight;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-top: auto;
+  border-radius: $base-spacing * 0.25;
+}
 
+.btn-light {
+  background-color: $light-background;
+  border-color: $light-background;
+  color: $text-color;
+  &:hover {
+    background-color: darken($light-background, 5%);
+    border-color: darken($light-background, 7.5%);
+  }
 }
 
 .paginador-productos {
   text-align: center;
   display: block;
   background-color: transparent;
+  margin-top: $base-spacing * 2;
+  margin-bottom: $base-spacing * 2;
 }
 
+@media (max-width: 767.98px) {
+  .product-cards-grid {
+    margin-right: -($base-spacing * 0.46875);
+    margin-left: -($base-spacing * 0.46875);
 
-@media (max-width: 768px) {
-  .card {
-    margin: 0.5em;
+    .col-12, .col-sm-6 {
+      padding-right: $base-spacing * 0.46875;
+      padding-left: $base-spacing * 0.46875;
+      padding-bottom: $base-spacing * 0.9375;
+    }
   }
 
-  .imagen {
-    height: 15vh;
+  .product-card {
+    min-height: $base-spacing * 16;
   }
-
-  .card-body {
-    padding: 0.5em;
-  }
-
-  .card-title {
-    font-size: 1.2em;
-  }
-
-  .descripcion {
-    font-size: 0.8em;
-  }
-
-  .precios {
-    flex-direction: column;
-  }
-
-  .precio-unitario {
-    font-size: 1em;
-  }
-
-  .precio-promocion {
-    font-size: 1.2em;
+  .product-image {
+    height: $base-spacing * 8;
   }
 }

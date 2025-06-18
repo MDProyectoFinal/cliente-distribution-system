@@ -1,21 +1,26 @@
-<div style="margin-top: 2rem">
-  <h3 class="page-title">Listado de Productos</h3>
+<div class="container mt-4"> <h3 class="page-title">Listado de Productos</h3>
 
-  <shared-buscador placeholder="Ingresar nombre producto" (onValue)="buscarProductoPorNombre($event)"></shared-buscador>
+  <div class="row mb-4 align-items-center">
+    <div class="col-md-8 col-lg-9">
+      <shared-buscador placeholder="Ingresar nombre producto" (onValue)="buscarProductoPorNombre($event)"></shared-buscador>
+    </div>
+    <div class="col-md-4 col-lg-3 text-md-right mt-3 mt-md-0"> <a class="btn btn-primary btn-nuevo-producto" [routerLink]="['nuevo']" routerLinkActive="router-link-active">Nuevo Producto</a>
+    </div>
+  </div>
 
-  <a class="btn-nuevo-producto" [routerLink]="['nuevo']" routerLinkActive="router-link-active">Nuevo</a>
-
-  <ul>
-    <li class="producto-lista flex justify-content-between" *ngFor="let prod of productosFiltrados">
+  <div class="list-group"> <li class="list-group-item d-flex justify-content-between align-items-center producto-lista" *ngFor="let prod of productosFiltrados">
       <span class="nombre-producto">{{ prod.nombre }}</span>
-      <!-- <a [routerLink]="['promociones', prod._id]" routerLinkActive="router-link-active"> <fa-icon [icon]="promoIcon"></fa-icon></a> -->
-      <a [routerLink]="[prod._id, 'promociones']" routerLinkActive="router-link-active" title="Promociones"> <i class="fa fa-dollar"></i></a>
-      <a [routerLink]="['detalle', prod._id]" routerLinkActive="router-link-active" title="Ver detalle"><i class="fa fa-edit"></i></a>
-      <a (click)="confirmarEliminacion(prod._id)" title="Eliminar">
-        <i class="fa fa-trash"></i>
-      </a>
+      <div class="d-flex"> <a [routerLink]="[prod._id, 'promociones']" routerLinkActive="router-link-active" title="Promociones" class="btn btn-sm btn-outline-secondary mr-2"> <i class="fas fa-dollar-sign"></i> </a>
+        <a [routerLink]="['detalle', prod._id]" routerLinkActive="router-link-active" title="Ver detalle" class="btn btn-sm btn-outline-info mr-2">
+          <i class="fas fa-edit"></i> </a>
+        <a (click)="confirmarEliminacion(prod._id)" title="Eliminar" class="btn btn-sm btn-outline-danger">
+          <i class="fas fa-trash"></i> </a>
+      </div>
     </li>
-  </ul>
+  </div>
 
-  <paginador class="paginador-productos" *ngIf="infoPagina" [paginaActual]="infoPagina.paginaActual" [linkSiguiente]="infoPagina.linkSiguiente" [linkAnterior]="infoPagina.linkAnterior" [totalPaginas]="infoPagina.totalPaginas" [totalElementos]="infoPagina.totalElementos" (navegar)="irPagina($event)" (navegarAnterior)="navegarAnterior()" (navegarSiguiente)="navegarSiguiente()"></paginador>
+  <div class="d-flex justify-content-center">
+    <paginador class="paginador-productos" *ngIf="infoPagina" [paginaActual]="infoPagina.paginaActual" [linkSiguiente]="infoPagina.linkSiguiente" [linkAnterior]="infoPagina.linkAnterior" [totalPaginas]="infoPagina.totalPaginas" [totalElementos]="infoPagina.totalElementos" (navegar)="irPagina($event)" (navegarAnterior)="navegarAnterior()" (navegarSiguiente)="navegarSiguiente()"></paginador>
+  </div>
+
 </div>

@@ -1,10 +1,27 @@
-@import "/src/app/app.component.scss";
+/* src/app/productos/components/editar-promocion/editar-promocion.component.scss */
 
-#activa{
-    margin-top: 1rem;;
-    margin-left: 2rem;
+@import 'src/_variables.scss';
+
+// Estilos para el checkbox 'Activa'
+.form-check-input {
+    width: $base-spacing * 1.25;
+    height: $base-spacing * 1.25;
 }
 
-.campo {
-    margin-top: 1rem;
-  }
+.form-check-label {
+    margin-bottom: 0;
+}
+
+// --- Estilos para la distinción de precios ---
+.precio-base-info {
+  font-size: $base-spacing * 1.1; // Un poco más grande que el texto normal
+  color: lighten($text-color, 10%); // Un gris ligeramente más claro
+  font-weight: 500; // Semi-negrita
+  // Eliminamos text-decoration: line-through
+}
+
+.precio-promocional-calculado {
+  font-size: $base-spacing * 1.5; // Tamaño significativamente más grande para el precio promocional
+  font-weight: 700; // Muy negrita para destacarlo
+  color: $promo-color; // Usamos tu variable $promo-color
+}

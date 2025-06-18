@@ -1,54 +1,122 @@
+@import 'src/_variables.scss';
+
 .modal {
-    display: none;
-    position: fixed;
-    top: 4rem;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-  }
+  display: none; // Por defecto no se muestra
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6); // Fondo semitransparente
+  z-index: 1050; // Z-index alto para asegurar que esté por encima de otros elementos
+  // Añadir flexbox para centrar el modal vertical y horizontalmente si no lo hace Bootstrap
+  // Si display: none, estas propiedades no tienen efecto, se aplicarán al activar .show
+  display: flex; // Mantener flexbox para centrado cuando sea visible
+  align-items: center; // Centrado vertical
+  justify-content: center; // Centrado horizontal
+}
 
-  .modal.show {
-    display: block;
-  }
+.modal.show {
+  display: flex; // CAMBIO CLAVE: Usa flex para mostrar el modal y permitir el centrado
+}
 
-  .modal-dialog {
-    margin: 40px auto;
-    max-width: 600px;
-  }
+.modal-dialog {
+  max-width: $base-spacing * 30;
+  width: 90%;
+  margin: $base-spacing;
+  position: relative;
+}
 
-  .modal-content {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
+.modal-content {
+  background-color: $white-background;
+  border-radius: 0;
+  box-shadow: $shadow-md;
+  border: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: hidden;
+}
 
-  .modal-header {
-    border-bottom: 1px solid #ddd;
-    padding: 15px;
-  }
+.modal-header {
+  border-bottom: 1px solid lighten($text-color, 40%);
+  padding: $base-spacing;
+  display: flex;
+  justify-content: space-between; // Espacio entre título y botón cerrar
+  align-items: center;
+  background-color: $color-primary; // Color de fondo más oscuro
+  color: $white-background; // Texto blanco
+  border-top-left-radius: 0; // CAMBIO CLAVE: Esquinas superiores cuadradas
+  border-top-right-radius: 0;
+}
 
-  .modal-title {
-    font-size: 18px;
-    font-weight: bold;
-  }
+.modal-title {
+  font-size: $base-spacing * 1.125;
+  font-weight: $heading-font-weight;
+  color: $white-background;
+}
 
-  .modal-body {
-    padding: 15px;
-  }
+.modal-body {
+  padding: $base-spacing;
+  flex-grow: 1;
+  overflow-y: auto;
+}
 
-  .modal-footer {
-    border-top: 1px solid #ddd;
-    padding: 15px;
-    text-align: right;
-  }
+.modal-footer {
+  border-top: 1px solid lighten($text-color, 40%);
+  padding: $base-spacing;
+  display: flex;
+  justify-content: flex-end;
+  gap: $base-spacing * 0.5;
+  border-bottom-left-radius: 0; // CAMBIO CLAVE: Esquinas inferiores cuadradas
+  border-bottom-right-radius: 0;
+}
 
-  .close {
-    cursor: pointer;
-    font-size: 24px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+// VUELVE: Estilos para el botón de cerrar (`.close`)
+.close {
+  cursor: pointer;
+  font-size: $base-spacing * 1.5;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  color: $white-background; // Color blanco para contrastar con el header oscuro
+  opacity: 0.8; // Ligera opacidad
+  margin-left: $base-spacing * 0.5; // Espacio a la izquierda para separarlo del título si es necesario
+  &:hover {
+    opacity: 1;
+    color: lighten($white-background, 10%); // Un blanco un poco más brillante al pasar el ratón
   }
+}
+
+// Estilos para el botón "Cancelar" (`btn-modal-cancel`)
+.btn-modal-cancel {
+    background-color: #dee2e6;
+    border-color: #dee2e6;
+    color: $text-color;
+    transition: all 0.2s ease-in-out;
+    // Eliminamos border-radius si los queremos cuadrados
+    border-radius: 0;
+
+    &:hover {
+        background-color: darken(#dee2e6, 10%);
+        border-color: darken(#dee2e6, 12%);
+        color: $text-color;
+    }
+}
+
+// NUEVO: Estilos para el botón "Confirmar" (`btn-modal-confirm`)
+.btn-modal-confirm {
+    background-color: $color-primary; // Mismo color que el header
+    border-color: $color-primary;
+    color: $white-background; // Texto blanco para contrastar
+    transition: all 0.2s ease-in-out;
+    // Eliminamos border-radius si los queremos cuadrados
+    border-radius: 0;
+
+    &:hover {
+        background-color: darken($color-primary, 7.5%); // Oscurecer un poco al pasar el ratón
+        border-color: darken($color-primary, 10%);
+        color: $white-background;
+    }
+}

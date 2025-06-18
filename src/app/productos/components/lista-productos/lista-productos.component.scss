@@ -1,53 +1,87 @@
-@import "/src/app/app.component.scss";
+@import 'src/_variables.scss';
 
+/* Otros estilos para tu lista de productos */
 .producto-lista {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  font-weight: 400;
-  border: 1px solid #ccc;
+    background-color: $white-background; // Usando tu variable
+    border: 1px solid #e0e0e0; // Borde sutil
+    border-radius: $base-spacing * .25; // Usando tu variable
+    padding: $base-spacing; // Usando tu variable
+    margin-bottom: $base-spacing * .5; // Usando tu variable
+    align-items: center; // Centra verticalmente los elementos
+    transition: all 0.2s ease-in-out; // Transición para hover
+}
 
-  .nombre-producto {
-    flex: 1 1 auto;
-  }
-  a {
-    margin-right: 1rem;
-    color: $color-secondary;
+.producto-lista:hover {
+    box-shadow: $shadow-md; // Sombra al pasar el ratón
+    transform: translateY(-2px); // Efecto sutil de elevación
+}
 
-    &:hover {
-      color: lighten($color-secondary, 10);
-      cursor: pointer;
+.nombre-producto {
+    font-weight: 700; // Hacemos el nombre más grueso (de 500 a 700)
+    color: $color-primary; // Color primario para el nombre
+    font-size: $base-spacing * 1.1; // Un tamaño ligeramente más grande para destacar
+    flex-grow: 1; // Para que ocupe el espacio disponible
+}
+
+/* Ajustamos los estilos de los enlaces de acción */
+.producto-lista a {
+    // Estas son las clases de Bootstrap que añadiste en el HTML,
+    // así que los estilos de Bootstrap ya están aplicándose a ellas.
+    // Queremos ajustar los colores de los iconos dentro de esos botones.
+    // Los botones de acción ahora son `.btn .btn-sm .btn-outline-*`.
+    // Por lo tanto, estos estilos CSS directos sobre `a` ya no son los ideales.
+    // Necesitamos apuntar a los iconos dentro de los botones.
+    // Si necesitas un color específico para los íconos (que no sea el por defecto del botón),
+    // podrías usar una clase o un selector más específico.
+}
+
+// Estilos para los iconos dentro de los botones de acción (ej. en el HTML son `<i class="fas fa-edit"></i>`)
+.producto-lista .btn {
+    // Sobreescribe los colores de los botones de esquema si lo necesitas.
+    // Bootstrap ya maneja el color del texto (y por ende el icono) para `btn-outline-secondary/info/danger`.
+    // La clave es que el color del icono ya viene del color del texto del botón.
+
+    // Ejemplo para `btn-outline-secondary` (Promociones):
+    &.btn-outline-secondary {
+        color: $color-secondary; // Color del ícono por defecto
+        border-color: $color-secondary; // Borde del mismo color
+        &:hover {
+            background-color: $color-secondary; // Fondo al hacer hover
+            color: $white-background; // Color del ícono al hacer hover
+            border-color: $color-secondary; // Mantiene el borde del mismo color
+        }
     }
-  }
 
-  i {
-    font-size: 1.2rem;
-  }
+    // Ejemplo para `btn-outline-info` (Ver detalle):
+    &.btn-outline-info {
+        color: #17a2b8; // Color del ícono por defecto (info de Bootstrap)
+        border-color: #17a2b8; // Borde del mismo color
+        &:hover {
+            background-color: #17a2b8;
+            color: $white-background;
+            border-color: #17a2b8;
+        }
+    }
+
+    // Ejemplo para `btn-outline-danger` (Eliminar):
+    &.btn-outline-danger {
+        color: #dc3545; // Color del ícono por defecto (danger de Bootstrap)
+        border-color: #dc3545; // Borde del mismo color
+        &:hover {
+            background-color: #dc3545;
+            color: $white-background;
+            border-color: #dc3545;
+        }
+    }
 }
 
-ul {
-  margin-top: 1.5rem;
-  padding: 0;
-}
 
 .btn-nuevo-producto {
-  background-color: $color-secondary;
-  color: white;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
-  display: inline-block;
-  margin-top: 0.5rem;
-
-  &:hover {
-    background-color: lighten($color-secondary, 10);
-    text-decoration: none;
-  }
+    margin-bottom: $base-spacing * 1.5; // Espacio debajo del botón
+    margin-top: $base-spacing; // Espacio encima
+    display: inline-block; // Para que el margen superior funcione
 }
 
 .paginador-productos {
-  text-align: center;
-  display: block;
-  background-color: transparent;
+    margin-top: $base-spacing * 2; // Más espacio para el paginador
 }

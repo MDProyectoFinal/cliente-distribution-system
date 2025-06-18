@@ -1,0 +1,39 @@
+<div class="table-responsive">
+  <table class="table table-hover align-middle mb-0">
+    <thead>
+      <tr>
+        <th>Nro. Pedido</th>
+        <th *ngIf="mostrarColumnaCliente">Cliente</th> <th>Estado</th>
+        <th>Fecha Alta</th>
+        <th>Total</th>
+        <th class="text-center" style="width: 180px">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pedido of pedidos">
+        <td>{{ pedido.idPedido }}</td>
+        <td *ngIf="mostrarColumnaCliente">{{ pedido.cliente.nombre_usuario }}</td> <td>
+          <span [ngClass]="['estado-badge', getEstadoClase(pedido.estado)]">{{ pedido.estado?.toUpperCase() }}</span>
+        </td>
+        <td>{{ pedido.fechaAlta | date : "dd/MM/yy HH:mm" }}</td>
+        <td>{{ pedido.subtotal | currency : "ARS" : "symbol" : "1.2-2" }}</td>
+        <td>
+          <div class="d-flex justify-content-start align-items-center">
+            <button (click)="onVerDetalles(pedido.idPedido)" title="Ver Detalles" class="btn btn-sm btn-info mx-1">
+              <i class="fa fa-eye"></i>
+            </button>
+            <button *ngIf="mostrarBotonCambiarEstado" (click)="onCambiarEstado(pedido.idPedido, pedido.estado)" title="Cambiar estado" class="btn btn-sm btn-secondary mx-1">
+              <i class="fa fa-exchange"></i>
+            </button>
+            <button *ngIf="mostrarBotonMarcarPagado && !pedido.pagado" (click)="onMarcarPagado(pedido._id)" title="Marcar como pagado" class="btn btn-sm btn-warning mx-1">
+              <i class="fa fa-credit-card"></i>
+            </button>
+            <button *ngIf="mostrarBotonCancelar && pedido.estado != 'Cancelado' && pedido.estado != 'Completado'" (click)="onCancelarPedido(pedido.idPedido)" title="Cancelar Pedido" class="btn btn-sm btn-danger mx-1">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
