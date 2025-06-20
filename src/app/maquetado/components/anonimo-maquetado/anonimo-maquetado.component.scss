@@ -1,0 +1,27 @@
+.header-sistema {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 0;
+  position: relative;
+  top: 0;
+  width: 100%;
+
+  // Si querés que quede fijo arriba al hacer scroll, descomentá:
+  // position: fixed;
+  // background-color: white;
+  // z-index: 1000;
+}
+
+.logo-sistema {
+  width: 27px;
+  height: 27px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.titulo-sistema {
+  color: #483DA7;
+  margin: 0;
+}
