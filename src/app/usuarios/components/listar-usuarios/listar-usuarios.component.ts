@@ -28,11 +28,21 @@ export class ListarUsuariosComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.usuarioService.obtenerUsuariosPorNombreUsuario( nombreUsuarioIngresado )
-      .subscribe( (usuarios: UsuarioInterface[]) => {
-        this.listaUsuarios = usuarios;
-        this.isLoading = false;
+    if (nombreUsuarioIngresado?.trim()) {
+      this.usuarioService.obtenerUsuariosPorNombreUsuario( nombreUsuarioIngresado )
+        .subscribe( (usuarios: UsuarioInterface[]) => {
+          this.listaUsuarios = usuarios;
+          this.isLoading = false;
       })
+    }else{
+       this.usuarioService.obtenerUsuarios()
+        .subscribe( (usuarios: UsuarioInterface[]) => {
+          this.listaUsuarios = usuarios;
+          this.isLoading = false;
+      })
+    }
+
+
   }
 
 }
