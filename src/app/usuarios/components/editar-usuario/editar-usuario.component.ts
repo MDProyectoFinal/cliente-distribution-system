@@ -106,29 +106,25 @@ export class EditarUsuarioComponent {
 
         var idUsuario = this.authenticationService.usuarioActual?._id ?? this.authenticationService.decodedToken.sub;
 
-
         // Obtenemos la imagen del usuario
         this._usuarioService.obtenerAvatarUsuario(idUsuario).subscribe({
           next: (imagen: any) => {
             this.urlImagen = imagen;
+
+            // NUEVO LLENADO DE VARIABLES - Actualiza el formulario con los valores iniciales
+            this.myForm.patchValue({
+              id: this.personaEdicion.id, // Ver si es necesario
+              nombre: this.personaEdicion.nombre,
+              apellido: this.personaEdicion.apellido,
+              direccion: this.personaEdicion.direccion,
+              telefono: this.personaEdicion.telefono,
+              //urlImagen: this.urlImagen, //data.user[0].urlImagen,
+              latitud: this.personaEdicion.latitud,
+              longitud: this.personaEdicion.longitud
+            });
+
           },
         });
-
-        console.log(this.personaEdicion);
-
-
-        // NUEVO LLENADO DE VARIABLES - Actualiza el formulario con los valores iniciales
-        this.myForm.patchValue({
-          id: this.personaEdicion.id, // Ver si es necesario
-          nombre: this.personaEdicion.nombre,
-          apellido: this.personaEdicion.apellido,
-          direccion: this.personaEdicion.direccion,
-          telefono: this.personaEdicion.telefono,
-          urlImagen: data.user[0].urlImagen,
-          latitud: this.personaEdicion.latitud,
-          longitud: this.personaEdicion.longitud
-        });
-
       },
       error: (e) => {
          this.alertifyService.alert(this.nombreHeaderAlert, 'No pudieron recuperarse datos personales');
@@ -142,7 +138,6 @@ export class EditarUsuarioComponent {
   }
 
   async onSubmit() {
-
     // Validamos el formulario previo a la actualización y para poder actualizar.
     if (this.myForm.invalid) {
       // Si el formulario es inválido, marcar todos los campos como tocados

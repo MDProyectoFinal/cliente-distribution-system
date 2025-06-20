@@ -78,7 +78,7 @@
       <label>Sube tu foto: </label><br />
 
       <img class="img-avatar-usuario" width="100px" height="100px" [src]="urlImagen" *ngIf="urlImagen" />
-      <input type="file" id="btn-subir-imagen" formControlName="urlImagen" hidden (change)="onImageChanged($event)" />
+      <input type="file" id="btn-subir-imagen" hidden (change)="onImageChanged($event)" />
       <label for="btn-subir-imagen" class="lbl-subir-imagen">Seleccione una imagen</label>
     </div>
 
