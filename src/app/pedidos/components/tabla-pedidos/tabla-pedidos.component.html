@@ -13,7 +13,7 @@
       <tr *ngFor="let pedido of pedidos">
         <td>{{ pedido.idPedido }}</td>
         <td *ngIf="mostrarColumnaCliente">{{ pedido.cliente.nombre_usuario }}</td> <td>
-          <span [ngClass]="['estado-badge', getEstadoClase(pedido.estado)]">{{ pedido.estado?.toUpperCase() }}</span>
+          <span [ngClass]="['estado-badge', getEstadoClase(pedido.estado)]">{{ pedido?.estado?.toUpperCase() }}</span>
         </td>
         <td>{{ pedido.fechaAlta | date : "dd/MM/yy HH:mm" }}</td>
         <td>{{ pedido.subtotal | currency : "ARS" : "symbol" : "1.2-2" }}</td>

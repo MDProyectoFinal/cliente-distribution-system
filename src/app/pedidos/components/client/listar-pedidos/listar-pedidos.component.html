@@ -73,7 +73,17 @@
     <div class="col-12">
       <app-tabla-pedidos [pedidos]="pedidos" [mostrarColumnaCliente]="false" [mostrarBotonCambiarEstado]="false" [mostrarBotonCancelar]="false" (verDetalles)="abrirModal($event)" (marcarPagado)="pagarPedido($event)"> </app-tabla-pedidos>
 
-      <a [href]="'https://wa.me/' + numero + '?text=' + mensaje" target="_blank" class="whatsapp-link mt-5"> <i class="fa fa-whatsapp"></i> ¿Deseas cancelar un pedido? </a>
+      <a [href]="'https://wa.me/' + numero + '?text=' + mensaje"
+         target="_blank"
+         class="whatsapp-link mt-5">
+         <img
+          src="assets/img/logo_wap_blanco-2.png"
+          alt="Logo"
+          class="logo-wap me-10"
+         />
+         <!-- <i class="fa fa-whatsapp"></i>  -->
+            ¿Deseas cancelar un pedido?
+      </a>
     </div>
   </div>
 </div>
