@@ -229,7 +229,7 @@ export class ListaPedidosComponent implements OnInit {
 
     // Seteo el estado "Cancelado" que se envíará la API para cambiar el estado.
     const estadoCancelado = this.estados.find(
-      (estado) => estado === 'Cancelado'
+      (estado) => estado.toLowerCase() === 'cancelado'
     );
     this.proximoEstado = estadoCancelado;
 
