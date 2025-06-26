@@ -248,7 +248,7 @@ export class ListaPedidosComponent implements OnInit {
 
   cambiarEstado(idPedido: string, estadoActual: string): void {
     // Obtenemos el índica del estado actual en el array de estados
-    const indiceEstadoActual = this.estados.indexOf(estadoActual);
+    const indiceEstadoActual = this.estados.indexOf(estadoActual.toUpperCase());
 
     // Verifica si el índice está dentro del rango y devuelve el siguiente estado
     if (
