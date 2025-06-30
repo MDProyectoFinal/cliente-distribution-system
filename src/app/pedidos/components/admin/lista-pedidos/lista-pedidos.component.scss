@@ -21,33 +21,29 @@ form {
   border-radius: $base-spacing * 0.75;
   box-shadow: $shadow-sm;
   padding: $base-spacing * 1.5;
+
   .form-label {
     color: $color-primary;
     font-weight: 600;
     margin-bottom: $base-spacing * 0.25;
   }
-  .form-control,
-  .form-select {
-    border: 1px solid $color-primary !important;
-    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.05);
-    &:focus {
-      border-color: $color-secondary !important;
-      box-shadow: 0 0 0 0.2rem rgba($color-secondary, 0.25);
-    }
-  }
-  .btn-primary {
-    @extend .btn-primary;
-  }
 }
+
 
 .form-control,
 .form-select {
   border: 1px solid $color-primary !important;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.05);
-  height: 38px; // Por ejemplo, la altura por defecto de form-control en Bootstrap 4
+  height: 38px;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  display: block;
+  width: 100%;
+
   &:focus {
     border-color: $color-secondary !important;
-    box-shadow: 0 0 0 0.2rem rgba($color-secondary, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(rgba($color-secondary, 0.25), .25);
   }
 }
 
