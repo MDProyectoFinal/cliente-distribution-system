@@ -79,35 +79,41 @@
   </div>
 </div>
 
-<app-modal-cancelar-confirmar #modal [title]="'VER DETALLE'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
-  <div class="modal-body-content">
-    <div class="row mb-3">
-      <div class="col-md-6"><strong>ID Pedido:</strong> {{ pedidoDetalle?.idPedido }}</div>
-      <div class="col-md-6"><strong>Cliente:</strong> {{ pedidoDetalle?.cliente?.nombre_usuario }}</div>
+<app-modal-cancelar-confirmar #modal [title]="'VER DETALLE'" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()" [displayButtons]="false">
+  <div class="contenido-cuerpo-modal">
+    <div class="row mb-1">
+      <div class="col-md-6"><strong class="text-secondary">Nro. Pedido:</strong> {{ pedidoDetalle?.idPedido }}</div>
+      <div class="col-md-6"><strong class="text-secondary">Cliente:</strong> {{ pedidoDetalle?.cliente?.nombre_usuario }}</div>
+    </div>
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-6"><strong class="text-secondary">Alta:</strong> {{ pedidoDetalle?.fechaAlta | date : "dd/MM/yyyy HH:mm:ss" }}</div>
+      <div class="col-md-5 mb-2 mb-md-0">
+        <span [ngClass]="['estado-badge', getEstadoClase(pedidoDetalle?.estado || '')]">{{ pedidoDetalle?.estado?.toUpperCase() }}</span>
+      </div>
     </div>
 
     <hr class="my-3" />
 
     <div class="row">
       <div class="col-12">
-        <h6 class="text-primary mb-3">Productos:</h6>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let producto of pedidoDetalle?.items">
-            <div class="d-flex align-items-center product-detail-item">
-              <div class="product-image me-3">
-                <img [src]="producto.idProducto.imagen" alt="Producto Imagen" class="img-fluid rounded" style="width: 80px; height: 80px; object-fit: contain" />
+        <h6 class="text-primary text-center b-3">Productos</h6>
+        <ul class="list-group list-group-flush lista-productos-scrollable">
+          <li class="list-group-item" *ngFor="let itemProducto of pedidoDetalle?.items">
+            <div class="d-flex align-items-center detalle-item-producto">
+              <div class="imagen-producto me-3">
+                <img [src]="itemProducto.idProducto.imagen" alt="Producto Imagen" class="img-fluid rounded" style="width: 80px; height: 80px; object-fit: contain" />
               </div>
-              <div class="product-info flex-grow-1">
-                <strong class="text-dark">{{ producto.idProducto.descripcion }}</strong>
+              <div class="info-producto flex-grow-1">
+                <strong class="text-dark descripcion-producto">{{ itemProducto?.idProducto?.descripcion }}</strong>
                 <ul class="list-unstyled mb-0 mt-1">
                   <li>
-                    Precio: <span class="fw-bold">{{ producto.precio | currency : "ARS" : "symbol" : "1.2-2" }}</span>
+                    Precio: <span class="fw-bold">{{ itemProducto.precio | currency : "ARS" : "symbol" : "1.2-2" }}</span>
                   </li>
                   <li>
-                    Cantidad: <span class="fw-bold">{{ producto.cantidad }}</span>
+                    Cantidad: <span class="fw-bold">{{ itemProducto.cantidad }}</span>
                   </li>
                   <li>
-                    Total: <span class="fw-bold">{{ producto.total | currency : "ARS" : "symbol" : "1.2-2" }}</span>
+                    Total: <span class="fw-bold">{{ itemProducto.total | currency : "ARS" : "symbol" : "1.2-2" }}</span>
                   </li>
                 </ul>
               </div>
@@ -119,16 +125,8 @@
 
     <hr class="my-3" />
 
-    <div class="row">
-      <div class="col-md-6 mb-2 mb-md-0">
-        <strong class="text-secondary">Estado:</strong>
-        <span [ngClass]="['estado-badge', getEstadoClase(pedidoDetalle?.estado || '')]">{{ pedidoDetalle?.estado?.toUpperCase() }}</span>
-      </div>
-      <div class="col-md-6 text-md-end"><strong class="text-secondary">Fecha de Alta:</strong> {{ pedidoDetalle?.fechaAlta | date : "dd/MM/yyyy HH:mm:ss" }}</div>
-    </div>
-
-    <div class="row mt-3">
-      <div class="col-12 text-end">
+     <div class="row">
+      <div class="col-12 text-center">
         <h5 class="mb-0 text-primary">
           Total del Pedido: <span class="fw-bold">{{ pedidoDetalle?.subtotal | currency : "ARS" : "symbol" : "1.2-2" }}</span>
         </h5>
