@@ -1,5 +1,5 @@
 /* src/styles.scss */
-@import 'src/_variables.scss';
+@import "src/_variables.scss";
 /* 1. Importa funciones, variables y mixins de Bootstrap */
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
@@ -7,23 +7,23 @@
 
 /* 2. Tus overrides de variables de Bootstrap */
 // Definir tu paleta de colores aquí para que Bootstrap los use
-$color-primary: #002B53; // Tu color principal actual
-$color-secondary: #483DA7; // Tu color secundario actual
+$color-primary: #002b53; // Tu color principal actual
+$color-secondary: #483da7; // Tu color secundario actual
 
 // Colores de Bootstrap (sobrescribe los por defecto)
 $theme-colors: (
-    "primary": $color-primary,
-    "secondary": $color-secondary,
-    "success": #28a745,
-    "danger": #dc3545,
-    "info": #17a2b8,
-    "warning": #ffc107,
-    "light": #f8f9fa,
-    "dark": #343a40
+  "primary": $color-primary,
+  "secondary": $color-secondary,
+  "success": #28a745,
+  "danger": #dc3545,
+  "info": #17a2b8,
+  "warning": #ffc107,
+  "light": #f8f9fa,
+  "dark": #343a40,
 );
 
 // Definir el fondo principal del cuerpo
-$body-bg: #FFFFFF;
+$body-bg: #ffffff;
 
 // Definir el color del texto principal del cuerpo
 $body-color: #333333;
@@ -52,219 +52,320 @@ $headings-font-weight: 600; // Un peso un poco más fuerte para los títulos
 
 // Variables CSS para Alertify (pueden quedarse aquí o en un _alertify.scss)
 :root {
-    --ajs-primary-color: #{$color-primary};
-    --ajs-btn-primary-bg: #{$color-primary};
-    --ajs-header-color: #{$light};
-    --ajs-error-header-color: rgb(180, 56, 56);
-    --ajs-error-button-color: rgb(180, 56, 56);
+  --ajs-primary-color: #{$color-primary};
+  --ajs-btn-primary-bg: #{$color-primary};
+  --ajs-header-color: #{$light};
+  --ajs-error-header-color: rgb(180, 56, 56);
+  --ajs-error-button-color: rgb(180, 56, 56);
 }
 
 .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
-    color: var(--ajs-primary-color);
-    cursor: pointer;
+  color: var(--ajs-primary-color);
+  cursor: pointer;
 }
 
 .alertify .ajs-header {
-    color: var(--ajs-header-color);
-    background: var(--ajs-btn-primary-bg);
+  color: var(--ajs-header-color);
+  background: var(--ajs-btn-primary-bg);
 }
 
 .alertify.ajs-error-dialog .ajs-header {
-    color: var(--ajs-header-color);
-    background: var(--ajs-error-header-color);
+  color: var(--ajs-header-color);
+  background: var(--ajs-error-header-color);
 }
 
 .alertify.ajs-error-dialog .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
-    color: var(--ajs-error-button-color);
+  color: var(--ajs-error-button-color);
 }
 
 .alertify-notifier .ajs-message.ajs-success {
-    background-color: var(--ajs-primary-color);
-    border-color: $color-primary;
+  background-color: var(--ajs-primary-color);
+  border-color: $color-primary;
 }
 
 // Global body and html settings
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .page-container {
-    background: #FFFFFF;
-    color: $body-color;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  background: #ffffff;
+  color: $body-color;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
-    main {
-        flex-grow: 1;
-        padding: $spacer * 1.5 $spacer * 2;
-        margin-top: $spacer * 5;
-        padding-bottom: $spacer * 6.25;
-        background: #F8F9FA;
-        border-radius: $spacer * .5;
-        box-shadow: 0 $spacer * .125 $spacer * .25 rgba(0, 0, 0, .075);
-    }
+  main {
+    flex-grow: 1;
+    padding: $spacer * 1.5 $spacer * 2;
+    margin-top: $spacer * 5;
+    padding-bottom: $spacer * 6.25;
+    background: #f8f9fa;
+    border-radius: $spacer * 0.5;
+    box-shadow: 0 $spacer * 0.125 $spacer * 0.25 rgba(0, 0, 0, 0.075);
+  }
 }
 
 /* TITULOS - Clase general para títulos de página */
 .page-title {
-    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
-    font-weight: 600;
-    color: $dark;
-    border-bottom: 2px solid $color-secondary;
-    padding-bottom: $spacer * .5;
-    margin-bottom: $spacer * 1.5;
-    display: flex;
-    align-items: center;
-    gap: $spacer * .5;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-    animation: fadeInDown 0.4s ease;
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-weight: 600;
+  color: $dark;
+  border-bottom: 2px solid $color-secondary;
+  padding-bottom: $spacer * 0.5;
+  margin-bottom: $spacer * 1.5;
+  display: flex;
+  align-items: center;
+  gap: $spacer * 0.5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  animation: fadeInDown 0.4s ease;
 }
 
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Si titulos-paginas es lo mismo que page-title, puedes hacer que page-title lo extienda o usar h3 directamente */
 .titulos-paginas {
-    @extend .page-title;
+  @extend .page-title;
 }
 
 .titulos-inicio {
-    color: $color-primary;
-    font-size: $h4-font-size;
-    font-weight: $headings-font-weight;
+  color: $color-primary;
+  font-size: $h4-font-size;
+  font-weight: $headings-font-weight;
 }
 
 /* Estilos para botones primarios de Bootstrap */
 .btn-primary {
-    background-color: $color-secondary;
-    border-color: $color-secondary;
-    &:hover {
-        background-color: darken($color-secondary, 7.5%);
-        border-color: darken($color-secondary, 10%);
-    }
+  background-color: $color-secondary;
+  border-color: $color-secondary;
+  &:hover {
+    background-color: darken($color-secondary, 7.5%);
+    border-color: darken($color-secondary, 10%);
+  }
 }
 
 /* Estilos para etiquetas */
 label {
-    color: $color-primary;
-    font-weight: 600;
+  color: $color-primary;
+  font-weight: 600;
 }
 
 /* Estilos para controles de formulario */
 .form-control {
-    border: 1px solid $color-primary !important;
-    box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.25);
-    &:focus {
-        border-color: $color-secondary !important;
-        box-shadow: 0 0 0 0.2rem rgba($color-secondary, .25);
-    }
+  border: 1px solid $color-primary !important;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  &:focus {
+    border-color: $color-secondary !important;
+    box-shadow: 0 0 0 0.2rem rgba($color-secondary, 0.25);
+  }
 }
 
 .form-control::placeholder {
-    color: rgb(168, 168, 168);
+  color: rgb(168, 168, 168);
 }
 
 /* SWIPER / CARD STYLES - Mueve esto si Swiper se usa globalmente o crea _swiper.scss */
 .swiper-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: $spacer * 1.25;
-    padding: $spacer * 1.25;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $spacer * 1.25;
+  padding: $spacer * 1.25;
 }
 
 swiper-slide {
-    background-color: #ffffff;
-    border-radius: $spacer * .75;
-    padding: $spacer;
-    box-shadow: 0 $spacer * .25 $spacer * .5 rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 220px;
-    margin: 0;
+  background-color: #ffffff;
+  border-radius: $spacer * 0.75;
+  padding: $spacer;
+  box-shadow: 0 $spacer * 0.25 $spacer * 0.5 rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 220px;
+  margin: 0;
 }
 
 swiper-slide:hover {
-    transform: translateY(-$spacer * .625);
-    box-shadow: 0 $spacer * .5 $spacer * 1 rgba(0, 0, 0, 0.25);
+  transform: translateY(-$spacer * 0.625);
+  box-shadow: 0 $spacer * 0.5 $spacer * 1 rgba(0, 0, 0, 0.25);
 }
 
 swiper-slide .imagen {
-    width: 100%;
-    height: auto;
-    max-height: $spacer * 9.375;
-    object-fit: contain;
-    border-radius: $spacer * .5;
-    margin-bottom: $spacer * .625;
+  width: 100%;
+  height: auto;
+  max-height: $spacer * 9.375;
+  object-fit: contain;
+  border-radius: $spacer * 0.5;
+  margin-bottom: $spacer * 0.625;
 }
 
 @media (max-width: 768px) {
-    .swiper-wrapper {
-        justify-content: center;
-        gap: $spacer * .9375;
-    }
+  .swiper-wrapper {
+    justify-content: center;
+    gap: $spacer * 0.9375;
+  }
 
-    swiper-slide {
-        width: 90%;
-    }
+  swiper-slide {
+    width: 90%;
+  }
 }
 
 /* NUEVO Diseño */
 .hr-separador {
-    border: none;
-    height: 0.2rem;
-    background-color: $color-secondary;
-    margin-top: $spacer * 1.25;
-    margin-bottom: $spacer * 1.25;
+  border: none;
+  height: 0.2rem;
+  background-color: $color-secondary;
+  margin-top: $spacer * 1.25;
+  margin-bottom: $spacer * 1.25;
 }
 
 .error-message {
-    color: red;
-    font-size: $spacer * .875;
-    font-weight: bold;
+  color: red;
+  font-size: $spacer * 0.875;
+  font-weight: bold;
 }
 
-.nombreProducto { // Este también puede ir al componente si solo se usa en las cards/productos
-    color: $color-primary;
-    font-weight: 700;
-    font-size: $spacer * .9375;
+.nombreProducto {
+  // Este también puede ir al componente si solo se usa en las cards/productos
+  color: $color-primary;
+  font-weight: 700;
+  font-size: $spacer * 0.9375;
 }
 
-.precioProducto { // Este también puede ir al componente si solo se usa en las cards/productos
-    color: gray;
-    font-weight: 100;
-    font-size: $spacer * 1.0625;
+.precioProducto {
+  // Este también puede ir al componente si solo se usa en las cards/productos
+  color: gray;
+  font-weight: 100;
+  font-size: $spacer * 1.0625;
 }
 
-@media(min-width: 920px){
-    swiper-slide .imagen{
-        width: $spacer * 6.25;
-    }
-    .nombreProducto{
-        font-size: $spacer * 1.1875;
-    }
-    .precioProducto{
-        font-size: $spacer * 1.3125;
-    }
+/* --- MODALES --- */
+.contenido-cuerpo-modal {
+  padding: $base-spacing;
+
+  .text-secondary {
+    color: lighten($text-color, 15%) !important;
+  }
+
+  p.font-weight-bold {
+    font-weight: $heading-font-weight !important;
+    color: $text-color;
+  }
 }
 
-@media(min-width: 1200px){
-    swiper-slide .imagen{
-        width: $spacer * 7.5;
+/* --- Estilos específicos de la lista de productos --- */
+
+.lista-productos-scrollable {
+  max-height: 300px; /* Ajusta esta altura máxima según sea necesario */
+  overflow-y: scroll; /* MUESTRA SIEMPRE la barra de desplazamiento para evitar el desplazamiento de contenido */
+
+  /* --- Estilo de la barra de desplazamiento para navegadores WebKit (Chrome, Safari, Edge moderno) --- */
+  &::-webkit-scrollbar {
+    width: 8px; /* Ancho estándar para una barra de desplazamiento visible */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent; /* Hace la pista invisible */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba($color-primary, 0.3); /* Pulgar semi-transparente, usando tu color primario */
+    border-radius: 4px;
+    border: 2px solid transparent; /* Da un ligero efecto de padding alrededor del pulgar */
+    background-clip: padding-box; /* Asegura que el borde no se muestre con el padding */
+  }
+
+  /* --- Estilo de la barra de desplazamiento para Firefox --- */
+  scrollbar-width: thin; /* 'thin' o 'auto' */
+  scrollbar-color: rgba($color-primary, 0.3) transparent; /* color del pulgar y color de la pista */
+}
+
+.imagen-producto {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: $base-spacing * 0.5;
+    object-fit: contain;
+  }
+}
+
+.info-producto {
+  flex-grow: 1;
+  min-width: 0;
+   margin-left: 1rem;
+
+  .descripcion-producto {
+max-height: 2.4em; /* Asume un line-height de 1.2em, así 2.4em = 2 líneas */
+    overflow-y: auto; /* Permite scroll si el contenido excede 2 líneas */
+    margin-bottom: $base-spacing * 0.25;
+
+    /* Estilos para la barra de desplazamiento si aparece en la descripción */
+    &::-webkit-scrollbar {
+      width: 4px; /* Scrollbar más estrecho para la descripción */
     }
-    .nombreProducto{
-        font-size: $spacer * 1.3125;
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba($color-primary, 0.2);
+      border-radius: 2px;
     }
-    .precioProducto{
-        font-size: $spacer * 1.4375;
+    scrollbar-width: thin;
+    scrollbar-color: rgba($color-primary, 0.2) transparent;
+  }
+
+  ul {
+    li {
+      font-size: $base-spacing * 0.9;
+      color: $text-color;
+      span {
+        font-weight: $heading-font-weight;
+        color: $color-primary;
+      }
     }
+  }
+}
+
+@media (min-width: 920px) {
+  swiper-slide .imagen {
+    width: $spacer * 6.25;
+  }
+  .nombreProducto {
+    font-size: $spacer * 1.1875;
+  }
+  .precioProducto {
+    font-size: $spacer * 1.3125;
+  }
+}
+
+@media (min-width: 1200px) {
+  swiper-slide .imagen {
+    width: $spacer * 7.5;
+  }
+  .nombreProducto {
+    font-size: $spacer * 1.3125;
+  }
+  .precioProducto {
+    font-size: $spacer * 1.4375;
+  }
 }

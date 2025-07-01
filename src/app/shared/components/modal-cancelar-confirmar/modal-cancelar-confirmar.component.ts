@@ -8,8 +8,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ModalCancelarConfirmarComponent {
   @Input() title: string;
   @Input() isOpen: boolean = false;
+  @Input() displayButtons:boolean = true;
   @Output() closeModalEvent = new EventEmitter();
   @Output() confirmEvent = new EventEmitter();
+
 
   closeModal() {
     this.closeModalEvent.emit();
