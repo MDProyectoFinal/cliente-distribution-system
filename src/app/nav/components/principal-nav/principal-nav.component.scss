@@ -43,6 +43,23 @@ button {
   box-shadow: none;
 }
 
+.navbar-admin {
+  background: linear-gradient(90deg, #FFD700, #FFF3B0, #FFFFFF);
+  color: #000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-admin .nav-link,
+.navbar-admin .navbar-brand,
+.navbar-admin .fa-icon {
+  color: #000 !important;
+}
+
+.navbar-admin .nav-link.actived {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .nombre-usuario{
     color: $color-primary;
     font-weight: 700;
