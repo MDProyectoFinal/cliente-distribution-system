@@ -1,4 +1,11 @@
-<nav class="navbar navbar-light bg-light fixed-top" *ngIf="login">
+<nav
+  class="navbar navbar-light fixed-top"
+  [ngClass]="{
+    'bg-light': authService.userRol !== 'ADMIN',
+    'navbar-admin': authService.userRol === 'ADMIN'
+  }"
+
+  *ngIf="login">
   <div class="container-fluid d-flex justify-content-center w-100 px-0">
     <div class="row align-items-center justify-content-between w-100">
       <div class="col-12">

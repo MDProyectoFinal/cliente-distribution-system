@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SobreNosotrosComponent {
 
+  public mision: string = 'Comercializar y distribuir productos de copetín multimarca.';
+  public vision: string = 'Lograr que Rosario Snack provea un posicionamiento estratégico entre las primeras distribuidoras multimarca a nivel regional.';
+
 }

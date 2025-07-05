@@ -11,7 +11,8 @@ export class ModalCancelarConfirmarComponent {
   @Input() displayButtons:boolean = true;
   @Output() closeModalEvent = new EventEmitter();
   @Output() confirmEvent = new EventEmitter();
-
+  @Input() confirmText: string = 'Confirmar';
+  @Input() cancelText: string = 'Cancelar';
 
   closeModal() {
     this.closeModalEvent.emit();
