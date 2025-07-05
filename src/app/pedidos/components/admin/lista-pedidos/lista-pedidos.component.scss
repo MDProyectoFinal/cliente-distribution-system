@@ -21,22 +21,11 @@ form {
   border-radius: $base-spacing * 0.75;
   box-shadow: $shadow-sm;
   padding: $base-spacing * 1.5;
+
   .form-label {
     color: $color-primary;
     font-weight: 600;
     margin-bottom: $base-spacing * 0.25;
-  }
-  .form-control,
-  .form-select {
-    border: 1px solid $color-primary !important;
-    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.05);
-    &:focus {
-      border-color: $color-secondary !important;
-      box-shadow: 0 0 0 0.2rem rgba($color-secondary, 0.25);
-    }
-  }
-  .btn-primary {
-    @extend .btn-primary;
   }
 }
 
@@ -44,10 +33,16 @@ form {
 .form-select {
   border: 1px solid $color-primary !important;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.05);
-  height: 38px; // Por ejemplo, la altura por defecto de form-control en Bootstrap 4
+  height: 38px;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  display: block;
+  width: 100%;
+
   &:focus {
     border-color: $color-secondary !important;
-    box-shadow: 0 0 0 0.2rem rgba($color-secondary, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(rgba($color-secondary, 0.25), 0.25);
   }
 }
 
@@ -125,52 +120,26 @@ form {
 }
 
 app-modal-cancelar-confirmar {
-  .modal-content {
-    background-color: $white-background;
-    border-radius: $base-spacing * 0.75;
-    box-shadow: $shadow-lg;
-    padding: $base-spacing * 1.5;
-  }
 
-  .modal-header {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .modal-title {
-    font-size: $base-spacing * 1.25;
-    font-weight: $heading-font-weight;
-    color: $color-primary;
-  }
-
-  .modal-body-content {
-    padding: $base-spacing;
-    .text-secondary {
-      color: lighten($text-color, 15%) !important;
+   .modal-content {
+        background-color: $white-background;
+        border-radius: $base-spacing * 0.75;
+        box-shadow: $shadow-lg;
+        padding: $base-spacing * 1.5;
     }
-    p.font-weight-bold {
-      font-weight: $heading-font-weight !important;
-      color: $text-color;
-    }
-  }
 
-  .producto-imagen img {
-    border-radius: $base-spacing * 0.5;
-    object-fit: contain;
-  }
-  .producto-info {
-    ul {
-      li {
-        font-size: $base-spacing * 0.9;
-        color: $text-color;
-        span {
-          font-weight: $heading-font-weight;
-          color: $color-primary;
-        }
-      }
+    .modal-header {
+        border-bottom: none;
+        padding-bottom: 0;
     }
-  }
+
+    .modal-title {
+        font-size: $base-spacing * 1.25;
+        font-weight: $heading-font-weight;
+        color: $color-primary;
+    }
 }
+
 #collapseSummaryMobile {
   .table {
     td {
