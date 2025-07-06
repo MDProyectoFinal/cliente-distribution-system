@@ -1,12 +1,13 @@
-<div class="detalle-carrito py-4">
-  <div class="container-carrito container-fluid">
-    <div class="row">
+@if (productos.length> 0) {
+  <div class="detalle-carrito py-4">
+    <div class="container-carrito container-fluid">
+      <div class="row">
 
-      <div class="col-12 col-lg-8">
-        <div class="carrito card mb-3">
-          <div class="card-body borde-productos">
-            <ng-container *ngFor="let prod of productos; let last = last">
-              <app-card-producto-carrito
+        <div class="col-12 col-lg-8">
+          <div class="carrito card mb-3">
+            <div class="card-body borde-productos">
+              <ng-container *ngFor="let prod of productos; let last = last">
+                <app-card-producto-carrito
                 [producto]="prod.producto"
                 [cantidad]="prod.cantidad"
                 [subtotal]="prod.getSubtotal()">
@@ -23,18 +24,18 @@
       </div>
 
       <div class="col-12 col-lg-4 mt-4 mt-lg-0 d-none d-md-block"> <div class="total-carrito card">
-          <div class="card-body">
-            <h4 class="card-title text-center">Resumen de Compra</h4>
-            <div class="total text-center mb-3">
-              <span class="font-weight-bold">Total: {{ calcularTotal() | currency:'ARS' }}</span>
-            </div>
-            <button class="btn btn-primary btn-block mt-3" (click)="checkout()">Continuar a checkout</button>
+        <div class="card-body">
+          <h4 class="card-title text-center">Resumen de Compra</h4>
+          <div class="total text-center mb-3">
+            <span class="font-weight-bold">Total: {{ calcularTotal() | currency:'ARS' }}</span>
           </div>
+          <button class="btn btn-primary btn-block mt-3" (click)="checkout()">Continuar a checkout</button>
         </div>
       </div>
-
     </div>
+
   </div>
+</div>
 </div>
 
 <div class="checkout-fixed-mobile d-md-none fixed-bottom bg-white p-3 border-top shadow-lg">
@@ -45,3 +46,10 @@
     <button class="btn btn-primary flex-grow-1 ml-3" (click)="checkout()">Checkout</button>
   </div>
 </div>
+}
+@else{
+  <div class="container-carrito d-flex total-carrito card">
+    <h4 class="text-center mt-3 carrito-vacio">CARRITO VACÍO</h4>
+  </div>
+
+}
