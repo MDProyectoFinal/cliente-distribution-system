@@ -1,5 +1,35 @@
-@import 'src/_variables.scss';
+@import 'src/styles.scss';
 
 a>i:hover{
     cursor: pointer;
+}
+
+.nombre-producto{
+    color: $color-secondary
+}
+
+.fila-promocion-activa {
+  border-left: 4px solid map-get($theme-colors, "success"); /* Un borde sutil del color primario */
+
+  .txt-estado{
+    color:map-get($theme-colors, "success") !important;
+    font-weight: 600 ;
+  }
+}
+
+.fila-promocion-inactiva {
+
+  color: #6c757d;
+  border-left: 4px solid map-get($theme-colors, "danger");
+  opacity: 0.8;
+
+
+  td {
+    color: inherit;
+  }
+
+  .txt-estado{
+    color:map-get($theme-colors, "danger") !important;
+    font-weight: 600 ;
+  }
 }
