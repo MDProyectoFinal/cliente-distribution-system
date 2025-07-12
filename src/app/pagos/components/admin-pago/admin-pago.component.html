@@ -1,0 +1,31 @@
+<!-- LOADING -->
+<shared-loading-spinner *ngIf="isLoading" textoCarga="Procesando pago.."></shared-loading-spinner>
+
+<div class="payment-summary-container">
+  <h2>Resumen de tu pedido</h2>
+
+  <div class="user-info"></div>
+
+  <div class="order-details">
+    <h3>Detalles del Pedido:</h3>
+    <ul>
+      <li *ngFor="let item of productos">
+        <span>{{ item.producto.nombre }}</span>
+        <span>x{{ item.cantidad }}</span>
+        <span>{{ item.getSubtotal() | currency : "ARS" }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="total-amount">
+    <!-- Deberiamos poner el total del campo subtotal de "Pedidos" -->
+    <h2>Total: {{ total | currency : "ARS" }}</h2>
+  </div>
+
+  <button [disabled]="!usuarioSeleccionado?._id" class="payment-button" (click)="guardarPedido(true)">Guardar y pagar</button>
+
+  <button [disabled]="!usuarioSeleccionado?._id" class="payment-button guardar mt-4" (click)="guardarPedido(false)">Guardar sin pago</button>
+
+  <hr />
+  <div *ngIf="procesandoPago" class="alert alert-info" role="alert">¡Estás en la etapa final del proceso de Pago!</div>
+</div>

@@ -31,9 +31,6 @@ export class RealizarPagoComponent implements OnInit {
   public nombreUsuario: string = '';
   public email: string = '';
 
-  // TODO: crear archivo "env" o poner en config -> global esa key
-  // mercadoPago = new MercadoPago('APP_USR-d79f1964-73cf-4b79-b1f7-7a0453139132'); // PUBLICC-KEY - Credencial de produccion de ambiente de prueba - VENDEDOR
-
   constructor(private _pagoServices: PagoService, private _authService: AuthenticationService, private carritoService: CarritoPedidoService,
     private pedidoService: PedidoService, private router: Router, private alertifyService: AlertifyService) {
     // Inicializo todo el Data que llenaremos y enviaremos para el pago

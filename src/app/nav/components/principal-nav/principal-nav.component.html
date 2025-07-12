@@ -55,6 +55,9 @@
               <a [routerLink]="['/inicio']" [routerLinkActive]="['actived']" class="nav-link active" data-toggle="collapse" data-target="#navbarSupportedContent" aria-current="page" >Home</a>
             </li>
             <li class="nav-item">
+              <a *ngIf="this.authService.userRol === 'ADMIN'" [routerLink]="['/productos/listado']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Nuevo Pedido</a>
+            </li>
+            <li class="nav-item">
               <a *ngIf="this.authService.userRol === 'ADMIN'" [routerLink]="['/admin/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
               <a *ngIf="this.authService.userRol === 'CLIENT'" [routerLink]="['/client/pedidos']" [routerLinkActive]="['actived']" class="nav-link" data-toggle="collapse" data-target="#navbarSupportedContent" href="#">Pedidos</a>
             </li>
