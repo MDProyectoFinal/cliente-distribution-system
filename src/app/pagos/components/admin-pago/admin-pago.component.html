@@ -1,10 +1,25 @@
 <!-- LOADING -->
-<shared-loading-spinner *ngIf="isLoading" textoCarga="Procesando pago.."></shared-loading-spinner>
+<shared-loading-spinner *ngIf="isLoading" textoCarga="Guardadno pedido.."></shared-loading-spinner>
 
 <div class="payment-summary-container">
-  <h2>Resumen de tu pedido</h2>
+  <h2>Generar pedido</h2>
 
-  <div class="user-info"></div>
+    <div class="form-group mb-3">
+    <label for="clienteSelect" class="form-label"><strong>Cliente:</strong></label>
+    <select id="clienteSelect" class="form-select form-control"
+      [(ngModel)]="usuarioSeleccionado">
+        <option [ngValue]="null" disabled>Seleccione un cliente</option>
+        <option *ngFor="let cliente of usuarios" [ngValue]="cliente">
+          {{ cliente.nombre_usuario }}
+        </option>
+    </select>
+  </div>
+
+  <div class="user-info" *ngIf="usuarioSeleccionado?._id">
+    <h5>Pedido para</h5>
+    <p>{{usuarioSeleccionado?.nombre_usuario}} - {{usuarioSeleccionado?.email}}</p>
+
+  </div>
 
   <div class="order-details">
     <h3>Detalles del Pedido:</h3>
