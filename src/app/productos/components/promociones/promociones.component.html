@@ -1,26 +1,36 @@
-<div class="mt-5"><button class="btn-primary" (click)="abrirModal(null)">Nueva promoción</button></div>
+<div class="container-fluid mt-4">
+  <h3 class="page-title">Promociones</h3>
+  <h6>
+    Promociones del producto
+    <span class="nombre-producto">
+      {{ producto.nombre }}
+    </span>
+  </h6>
+  <button class="btn btn-primary my-3" (click)="abrirModal(null)">Nueva promoción</button>
 
-<table *ngIf="producto" class="table mt-5">
-    <thead>
+  <div class="table-responsive">
+    <table *ngIf="producto" class="table">
+      <thead>
         <th scope="col">Desde</th>
         <th scope="col">Hasta</th>
         <th scope="col">Precio</th>
         <th scope="col">Estado</th>
-        <th scope="col"></th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let promo of producto.promociones" [ngClass]="!promo.activa ? 'table-danger' : 'table-primary'" >
-            <td>{{promo.fecha_inicio | date}}</td>
-            <td>{{promo.fecha_fin | date}}</td>
-            <td>{{promo.precio | currency:'ARS'}}</td>
-            <td>{{promo.activa ? "Activa" : "Inactiva" }}</td>
-            <td><a (click)="abrirModal(promo)" title="Editar"><i class="fa fa-edit"></i></a></td>
+        <th scope="col">Acciones</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let promo of producto.promociones" [ngClass]="!promo.activa ? 'fila-promocion-inactiva' : 'fila-promocion-activa'">
+          <td>{{ promo.fecha_inicio | date }}</td>
+          <td>{{ promo.fecha_fin | date }}</td>
+          <td>{{ promo.precio | currency : "ARS" }}</td>
+          <td class="txt-estado">{{ promo.activa ? "Activa" : "Inactiva" }}</td>
+          <td>
+            <a (click)="abrirModal(promo)" title="Editar"><i class="fa fa-edit"></i></a>
+          </td>
         </tr>
-    </tbody>
-</table>
-
-<app-modal-cancelar-confirmar #modal [title]="tituloModal" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
-
+      </tbody>
+    </table>
+  </div>
+  <app-modal-cancelar-confirmar #modal [title]="tituloModal" (closeModalEvent)="onModalClose()" (confirmEvent)="onModalConfirm()">
     <app-editar-promocion #editarPromocion [promocion]="promocion" [precioProducto]="producto?.precio_unitario" />
-
-    </app-modal-cancelar-confirmar>
+  </app-modal-cancelar-confirmar>
+</div>

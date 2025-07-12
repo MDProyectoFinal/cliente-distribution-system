@@ -346,6 +346,53 @@ max-height: 2.4em; /* Asume un line-height de 1.2em, así 2.4em = 2 líneas */
   }
 }
 
+
+
+/*-- ESTILOS DE TABLAS  --*/
+
+.table-responsive {
+  border-radius: $base-spacing * 0.75;
+  box-shadow: $shadow-md;
+  background-color: $white-background;
+  padding: $base-spacing;
+}
+
+.table {
+  thead {
+    th {
+      color: $color-primary;
+      font-weight: $heading-font-weight;
+      border-bottom: 2px solid lighten($color-primary, 30%);
+      padding-bottom: $base-spacing * 0.75;
+      text-align: center; // Centralizar los headers de la tabla
+    }
+  }
+  tbody {
+    td {
+      padding: $base-spacing * 0.75;
+      vertical-align: middle;
+      color: $text-color;
+      border-top: 1px solid lighten($text-color, 65%);
+      text-align: center; // Centralizar el contenido de las celdas
+    }
+    tr:first-child td {
+      border-top: none;
+    }
+  }
+}
+
+.table td .btn {
+  font-size: $base-spacing * 0.75;
+  padding: $base-spacing * 0.35 $base-spacing * 0.55;
+  border-radius: $base-spacing * 0.25;
+}
+
+table.table thead th {
+    border-top: none;
+}
+
+
+
 @media (min-width: 920px) {
   swiper-slide .imagen {
     width: $spacer * 6.25;

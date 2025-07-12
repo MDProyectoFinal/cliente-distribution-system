@@ -35,6 +35,11 @@
   color: $color-primary;
 }
 
+.carrito-vacio{
+  color: $color-primary;
+  font-weight: $heading-font-weight;
+}
+
 .checkout-fixed-mobile {
   z-index: 1030;
   .total-fixed {
