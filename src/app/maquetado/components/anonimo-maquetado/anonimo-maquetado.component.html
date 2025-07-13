@@ -6,7 +6,10 @@
         src="assets/img/logo_distribution_system.png"
         alt="Logo"
         class="logo-sistema" />
-      <h2 class="titulo-sistema">{{ nombreSistema }}</h2>
+      <!-- <h2 class="titulo-sistema">{{ nombreSistema }}</h2> -->
+      <h2 class="titulo-sistema d-none d-md-block">{{ nombreSistema }}</h2> <!-- Para pantallas medianas o más grandes -->
+      <h2 class="titulo-sistema d-block d-md-none">DS</h2> <!-- Para pantallas pequeñas (mobile) -->
+
     </div>
   <!-- </a> -->
 </h1>
