@@ -1,11 +1,25 @@
 <div class="container-fluid mt-4">
   <h3 class="page-title">Promociones</h3>
-  <h6>
+  <!-- <h6>
     Promociones del producto
     <span class="nombre-producto">
       {{ producto.nombre }}
     </span>
-  </h6>
+  </h6> -->
+  <div *ngIf="producto" class="card mb-4 shadow-sm p-3 rounded" style="max-width: 800px; margin: 0 auto;">
+    <div class="row g-3 align-items-center">
+      <div class="col-md-3 text-center">
+        <img [src]="producto.imagen" alt="Imagen del producto" class="img-fluid rounded" style="max-height: 120px;">
+      </div>
+      <div class="col-md-9">
+        <h4 class="mb-1">{{ producto.nombre }}</h4>
+        <p class="mb-1">Precio Unitario: <strong>${{ producto.precio_unitario | number:'1.2-2' }}</strong></p>
+        <p class="mb-0" [ngClass]="{ 'text-success': producto.stock > 0, 'text-danger': producto.stock === 0 }">
+          Stock: <strong>{{ producto.stock > 0 ? (producto.stock + ' disponibles') : 'Sin stock' }}</strong>
+        </p>
+      </div>
+    </div>
+  </div>
   <button class="btn btn-primary my-3" (click)="abrirModal(null)">Nueva promoción</button>
 
   <div class="table-responsive">
