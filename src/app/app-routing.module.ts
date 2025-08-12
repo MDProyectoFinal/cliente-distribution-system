@@ -31,6 +31,7 @@ import { PaginaPrincipalProveedoresComponent } from './proveedores/pages/pagina-
 import { GenerarPedidoProveedorComponent } from './proveedores/components/generar-pedido-proveedor/generar-pedido-proveedor.component';
 import { OlvideMiPasswordComponent } from './usuarios/components/olvide-mi-password/olvide-mi-password.component';
 import { RecuperarClaveComponent } from './usuarios/components/recuperar-clave/recuperar-clave.component';
+import { AdminPagoComponent } from './pagos/components/admin-pago/admin-pago.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,8 @@ const routes: Routes = [
             loadChildren: () => import('./proveedores/proveedores.module').then((m) => m.ProveedoresModule),
           },
           { path: 'listar-usuarios', component: ListarUsuariosComponent },
+
+          { path: 'pago', component: AdminPagoComponent },
         ]
       },
 

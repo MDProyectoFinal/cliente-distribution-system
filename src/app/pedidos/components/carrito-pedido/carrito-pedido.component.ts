@@ -4,6 +4,7 @@ import { CarritoPedidoService } from 'src/app/productos/services/carrito-pedido.
 import { LineaProducto } from 'src/app/productos/interfaces/lineaProducto';
 import { PedidoService } from '../../services/pedido.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/usuarios/services/authentication.service';
 
 @Component({
   selector: 'app-carrito-pedido',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class CarritoPedidoComponent implements OnInit {
   productos: LineaProducto[];
 
-  constructor(private router : Router, private carritoService: CarritoPedidoService, private alertifyService: AlertifyService) {}
+  constructor(private router : Router, private carritoService: CarritoPedidoService, private alertifyService: AlertifyService, private authService : AuthenticationService) {}
   ngOnInit(): void {
     this.getProductosEnCarrito();
     this.carritoService.cantidadEnCarrito$.subscribe((cantidad =>{
@@ -40,7 +41,12 @@ export class CarritoPedidoComponent implements OnInit {
 
   checkout(){
 
-    this.router.navigateByUrl('/client/pago')
+    if(this.authService.isAdmin()){
+    this.router.navigateByUrl('admin/pago')
+    }else{
+      this.router.navigateByUrl('client/pago')
+    }
+
 
   }
 

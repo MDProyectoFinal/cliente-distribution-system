@@ -9,7 +9,6 @@ a>i:hover{
 }
 
 .fila-promocion-activa {
-  border-left: 4px solid map-get($theme-colors, "success"); /* Un borde sutil del color primario */
 
   .txt-estado{
     color:map-get($theme-colors, "success") !important;
@@ -19,8 +18,7 @@ a>i:hover{
 
 .fila-promocion-inactiva {
 
-  color: #6c757d;
-  border-left: 4px solid map-get($theme-colors, "danger");
+  color: #aeb1b4;
   opacity: 0.8;
 
 

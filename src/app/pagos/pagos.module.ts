@@ -7,9 +7,11 @@ import { RealizarPagoComponent } from './components/realizar-pago/realizar-pago.
 import { PagoExitosoComponent } from './components/estados-pago/pago-exitoso/pago-exitoso.component';
 import { PagoFallidoComponent } from './components/estados-pago/pago-fallido/pago-fallido.component';
 import { PagoPendienteComponent } from './components/estados-pago/pago-pendiente/pago-pendiente.component';
+import { AdminPagoComponent } from './components/admin-pago/admin-pago.component';
 
 @NgModule({
   declarations: [
+    AdminPagoComponent,
     RealizarPagoComponent,
     PagoExitosoComponent,
     PagoFallidoComponent,

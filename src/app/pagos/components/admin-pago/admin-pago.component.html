@@ -1,0 +1,46 @@
+<!-- LOADING -->
+<shared-loading-spinner *ngIf="isLoading" textoCarga="Guardadno pedido.."></shared-loading-spinner>
+
+<div class="payment-summary-container">
+  <h2>Generar pedido</h2>
+
+    <div class="form-group mb-3">
+    <label for="clienteSelect" class="form-label"><strong>Cliente:</strong></label>
+    <select id="clienteSelect" class="form-select form-control"
+      [(ngModel)]="usuarioSeleccionado">
+        <option [ngValue]="null" disabled>Seleccione un cliente</option>
+        <option *ngFor="let cliente of usuarios" [ngValue]="cliente">
+          {{ cliente.nombre_usuario }}
+        </option>
+    </select>
+  </div>
+
+  <div class="user-info" *ngIf="usuarioSeleccionado?._id">
+    <h5>Pedido para</h5>
+    <p>{{usuarioSeleccionado?.nombre_usuario}} - {{usuarioSeleccionado?.email}}</p>
+
+  </div>
+
+  <div class="order-details">
+    <h3>Detalles del Pedido:</h3>
+    <ul>
+      <li *ngFor="let item of productos">
+        <span>{{ item.producto.nombre }}</span>
+        <span>x{{ item.cantidad }}</span>
+        <span>{{ item.getSubtotal() | currency : "ARS" }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="total-amount">
+    <!-- Deberiamos poner el total del campo subtotal de "Pedidos" -->
+    <h2>Total: {{ total | currency : "ARS" }}</h2>
+  </div>
+
+  <button [disabled]="!usuarioSeleccionado?._id" class="payment-button" (click)="guardarPedido(true)">Guardar y pagar</button>
+
+  <button [disabled]="!usuarioSeleccionado?._id" class="payment-button guardar mt-4" (click)="guardarPedido(false)">Guardar sin pago</button>
+
+  <hr />
+  <div *ngIf="procesandoPago" class="alert alert-info" role="alert">¡Estás en la etapa final del proceso de Pago!</div>
+</div>
