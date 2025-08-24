@@ -94,26 +94,4 @@ export class PagoService {
       })
     );
   }
-
-  guardarPedidoParaUsuario(idUsuario : string) : Observable<any> {
-
-    const productosInsertar = this.carritoService.getProductos().map((p) => {
-      return { idProducto: p.producto._id, cantidad: p.cantidad };
-    });
-
-    const body = {
-      idUsuario: idUsuario,
-      productos: productosInsertar,
-    };
-
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
-    return this._http.post(this.url + 'pedidos/', body, { headers: headers }).pipe(
-      map((response: any) => {
-        return response;
-      })
-    );
-  }
 }

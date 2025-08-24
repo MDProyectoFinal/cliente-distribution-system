@@ -85,4 +85,28 @@ export class PedidoService {
       })
     );
   }
+
+    guardarPedidoParaUsuario(idUsuario : string, pagado:boolean) : Observable<any> {
+
+    const productosInsertar = this.carritoService.getProductos().map((p) => {
+      return { idProducto: p.producto._id, cantidad: p.cantidad };
+    });
+
+    const body = {
+      idUsuario: idUsuario,
+      productos: productosInsertar,
+      pedidoPagado: pagado
+    };
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      authorization: localStorage.getItem('token') as string,
+    });
+
+    return this._http.post(this.url + `clientes/${idUsuario}/pedidos/`, body, { headers: headers }).pipe(
+      map((response: any) => {
+        return response;
+      })
+    );
+  }
 }
