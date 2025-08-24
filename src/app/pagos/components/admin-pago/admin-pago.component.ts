@@ -22,7 +22,7 @@ export class AdminPagoComponent implements OnInit {
   productos: LineaProducto[];
   total: number;
 
-  constructor(private carritoService: CarritoPedidoService, private alertifyService: AlertifyService, private pagoService: PagoService, private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private carritoService: CarritoPedidoService, private alertifyService: AlertifyService, private pedidoService: PedidoService, private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
     this.usuarioService.obtenerUsuarios().subscribe({
@@ -54,23 +54,12 @@ export class AdminPagoComponent implements OnInit {
   guardarPedido(pagado: boolean) {
     this.isLoading = true;
 
-    this.pagoService
-      .guardarPedidoParaUsuario(this.usuarioSeleccionado?._id!)
+    this.pedidoService
+      .guardarPedidoParaUsuario(this.usuarioSeleccionado?._id!, pagado)
       .pipe(
         switchMap((pedidoGuardadoResponse: any) => {
           console.log(pedidoGuardadoResponse);
-
-          let pedidoId = pedidoGuardadoResponse?._id;
-
-          if (!pedidoId) {
-            return throwError(() => new Error('No se pudo obtener el ID del pedido para el pago.'));
-          }
-
-          if (pagado) {
-            return this.pagoService.registrarPago(pedidoId);
-          } else {
-            return of(pedidoGuardadoResponse);
-          }
+          return of(pedidoGuardadoResponse);
         }),
         catchError((err) => {
           return throwError(() => err);
