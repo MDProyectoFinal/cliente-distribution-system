@@ -113,8 +113,8 @@ button {
 }
 
 .usuario-imagen img {
-  width: 40px; /* Ajusta el tamaño según tus necesidades */
-  height: 40px; /* Asegúrate de que el ancho y alto sean iguales para un círculo perfecto */
+  width: 100%; /* Ajusta el tamaño según tus necesidades */
+  height: 100%; /* Asegúrate de que el ancho y alto sean iguales para un círculo perfecto */
   border-radius: 50%; /* Esto hace que la imagen sea circular */
   object-fit: cover; /* Esto asegura que la imagen cubra el área sin deformarse */
   border: 2px solid #ccc; /* Opcional: agrega un borde */
