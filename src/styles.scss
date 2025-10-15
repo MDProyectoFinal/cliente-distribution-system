@@ -391,7 +391,9 @@ table.table thead th {
     border-top: none;
 }
 
-
+.grecaptcha-badge{
+  bottom:4em !important
+}
 
 @media (min-width: 920px) {
   swiper-slide .imagen {
