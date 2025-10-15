@@ -36,8 +36,12 @@ export class LoguearUsuarioComponent {
           },
           complete: () => {
             this.mensajeErrorLogin = '';
-            console.log('Redireccionando');
-            setTimeout(() => this.router.navigateByUrl('/'), 2000);
+            this.router.navigateByUrl('/')
+            setTimeout(() => {
+              
+              window.location.reload()
+              
+            }, 500);
           },
         });
       },
