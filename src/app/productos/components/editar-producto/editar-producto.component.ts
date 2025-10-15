@@ -88,7 +88,7 @@ export class EditarProductoComponent implements OnInit {
     if (this.isAgregar) {
       this.servicioProducto.insertarProducto(this.productoForm.value, this.imagenSubir).subscribe({
         complete: () => {
-           this.alertifyService.alert(this.nombreHeaderAlert, 'Producto agregado exitosamente.');
+           this.alertifyService.success('Producto agregado exitosamente.');
           this.location.back();
         },
         error: (e) => {
@@ -98,7 +98,6 @@ export class EditarProductoComponent implements OnInit {
         },
       });
     } else {
-      console.log(this.productoForm.value);
 
       this.servicioProducto.editarProducto(this.id, this.productoForm.value, this.imagenSubir).subscribe({
         complete: () =>  this.alertifyService.success('Producto modificado exitosamente.'),
