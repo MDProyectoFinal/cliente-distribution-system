@@ -43,7 +43,7 @@ export class RealizarPagoComponent implements OnInit {
     var token = localStorage.getItem('token') as string;
     this.decodedToken = this.jwtHelper.decodeToken(token);
     this.nombreUsuario = this._authService.decodedToken.nombre_usuario;
-    this.email = this._authService.decodedToken.email;
+    this.email = "test_user_1168959890@testuser.com";
   }
   ngOnInit(): void {
     this.llenarPreferencesPago();

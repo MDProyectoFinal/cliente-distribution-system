@@ -73,7 +73,7 @@ export class PagoService {
     );
   }
 
-  guardarPedido(): Observable<any> {
+    guardarPedido(): Observable<any> {
     const idUsuario = this.authenticationService.decodedToken.sub;
     const productosInsertar = this.carritoService.getProductos().map((p) => {
       return { idProducto: p.producto._id, cantidad: p.cantidad };
