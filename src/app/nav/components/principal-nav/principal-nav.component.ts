@@ -2,7 +2,7 @@ import { LocalStorageService } from './../../../shared/services/local-storage.se
 import { CarritoPedidoService } from './../../../productos/services/carrito-pedido.service';
 import { identity, Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../usuarios/services/authentication.service';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { faBars, faBell, faCartShopping, faGear } from '@fortawesome/free-solid-svg-icons';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
@@ -21,6 +21,9 @@ export class PrincipalNavComponent {
   public nombreUsuario: string = '';
   cantidadCarritoSub: Subscription;
   cantidadEnCarrito: number;
+
+  @ViewChild('navbarToggler') navbarToggler!: ElementRef;
+  @ViewChild('navbarSupportedContent') navbarSupportedContent!: ElementRef;
 
 
   public roles: String[] = Object.values( Roles );
@@ -64,6 +67,16 @@ export class PrincipalNavComponent {
   public verCarrito(){
     this.router.navigateByUrl('/carrito')
 
+  }
+
+  cerrarMenu(){
+    const isMenuOpen = this.navbarSupportedContent.nativeElement.classList.contains('show');
+    
+    if (isMenuOpen) {
+      // Si está abierto, simulamos un clic en el botón para que Bootstrap lo cierre.
+      // Esto se encarga de quitar la clase 'show' y actualizar el 'aria-expanded'.
+      this.navbarToggler.nativeElement.click();
+    }
   }
 
 
